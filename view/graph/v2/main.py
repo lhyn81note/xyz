@@ -1,8 +1,6 @@
 import sys
 from PySide6.QtWidgets import QApplication, QMainWindow, QGraphicsView
 from PySide6.QtCore import Qt
-from PySide6.QtGui import QPainter
-from PySide6.QtWidgets import QGraphicsScene, QGraphicsItem, QGraphicsProxyWidget
 from node_manager import NodeManager
 
 CONFIG = {
@@ -25,20 +23,21 @@ class MainWindow(QMainWindow):
         
         # 设置视图
         self.view = QGraphicsView(self.manager.scene)
-        self.view.setRenderHint(QPainter.Antialiasing)
+        self.view.setRenderHint(Qt.SmoothPixmapTransform)
         self.view.setSceneRect(0, 0, 800, 600)
         self.setCentralWidget(self.view)
         
         # 连接信号
-        self.manager.head_node.mousePressEvent = self.on_node_click
+        for node in self.manager.nodes.values():
+            node.clicked.connect(self.on_node_click)
 
-    def on_node_click(self, event):
+    def on_node_click(self, node_id):
         """处理节点点击事件"""
         parent = self.manager.head_node
         new_node = NodeItem("NEW_NODE", "新节点")
         new_node.setPos(parent.pos().x(), parent.pos().y() + 150)
         self.manager.scene.addItem(new_node)
-        parent.child_items.append(new_node)
+        parent.children.append(new_node)
         self.manager.calculate_layout()
 
 if __name__ == "__main__":

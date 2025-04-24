@@ -1,51 +1,61 @@
-from PySide6.QtWidgets import QGraphicsItem, QGraphicsProxyWidget
-from PySide6.QtCore import Qt, QRectF, QPointF
-from PySide6.QtGui import QPainter, QColor, QPen, QFont
+from PySide6.QtWidgets import QWidget, QLabel, QPushButton, QVBoxLayout
+from PySide6.QtCore import Qt, Signal
 
-class NodeItem(QGraphicsItem):
-    def __init__(self, node_id, label, is_end=False):
-        super().__init__()
+class NodeItem(QWidget):
+    clicked = Signal(str)  # 传递节点ID
+    hoverEntered = Signal(str)
+    hoverExited = Signal(str)
+
+    def __init__(self, node_id, label, is_end=False, parent=None):
+        super().__init__(parent)
         self.node_id = node_id
-        self.label = label
         self.is_end = is_end
-        self.parent = None
-        self.child_items = []
-        self.setFlag(QGraphicsItem.ItemIsSelectable, True)
-        self.setAcceptHoverEvents(True)
-        self.is_hovered = False
-
-    def boundingRect(self):
-        return QRectF(-60, -30, 120, 60).adjusted(-2, -2, 2, 2)
-
-    def paint(self, painter, option, widget):
-        # 绘制背景
-        bg_color = QColor(179, 216, 245) if not self.is_end else QColor(155, 205, 155)
-        painter.fillRect(self.boundingRect(), bg_color)
+        self.setup_ui()
+        self.load_stylesheet()
+        self.child_items = []  # 子节点列表
         
-        # 绘制边框
-        pen = QPen(QColor(67, 164, 212), 1.5)
-        painter.setPen(pen)
-        painter.drawRect(self.boundingRect().adjusted(0, 0, -1, -1))
-        
-        # 绘制文字
-        painter.setPen(Qt.black)
-        painter.setFont(QFont("Microsoft YaHei", 12))
-        painter.drawText(self.boundingRect(), Qt.AlignCenter, self.label)
-        
-        # 绘制+号
-        if self.is_hovered:
-            painter.setPen(Qt.red)
-            painter.setBrush(Qt.red)
-            painter.drawEllipse(QPointF(0, 25), 8, 8)
-            painter.drawLine(-5, 25, 5, 25)
-            painter.drawLine(0, 20, 0, 30)
+        # 连接信号
+        self.hoverEntered.connect(lambda: self.hoverEntered.emit(node_id))
+        self.hoverExited.connect(lambda: self.hoverExited.emit(node_id))
 
-    def hoverEnterEvent(self, event):
-        self.is_hovered = True
-        self.update()
-        super().hoverEnterEvent(event)
+    def setup_ui(self):
+        layout = QVBoxLayout(self)
+        layout.setContentsMargins(8, 8, 8, 8)
+        
+        self.label_widget = QLabel(self)
+        self.label_widget.setAlignment(Qt.AlignCenter)
+        self.label_widget.setObjectName("node-label")
+        
+        self.plus_button = QPushButton("+", self)
+        self.plus_button.setFixedSize(16, 16)
+        self.plus_button.hide()
+        
+        layout.addWidget(self.label_widget)
+        layout.addWidget(self.plus_button)
 
-    def hoverLeaveEvent(self, event):
-        self.is_hovered = False
-        self.update()
-        super().hoverLeaveEvent(event)
+    def load_stylesheet(self):
+        """加载QSS样式表"""
+        self.setStyleSheet(open("node_style.qss").read())
+        self.update_style()
+
+    def update_style(self):
+        """根据状态更新样式"""
+        if self.is_end:
+            self.setProperty("isEnd", True)
+        else:
+            self.setProperty("isEnd", False)
+        self.style().polish(self)
+
+    def enterEvent(self, event):
+        self.plus_button.show()
+        self.hoverEntered.emit(self.node_id)
+        super().enterEvent(event)
+
+    def leaveEvent(self, event):
+        self.plus_button.hide()
+        self.hoverExited.emit(self.node_id)
+        super().leaveEvent(event)
+
+    def mousePressEvent(self, event):
+        self.clicked.emit(self.node_id)
+        super().mousePressEvent(event)

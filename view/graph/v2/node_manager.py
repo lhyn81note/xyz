@@ -52,13 +52,13 @@ class NodeManager:
         self.scene.addItem(self.head_node)
 
     def calculate_layout(self):
-        print(1, "开始布局")
+        # print(1, "开始布局")
         """自动计算节点布局"""
-        x_spacing = 200
-        y_spacing = 150
+        x_spacing = 300
+        y_spacing = 200
         
         # 布局头节点
-        self.head_node.setPos(400, 50)
+        self.head_node.setPos(100, 100)
         self.scene.addItem(self.head_node)
         
         # 递归布局子节点
