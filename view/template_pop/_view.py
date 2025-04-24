@@ -15,36 +15,82 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QLabel, QSizePolicy, QVBoxLayout,
+from PySide6.QtWidgets import (QApplication, QCheckBox, QHBoxLayout, QLineEdit,
+    QPushButton, QSizePolicy, QTextBrowser, QVBoxLayout,
     QWidget)
 
 class Ui_Form(object):
     def setupUi(self, Form):
         if not Form.objectName():
             Form.setObjectName(u"Form")
-        Form.resize(715, 410)
+        Form.resize(894, 595)
+        Form.setStyleSheet(u"            QLineEdit {\n"
+"                border: 2px solid #2196F3;\n"
+"                border-radius: 5px;\n"
+"                padding: 8px;\n"
+"                font-size: 14px;\n"
+"            }\n"
+"            QCheckBox{\n"
+"                border: 2px solid #2196F3;\n"
+"                border-radius: 5px;\n"
+"                padding: 8px;\n"
+"                font-size: 14px;\n"
+"            }\n"
+"            QLineEdit:focus {\n"
+"                border-color: #64B5F6;\n"
+"            }\n"
+"            QPushButton {\n"
+"                border: 2px solid #2196F3;\n"
+"                border-radius: 5px;\n"
+"                padding: 8px;\n"
+"                font-size: 14px;\n"
+"				background-color: rgb(0, 85, 127);\n"
+"				color: rgb(255, 255, 255);\n"
+"            }")
         self.verticalLayout = QVBoxLayout(Form)
         self.verticalLayout.setObjectName(u"verticalLayout")
-        self.label = QLabel(Form)
-        self.label.setObjectName(u"label")
-        font = QFont()
-        font.setFamilies([u"\u9ed1\u4f53"])
-        font.setPointSize(36)
-        self.label.setFont(font)
-        self.label.setAlignment(Qt.AlignCenter)
+        self.widget_2 = QWidget(Form)
+        self.widget_2.setObjectName(u"widget_2")
+        self.horizontalLayout = QHBoxLayout(self.widget_2)
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.tb_quest = QLineEdit(self.widget_2)
+        self.tb_quest.setObjectName(u"tb_quest")
 
-        self.verticalLayout.addWidget(self.label)
+        self.horizontalLayout.addWidget(self.tb_quest)
 
-        self.label_2 = QLabel(Form)
-        self.label_2.setObjectName(u"label_2")
-        font1 = QFont()
-        font1.setFamilies([u"\u9ed1\u4f53"])
-        font1.setPointSize(20)
-        self.label_2.setFont(font1)
-        self.label_2.setAlignment(Qt.AlignCenter)
+        self.ck_manual = QCheckBox(self.widget_2)
+        self.ck_manual.setObjectName(u"ck_manual")
 
-        self.verticalLayout.addWidget(self.label_2)
+        self.horizontalLayout.addWidget(self.ck_manual)
 
+        self.btn_ask = QPushButton(self.widget_2)
+        self.btn_ask.setObjectName(u"btn_ask")
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.btn_ask.sizePolicy().hasHeightForWidth())
+        self.btn_ask.setSizePolicy(sizePolicy)
+        self.btn_ask.setMinimumSize(QSize(100, 0))
+
+        self.horizontalLayout.addWidget(self.btn_ask)
+
+
+        self.verticalLayout.addWidget(self.widget_2)
+
+        self.widget = QWidget(Form)
+        self.widget.setObjectName(u"widget")
+        self.widget.setStyleSheet(u"")
+        self.verticalLayout_2 = QVBoxLayout(self.widget)
+        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
+        self.tb_answer = QTextBrowser(self.widget)
+        self.tb_answer.setObjectName(u"tb_answer")
+
+        self.verticalLayout_2.addWidget(self.tb_answer)
+
+
+        self.verticalLayout.addWidget(self.widget)
+
+        self.verticalLayout.setStretch(1, 1)
 
         self.retranslateUi(Form)
 
@@ -53,7 +99,7 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         Form.setWindowTitle(QCoreApplication.translate("Form", u"Form", None))
-        self.label.setText(QCoreApplication.translate("Form", u"\u5f39\u7a97\u9875\u9762", None))
-        self.label_2.setText(QCoreApplication.translate("Form", u"\u5728\u6b64\u57fa\u7840\u8bbe\u8ba1ui,\u5e76\u4fee\u6539view.py\u5b9e\u73b0\u903b\u8f91", None))
+        self.ck_manual.setText(QCoreApplication.translate("Form", u"\u77e5\u8bc6\u5e93", None))
+        self.btn_ask.setText(QCoreApplication.translate("Form", u"\u67e5\u8be2", None))
     # retranslateUi
 

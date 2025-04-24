@@ -29,7 +29,7 @@ Menus = {
         {'title':'PLC功能测试', 'icon':'plc.png', 'view_id':'view_plc','pop':False, 'fixed':False},
         {'title':'消息功能测试', 'icon':'docu.png', 'view_id':'view_notify','pop':False, 'fixed':False},
         {'title':'绑定功能测试', 'icon':'docu.png', 'view_id':'view_bind','pop':False, 'fixed':False},
-        {'title':'弹窗测试', 'icon':'tool.png', 'view_id':'view_pop','pop':True, 'fixed':False},
+        {'title':'知识检索', 'icon':'tool.png', 'view_id':'view_pop','pop':True, 'fixed':False},
     ],
     '设置':[
         {'title':'用户设置', 'icon':'db.png', 'view_id':'view_setting_user','pop':False, 'fixed':False},
