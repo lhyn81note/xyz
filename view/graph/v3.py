@@ -1,6 +1,6 @@
 import sys
 from PySide6.QtWidgets import (
-    QApplication, QGraphicsView, QGraphicsScene, QGraphicsItem
+    QApplication, QGraphicsView, QGraphicsScene, QGraphicsItem, QGraphicsLineItem
 )
 from PySide6.QtCore import Qt, QPointF, QRectF
 from PySide6.QtGui import QPainter, QPen, QColor, QFont, QBrush
@@ -19,6 +19,13 @@ NodeItem:hover {
 }
 """
 
+NODE_CONFIG = [
+    {"id": "001", "name": "HEAD", "x": 0, "y": 0},
+    {"id": "002", "name": "Node 2", "x": 100, "y": 100},
+    {"id": "003", "name": "Node 3", "x": 200, "y": 200},
+]
+
+
 class NodeItem(QGraphicsItem):
     NODE_RADIUS = 30
     CONNECTION_OFFSET = 40  # 连接线偏移量
@@ -31,6 +38,7 @@ class NodeItem(QGraphicsItem):
         self.children = []
         self.hovered = False
         self.setFlag(QGraphicsItem.ItemIsSelectable, True)
+        self.setFlag(QGraphicsItem.ItemIsMovable, True)  # Enable dragging
         self.setAcceptHoverEvents(True)
         self.setPos(0, 0)  # 初始位置将由布局管理器设置
 
@@ -75,6 +83,12 @@ class NodeItem(QGraphicsItem):
         self.scene().update()
         super().hoverLeaveEvent(event)
 
+    def mouseReleaseEvent(self, event):
+        super().mouseReleaseEvent(event)
+        # Notify the parent view to redraw connections
+        if self.scene():
+            self.scene().parent().redraw_connections()
+
     def add_child(self, child_node):
         self.children.append(child_node)
         child_node.parent = self
@@ -86,27 +100,48 @@ class NodeGraphView(QGraphicsView):
         self.scene = QGraphicsScene()
         self.setScene(self.scene)
         self.nodes = {}
-        self.init_head_node()
+        self.init_nodes()
         self.setSceneRect(-400, -300, 800, 600)
         self.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
 
-    def init_head_node(self):
-        head = NodeItem("001", "HEAD")
-        self.nodes["001"] = head
-        self.scene.addItem(head)
-        self.update_layout()
+    def init_nodes(self):
+        for node_config in NODE_CONFIG:
+            node = NodeItem(node_config["id"], node_config["name"])
+            node.setPos(node_config["x"], node_config["y"])
+            self.nodes[node_config["id"]] = node
+            self.scene.addItem(node)
+
+        # Draw connections
+        self.redraw_connections()
+
+    def redraw_connections(self):
+        # Clear existing lines
+        for item in self.scene.items():
+            if isinstance(item, QGraphicsLineItem):
+                self.scene.removeItem(item)
+
+        # Redraw connections
+        for i in range(len(NODE_CONFIG) - 1):
+            node_a = self.nodes[NODE_CONFIG[i]["id"]]
+            node_b = self.nodes[NODE_CONFIG[i + 1]["id"]]
+            self.scene.addLine(
+                node_a.pos().x(), node_a.pos().y(),
+                node_b.pos().x(), node_b.pos().y(),
+                QPen(Qt.black, 2)
+            )
 
     def update_layout(self):
-        """自动布局所有节点"""
-        x_offset = 0
-        y_offset = 0
-        for node_id in sorted(self.nodes.keys()):
-            node = self.nodes[node_id]
-            node.setPos(x_offset, y_offset)
-            y_offset += 100  # 垂直间距
+        print(1, "开始布局")
+        """Update the layout of the nodes and redraw connections."""
+        for node_id, node in self.nodes.items():
+            # Optionally, you can implement a layout algorithm here
+            # For now, we just ensure the nodes are in their current positions
+            node.setPos(node.pos())
+        self.redraw_connections()
 
     def mousePressEvent(self, event):
+        print(2, "鼠标按下事件")
         """处理节点连接创建"""
         # 使用新的API获取鼠标位置
         pos = event.globalPosition().toPoint()  # 获取全局坐标并转换为QPoint
@@ -137,6 +172,7 @@ class NodeGraphView(QGraphicsView):
             super().mousePressEvent(event)
 
 if __name__ == "__main__":
+
     app = QApplication(sys.argv)
     view = NodeGraphView()
     view.resize(800, 600)
