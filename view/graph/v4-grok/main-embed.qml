@@ -2,12 +2,12 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Shapes 1.15
 
-ApplicationWindow {
-    id: window
+Column {
     visible: true
-    width: 800
-    height: 600
-    title: "Tree Visualization"
+    width: 500
+    height: 500
+    anchors.fill: parent
+    anchors.margins: 5
 
     property var nodes: ({})
 

@@ -6,6 +6,7 @@ Rectangle {
     height: 50
     color: "lightblue"
     border.color: "black"
+    radius: 15
 
     property string nodeId: ""
     property string text: ""
