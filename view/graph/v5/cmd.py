@@ -5,9 +5,12 @@ import json
 class CmdMananger:
 
     def __init__(self):
+        self.flow_file = None
         self.meta = {}
         self.flow = {}  # Placeholder for flow configuration
+        self.head_node_id = None  # Placeholder for head node ID
         self.cmds = {}
+        self.cmdObjs = {}
         self.nodes = {}
         self.flowStatus = 0  # 0: idle, 1: running, 2: paused, 3: stopped 4: error
         self.cursor = ""  # Placeholder for flow configuration
@@ -16,25 +19,30 @@ class CmdMananger:
     流程配置文件操作
     '''
     def loadFlow(self, flow_file) -> bool:
+
         with open(flow_file, 'r', encoding='utf-8') as file:
+
+            self.flow_file = flow_file
             json_str = file.read()
             data = json.loads(json_str)
 
             if self.validateFlow(data):
                 self.meta = data.get("meta")
                 self.flow = {k: v for k, v in data.get("flow").items() if k != "head_node_id"}
+                self.head_node_id = data.get("flow").get("head_node_id")
                 self.cmds = data.get("cmds")
                 self.nodes = data.get("nodes")
 
 
     def saveFlow(self):
-        with open(flow_file, 'w') as file:
+        with open(self.flow_file, 'w') as file:
             data = {
                 "meta": self.meta,
                 "flow": self.flow,
                 "cmds": self.cmds,
                 "nodes": self.nodes
             }
+            data["flow"]["head_node_id"] = self.head_node_id
             json.dump(data, file, indent=4)
 
     def validateFlow(self, data):
@@ -77,11 +85,12 @@ class CmdMananger:
     '''
     指令操作
     '''
-    def loadCmds(self, cmds):
-        pass
+    def loadCmds(self):
+        for key, cmd in self.cmds.items():
+            self.cmdObjs[key] = Cmd(cmd)
 
-    def getCmd(self, name):
-        pass
+    def getCmd(self, cmd_id):
+        return self.cmdObjs.get(cmd_id)
     
     def addCmd(self, cmd):
         pass
@@ -100,7 +109,6 @@ class CmdMananger:
     '''
     
     def genQmlModel(self):
-
         nodes_model = []
         connections_model = []
 
@@ -110,19 +118,39 @@ class CmdMananger:
             for child in self.flow[key]:
                 connections_model.append({"from": key, "to": child})
 
-        print("Nodes model:", nodes_model)
-        print("Connections model:", connections_model)
+        # print("Nodes model:", nodes_model)
+        # print("Connections model:", connections_model)
         return nodes_model, connections_model
 
     '''
     核心操作
     '''
-    def start(self, name, *args, **kwargs):
-        cmd = self.get_cmd(name)
-        if cmd:
-            return cmd.execute(*args, **kwargs)
+    def start(self):
+        self.cursor = self.head_node_id
+        theCmd = self.getCmd(self.cursor)
+        asyncio.run(theCmd.run())
+        if theCmd.status == 2:
+            next_cmd_count = len(self.flow[self.cursor])
+            while(next_cmd_count>0):
+                
+                if next_cmd_count==1:
+                    self.cursor = self.flow[self.cursor][0]
+                    theCmd = self.getCmd(self.cursor)
+                    asyncio.run(theCmd.run())     
+                    if theCmd.status == 2:
+                        next_cmd_count = len(self.flow[self.cursor])  
+                    else:
+                        print(f"指令 {self.cursor} 执行失败")
+                        self.flowStatus = 4  # Set status to error
+                        break         
+                else:
+                    print(f"指令 {self.cursor} 有多条路径, 请手动选择")
+                    next_cmd_count = 1
         else:
-            raise ValueError(f"Command {name} not found.")
+            print(f"指令 {self.cursor} 执行失败")
+            self.flowStatus = 4  # Set status to error
+        
+        print(f"指令 {self.cursor} 执行完成")
 
     def stop(self, name):
         cmd = self.get_cmd(name)
@@ -166,7 +194,7 @@ class Cmd:
         self.status = 1  # Set status to running
         self.beginTime = datetime.now().strftime("%Y-%m-%d %H:%M:%S")  # Set start time in "yyyy-mm-dd hh:mm:ss" format
         try:
-            print("Executing command...")
+            print(f"正在执行指令: {self.name}")
             await asyncio.sleep(3)  # Use 'duration' from params or default to 1 second
             self.result = "success"  # Set result after process completion
             self.status = 2  # Set status to done
@@ -175,5 +203,6 @@ class Cmd:
             self.status = 3  # Set status to error
         finally:
             self.endTime = datetime.now().strftime("%Y-%m-%d %H:%M:%S")  # Replace with actual end time logic
+            print(f"Command {self.name} finished with result: {self.result}")
 
 

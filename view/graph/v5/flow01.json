@@ -1,75 +1,121 @@
 {
-    "meta":{
-        "schema":"test",
-        "desc":"测试流程",
-        "time":"2024-04-25"
+    "meta": {
+        "schema": "test",
+        "desc": "\u6d4b\u8bd5\u6d41\u7a0b",
+        "time": "2024-04-25"
     },
-    "flow":{
-        "head_node_id": "000",
-        "000": ["001"],
-        "001": ["002", "003"],
-        "002": ["004"],
-        "003": ["005"],
-        "004": ["003"],
-        "005": []
+    "flow": {
+        "000": [
+            "001"
+        ],
+        "001": [
+            "002",
+            "003"
+        ],
+        "002": [
+            "004"
+        ],
+        "003": [
+            "005"
+        ],
+        "004": [
+            "003"
+        ],
+        "005": [],
+        "head_node_id": "000"
     },
-    "cmds":{
-        "000":{
-            "type":"sys",
-            "name":"开始确认",
-            "param":{},
-            "monitor":{
-                "code":0
+    "cmds": {
+        "000": {
+            "type": "sys",
+            "name": "\u5f00\u59cb\u786e\u8ba4",
+            "param": {},
+            "monitor": {
+                "code": 0
             }
         },
-        "001":{
-            "type":"sys",
-            "name":"第一步",
-            "param":{},
-            "monitor":{
-                "code":0
+        "001": {
+            "type": "sys",
+            "name": "\u7b2c\u4e00\u6b65",
+            "param": {},
+            "monitor": {
+                "code": 0
             }
         },
-        "002":{
-            "type":"sys",
-            "name":"第二步",
-            "param":{},
-            "monitor":{
-                "code":0
+        "002": {
+            "type": "sys",
+            "name": "\u7b2c\u4e8c\u6b65",
+            "param": {},
+            "monitor": {
+                "code": 0
             }
         },
-        "003":{
-            "type":"sys",
-            "name":"第三步",
-            "param":{},
-            "monitor":{
-                "code":0
+        "003": {
+            "type": "sys",
+            "name": "\u7b2c\u4e09\u6b65",
+            "param": {},
+            "monitor": {
+                "code": 0
             }
         },
-        "004":{
-            "type":"sys",
-            "name":"第四步",
-            "param":{},
-            "monitor":{
-                "code":0
+        "004": {
+            "type": "sys",
+            "name": "\u7b2c\u56db\u6b65",
+            "param": {},
+            "monitor": {
+                "code": 0
             }
         },
-        "005":{
-            "type":"sys",
-            "name":"第五步",
-            "param":{},
-            "monitor":{
-                "code":0
+        "005": {
+            "type": "sys",
+            "name": "\u7b2c\u4e94\u6b65",
+            "param": {},
+            "monitor": {
+                "code": 0
             }
         }
     },
-    "nodes":{
-        "000":{"x":10, "y":10, "text":"", "text-color":"black", "bg-color":"white"},
-        "001":{"x":100, "y":10, "text":"", "text-color":"black", "bg-color":"white"},
-        "002":{"x":200, "y":10, "text":"", "text-color":"black", "bg-color":"white"},
-        "003":{"x":300, "y":10, "text":"", "text-color":"black", "bg-color":"white"},
-        "004":{"x":400, "y":10, "text":"", "text-color":"black", "bg-color":"white"},
-        "005":{"x":500, "y":10, "text":"", "text-color":"black", "bg-color":"white"}
+    "nodes": {
+        "000": {
+            "x": 52.0,
+            "y": 13.0,
+            "text": "",
+            "text-color": "black",
+            "bg-color": "white"
+        },
+        "001": {
+            "x": 51.0,
+            "y": 71.0,
+            "text": "",
+            "text-color": "black",
+            "bg-color": "white"
+        },
+        "002": {
+            "x": 250.0,
+            "y": 183.0,
+            "text": "",
+            "text-color": "black",
+            "bg-color": "white"
+        },
+        "003": {
+            "x": 70.0,
+            "y": 350.0,
+            "text": "",
+            "text-color": "black",
+            "bg-color": "white"
+        },
+        "004": {
+            "x": 263.0,
+            "y": 249.0,
+            "text": "",
+            "text-color": "black",
+            "bg-color": "white"
+        },
+        "005": {
+            "x": 137.0,
+            "y": 446.0,
+            "text": "",
+            "text-color": "black",
+            "bg-color": "white"
+        }
     }
-
 }

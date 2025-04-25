@@ -4,20 +4,22 @@ import QtQuick.Shapes 1.15
 
 Rectangle {
     id: node
-    width: 100
-    height: 50
-    color: "lightblue"
+    width: 150
+    height: 25
+    color: hovering ? "cyan" : "lightblue"
     border.color: "black"
-    radius: 15
+    radius: 5
 
     property string nodeId: ""
     property string text: ""
     property bool dragging: false
+    property bool hovering: false // New property for hover state
 
     signal evtAddChild(string nodeId)
     signal evtDelSelf(string nodeId)
     signal evtDelChildren(string nodeId)
     signal evtDoubleClick(string nodeId)
+    signal evtMove(string nodeId, real x, real y) // New signal for move event
 
     Text {
         anchors.centerIn: parent
@@ -29,6 +31,9 @@ Rectangle {
         acceptedButtons: Qt.LeftButton
         property real startX
         property real startY
+
+        onEntered: hovering = true // Set hover state to true
+        onExited: hovering = false // Set hover state to false
 
         onDoubleClicked: function(mouse) {
             if (mouse.button === Qt.LeftButton) {
@@ -48,6 +53,7 @@ Rectangle {
         onReleased: function(mouse) {
             if (mouse.button === Qt.LeftButton) {
                 dragging = false;
+                evtMove(node.nodeId, node.x, node.y); // Emit move event with new position
             } else if (mouse.button === Qt.RightButton) {
                 node.Clicked(nodeId); // Emit signal on right-click
             }
@@ -64,6 +70,7 @@ Rectangle {
                 startY = mousePos.y;
             }
         }
+        
     }
 
     Menu {

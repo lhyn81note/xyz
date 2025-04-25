@@ -6,13 +6,14 @@ Rectangle {
     id: node
     width: 100
     height: 50
-    color: "lightblue"
+    color: hovering ? "cyan" : "lightblue"
     border.color: "black"
     radius: 15
 
     property string nodeId: ""
     property string text: ""
     property bool dragging: false
+    property bool hovering: false // New property for hover state
 
     signal evtAddChild(string nodeId)
     signal evtDelSelf(string nodeId)
@@ -29,6 +30,9 @@ Rectangle {
         acceptedButtons: Qt.LeftButton
         property real startX
         property real startY
+
+        onEntered: hovering = true // Set hover state to true
+        onExited: hovering = false // Set hover state to false
 
         onDoubleClicked: function(mouse) {
             if (mouse.button === Qt.LeftButton) {
@@ -64,6 +68,7 @@ Rectangle {
                 startY = mousePos.y;
             }
         }
+        
     }
 
     Menu {

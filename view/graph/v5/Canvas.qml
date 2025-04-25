@@ -74,11 +74,14 @@ Rectangle {
                     evtAny({code: 0, type:"edit_self", msg: "接受请求",data: model.id})
                 }
             }
-            
+
+            onEvtMove: {
+                evtAny({code: 0, type: "move", msg: "Move event received", data: {id: nodeId, x: x, y: y}})
+            }
             
             Component.onCompleted: {
                 canvas.nodes[nodeId] = this
-                console.log("Node added:", nodeId, this)
+                // console.log("Node added:", nodeId, this)
             }
         }
     }
@@ -93,10 +96,10 @@ Rectangle {
             ShapePath {
                 strokeColor: "black"
                 strokeWidth: 2
-                startX: canvas.nodes[from].x + 50  // Center of node
-                startY: canvas.nodes[from].y + 50
+                startX: canvas.nodes[from].x + canvas.nodes[from].width/2  // Center of node
+                startY: canvas.nodes[from].y + canvas.nodes[from].height
                 PathLine {
-                    x: canvas.nodes[to].x + 50
+                    x: canvas.nodes[to].x + canvas.nodes[to].width/2
                     y: canvas.nodes[to].y
                 }
             }

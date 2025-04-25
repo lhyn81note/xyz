@@ -19,28 +19,11 @@ class Window(QWidget):
         self.qml_flow.setResizeMode(QQuickWidget.ResizeMode.SizeRootObjectToView)
 
         nodes_model, connections_model = _top.cmd_manager.genQmlModel()
-        # # Example JSON configuration
-        # json_str = '''
-        # {
-        #     "head_node_id": "开始",
-        #     "开始": ["002", "003"],
-        #     "002": ["004", "005"],
-        #     "003": ["006", "007"],
-        #     "004": ["end"],
-        #     "005": ["003"],
-        #     "006": ["end"],
-        #     "007": ["end"]
-        # }
-        # '''
-        # # Parse JSON
-        # head_node, tree = parse_json(json_str)
-        # positions = compute_positions(head_node, tree)
-        # nodes_model, connections_model = generate_models(head_node, tree, positions)
 
         user = "admin"
+        self.qml_flow.rootContext().setContextProperty("editable", user=="admin")
         self.qml_flow.rootContext().setContextProperty("nodesData", nodes_model)
         self.qml_flow.rootContext().setContextProperty("connectionsData", connections_model)
-        self.qml_flow.rootContext().setContextProperty("editable", user=="admin")
 
         self.qml_flow.setSource(QUrl.fromLocalFile('Canvas.qml'))       
         self.qml_root = self.qml_flow.rootObject()
@@ -48,10 +31,17 @@ class Window(QWidget):
         self.layout_tags = QVBoxLayout(self.ui.wgt_flow)
         self.layout_tags.addWidget(self.qml_flow)
 
-        self.qml_root.evtAny.connect(self.onInfomation)
+        self.qml_root.evtAny.connect(self.onAny)
+        self.ui.pushButton.clicked.connect(self.onStart)
+
+    @Slot()
+    def onStart(self):
+        # print("onStart")
+        # self.qml_root.start()
+        _top.cmd_manager.start()
 
     @Slot(dict)
-    def onInfomation(self, response):
+    def onAny(self, response):
         # breakpoint()
         response = response.toVariant()
         if response["code"] == -2:
@@ -59,4 +49,13 @@ class Window(QWidget):
         elif response["code"] == -1:
             QMessageBox.warning(None, "警告", response["msg"])
         else:
-            QMessageBox.information(None, "信息", f"{response['type']}\n{response['msg']}\n{response['data']}")
+            # QMessageBox.information(None, "信息", f"{response['type']}\n{response['msg']}\n{response['data']}")
+            print(f"{response['type']}\n{response['msg']}\n{response['data']}")
+
+            if response["type"] == "move":
+                _top.cmd_manager.nodes[response["data"]["id"]]['x'] = response["data"]["x"]
+                _top.cmd_manager.nodes[response["data"]["id"]]['y'] = response["data"]["y"]
+                _top.cmd_manager.saveFlow()
+
+            else:
+                pass
