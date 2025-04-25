@@ -1,0 +1,75 @@
+{
+    "meta":{
+        "schema":"test",
+        "desc":"测试流程",
+        "time":"2024-04-25"
+    },
+    "flow":{
+        "head_node_id": "000",
+        "000": ["001"],
+        "001": ["002", "003"],
+        "002": ["004"],
+        "003": ["005"],
+        "004": ["003"],
+        "005": []
+    },
+    "cmds":{
+        "000":{
+            "type":"sys",
+            "name":"开始确认",
+            "param":{},
+            "monitor":{
+                "code":0
+            }
+        },
+        "001":{
+            "type":"sys",
+            "name":"第一步",
+            "param":{},
+            "monitor":{
+                "code":0
+            }
+        },
+        "002":{
+            "type":"sys",
+            "name":"第二步",
+            "param":{},
+            "monitor":{
+                "code":0
+            }
+        },
+        "003":{
+            "type":"sys",
+            "name":"第三步",
+            "param":{},
+            "monitor":{
+                "code":0
+            }
+        },
+        "004":{
+            "type":"sys",
+            "name":"第四步",
+            "param":{},
+            "monitor":{
+                "code":0
+            }
+        },
+        "005":{
+            "type":"sys",
+            "name":"第五步",
+            "param":{},
+            "monitor":{
+                "code":0
+            }
+        }
+    },
+    "nodes":{
+        "000":{"x":10, "y":10, "text":"", "text-color":"black", "bg-color":"white"},
+        "001":{"x":100, "y":10, "text":"", "text-color":"black", "bg-color":"white"},
+        "002":{"x":200, "y":10, "text":"", "text-color":"black", "bg-color":"white"},
+        "003":{"x":300, "y":10, "text":"", "text-color":"black", "bg-color":"white"},
+        "004":{"x":400, "y":10, "text":"", "text-color":"black", "bg-color":"white"},
+        "005":{"x":500, "y":10, "text":"", "text-color":"black", "bg-color":"white"}
+    }
+
+}
