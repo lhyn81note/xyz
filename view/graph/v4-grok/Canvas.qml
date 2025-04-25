@@ -31,11 +31,32 @@ Rectangle {
 
     Repeater {
         model: nodesModel
-        delegate: Node {
+        delegate: FlowNode {
             nodeId: model.id
             text: model.text
             x: model.x
             y: model.y
+
+            // 这是最神奇的隐式绑定!!!!!!!!
+            // 子节点的Signal名称为 evtAddChild
+            // 在这里的调用名称改为 onEvtAddChild
+            onEvtAddChild :{
+                console.log("添加子节点:", nodeId, model.text)
+            }
+
+            onEvtDelSelf :{
+                console.log("删除节点:", nodeId, model.text)
+            }
+
+            onEvtDelChildren :{
+                console.log("删除子节点:", nodeId, model.text)
+            }
+
+            onEvtDoubleClick:{
+                console.log("双击节点:", nodeId, model.text)
+            }
+            
+            
             Component.onCompleted: {
                 canvas.nodes[nodeId] = this
                 console.log("Node added:", nodeId, this)

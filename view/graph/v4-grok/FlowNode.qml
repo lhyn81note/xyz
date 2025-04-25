@@ -1,4 +1,6 @@
 import QtQuick 2.15
+import QtQuick.Controls 2.15
+import QtQuick.Shapes 1.15
 
 Rectangle {
     id: node
@@ -12,6 +14,11 @@ Rectangle {
     property string text: ""
     property bool dragging: false
 
+    signal evtAddChild(string nodeId)
+    signal evtDelSelf(string nodeId)
+    signal evtDelChildren(string nodeId)
+    signal evtDoubleClick(string nodeId)
+
     Text {
         anchors.centerIn: parent
         text: node.text
@@ -22,6 +29,12 @@ Rectangle {
         acceptedButtons: Qt.LeftButton
         property real startX
         property real startY
+
+        onDoubleClicked: function(mouse) {
+            if (mouse.button === Qt.LeftButton) {
+                node.evtDoubleClick(node.nodeId); // Emit signal on double-click
+            }
+        }
 
         onPressed: function(mouse) {
             if (mouse.button === Qt.LeftButton) {
@@ -35,6 +48,8 @@ Rectangle {
         onReleased: function(mouse) {
             if (mouse.button === Qt.LeftButton) {
                 dragging = false;
+            } else if (mouse.button === Qt.RightButton) {
+                node.Clicked(nodeId); // Emit signal on right-click
             }
         }
 
@@ -47,6 +62,33 @@ Rectangle {
                 node.y += dy;
                 startX = mousePos.x;
                 startY = mousePos.y;
+            }
+        }
+    }
+
+    Menu {
+        id: contextMenu
+        MenuItem {
+            text: "添加下一指令"
+            onTriggered: evtAddChild(node.nodeId)
+        }
+        MenuItem {
+            text: "删除本条指令"
+            onTriggered: evtDelSelf(node.nodeId)
+        }
+        MenuItem {
+            text: "删除指令链"
+            onTriggered: evtDelChildren(node.nodeId)
+        }
+    }
+
+    MouseArea {
+        anchors.fill: parent
+        acceptedButtons: Qt.RightButton
+
+        onClicked: function(mouse) {
+            if (mouse.button === Qt.RightButton) {
+                contextMenu.open(); // Open context menu on right-click
             }
         }
     }
