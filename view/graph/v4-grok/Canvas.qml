@@ -2,6 +2,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Shapes 1.15
 
+
 Rectangle {
     id: canvas
     visible: true
@@ -11,6 +12,8 @@ Rectangle {
     anchors.margins: 5
 
     property var nodes: ({})
+
+    signal evtAny(var response)
 
     ListModel {
         id: nodesModel
@@ -41,19 +44,35 @@ Rectangle {
             // 子节点的Signal名称为 evtAddChild
             // 在这里的调用名称改为 onEvtAddChild
             onEvtAddChild :{
-                console.log("添加子节点:", nodeId, model.text)
+                if (!editable) {
+                    evtAny({code: -1, type:"add_child", msg: "非管理员无法编辑流程!",data: null})
+                } else {
+                    evtAny({code: 0, type:"add_child", msg: "接受请求",data: model.id})
+                }
             }
 
             onEvtDelSelf :{
-                console.log("删除节点:", nodeId, model.text)
+                if (!editable) {
+                    evtAny({code: -1, type:"del_self", msg: "非管理员无法编辑流程!",data: null})
+                } else {
+                    evtAny({code: 0, type:"del_self", msg: "接受请求",data: model.id})
+                }
             }
 
             onEvtDelChildren :{
-                console.log("删除子节点:", nodeId, model.text)
+                if (!editable) {
+                    evtAny({code: -1, type:"del_children", msg: "非管理员无法编辑流程!",data: null})
+                } else {
+                    evtAny({code: 0, type:"del_children", msg: "接受请求",data: model.id})
+                }
             }
 
             onEvtDoubleClick:{
-                console.log("双击节点:", nodeId, model.text)
+                if (!editable) {
+                    evtAny({code: -1, type:"edit_self", msg: "非管理员无法编辑流程!",data: null})
+                } else {
+                    evtAny({code: 0, type:"edit_self", msg: "接受请求",data: model.id})
+                }
             }
             
             
