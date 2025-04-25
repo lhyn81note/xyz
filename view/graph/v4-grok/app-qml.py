@@ -137,7 +137,7 @@ context.setContextProperty("nodesData", nodes_model)
 context.setContextProperty("connectionsData", connections_model)
 
 # Load QML file
-engine.load(QUrl.fromLocalFile("main.qml"))
+engine.load(QUrl.fromLocalFile("Main.qml"))
 
 if not engine.rootObjects():
     sys.exit(-1)

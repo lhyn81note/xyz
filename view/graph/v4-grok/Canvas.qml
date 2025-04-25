@@ -2,10 +2,11 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Shapes 1.15
 
-Column {
+Rectangle {
+    id: canvas
     visible: true
-    width: 500
-    height: 500
+    width: 800
+    height: 600
     anchors.fill: parent
     anchors.margins: 5
 
@@ -20,13 +21,11 @@ Column {
     }
 
     Component.onCompleted: {
-        var nodes = nodesData
-        for (var i = 0; i < nodes.length; i++) {
-            nodesModel.append(nodes[i])
+        for (var i = 0; i < nodesData.length; i++) {
+            nodesModel.append(nodesData[i])
         }
-        var connections = connectionsData
-        for (var j = 0; j < connections.length; j++) {
-            connectionsModel.append(connections[j])
+        for (var j = 0; j < connectionsData.length; j++) {
+            connectionsModel.append(connectionsData[j])
         }
     }
 
@@ -38,7 +37,8 @@ Column {
             x: model.x
             y: model.y
             Component.onCompleted: {
-                window.nodes[nodeId] = this
+                canvas.nodes[nodeId] = this
+                console.log("Node added:", nodeId, this)
             }
         }
     }
@@ -53,11 +53,11 @@ Column {
             ShapePath {
                 strokeColor: "black"
                 strokeWidth: 2
-                startX: window.nodes[from].x + 50  // Center of node
-                startY: window.nodes[from].y + 50
+                startX: canvas.nodes[from].x + 50  // Center of node
+                startY: canvas.nodes[from].y + 50
                 PathLine {
-                    x: window.nodes[to].x + 50
-                    y: window.nodes[to].y
+                    x: canvas.nodes[to].x + 50
+                    y: canvas.nodes[to].y
                 }
             }
         }
