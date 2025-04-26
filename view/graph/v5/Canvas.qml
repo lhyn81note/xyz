@@ -15,6 +15,16 @@ Rectangle {
 
     signal evtAny(var response)
 
+    function updateNodeStatus(nodeId, status) {
+        var node = canvas.nodes[nodeId]
+        if (node) {
+            node.textColor = status === 1 ? "white" : "black"
+            node.bgColor = status === 1 ? "orange" : status === 2 ? "green" : status === 3 ? "red" : "white"
+        } else {
+            console.log("Node not found:", nodeId)
+        }
+    }
+
     ListModel {
         id: nodesModel
     }
@@ -39,6 +49,8 @@ Rectangle {
             text: model.text
             x: model.x
             y: model.y
+            textColor: model.status === 1 ? "white" : "black"
+            bgColor: model.status === 1 ? "orange" : model.status === 2 ? "green" : model.status === 3 ? "red" : "white"
 
             // 这是最神奇的隐式绑定!!!!!!!!
             // 子节点的Signal名称为 evtAddChild

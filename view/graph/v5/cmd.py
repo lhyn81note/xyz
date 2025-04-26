@@ -1,10 +1,15 @@
 import asyncio
 from datetime import datetime
 import json
+from PySide6.QtCore import  QObject, Signal, Slot
+import threading
 
-class CmdMananger:
+class CmdMananger(QObject):
+
+    evtCmdChanged = Signal(str, int)  # Signal to emit status changes with id and status
 
     def __init__(self):
+        super().__init__()
         self.flow_file = None
         self.meta = {}
         self.flow = {}  # Placeholder for flow configuration
@@ -14,6 +19,10 @@ class CmdMananger:
         self.nodes = {}
         self.flowStatus = 0  # 0: idle, 1: running, 2: paused, 3: stopped 4: error
         self.cursor = ""  # Placeholder for flow configuration
+
+    @Slot(str, int)
+    def onChildStatusChanged(self, id, status):
+        self.evtCmdChanged.emit(id, status)
 
     '''
     流程配置文件操作
@@ -87,7 +96,9 @@ class CmdMananger:
     '''
     def loadCmds(self):
         for key, cmd in self.cmds.items():
-            self.cmdObjs[key] = Cmd(cmd)
+            newCmd = Cmd(key, cmd)
+            newCmd.evtStatusChanged.connect(self.onChildStatusChanged)
+            self.cmdObjs[key] = newCmd
 
     def getCmd(self, cmd_id):
         return self.cmdObjs.get(cmd_id)
@@ -126,31 +137,32 @@ class CmdMananger:
     核心操作
     '''
     def start(self):
-        self.cursor = self.head_node_id
-        theCmd = self.getCmd(self.cursor)
-        asyncio.run(theCmd.run())
-        if theCmd.status == 2:
-            next_cmd_count = len(self.flow[self.cursor])
-            while(next_cmd_count>0):
-                
-                if next_cmd_count==1:
-                    self.cursor = self.flow[self.cursor][0]
-                    theCmd = self.getCmd(self.cursor)
-                    asyncio.run(theCmd.run())     
-                    if theCmd.status == 2:
-                        next_cmd_count = len(self.flow[self.cursor])  
+        def run_flow():
+            self.cursor = self.head_node_id
+            theCmd = self.getCmd(self.cursor)
+            asyncio.run(theCmd.run_async())
+            if theCmd.status == 2:
+                next_cmd_count = len(self.flow[self.cursor])
+                while next_cmd_count > 0:
+                    if next_cmd_count == 1:
+                        self.cursor = self.flow[self.cursor][0]
+                        theCmd = self.getCmd(self.cursor)
+                        asyncio.run(theCmd.run_async())
+                        if theCmd.status == 2:
+                            next_cmd_count = len(self.flow[self.cursor])
+                        else:
+                            print(f"指令 {self.cursor} 执行失败")
+                            self.flowStatus = 4  # Set status to error
+                            break
                     else:
-                        print(f"指令 {self.cursor} 执行失败")
-                        self.flowStatus = 4  # Set status to error
-                        break         
-                else:
-                    print(f"指令 {self.cursor} 有多条路径, 请手动选择")
-                    next_cmd_count = 1
-        else:
-            print(f"指令 {self.cursor} 执行失败")
-            self.flowStatus = 4  # Set status to error
-        
-        print(f"指令 {self.cursor} 执行完成")
+                        print(f"指令 {self.cursor} 有多条路径, 请手动选择")
+                        next_cmd_count = 1
+            else:
+                print(f"指令 {self.cursor} 执行失败")
+                self.flowStatus = 4  # Set status to error
+
+        thread = threading.Thread(target=run_flow)
+        thread.start()
 
     def stop(self, name):
         cmd = self.get_cmd(name)
@@ -174,9 +186,13 @@ class CmdMananger:
             raise ValueError(f"Command {name} not found.")
 
 
-class Cmd:
+class Cmd(QObject):
 
-    def __init__(self, cmd_dict):
+    evtStatusChanged = Signal(str, int)  # Signal to emit status changes with id and status
+
+    def __init__(self, id, cmd_dict):
+        super().__init__()
+        self.id = id
         self.type = cmd_dict.get("type")
         self.name = cmd_dict.get("name")
         self.param = cmd_dict.get("param")
@@ -186,16 +202,26 @@ class Cmd:
         self.endTime = ""
         self.result = None
 
-    async def run(self):
+
+    @property
+    def duration(self):
+        if self.beginTime and self.endTime:
+            begin = datetime.strptime(self.beginTime, "%Y-%m-%d %H:%M:%S")
+            end = datetime.strptime(self.endTime, "%Y-%m-%d %H:%M:%S")
+            return (end - begin).total_seconds()
+        return None
+
+
+    async def run_async(self):
 
         if (self.status != 0):
             raise RuntimeError("无法运行非空闲状态指令!")
-
         self.status = 1  # Set status to running
         self.beginTime = datetime.now().strftime("%Y-%m-%d %H:%M:%S")  # Set start time in "yyyy-mm-dd hh:mm:ss" format
+        self.evtStatusChanged.emit(self.id, self.status)
         try:
-            print(f"正在执行指令: {self.name}")
-            await asyncio.sleep(3)  # Use 'duration' from params or default to 1 second
+            # print(f"正在执行指令: {self.name}")
+            await asyncio.sleep(1)  # Use 'duration' from params or default to 1 second
             self.result = "success"  # Set result after process completion
             self.status = 2  # Set status to done
         except Exception as e:
@@ -203,6 +229,5 @@ class Cmd:
             self.status = 3  # Set status to error
         finally:
             self.endTime = datetime.now().strftime("%Y-%m-%d %H:%M:%S")  # Replace with actual end time logic
+            self.evtStatusChanged.emit(self.id, self.status)
             print(f"Command {self.name} finished with result: {self.result}")
-
-

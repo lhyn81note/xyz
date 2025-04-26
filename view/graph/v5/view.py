@@ -33,6 +33,11 @@ class Window(QWidget):
 
         self.qml_root.evtAny.connect(self.onAny)
         self.ui.pushButton.clicked.connect(self.onStart)
+        _top.cmd_manager.evtCmdChanged.connect(self.onChildStatusChanged)
+
+    def updateGraph(self):
+        # print("updateGraph")
+        self.qml_root.updateGraph()
 
     @Slot()
     def onStart(self):
@@ -59,3 +64,8 @@ class Window(QWidget):
 
             else:
                 pass
+
+    @Slot(str, int)
+    def onChildStatusChanged(self, cmd_id, status):
+        print(f"Node状态变化: {cmd_id}, {status}")
+        self.qml_root.updateNodeStatus(cmd_id, status)

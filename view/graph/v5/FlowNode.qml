@@ -6,12 +6,15 @@ Rectangle {
     id: node
     width: 150
     height: 25
-    color: hovering ? "cyan" : "lightblue"
+    color: bgColor
     border.color: "black"
     radius: 5
 
     property string nodeId: ""
     property string text: ""
+    property string textColor: "black"
+    property string bgColor: hovering ? "cyan" : "lightblue"
+
     property bool dragging: false
     property bool hovering: false // New property for hover state
 
@@ -24,6 +27,9 @@ Rectangle {
     Text {
         anchors.centerIn: parent
         text: node.text
+        color: textColor
+        font.pixelSize: 12
+        font.bold: true
     }
 
     MouseArea {
