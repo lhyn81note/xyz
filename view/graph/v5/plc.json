@@ -3,7 +3,7 @@
         "id": "cmd1",
         "name": "测试指令1",
         "cmdtype": "cmd",
-        "addr":"DB1,X0.1",
+        "addr":"db:1,start:0,offset:1",
         "vartype":"BOOL",
         "monitor":["sig1"]
     },
@@ -11,7 +11,7 @@
         "id": "cmd2",
         "name": "测试指令2",
         "cmdtype": "cmd",
-        "addr":"DB1,X0.2",
+        "addr":"db:1,start:0,offset:2",
         "vartype":"BOOL",
         "monitor":["sig2"]
     },
@@ -19,7 +19,7 @@
         "id": "cmd3",
         "name": "测试指令3",
         "cmdtype": "cmd",
-        "addr":"DB1,X0.3",
+        "addr":"db:1,start:0,offset:3",
         "vartype":"BOOL",
         "monitor":["sig3"]
     },
@@ -27,7 +27,7 @@
         "id": "sig1",
         "name": "测试信号1",
         "cmdtype": "sig",
-        "addr":"DB2,X0.1",
+        "addr":"db:2,start:0,offset:1",
         "vartype":"BOOL",
         "monitor":[]
     },
@@ -35,7 +35,7 @@
         "id": "sig2",
         "name": "测试信号2",
         "cmdtype": "sig",
-        "addr":"DB2,X0.2",
+        "addr":"db:2,start:0,offset:2",
         "vartype":"BOOL",
         "monitor":[]
     },
@@ -43,7 +43,7 @@
         "id": "sig3",
         "name": "测试信号3",
         "cmdtype": "sig",
-        "addr":"DB2,X0.3",
+        "addr":"db:2,start:0,offset:3",
         "vartype":"BOOL",
         "monitor":[]
     },
@@ -51,7 +51,7 @@
         "id": "data1",
         "name": "数据1",
         "cmdtype": "data",
-        "addr":"DB3,WORD10",
+        "addr":"db:3,start:10,offset:",
         "vartype":"WORD",
         "monitor":[]
     },
@@ -59,7 +59,7 @@
         "id": "data2",
         "name": "数据2",
         "cmdtype": "data",
-        "addr":"DB3,WORD20",
+        "addr":"db:3,start:20,offset:",
         "vartype":"WORD",
         "monitor":[]
     },
@@ -67,7 +67,7 @@
         "id": "data3",
         "name": "数据3",
         "cmdtype": "data",
-        "addr":"DB3,WORD30",
+        "addr":"db:3,start:30,offset:",
         "vartype":"WORD",
         "monitor":[]
     }
