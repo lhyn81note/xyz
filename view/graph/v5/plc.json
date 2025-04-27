@@ -52,7 +52,7 @@
         "name": "数据1",
         "cmdtype": "data",
         "addr":"db:3,start:10,offset:",
-        "vartype":"WORD",
+        "vartype":"INT",
         "monitor":[]
     },
     "data2": {
@@ -68,7 +68,7 @@
         "name": "数据3",
         "cmdtype": "data",
         "addr":"db:3,start:30,offset:",
-        "vartype":"WORD",
+        "vartype":"REAL",
         "monitor":[]
     }
 }

@@ -1,8 +1,10 @@
-import json
+import json,time
 from pydantic import BaseModel, Field
 from typing import List
 import snap7
-from snap7.util import set_bool
+from snap7.util import set_bool, get_bool, set_int, get_int, set_real, get_real, set_word, get_word
+from typing import Union
+import threading
 
 # 定义 Pydantic 模型
 class Pt(BaseModel):
@@ -12,6 +14,7 @@ class Pt(BaseModel):
     addr: str = Field(..., description="地址")
     vartype: str = Field(..., description="变量类型")
     monitor: List[str] = Field(..., description="监控信号列表")
+    value: Union[bool, int, float]= None
 
 class Plc:
 
@@ -54,36 +57,103 @@ class Plc:
                 print(f"Error connecting to PLC: {e}")
                 self.alive = False
 
-    def exe(self, cmd_id):
+    def write(self, cmd_id, value)->bool:
         if self.protocal == "modbus":
             pass
         elif self.protocal == "s7":
-            # try:
-                for pt in self.pts:
-                    if (pt.id == cmd_id) and (pt.cmdtype == "cmd") and (pt.vartype == "BOOL"):
+            for pt in self.pts:
+                if (pt.id == cmd_id):
+                    if ((pt.cmdtype == "cmd") and (pt.vartype == "BOOL")):
                         addrs = pt.addr.split(",")
-                        db = int(addrs[0].split(":")[1])  # Extract DB number
-                        start = int(addrs[1].split(":")[1])  # Extract start address
+                        db = int(addrs[0].split(":")[1])  
+                        start_byte = int(addrs[1].split(":")[1])  
                         offset = int(addrs[2].split(":")[1])
 
-                        data = bytearray(1)
-                        # 使用set_bool方法将指定位置设置为True
-                        set_bool(data, 0, offset, True)
-                        # 写入数据到PLC的指定DB块和地址
-                        self.client.db_write(db, start, data)
-                        print(f"Set {pt.name} at {pt.addr} to True.")
-                        break
+                        data = bytearray(1) 
+                        set_bool(data, 0, offset, value==True)# 使用set_bool方法将指定位置设置为True
+                        self.client.db_write(db, start_byte, data)# 写入数据到PLC的指定DB块和地址
+                        print(f"布尔指令 {pt.name} 执行成功")
+                        return True
+                    elif ((pt.cmdtype == "cmd") and (pt.vartype == "INT")):
+                        print(f"整数指令 {pt.name} 执行成功")
+                        return True
+                    elif ((pt.cmdtype == "cmd") and (pt.vartype == "REAL")):
+                        print(f"浮点指令 {pt.name} 执行成功")
+                        return True
                     else:
-                        print(f"指令不匹配!{cmd_id}")
-            # except Exception as e:
-            #     print(f"Error executing command {cmd_id}: {e}")
+                        print(f"输出指令必须为cmd!{pt.cmdtype}")
+                        return False
+                else:
+                    print(f"指令不存在!{cmd_id}")
+                    return False
+
+    def read(self, cmd_id)->[bool |int | float]:
+        if self.protocal == "modbus":
+            pass
+        elif self.protocal == "s7":
+            for pt in self.pts:
+                if (pt.id == cmd_id):
+
+                    addrs = pt.addr.split(",")
+                    db = int(addrs[0].split(":")[1])  
+                    start_byte = int(addrs[1].split(":")[1])  
+
+                    size = 8  # 读取8个字节
+                    # breakpoint()
+                    data = self.client.db_read(db, start_byte, size)
+                    if (pt.vartype == "BOOL"):
+                        offset = int(addrs[2].split(":")[1])
+                        return get_bool(data, 0, offset)
+
+                    elif (pt.vartype == "INT"):
+                        return get_int(data, 0)
+
+                    elif (pt.vartype == "WORD"):
+                        return get_word(data, 0)
+
+                    elif (pt.vartype == "REAL"):
+                        return get_real(data, 0)
+
+                    else:
+                        print(f"读取数据类型错误!{pt.vartype}")
+                        return None
+
+    def scan(self):
+        def readall():
+            while True:
+                if self.protocal == "modbus":
+                    pass
+                elif self.protocal == "s7":
+                    for pt in self.pts:
+                        if (pt.vartype == "BOOL"):
+                            pt.value = self.read(pt.id)
+                        elif (pt.vartype == "INT"):
+                            pt.value = self.read(pt.id)
+                        elif (pt.vartype == "WORD"):
+                            pt.value = self.read(pt.id)
+                        elif (pt.vartype == "REAL"):
+                            pt.value = self.read(pt.id)
+                        else:
+                            print(f"读取数据类型错误!{pt.vartype}")
+                time.sleep(self.interval / 1000)
+
+                print("-" * 40)
+                for pt in self.pts:
+                    print(f"ID: {pt.id}, Value: {pt.value}")
+
+        thread = threading.Thread(target=readall)
+        thread.start()
 
 if __name__ == "__main__":
+
     plc = Plc(config_file="plc.json", addr="172.16.1.95:0:2", protocal="s7", interval=1000)
     plc.load_config()
-    for pt in plc.pts:
-        print(pt)
-        print("-" * 40)
+
     plc.connect()
     print(f"PLC is alive: {plc.alive}")
-    plc.exe("cmd1")
+
+    # plc.write("cmd1",True)
+    # ret = plc.read("data1")
+    # print(f"读取数据: {ret}")
+
+    plc.scan()
