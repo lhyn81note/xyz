@@ -8,13 +8,13 @@ import threading
 
 # 定义 Pydantic 模型
 class Pt(BaseModel):
-    id: str = Field(..., description="命令的唯一标识")
+    id: str = Field(..., description="命令的唯一标识") # 默认值为Field表示映射到json的key
     name: str = Field(..., description="命令的名称")
-    cmdtype: str = Field(..., alias="cmdtype", description="命令类型")
+    iotype: str = Field(..., description="读写类型")
     addr: str = Field(..., description="地址")
     vartype: str = Field(..., description="变量类型")
     monitor: List[str] = Field(..., description="监控信号列表")
-    value: Union[bool, int, float]= None
+    value: Union[bool, int, float]= None  # 默认值不是Field表示不映射, 可以规定类型
 
 class Plc:
 
@@ -26,12 +26,14 @@ class Plc:
         self.interval = interval  # 默认间隔时间
         self.client = None
         self.alive = False  # PLC是否在线
-        self.pts = None
+        self.pts = {}
 
     def load_config(self):
         with open(self.filepath, 'r', encoding='utf-8') as file:
             data = json.load(file)
-            self.pts = [Pt(**value) for value in data.values()]
+            ptlist = [Pt(**value) for value in data.values()]
+            for pt in ptlist:
+                self.pts[pt.id] = pt
 
     def connect(self):
 
@@ -57,66 +59,108 @@ class Plc:
                 print(f"Error connecting to PLC: {e}")
                 self.alive = False
 
-    def write(self, cmd_id, value)->bool:
+    def write(self, ptId, value) -> bool:
+
+        pt = self.pts.get(ptId)
+
+        if pt is None:
+            print(f"指令不存在!{ptId}")
+            return False
+
+        if (self.client is None) or self.alive==False:
+            print(f"PLC未连接!")
+            return False
+
+        if pt.iotype == "i":
+            print(f"输入指令不能写入!{pt.iotype}")
+            return False
+
         if self.protocal == "modbus":
             pass
+
         elif self.protocal == "s7":
-            for pt in self.pts:
-                if (pt.id == cmd_id):
-                    if ((pt.cmdtype == "cmd") and (pt.vartype == "BOOL")):
-                        addrs = pt.addr.split(",")
-                        db = int(addrs[0].split(":")[1])  
-                        start_byte = int(addrs[1].split(":")[1])  
-                        offset = int(addrs[2].split(":")[1])
 
-                        data = bytearray(1) 
-                        set_bool(data, 0, offset, value==True)# 使用set_bool方法将指定位置设置为True
-                        self.client.db_write(db, start_byte, data)# 写入数据到PLC的指定DB块和地址
-                        print(f"布尔指令 {pt.name} 执行成功")
-                        return True
-                    elif ((pt.cmdtype == "cmd") and (pt.vartype == "INT")):
-                        print(f"整数指令 {pt.name} 执行成功")
-                        return True
-                    elif ((pt.cmdtype == "cmd") and (pt.vartype == "REAL")):
-                        print(f"浮点指令 {pt.name} 执行成功")
-                        return True
-                    else:
-                        print(f"输出指令必须为cmd!{pt.cmdtype}")
-                        return False
-                else:
-                    print(f"指令不存在!{cmd_id}")
-                    return False
+            addrs = pt.addr.split(",")
+            db = int(addrs[0].split(":")[1])  
+            start_byte = int(addrs[1].split(":")[1])  
 
-    def read(self, cmd_id)->[bool |int | float]:
+            if (pt.vartype == "BOOL"):
+                offset = int(addrs[2].split(":")[1])
+                data = bytearray(1) 
+                set_bool(data, 0, offset, value==True)# 使用set_bool方法将指定位置设置为True
+                self.client.db_write(db, start_byte, data)# 写入数据到PLC的指定DB块和地址
+                print(f"布尔指令 {pt.name} 执行成功")
+                return True
+
+            elif (pt.vartype == "INT"):
+                data = bytearray(2)  
+                set_int(data, 0, value)  
+                self.client.db_write(db, start_byte, data)  
+                print(f"整形指令 {pt.name} 执行成功")
+                return True
+
+            elif (pt.vartype == "WORD"):
+                data = bytearray(2) 
+                set_word(data, 0, value)  
+                self.client.db_write(db, start_byte, data)  
+                print(f"字指令 {pt.name} 执行成功")
+                return True
+
+            elif (pt.vartype == "REAL"):
+                data = bytearray(4)  
+                set_real(data, 0, value)  
+                self.client.db_write(db, start_byte, data)  
+                print(f"实数指令 {pt.name} 执行成功")
+                return True
+
+            else:
+                print(f"点类型错误:{pt.vartype}")
+                return False
+
+    def read(self, ptId)->[bool |int | float]:
+        pt = self.pts.get(ptId)
+
+        if pt is None:
+            print(f"指令不存在!{ptId}")
+            return False
+
+        if (self.client is None) or self.alive==False:
+            print(f"PLC未连接!")
+            return False
+
+        if pt.iotype == "i":
+            print(f"输入指令不能写入!{pt.iotype}")
+            return False
+
         if self.protocal == "modbus":
             pass
+
         elif self.protocal == "s7":
-            for pt in self.pts:
-                if (pt.id == cmd_id):
 
-                    addrs = pt.addr.split(",")
-                    db = int(addrs[0].split(":")[1])  
-                    start_byte = int(addrs[1].split(":")[1])  
+            addrs = pt.addr.split(",")
+            db = int(addrs[0].split(":")[1])  
+            start_byte = int(addrs[1].split(":")[1])  
 
-                    size = 8  # 读取8个字节
-                    # breakpoint()
-                    data = self.client.db_read(db, start_byte, size)
-                    if (pt.vartype == "BOOL"):
-                        offset = int(addrs[2].split(":")[1])
-                        return get_bool(data, 0, offset)
+            if (pt.vartype == "BOOL"):
+                offset = int(addrs[2].split(":")[1])
+                data = self.client.db_read(db, start_byte, 1) # 读取1个字节
+                return get_bool(data, 0, offset)
 
-                    elif (pt.vartype == "INT"):
-                        return get_int(data, 0)
+            elif (pt.vartype == "INT"):
+                data = self.client.db_read(db, start_byte, 2) # 读取2个字节
+                return get_int(data, 0)
 
-                    elif (pt.vartype == "WORD"):
-                        return get_word(data, 0)
+            elif (pt.vartype == "WORD"):
+                data = self.client.db_read(db, start_byte, 2) # 读取2个字节
+                return get_word(data, 0)
 
-                    elif (pt.vartype == "REAL"):
-                        return get_real(data, 0)
+            elif (pt.vartype == "REAL"):
+                data = self.client.db_read(db, start_byte, 4) # 读取4个字节
+                return get_real(data, 0)
 
-                    else:
-                        print(f"读取数据类型错误!{pt.vartype}")
-                        return None
+            else:
+                print(f"点类型错误!{pt.vartype}")
+                return None
 
     def scan(self):
         def readall():
@@ -152,8 +196,12 @@ if __name__ == "__main__":
     plc.connect()
     print(f"PLC is alive: {plc.alive}")
 
-    # plc.write("cmd1",True)
+    plc.write("data1",100)
+    plc.write("data2",65523)
+    plc.write("data3",11.22)
+
+
     # ret = plc.read("data1")
     # print(f"读取数据: {ret}")
 
-    plc.scan()
+    # plc.scan()
