@@ -8,9 +8,10 @@ class CmdMananger(QObject):
 
     evtCmdChanged = Signal(str, int)  # Signal to emit status changes with id and status
 
-    def __init__(self):
+    def __init__(self, flow_file, plc):
         super().__init__()
-        self.flow_file = None
+        self.flow_file = flow_file
+        self.plc = plc
         self.meta = {}
         self.flow = {}  # Placeholder for flow configuration
         self.head_node_id = None  # Placeholder for head node ID
@@ -27,11 +28,10 @@ class CmdMananger(QObject):
     '''
     流程配置文件操作
     '''
-    def loadFlow(self, flow_file) -> bool:
+    def loadFlow(self) -> bool:
 
-        with open(flow_file, 'r', encoding='utf-8') as file:
+        with open(self.flow_file, 'r', encoding='utf-8') as file:
 
-            self.flow_file = flow_file
             json_str = file.read()
             data = json.loads(json_str)
 
@@ -140,14 +140,14 @@ class CmdMananger(QObject):
         def run_flow():
             self.cursor = self.head_node_id
             theCmd = self.getCmd(self.cursor)
-            asyncio.run(theCmd.run_async())
+            asyncio.run(theCmd.run_async(self.plc))
             if theCmd.status == 2:
                 next_cmd_count = len(self.flow[self.cursor])
                 while next_cmd_count > 0:
                     if next_cmd_count == 1:
                         self.cursor = self.flow[self.cursor][0]
                         theCmd = self.getCmd(self.cursor)
-                        asyncio.run(theCmd.run_async())
+                        asyncio.run(theCmd.run_async(self.plc))
                         if theCmd.status == 2:
                             next_cmd_count = len(self.flow[self.cursor])
                         else:
@@ -165,9 +165,8 @@ class CmdMananger(QObject):
         thread.start()
 
     def runstep(self, theCmd):
-
         def run_step():
-            asyncio.run(theCmd.run_async())
+            asyncio.run(theCmd.run_async(self.plc))
             if theCmd.status == 2:
                 print(f"单步指令 {theCmd.name} 执行成功")
             else:
@@ -196,7 +195,6 @@ class Cmd(QObject):
         self.type = cmd_dict.get("type")
         self.name = cmd_dict.get("name")
         self.param = cmd_dict.get("param")
-        self.monitor = cmd_dict.get("monitor")
         self.status = 0  # 0: idle, 1: running, 2: done, 3: error
         self.beginTime = ""
         self.endTime = ""
@@ -212,15 +210,38 @@ class Cmd(QObject):
         return None
 
 
-    async def run_async(self):
+    async def run_async(self, plc):
 
         async def run_sys(self):
-            await asyncio.sleep(3) 
+            await asyncio.sleep(1) 
             self.result = "sys done." 
             self.status = 2  # Set status to done
 
-        async def run_plc(self):
-            await asyncio.sleep(3) 
+        async def run_plc(self, plc):
+
+            pt_out = plc.pts.get(self.param.get("out"))
+            pt_args = self.param.get("args")
+            pt_sigs = plc.pts.get(self.param.get("monitor"))
+
+            for arg_kv in pt_args:
+                print(f"写入指令: {arg_kv}")
+                for k,v in arg_kv.items():
+                    print(f"写入指令: {k} = {v}")
+                    pt_arg = plc.pts.get(k)
+                    if pt_arg is None:
+                        print(f"指令不存在!{k}")
+                        return False
+                    else:
+                        plc.write(k, v)
+
+            plc.write(pt_out.id, 1)
+            while True:
+                pt_sig = plc.read(pt_sigs.id)
+                if pt_sig == 1:
+                    print(f"监控点 {pt_sigs.id} 触发!!!")
+                    break
+                await asyncio.sleep(0.1)
+
             self.result = "plc done." 
             self.status = 2  # Set status to done
 
@@ -236,7 +257,7 @@ class Cmd(QObject):
                 await run_sys(self)
 
             elif self.type == "plc":
-                await run_plc(self)
+                await run_plc(self, plc)
 
         except Exception as e:
             self.result = str(e)  # Capture exception as result

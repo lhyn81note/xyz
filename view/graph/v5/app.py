@@ -5,12 +5,20 @@ import asyncio
 
 from view import Window
 from cmd import CmdMananger, Cmd
+from plc import Plc
 
 
 if __name__ == '__main__':
 
-    cmd_manager = CmdMananger()
-    cmd_manager.loadFlow("flow01.json")
+    # Plc初始化
+    plc = Plc(config_file="plc.json", addr="172.16.1.95:0:2", protocal="s7", interval=3000)
+    plc.load_config()
+    plc.connect()
+    print(f"PLC is alive: {plc.alive}")
+
+    # CmdMananger初始化
+    cmd_manager = CmdMananger("flow01.json", plc)
+    cmd_manager.loadFlow()
     cmd_manager.loadCmds()
 
     # Start Application

@@ -28,62 +28,79 @@
         "000": {
             "type": "sys",
             "name": "\u5f00\u59cb\u786e\u8ba4",
-            "param": {},
-            "monitor": {
-                "code": 0
+            "param": {
+                "args": null,
+                "monitor": {
+                    "code": 0
+                }
             }
         },
         "001": {
             "type": "plc",
             "name": "\u7b2c\u4e00\u6b65",
             "param": {
-                "cmd1": true,
-                "data1": 111,
-                "data2": 112
-            },
-            "monitor": {
-                "sig1": true
+                "out": "cmd1",
+                "args": [
+                    {
+                        "data1": 111
+                    }
+                ],
+                "monitor": "sig1"
             }
         },
         "002": {
             "type": "plc",
             "name": "\u7b2c\u4e8c\u6b65",
             "param": {
-                "cmd2": true,
-                "data1": 221,
-                "data3": 222.2
-            },
-            "monitor": {
-                "sig2": true
+                "out": "cmd2",
+                "args": [
+                    {
+                        "data1": 221
+                    },
+                    {
+                        "data2": 222
+                    }
+                ],
+                "monitor": "sig2"
             }
         },
         "003": {
             "type": "plc",
             "name": "\u7b2c\u4e09\u6b65",
             "param": {
-                "cmd3": true,
-                "data1": 333,
-                "data2": 3333,
-                "data3": 333.3
-            },
-            "monitor": {
-                "sig3": true
+                "out": "cmd3",
+                "args": [
+                    {
+                        "data1": 331
+                    },
+                    {
+                        "data2": 3332
+                    },
+                    {
+                        "data3": 333.33
+                    }
+                ],
+                "monitor": "sig3"
             }
         },
         "004": {
             "type": "sys",
             "name": "\u7b2c\u56db\u6b65",
-            "param": {},
-            "monitor": {
-                "code": 0
+            "param": {
+                "args": null,
+                "monitor": {
+                    "code": 0
+                }
             }
         },
         "005": {
             "type": "sys",
             "name": "\u7b2c\u4e94\u6b65",
-            "param": {},
-            "monitor": {
-                "code": 0
+            "param": {
+                "args": null,
+                "monitor": {
+                    "code": 0
+                }
             }
         }
     },
@@ -101,14 +118,14 @@
             "status": "idle"
         },
         "002": {
-            "x": 205.0,
-            "y": 235.0,
+            "x": 258.0,
+            "y": 215.0,
             "text": "",
             "status": "idle"
         },
         "003": {
-            "x": 68.0,
-            "y": 411.0,
+            "x": 48.0,
+            "y": 401.0,
             "text": "",
             "status": "idle"
         },
