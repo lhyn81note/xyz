@@ -128,10 +128,6 @@ class Plc:
             print(f"PLC未连接!")
             return False
 
-        if pt.iotype == "i":
-            print(f"输入指令不能写入!{pt.iotype}")
-            return False
-
         if self.protocal == "modbus":
             pass
 
@@ -165,32 +161,22 @@ class Plc:
     def scan(self):
         def readall():
             while True:
+                print("-" * 40)
                 if self.protocal == "modbus":
                     pass
                 elif self.protocal == "s7":
-                    for pt in self.pts:
-                        if (pt.vartype == "BOOL"):
-                            pt.value = self.read(pt.id)
-                        elif (pt.vartype == "INT"):
-                            pt.value = self.read(pt.id)
-                        elif (pt.vartype == "WORD"):
-                            pt.value = self.read(pt.id)
-                        elif (pt.vartype == "REAL"):
-                            pt.value = self.read(pt.id)
-                        else:
-                            print(f"读取数据类型错误!{pt.vartype}")
+                    for pt in self.pts.values():
+                        print(pt)
+                        pt.value = self.read(pt.id)
+                        print(f"ID: {pt.id}, Value: {pt.value}")
                 time.sleep(self.interval / 1000)
-
-                print("-" * 40)
-                for pt in self.pts:
-                    print(f"ID: {pt.id}, Value: {pt.value}")
 
         thread = threading.Thread(target=readall)
         thread.start()
 
 if __name__ == "__main__":
 
-    plc = Plc(config_file="plc.json", addr="172.16.1.95:0:2", protocal="s7", interval=1000)
+    plc = Plc(config_file="plc.json", addr="172.16.1.95:0:2", protocal="s7", interval=3000)
     plc.load_config()
 
     plc.connect()
@@ -204,4 +190,4 @@ if __name__ == "__main__":
     # ret = plc.read("data1")
     # print(f"读取数据: {ret}")
 
-    # plc.scan()
+    plc.scan()
