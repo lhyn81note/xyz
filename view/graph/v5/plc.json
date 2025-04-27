@@ -1,0 +1,74 @@
+{
+    "cmd1": {
+        "id": "cmd1",
+        "name": "测试指令1",
+        "cmdtype": "cmd",
+        "addr":"DB1,X0.1",
+        "vartype":"BOOL",
+        "monitor":["sig1"]
+    },
+    "cmd2": {
+        "id": "cmd2",
+        "name": "测试指令2",
+        "cmdtype": "cmd",
+        "addr":"DB1,X0.2",
+        "vartype":"BOOL",
+        "monitor":["sig2"]
+    },
+    "cmd3": {
+        "id": "cmd3",
+        "name": "测试指令3",
+        "cmdtype": "cmd",
+        "addr":"DB1,X0.3",
+        "vartype":"BOOL",
+        "monitor":["sig3"]
+    },
+    "sig1": {
+        "id": "sig1",
+        "name": "测试信号1",
+        "cmdtype": "sig",
+        "addr":"DB2,X0.1",
+        "vartype":"BOOL",
+        "monitor":[]
+    },
+    "sig2": {
+        "id": "sig2",
+        "name": "测试信号2",
+        "cmdtype": "sig",
+        "addr":"DB2,X0.2",
+        "vartype":"BOOL",
+        "monitor":[]
+    },
+    "sig3": {
+        "id": "sig3",
+        "name": "测试信号3",
+        "cmdtype": "sig",
+        "addr":"DB2,X0.3",
+        "vartype":"BOOL",
+        "monitor":[]
+    },
+    "data1": {
+        "id": "data1",
+        "name": "数据1",
+        "cmdtype": "data",
+        "addr":"DB3,WORD10",
+        "vartype":"WORD",
+        "monitor":[]
+    },
+    "data2": {
+        "id": "data2",
+        "name": "数据2",
+        "cmdtype": "data",
+        "addr":"DB3,WORD20",
+        "vartype":"WORD",
+        "monitor":[]
+    },
+    "data3": {
+        "id": "data3",
+        "name": "数据3",
+        "cmdtype": "data",
+        "addr":"DB3,WORD30",
+        "vartype":"WORD",
+        "monitor":[]
+    }
+}

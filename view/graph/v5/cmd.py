@@ -221,7 +221,7 @@ class Cmd(QObject):
         self.evtStatusChanged.emit(self.id, self.status)
         try:
             # print(f"正在执行指令: {self.name}")
-            await asyncio.sleep(1)  # Use 'duration' from params or default to 1 second
+            await asyncio.sleep(3)  # Use 'duration' from params or default to 1 second
             self.result = "success"  # Set result after process completion
             self.status = 2  # Set status to done
         except Exception as e:

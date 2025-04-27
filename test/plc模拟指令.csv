@@ -1,0 +1,11 @@
+DB1,X0.1;cmd-pt1
+DB1,X0.2;cmd-pt2
+DB1,X0.3;cmd-pt3
+
+DB2,X0.1;done-pt1
+DB2,X0.2;done-pt2
+DB2,X0.3;done-pt3
+
+DB3,WORD10;data-pt1
+DB3,WORD20;data-pt2
+DB3,WORD30;data-pt3

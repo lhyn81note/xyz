@@ -106,7 +106,7 @@ Rectangle {
             property string to: model.to
 
             ShapePath {
-                strokeColor: "black"
+                strokeColor: "#5f5c5c"
                 strokeWidth: 2
                 startX: canvas.nodes[from].x + canvas.nodes[from].width/2  // Center of node
                 startY: canvas.nodes[from].y + canvas.nodes[from].height
