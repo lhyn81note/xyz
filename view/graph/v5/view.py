@@ -43,7 +43,7 @@ class Window(QWidget):
     def onStart(self):
         # print("onStart")
         # self.qml_root.start()
-        _top.cmd_manager.start()
+        _top.cmd_manager.runflow()
 
     @Slot(dict)
     def onAny(self, response):

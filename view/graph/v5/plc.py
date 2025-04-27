@@ -166,7 +166,6 @@ class Plc:
                     pass
                 elif self.protocal == "s7":
                     for pt in self.pts.values():
-                        print(pt)
                         pt.value = self.read(pt.id)
                         print(f"ID: {pt.id}, Value: {pt.value}")
                 time.sleep(self.interval / 1000)

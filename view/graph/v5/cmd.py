@@ -136,7 +136,7 @@ class CmdMananger(QObject):
     '''
     核心操作
     '''
-    def start(self):
+    def runflow(self):
         def run_flow():
             self.cursor = self.head_node_id
             theCmd = self.getCmd(self.cursor)
@@ -151,39 +151,39 @@ class CmdMananger(QObject):
                         if theCmd.status == 2:
                             next_cmd_count = len(self.flow[self.cursor])
                         else:
-                            print(f"指令 {self.cursor} 执行失败")
+                            print(f"流指令 {self.cursor} 执行失败")
                             self.flowStatus = 4  # Set status to error
                             break
                     else:
-                        print(f"指令 {self.cursor} 有多条路径, 请手动选择")
+                        print(f"流指令 {self.cursor} 有多条路径, 请手动选择")
                         next_cmd_count = 1
             else:
-                print(f"指令 {self.cursor} 执行失败")
+                print(f"流指令 {self.cursor} 执行失败")
                 self.flowStatus = 4  # Set status to error
 
         thread = threading.Thread(target=run_flow)
         thread.start()
 
+    def runstep(self, theCmd):
+
+        def run_step():
+            asyncio.run(theCmd.run_async())
+            if theCmd.status == 2:
+                print(f"单步指令 {theCmd.name} 执行成功")
+            else:
+                print(f"单步指令 {theCmd.name} 执行失败")
+
+        thread = threading.Thread(target=run_step)
+        thread.start()
+
     def stop(self, name):
-        cmd = self.get_cmd(name)
-        if cmd:
-            return cmd.stop()
-        else:
-            raise ValueError(f"Command {name} not found.")
+        pass
 
     def pause(self, name):
-        cmd = self.get_cmd(name)
-        if cmd:
-            return cmd.pause()
-        else:
-            raise ValueError(f"Command {name} not found.")
+        pass
 
     def goon(self, name):
-        cmd = self.get_cmd(name)
-        if cmd:
-            return cmd.goon()
-        else:
-            raise ValueError(f"Command {name} not found.")
+        pass
 
 
 class Cmd(QObject):
@@ -214,20 +214,35 @@ class Cmd(QObject):
 
     async def run_async(self):
 
+        async def run_sys(self):
+            await asyncio.sleep(3) 
+            self.result = "sys done." 
+            self.status = 2  # Set status to done
+
+        async def run_plc(self):
+            await asyncio.sleep(3) 
+            self.result = "plc done." 
+            self.status = 2  # Set status to done
+
         if (self.status != 0):
             raise RuntimeError("无法运行非空闲状态指令!")
+
         self.status = 1  # Set status to running
         self.beginTime = datetime.now().strftime("%Y-%m-%d %H:%M:%S")  # Set start time in "yyyy-mm-dd hh:mm:ss" format
         self.evtStatusChanged.emit(self.id, self.status)
+
         try:
-            # print(f"正在执行指令: {self.name}")
-            await asyncio.sleep(3)  # Use 'duration' from params or default to 1 second
-            self.result = "success"  # Set result after process completion
-            self.status = 2  # Set status to done
+            if self.type == "sys":
+                await run_sys(self)
+
+            elif self.type == "plc":
+                await run_plc(self)
+
         except Exception as e:
             self.result = str(e)  # Capture exception as result
             self.status = 3  # Set status to error
+
         finally:
             self.endTime = datetime.now().strftime("%Y-%m-%d %H:%M:%S")  # Replace with actual end time logic
             self.evtStatusChanged.emit(self.id, self.status)
-            print(f"Command {self.name} finished with result: {self.result}")
+            print(f"指令 {self.name} 执行完毕: {self.result}")

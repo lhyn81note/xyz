@@ -34,27 +34,40 @@
             }
         },
         "001": {
-            "type": "sys",
+            "type": "plc",
             "name": "\u7b2c\u4e00\u6b65",
-            "param": {},
+            "param": {
+                "cmd1": true,
+                "data1": 111,
+                "data2": 112
+            },
             "monitor": {
-                "code": 0
+                "sig1": true
             }
         },
         "002": {
-            "type": "sys",
+            "type": "plc",
             "name": "\u7b2c\u4e8c\u6b65",
-            "param": {},
+            "param": {
+                "cmd2": true,
+                "data1": 221,
+                "data3": 222.2
+            },
             "monitor": {
-                "code": 0
+                "sig2": true
             }
         },
         "003": {
-            "type": "sys",
+            "type": "plc",
             "name": "\u7b2c\u4e09\u6b65",
-            "param": {},
+            "param": {
+                "cmd3": true,
+                "data1": 333,
+                "data2": 3333,
+                "data3": 333.3
+            },
             "monitor": {
-                "code": 0
+                "sig3": true
             }
         },
         "004": {
@@ -88,14 +101,14 @@
             "status": "idle"
         },
         "002": {
-            "x": 239.0,
-            "y": 222.0,
+            "x": 205.0,
+            "y": 235.0,
             "text": "",
             "status": "idle"
         },
         "003": {
-            "x": 51.0,
-            "y": 387.0,
+            "x": 68.0,
+            "y": 411.0,
             "text": "",
             "status": "idle"
         },
