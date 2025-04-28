@@ -169,7 +169,7 @@ class S7(BasePlc):
     def scan(self):
         def readall():
             while True:
-                print("-" * 40)
+                # print("-" * 40)
                 if self.protocal == "modbus":
                     pass
                 elif self.protocal == "s7":

@@ -10,7 +10,7 @@ from .setting_user.view import Window as view_setting_user
 from .setting_basic.view import Window as view_setting_basic
 from .setting_types.view import Window as view_setting_types
 
-from .graph.v5.view import Window as view_graph
+from .graph.v6.view import Window as view_graph
 
 Views = {
     'view_index':{'title':'母版页','obj':view_index},
@@ -30,7 +30,7 @@ Menus = {
         {'title':'PLC功能测试', 'icon':'plc.png', 'view_id':'view_plc','pop':False, 'fixed':False},
         {'title':'消息功能测试', 'icon':'docu.png', 'view_id':'view_notify','pop':False, 'fixed':False},
         {'title':'绑定功能测试', 'icon':'docu.png', 'view_id':'view_bind','pop':False, 'fixed':False},
-        {'title':'知识检索', 'icon':'tool.png', 'view_id':'view_pop','pop':True, 'fixed':False},
+        {'title':'知识库检索', 'icon':'tool.png', 'view_id':'view_pop','pop':True, 'fixed':False},
         {'title':'图形化测试', 'icon':'tool.png', 'view_id':'view_graph','pop':False, 'fixed':False},
     ],
     '设置':[

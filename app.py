@@ -7,9 +7,11 @@ from wgts import TabWidget, PlcData, PlcTable
 from view import Views, Menus, MainFrame
 
 # 全局Service初始化
-LibServices = Utils()
-Broker = Notify().msgBroker()
-PLC = Devices().Plc(config_file="plc_s7.json", addr="172.16.1.95:0:2", protocal="s7", interval=500)
+PLC = CoreProvider().Plc(config_file="plc_s7.json", addr="172.16.1.95:0:2", protocal="s7", interval=500)
+CmdManager = CoreProvider().CmdManager("flow01.json", PLC)
+Cmd = CoreProvider().Cmd
+Broker = CoreProvider().MsgBroker()
+LibServices = UtilsProvider()
 
 # 全局数据库引擎初始化
 DbEng_Alarms = GenDbEnging(dbpath="sqlite:///db/Alarms.db")
@@ -41,12 +43,11 @@ TblBogieResult = TblBogieResult(engine=DbEng_result)
 TblNowSheet = TblNowSheet(engine=DbEng_result)
 TblResultMx =   TblResultMx(engine=DbEng_result)
 
+CmdManager.loadFlow()
+CmdManager.loadCmds()
 PLC.load_config()
 PLC.connect()
 print(f"PLC is alive: {PLC.alive}")
-# PLC.write("data1",100)
-# PLC.write("data2",65523)
-# PLC.write("data3",11.22)
 PLC.scan()
 
 if __name__ == '__main__':

@@ -19,7 +19,7 @@ class Window(QWidget):
         self.qml_flow.setResizeMode(QQuickWidget.ResizeMode.SizeRootObjectToView)
 
         nodes_model, connections_model = _top.CmdManager.genQmlModel()
-        # nodes_model, connections_model = _top.cmd_manager.genQmlModel()
+
         user = "admin"
         self.qml_flow.rootContext().setContextProperty("editable", user=="admin")
         self.qml_flow.rootContext().setContextProperty("nodesData", nodes_model)
@@ -43,7 +43,7 @@ class Window(QWidget):
     def onStart(self):
         # print("onStart")
         # self.qml_root.start()
-        _top.cmd_manager.runflow()
+        _top.CmdManager.runflow()
 
     @Slot(dict)
     def onAny(self, response):
@@ -58,9 +58,9 @@ class Window(QWidget):
             print(f"{response['type']}\n{response['msg']}\n{response['data']}")
 
             if response["type"] == "move":
-                _top.cmd_manager.nodes[response["data"]["id"]]['x'] = response["data"]["x"]
-                _top.cmd_manager.nodes[response["data"]["id"]]['y'] = response["data"]["y"]
-                _top.cmd_manager.saveFlow()
+                _top.CmdManager.nodes[response["data"]["id"]]['x'] = response["data"]["x"]
+                _top.CmdManager.nodes[response["data"]["id"]]['y'] = response["data"]["y"]
+                _top.CmdManager.saveFlow()
 
             else:
                 pass
