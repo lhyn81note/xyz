@@ -5,6 +5,7 @@ import snap7
 from snap7.util import set_bool, get_bool, set_int, get_int, set_real, get_real, set_word, get_word
 from typing import Union
 import threading
+from . import BasePlc
 
 # 定义 Pydantic 模型
 class Pt(BaseModel):
@@ -16,10 +17,10 @@ class Pt(BaseModel):
     monitor: List[str] = Field(..., description="监控信号列表")
     value: Union[bool, int, float]= None  # 默认值不是Field表示不映射, 可以规定类型
 
-class Plc:
+class S7(BasePlc):
 
-    def __init__(self, config_file: str, addr: str, protocal: str = "modbus", interval: int = 1000):
-
+    def __init__(self, config_file: str, addr: str, protocal: str, interval: int):
+        super().__init__()
         self.filepath = config_file
         self.addr = addr
         self.protocal = protocal
@@ -27,6 +28,7 @@ class Plc:
         self.client = None
         self.alive = False  # PLC是否在线
         self.pts = {}
+        self.callbacks = []  # 用于存储回调函数
 
     def load_config(self) -> bool:
         try:
@@ -173,15 +175,16 @@ class Plc:
                 elif self.protocal == "s7":
                     for pt in self.pts.values():
                         pt.value = self.read(pt.id)
-                        print(f"ID: {pt.id}, Value: {pt.value}")
+                        # print(f"ID: {pt.id}, Value: {pt.value}")
                 time.sleep(self.interval / 1000)
+                self.trigger_callbacks()
 
-        thread = threading.Thread(target=readall)
+        thread = threading.Thread(target=readall, daemon=True)
         thread.start()
 
 if __name__ == "__main__":
 
-    plc = Plc(config_file="plc.json", addr="172.16.1.95:0:2", protocal="s7", interval=3000)
+    plc = Plc(config_file="plc.json", addr="172.16.1.95:0:2", protocal="s7", interval=500)
     plc.load_config()
 
     plc.connect()

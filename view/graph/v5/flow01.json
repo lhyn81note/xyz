@@ -1,7 +1,7 @@
 {
     "meta": {
         "schema": "test",
-        "desc": "\u6d4b\u8bd5\u6d41\u7a0b",
+        "desc": "测试流程",
         "time": "2024-04-25"
     },
     "flow": {
@@ -27,7 +27,7 @@
     "cmds": {
         "000": {
             "type": "sys",
-            "name": "\u5f00\u59cb\u786e\u8ba4",
+            "name": "开始确认",
             "param": {
                 "args": null,
                 "monitor": {
@@ -37,7 +37,7 @@
         },
         "001": {
             "type": "plc",
-            "name": "\u7b2c\u4e00\u6b65",
+            "name": "第一步",
             "param": {
                 "out": "cmd1",
                 "args": [
@@ -50,7 +50,7 @@
         },
         "002": {
             "type": "plc",
-            "name": "\u7b2c\u4e8c\u6b65",
+            "name": "第二步",
             "param": {
                 "out": "cmd2",
                 "args": [
@@ -66,7 +66,7 @@
         },
         "003": {
             "type": "plc",
-            "name": "\u7b2c\u4e09\u6b65",
+            "name": "第三步",
             "param": {
                 "out": "cmd3",
                 "args": [
@@ -85,7 +85,7 @@
         },
         "004": {
             "type": "sys",
-            "name": "\u7b2c\u56db\u6b65",
+            "name": "第四步",
             "param": {
                 "args": null,
                 "monitor": {
@@ -95,7 +95,7 @@
         },
         "005": {
             "type": "sys",
-            "name": "\u7b2c\u4e94\u6b65",
+            "name": "第五步",
             "param": {
                 "args": null,
                 "monitor": {
@@ -106,38 +106,38 @@
     },
     "nodes": {
         "000": {
-            "x": 50.0,
-            "y": 13.0,
+            "x": 50,
+            "y": 13,
             "text": "",
             "status": "idle"
         },
         "001": {
-            "x": 53.0,
-            "y": 142.0,
+            "x": 50,
+            "y": 103,
             "text": "",
             "status": "idle"
         },
         "002": {
-            "x": 258.0,
-            "y": 215.0,
+            "x": 258,
+            "y": 215,
             "text": "",
             "status": "idle"
         },
         "003": {
-            "x": 48.0,
-            "y": 401.0,
+            "x": 48,
+            "y": 401,
             "text": "",
             "status": "idle"
         },
         "004": {
-            "x": 240.0,
-            "y": 288.0,
+            "x": 257,
+            "y": 296,
             "text": "",
             "status": "idle"
         },
         "005": {
-            "x": 51.0,
-            "y": 518.0,
+            "x": 51,
+            "y": 518,
             "text": "",
             "status": "idle"
         }

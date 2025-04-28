@@ -27,13 +27,14 @@ class Window(QWidget):
         # self.ax = self.figure.add_subplot(111)
         # self.line, = self.ax.plot(self.data, 'r-')
         # self.canvas.draw()
-        data = [[pt['name'],pt['io'].name,pt['area'].name,pt['type'].name,pt['address'],pt['value']] for pt in _top.PLC.config['pts']]
+        # data = [[pt['name'],pt['io'].name,pt['area'].name,pt['type'].name,pt['address'],pt['value']] for pt in _top.PLC.config['pts']]
         # data = [
         #     [key, *value.values()]
         #     for key, value in data.items()
         # ]
 
-        self.plcdata = _top.PlcData(data)
+        self.plcdata = _top.PlcData(list(_top.PLC.pts.values()))
         plcview = _top.PlcTable(self.plcdata)
-        _top.PLC.register_callback(lambda ipt: self.plcdata.setData(ipt[0], 5, ipt[1]))
+        # _top.PLC.register_callback(lambda ipt: self.plcdata.setData(ipt[0], 5, ipt[1]))
+        _top.PLC.register_callback(lambda: self.plcdata.update())
         self.ui.horizontalLayout_2.addWidget(plcview)

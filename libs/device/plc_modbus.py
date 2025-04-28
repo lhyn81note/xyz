@@ -2,10 +2,35 @@ from abc import abstractmethod, ABCMeta
 from typing import List, Dict, TypeVar, Union
 import threading
 import time
-from . import BasePlc, MODBUS_AREA, MODBUS_VARTYPE, IO, BYTE_ENDIAN, WORD_ENDIAN, T
+from . import BasePlc
 from pymodbus.client import ModbusTcpClient
 from pymodbus.payload import BinaryPayloadDecoder, BinaryPayloadBuilder
 from pymodbus.constants import Endian
+from enum import Enum
+
+class MODBUS_AREA(Enum):
+    Coil=0
+    InCoil=1
+    Reg=2
+    InReg=3
+
+class IO(Enum):
+    IN=0
+    OUT=1
+
+class MODBUS_VARTYPE(Enum):
+    Bool=0
+    Int_16=1
+    Int_32=2
+    Real_32=4
+    
+class BYTE_ENDIAN(Enum):
+    BIG=0
+    LITTLE=1
+
+class WORD_ENDIAN(Enum):
+    BIG=0
+    LITTLE=1
 
 class ModbusTcp(BasePlc):
 

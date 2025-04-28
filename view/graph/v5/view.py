@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from _view import Ui_Form
 import os,sys,json
+from view.graph.v5._view import Ui_Form
 from PySide6.QtWidgets import (QApplication, QVBoxLayout, QLabel, QMainWindow, QSizePolicy, QWidget, QDialog, QMessageBox)
 from PySide6.QtQuickWidgets import QQuickWidget
 from PySide6.QtCore import Slot, QUrl, QObject, QAbstractListModel, Qt, QSize, QMimeData

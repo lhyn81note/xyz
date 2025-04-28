@@ -2,62 +2,49 @@ from abc import abstractmethod, ABCMeta
 from typing import List, Dict, TypeVar, Union
 from enum import Enum
 
-__all__ = ["plc"]
+__all__ = ["plc_modbus", "plc_s7", "BasePlc"]
 
 T=TypeVar("T")
 
-class MODBUS_AREA(Enum):
-    Coil=0
-    InCoil=1
-    Reg=2
-    InReg=3
-
-class IO(Enum):
-    IN=0
-    OUT=1
-
-class MODBUS_VARTYPE(Enum):
-    Bool=0
-    Int_16=1
-    Int_32=2
-    Real_32=4
-    
-class BYTE_ENDIAN(Enum):
-    BIG=0
-    LITTLE=1
-
-class WORD_ENDIAN(Enum):
-    BIG=0
-    LITTLE=1
-
 class BasePlc(metaclass = ABCMeta):
+
     def __init__(self):
-           self._isalive=False
-           pass
+        self.pts_file_path = None
+        self.addr =     None
+        self.protocal = None
+        self.interval = None
+        self.client = None
+        self.alive = False  # PLC是否在线
+        self.pts = {}
+        self.callbacks = []  # 用于存储回调函数
+
+    def register_callback(self, callback):
+        if callable(callback):
+            self.callbacks.append(callback)
+        else:
+            raise ValueError("无法调用对象")
+
+    def trigger_callbacks(self, *args, **kwargs):
+        for callback in self.callbacks:
+            if callback is not None:
+                callback(*args, **kwargs)
 
     @abstractmethod
-    def conn(self)->bool:
+    def load_config(self)->bool:
         pass
 
     @abstractmethod
-    def disconn(self)->bool:
-        pass
-
-    def isalive(self)->bool:
-        return self._isalive
-
-    @abstractmethod
-    def read_coils(self, area:MODBUS_AREA, start_address:int, count:int) -> Union[List[bool] , None] :
+    def connect(self)->bool:
         pass
 
     @abstractmethod
-    def write_coil(self, area:MODBUS_AREA, start_address:int, count:int, values:List[bool]) -> bool:
+    def read(self, ptId) -> bool :
         pass
 
     @abstractmethod
-    def read_regs(self, area:MODBUS_AREA, start_address:int, count:int) -> Union[List[T] , None] :
+    def write(self, ptId) -> bool :
         pass
 
     @abstractmethod
-    def write_reg(self, area:MODBUS_AREA, start_address:int, count:int, values:List[T]) -> bool:
+    def scan(self) -> bool :
         pass
