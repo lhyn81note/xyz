@@ -56,6 +56,7 @@ class CmdMananger(QObject):
                 "nodes": self.nodes
             }
             data["flow"]["head_node_id"] = self.head_node_id
+            print(f'保存{self.flow_file}')
             json.dump(data, file, indent=4)
 
     def validateFlow(self, data):

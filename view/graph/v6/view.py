@@ -20,7 +20,11 @@ class Window(QWidget):
         self.CmdManagerAgent = None
 
         # 设置下拉菜单
-        self.ui.cmb_flow.addItems(list(_top.CmdManager.keys())) 
+        # breakpoint()
+        # flownames = list(map(lambda cmdkey: _top.CmdManager[cmdkey].meta['name'], list(_top.CmdManager.keys())))
+        flownames = list(_top.CmdManager.keys())
+
+        self.ui.cmb_flow.addItems(flownames) 
         self.ui.cmb_flow.currentIndexChanged.connect(self.onSelectFlow)
 
         # 初始化QML控件
@@ -56,6 +60,7 @@ class Window(QWidget):
 
         self.qml_flow.setSource(QUrl.fromLocalFile('view/graph/v6/Canvas.qml'))       
         self.qml_root = self.qml_flow.rootObject()
+        self.qml_root.evtAny.disconnect()
         self.qml_root.evtAny.connect(self.onAny)
 
         self.CmdManagerAgent.evtCmdChanged.connect(self.onChildStatusChanged)
@@ -73,7 +78,6 @@ class Window(QWidget):
 
     @Slot(dict)
     def onAny(self, response):
-        # breakpoint()
         response = response.toVariant()
         if response["code"] == -2:
             QMessageBox.critical(None, "错误", response["msg"])
@@ -81,13 +85,12 @@ class Window(QWidget):
             QMessageBox.warning(None, "警告", response["msg"])
         else:
             # QMessageBox.information(None, "信息", f"{response['type']}\n{response['msg']}\n{response['data']}")
-            print(f"{response['type']}\n{response['msg']}\n{response['data']}")
+            # print(f"{response['type']}\n{response['msg']}\n{response['data']}")
 
             if response["type"] == "move":
                 self.CmdManagerAgent.nodes[response["data"]["id"]]['x'] = response["data"]["x"]
                 self.CmdManagerAgent.nodes[response["data"]["id"]]['y'] = response["data"]["y"]
                 self.CmdManagerAgent.saveFlow()
-
             else:
                 pass
 

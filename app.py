@@ -24,8 +24,8 @@ PLC.scan()
 Cmd = CoreProvider().Cmd
 CmdManager = {}
 CmdManager['test'] = CoreProvider().CmdManager(config['flow']['try_test'], PLC)
-CmdManager['gas'] = CoreProvider().CmdManager(config['flow']['try_test'], PLC)
-CmdManager['force'] = CoreProvider().CmdManager(config['flow']['try_test'], PLC)
+CmdManager['gas'] = CoreProvider().CmdManager(config['flow']['try_gas'], PLC)
+CmdManager['force'] = CoreProvider().CmdManager(config['flow']['try_force'], PLC)
 
 Broker = CoreProvider().MsgBroker()
 LibServices = UtilsProvider()
