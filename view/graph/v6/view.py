@@ -10,6 +10,7 @@ _top = sys.modules['__main__']
 class Window(QWidget):
 
     def __init__(self):
+        print("######### 创建Graph ############")
         super().__init__()
         self.ui = Ui_Form()
         self.ui.setupUi(self)
@@ -34,10 +35,8 @@ class Window(QWidget):
         self.qml_root.evtAny.connect(self.onAny)
         self.ui.pushButton.clicked.connect(self.onStart)
         _top.CmdManager.evtCmdChanged.connect(self.onChildStatusChanged)
-
-    def updateGraph(self):
-        # print("updateGraph")
-        self.qml_root.updateGraph()
+        for _, cmdobj in _top.CmdManager.cmdObjs.items():
+            self.qml_root.updateNodeStatus(cmdobj.id, cmdobj.status)
 
     @Slot()
     def onStart(self):

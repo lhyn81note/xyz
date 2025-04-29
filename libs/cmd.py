@@ -221,7 +221,7 @@ class Cmd(QObject):
 
             pt_out = plc.pts.get(self.param.get("out"))
             pt_args = self.param.get("args")
-            pt_sigs = plc.pts.get(self.param.get("monitor"))
+            pt_sig = plc.pts.get(self.param.get("monitor"))
 
             for arg_kv in pt_args:
                 print(f"写入指令: {arg_kv}")
@@ -236,11 +236,13 @@ class Cmd(QObject):
 
             plc.write(pt_out.id, 1)
             while True:
-                pt_sig = plc.read(pt_sigs.id)
-                if pt_sig == 1:
-                    print(f"监控点 {pt_sigs.id} 触发!!!")
+                # pt_sig = plc.read(pt_sigs.id)
+                print(pt_sig)
+                if pt_sig.value == 1:
+                    print(f"监控点 {pt_sig.id} 触发!!!")
                     break
-                await asyncio.sleep(0.1)
+                await asyncio.sleep(1)
+                # await asyncio.sleep(plc.interval/1000)
 
             self.result = "plc done." 
             self.status = 2  # Set status to done
