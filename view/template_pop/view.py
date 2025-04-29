@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-from view.template_pop._view import Ui_Form
 import os,sys
-import ollama
 _top = sys.modules['__main__']
+import ollama
+from view.template_pop._view import Ui_Form
 from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
     QMetaObject, QObject, QPoint, QRect,QThread,Signal,QSize, QTime, QUrl, Qt)
 from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
@@ -13,7 +13,7 @@ from PySide6.QtWidgets import (QApplication, QHBoxLayout, QLabel, QMainWindow,
     QSizePolicy, QWidget, QDialog)
 import requests
 
-remote_host = "http://182.18.6.221:11434"  # Replace with your actual remote server URL
+remote_host = _top.config['ai']['host']  # Replace with your actual remote server URL
 client = ollama.Client(host=remote_host)
 
 def parse_text(filepath):
@@ -22,7 +22,7 @@ def parse_text(filepath):
         text = text.replace('\n\n', '')
         return text
     
-raw_context = parse_text("res/docu/manual.txt")
+raw_context = parse_text(_top.config['ai']['doc'])
 # print(context)
 
 class LLM(QThread):

@@ -9,6 +9,7 @@ class CmdMananger(QObject):
     evtCmdChanged = Signal(str, int)  # Signal to emit status changes with id and status
 
     def __init__(self, flow_file, plc):
+
         super().__init__()
         self.flow_file = flow_file
         self.plc = plc
@@ -20,6 +21,9 @@ class CmdMananger(QObject):
         self.nodes = {}
         self.flowStatus = 0  # 0: idle, 1: running, 2: paused, 3: stopped 4: error
         self.cursor = ""  # Placeholder for flow configuration
+
+        self.loadFlow()
+        self.loadCmds()
 
     @Slot(str, int)
     def onChildStatusChanged(self, id, status):

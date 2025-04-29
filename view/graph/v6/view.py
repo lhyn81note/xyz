@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import os,sys,json
-from view.graph.v5._view import Ui_Form
+from view.graph.v6._view import Ui_Form
 from PySide6.QtWidgets import (QApplication, QVBoxLayout, QLabel, QMainWindow, QSizePolicy, QWidget, QDialog, QMessageBox)
 from PySide6.QtQuickWidgets import QQuickWidget
 from PySide6.QtCore import Slot, QUrl, QObject, QAbstractListModel, Qt, QSize, QMimeData
@@ -10,39 +10,66 @@ _top = sys.modules['__main__']
 class Window(QWidget):
 
     def __init__(self):
-        print("######### 创建Graph ############")
+
         super().__init__()
         self.ui = Ui_Form()
         self.ui.setupUi(self)
         self.ui.retranslateUi(self)
+        
+        # 设置本页面的CmdMananger代理
+        self.CmdManagerAgent = None
 
+        # 设置下拉菜单
+        self.ui.cmb_flow.addItems(list(_top.CmdManager.keys())) 
+        self.ui.cmb_flow.currentIndexChanged.connect(self.onSelectFlow)
+
+        # 初始化QML控件
         self.qml_flow = QQuickWidget()
         self.qml_flow.setResizeMode(QQuickWidget.ResizeMode.SizeRootObjectToView)
+        self.layout_qml = QVBoxLayout(self.ui.wgt_flow)
+        self.layout_qml.addWidget(self.qml_flow)
 
-        nodes_model, connections_model = _top.CmdManager.genQmlModel()
+        # 初始化qml根对象
+        self.qml_root = None
 
-        user = "admin"
-        self.qml_flow.rootContext().setContextProperty("editable", user=="admin")
+        # 绑定事件
+        self.ui.btn_start.clicked.connect(self.onStart)
+
+        self.SetGraph("test")
+
+    def SetGraph(self, flowname):
+
+        print(f"######### 创建Graph:{flowname} ############")
+        for k,v  in _top.CmdManager.items():
+            if k==flowname:
+                self.CmdManagerAgent = _top.CmdManager.get(flowname)
+                break
+
+        if not self.CmdManagerAgent:
+            print("流程信息调取出错!")
+            return 
+
+        nodes_model, connections_model = self.CmdManagerAgent.genQmlModel()
+        self.qml_flow.rootContext().setContextProperty("editable", _top.User=="admin")
         self.qml_flow.rootContext().setContextProperty("nodesData", nodes_model)
         self.qml_flow.rootContext().setContextProperty("connectionsData", connections_model)
 
-        self.qml_flow.setSource(QUrl.fromLocalFile('view/graph/v5/Canvas.qml'))       
+        self.qml_flow.setSource(QUrl.fromLocalFile('view/graph/v6/Canvas.qml'))       
         self.qml_root = self.qml_flow.rootObject()
-
-        self.layout_tags = QVBoxLayout(self.ui.wgt_flow)
-        self.layout_tags.addWidget(self.qml_flow)
-
         self.qml_root.evtAny.connect(self.onAny)
-        self.ui.pushButton.clicked.connect(self.onStart)
-        _top.CmdManager.evtCmdChanged.connect(self.onChildStatusChanged)
-        for _, cmdobj in _top.CmdManager.cmdObjs.items():
+
+        self.CmdManagerAgent.evtCmdChanged.connect(self.onChildStatusChanged)
+        for _, cmdobj in self.CmdManagerAgent.cmdObjs.items():
             self.qml_root.updateNodeStatus(cmdobj.id, cmdobj.status)
 
     @Slot()
+    def onSelectFlow(self):
+        flowname = self.ui.cmb_flow.currentText()
+        self.SetGraph(flowname)   
+
+    @Slot()
     def onStart(self):
-        # print("onStart")
-        # self.qml_root.start()
-        _top.CmdManager.runflow()
+        self.CmdManagerAgent.runflow()
 
     @Slot(dict)
     def onAny(self, response):
@@ -57,9 +84,9 @@ class Window(QWidget):
             print(f"{response['type']}\n{response['msg']}\n{response['data']}")
 
             if response["type"] == "move":
-                _top.CmdManager.nodes[response["data"]["id"]]['x'] = response["data"]["x"]
-                _top.CmdManager.nodes[response["data"]["id"]]['y'] = response["data"]["y"]
-                _top.CmdManager.saveFlow()
+                self.CmdManagerAgent.nodes[response["data"]["id"]]['x'] = response["data"]["x"]
+                self.CmdManagerAgent.nodes[response["data"]["id"]]['y'] = response["data"]["y"]
+                self.CmdManagerAgent.saveFlow()
 
             else:
                 pass

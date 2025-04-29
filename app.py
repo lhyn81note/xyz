@@ -1,4 +1,6 @@
 import sys
+import configparser
+
 from PySide6.QtWidgets import QApplication
 
 from libs import *
@@ -6,10 +8,25 @@ from models import *
 from wgts import TabWidget, PlcData, PlcTable
 from view import Views, Menus, MainFrame
 
+User="admin"
+
+# 读取程序配置
+config = configparser.ConfigParser()
+config.read('app.ini')
+
 # 全局Service初始化
-PLC = CoreProvider().Plc(config_file="plc_s7.json", addr="172.16.1.95:0:2", protocal="s7", interval=500)
-CmdManager = CoreProvider().CmdManager("flow01.json", PLC)
+PLC = CoreProvider().Plc(config_file=config.get('plc','pts'), addr=config['plc']['host'], interval=config.getint('plc','interval'))
+PLC.load_config()
+PLC.connect()
+print(f"PLC is alive: {PLC.alive}")
+PLC.scan()
+
 Cmd = CoreProvider().Cmd
+CmdManager = {}
+CmdManager['test'] = CoreProvider().CmdManager(config['flow']['try_test'], PLC)
+CmdManager['gas'] = CoreProvider().CmdManager(config['flow']['try_test'], PLC)
+CmdManager['force'] = CoreProvider().CmdManager(config['flow']['try_test'], PLC)
+
 Broker = CoreProvider().MsgBroker()
 LibServices = UtilsProvider()
 
@@ -43,14 +60,8 @@ TblBogieResult = TblBogieResult(engine=DbEng_result)
 TblNowSheet = TblNowSheet(engine=DbEng_result)
 TblResultMx =   TblResultMx(engine=DbEng_result)
 
-CmdManager.loadFlow()
-CmdManager.loadCmds()
-PLC.load_config()
-PLC.connect()
-print(f"PLC is alive: {PLC.alive}")
-PLC.scan()
-
 if __name__ == '__main__':
+
     app = QApplication(sys.argv)
     main_win = MainFrame(menus=Menus, title="QtAppX")
     main_win.show()

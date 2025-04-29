@@ -1,7 +1,7 @@
 {
     "meta": {
         "schema": "test",
-        "desc": "\u6d4b\u8bd5\u6d41\u7a0b",
+        "name": "\u6d4b\u8bd5\u6d41\u7a0b",
         "time": "2024-04-25"
     },
     "flow": {

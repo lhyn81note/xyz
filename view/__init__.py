@@ -3,7 +3,7 @@ from .frame.view import Window as MainFrame
 from .index.view import Window as view_index
 from .template_notify.view import Window as view_notify
 from .template_plc.view import Window as view_plc
-from .template_pop.view import Window as view_pop
+# from .template_pop.view import Window as view_pop
 from .template_bindpage.view import PageBogieModel as view_bind
 
 from .setting_user.view import Window as view_setting_user
@@ -16,7 +16,7 @@ Views = {
     'view_index':{'title':'母版页','obj':view_index},
     'view_notify':{'title':'消息功能测试','obj':view_notify},
     'view_plc':{'title':'PLC功能测试','obj':view_plc},
-    'view_pop':{'title':'弹窗测试','obj':view_pop},
+    # 'view_pop':{'title':'知识库测试','obj':view_pop},
     'view_bind':{'title':'控件测试','obj':view_bind},
     'view_setting_user':{'title':'用户设置','obj':view_setting_user},
     'view_setting_basic':{'title':'基本参数设置','obj':view_setting_basic},
@@ -30,7 +30,7 @@ Menus = {
         {'title':'PLC功能测试', 'icon':'plc.png', 'view_id':'view_plc','pop':False, 'fixed':False},
         {'title':'消息功能测试', 'icon':'docu.png', 'view_id':'view_notify','pop':False, 'fixed':False},
         {'title':'绑定功能测试', 'icon':'docu.png', 'view_id':'view_bind','pop':False, 'fixed':False},
-        {'title':'知识库检索', 'icon':'tool.png', 'view_id':'view_pop','pop':True, 'fixed':False},
+        # {'title':'知识库检索', 'icon':'tool.png', 'view_id':'view_pop','pop':True, 'fixed':False},
         {'title':'图形化测试', 'icon':'tool.png', 'view_id':'view_graph','pop':False, 'fixed':False},
     ],
     '设置':[

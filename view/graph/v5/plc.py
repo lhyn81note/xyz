@@ -36,7 +36,7 @@ class Plc:
                 for pt in ptlist:
                     self.pts[pt.id] = pt
             return True
-        except e:
+        except Exception as e:
             print(f"加载配置文件失败: {self.filepath}")
             return False
 

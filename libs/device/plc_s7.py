@@ -19,11 +19,11 @@ class Pt(BaseModel):
 
 class S7(BasePlc):
 
-    def __init__(self, config_file: str, addr: str, protocal: str, interval: int):
+    def __init__(self, config_file: str, addr: str, interval: int):
         super().__init__()
         self.filepath = config_file
         self.addr = addr
-        self.protocal = protocal
+        self.protocal = "s7"
         self.interval = interval  # 默认间隔时间
         self.client = None
         self.alive = False  # PLC是否在线
@@ -38,34 +38,25 @@ class S7(BasePlc):
                 for pt in ptlist:
                     self.pts[pt.id] = pt
             return True
-        except e:
+        except Exception as e:
             print(f"加载配置文件失败: {self.filepath}")
             return False
 
     def connect(self) -> bool:
-
-        if self.protocal == "modbus":
-            print(f"Connecting to PLC at {self.addr} using Modbus protocol...")
-            # Add Modbus connection logic here
-            self.alive = True  # Simulate successful connection
-            return True
-
-        elif self.protocal == "s7":
-            print(f"Connecting to PLC at {self.addr} using Profinet S7 protocol...")
-            try:
-                self.client = snap7.client.Client()
-                ip = self.addr.split(":")[0]
-                rack = int(self.addr.split(":")[1]) if ":" in self.addr else 0
-                slot = int(self.addr.split(":")[2]) if ":" in self.addr else 1
-                self.client.connect(ip, rack, slot)  # Rack=0, Slot=1 are typical defaults
-                self.alive = self.client.get_connected()
-                if self.alive:
-                    print("Connection successful.")
-                else:
-                    print("Failed to connect.")
-            except Exception as e:
-                print(f"Error connecting to PLC: {e}")
-                self.alive = False
+        try:
+            self.client = snap7.client.Client()
+            ip = self.addr.split(":")[0]
+            rack = int(self.addr.split(":")[1]) if ":" in self.addr else 0
+            slot = int(self.addr.split(":")[2]) if ":" in self.addr else 1
+            self.client.connect(ip, rack, slot)  # Rack=0, Slot=1 are typical defaults
+            self.alive = self.client.get_connected()
+            if self.alive:
+                print("Connection successful.")
+            else:
+                print("Failed to connect.")
+        except Exception as e:
+            print(f"Error connecting to PLC: {e}")
+            self.alive = False
 
     def write(self, ptId, value) -> bool:
 

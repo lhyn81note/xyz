@@ -1,0 +1,145 @@
+{
+    "meta": {
+        "schema": "test",
+        "name": "\u6d4b\u8bd5\u6d41\u7a0b",
+        "time": "2024-04-25"
+    },
+    "flow": {
+        "000": [
+            "001"
+        ],
+        "001": [
+            "002",
+            "003"
+        ],
+        "002": [
+            "004"
+        ],
+        "003": [
+            "005"
+        ],
+        "004": [
+            "003"
+        ],
+        "005": [],
+        "head_node_id": "000"
+    },
+    "cmds": {
+        "000": {
+            "type": "sys",
+            "name": "\u5f00\u59cb\u786e\u8ba4",
+            "param": {
+                "args": null,
+                "monitor": {
+                    "code": 0
+                }
+            }
+        },
+        "001": {
+            "type": "plc",
+            "name": "\u7b2c\u4e00\u6b65",
+            "param": {
+                "out": "cmd1",
+                "args": [
+                    {
+                        "data1": 111
+                    }
+                ],
+                "monitor": "sig1"
+            }
+        },
+        "002": {
+            "type": "plc",
+            "name": "\u7b2c\u4e8c\u6b65",
+            "param": {
+                "out": "cmd2",
+                "args": [
+                    {
+                        "data1": 221
+                    },
+                    {
+                        "data2": 222
+                    }
+                ],
+                "monitor": "sig2"
+            }
+        },
+        "003": {
+            "type": "plc",
+            "name": "\u7b2c\u4e09\u6b65",
+            "param": {
+                "out": "cmd3",
+                "args": [
+                    {
+                        "data1": 331
+                    },
+                    {
+                        "data2": 3332
+                    },
+                    {
+                        "data3": 333.33
+                    }
+                ],
+                "monitor": "sig3"
+            }
+        },
+        "004": {
+            "type": "sys",
+            "name": "\u7b2c\u56db\u6b65",
+            "param": {
+                "args": null,
+                "monitor": {
+                    "code": 0
+                }
+            }
+        },
+        "005": {
+            "type": "sys",
+            "name": "\u7b2c\u4e94\u6b65",
+            "param": {
+                "args": null,
+                "monitor": {
+                    "code": 0
+                }
+            }
+        }
+    },
+    "nodes": {
+        "000": {
+            "x": 59.0,
+            "y": 13.0,
+            "text": "",
+            "status": "idle"
+        },
+        "001": {
+            "x": 59.0,
+            "y": 55.0,
+            "text": "",
+            "status": "idle"
+        },
+        "002": {
+            "x": 214.0,
+            "y": 102.0,
+            "text": "",
+            "status": "idle"
+        },
+        "003": {
+            "x": 58.0,
+            "y": 212.0,
+            "text": "",
+            "status": "idle"
+        },
+        "004": {
+            "x": 214.0,
+            "y": 151.0,
+            "text": "",
+            "status": "idle"
+        },
+        "005": {
+            "x": 58.0,
+            "y": 279.0,
+            "text": "",
+            "status": "idle"
+        }
+    }
+}
