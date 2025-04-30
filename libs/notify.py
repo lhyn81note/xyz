@@ -45,6 +45,7 @@ class MsgBroker:
         else: pass
     
 class MsgSubscriber:
+    
     def __init__(self, callback):
         self._callback = callback
     

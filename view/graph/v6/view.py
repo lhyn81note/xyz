@@ -39,7 +39,7 @@ class Window(QWidget):
         # 绑定事件
         self.ui.btn_start.clicked.connect(self.onStart)
 
-        self.SetGraph("test")
+        self.SetGraph("测试流程")
 
     def SetGraph(self, flowname):
 

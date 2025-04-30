@@ -166,6 +166,12 @@ class CmdMananger(QObject):
                 print(f"流指令 {self.cursor} 执行失败")
                 self.flowStatus = 4  # Set status to error
 
+            if self.flowStatus == 4:
+                print(f'有故障,流程中断')
+            else:
+                print(f'流程执行完毕')
+            return
+
         thread = threading.Thread(target=run_flow)
         thread.start()
 
@@ -240,17 +246,24 @@ class Cmd(QObject):
                         plc.write(k, v)
 
             plc.write(pt_out.id, 1)
-            while True:
+            while self.status == 1:
                 # pt_sig = plc.read(pt_sigs.id)
-                print(pt_sig)
+                # print(pt_sig)
+                for k in plc.pts.keys():
+                    if 'fault' in k:
+                        print(f"capture:{plc.pts.get(k)}")
+                        if plc.pts.get(k).value==True:
+                            self.result = "plc fault." 
+                            self.status = 3  # Set status to done
+                            break
                 if pt_sig.value == 1:
                     print(f"监控点 {pt_sig.id} 触发!!!")
+                    self.result = "plc done." 
+                    self.status = 2  # Set status to done
                     break
                 await asyncio.sleep(1)
                 # await asyncio.sleep(plc.interval/1000)
 
-            self.result = "plc done." 
-            self.status = 2  # Set status to done
 
         if (self.status != 0):
             raise RuntimeError("无法运行非空闲状态指令!")

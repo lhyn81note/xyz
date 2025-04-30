@@ -70,5 +70,53 @@
         "addr":"db:3,start:30,offset:",
         "vartype":"REAL",
         "monitor":[]
+    },
+    "fault1": {
+        "id": "fault1",
+        "name": "故障1",
+        "iotype": "i",
+        "addr":"db:2,start:1,offset:1",
+        "vartype":"BOOL",
+        "monitor":[]
+    },
+    "fault2": {
+        "id": "fault2",
+        "name": "故障2",
+        "iotype": "i",
+        "addr":"db:2,start:1,offset:2",
+        "vartype":"BOOL",
+        "monitor":[]
+    },
+    "fault3": {
+        "id": "fault3",
+        "name": "故障3",
+        "iotype": "i",
+        "addr":"db:2,start:1,offset:3",
+        "vartype":"BOOL",
+        "monitor":[]
+    },
+    "warn1": {
+        "id": "warn1",
+        "name": "报警1",
+        "iotype": "i",
+        "addr":"db:2,start:1,offset:4",
+        "vartype":"BOOL",
+        "monitor":[]
+    },
+    "warn2": {
+        "id": "warn2",
+        "name": "报警2",
+        "iotype": "i",
+        "addr":"db:2,start:1,offset:5",
+        "vartype":"BOOL",
+        "monitor":[]
+    },
+    "warn3": {
+        "id": "warn3",
+        "name": "报警3",
+        "iotype": "i",
+        "addr":"db:2,start:1,offset:6",
+        "vartype":"BOOL",
+        "monitor":[]
     }
 }

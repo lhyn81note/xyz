@@ -2,6 +2,7 @@
     "meta": {
         "schema": "test",
         "name": "\u6d4b\u8bd5\u6d41\u7a0b",
+        "desc": "该流程用于测试",
         "time": "2024-04-25"
     },
     "flow": {
@@ -112,8 +113,8 @@
             "status": "idle"
         },
         "001": {
-            "x": 3.0,
-            "y": 64.0,
+            "x": 56.0,
+            "y": 53.0,
             "text": "",
             "status": "idle"
         },

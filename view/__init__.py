@@ -13,7 +13,7 @@ from .setting_types.view import Window as view_setting_types
 from .graph.v6.view import Window as view_graph
 
 Views = {
-    'view_index':{'title':'母版页','obj':view_index},
+    'view_index':{'title':'自动流程','obj':view_graph},
     'view_notify':{'title':'消息功能测试','obj':view_notify},
     'view_plc':{'title':'PLC功能测试','obj':view_plc},
     # 'view_pop':{'title':'知识库测试','obj':view_pop},
@@ -21,7 +21,7 @@ Views = {
     'view_setting_user':{'title':'用户设置','obj':view_setting_user},
     'view_setting_basic':{'title':'基本参数设置','obj':view_setting_basic},
     'view_setting_types':{'title':'转向架类型设置','obj':view_setting_types},
-    'view_graph':{'title':'图形化测试','obj':view_graph},
+    # 'view_graph':{'title':'图形化测试','obj':view_graph},
 }
 print(f"{' Views ':#^50}")
 
@@ -31,7 +31,7 @@ Menus = {
         {'title':'消息功能测试', 'icon':'docu.png', 'view_id':'view_notify','pop':False, 'fixed':False},
         {'title':'绑定功能测试', 'icon':'docu.png', 'view_id':'view_bind','pop':False, 'fixed':False},
         # {'title':'知识库检索', 'icon':'tool.png', 'view_id':'view_pop','pop':True, 'fixed':False},
-        {'title':'图形化测试', 'icon':'tool.png', 'view_id':'view_graph','pop':False, 'fixed':False},
+        # {'title':'图形化测试', 'icon':'tool.png', 'view_id':'view_graph','pop':False, 'fixed':False},
     ],
     '设置':[
         {'title':'用户设置', 'icon':'db.png', 'view_id':'view_setting_user','pop':False, 'fixed':False},

@@ -7,7 +7,6 @@ from typing import Union
 import threading
 from . import BasePlc
 
-# 定义 Pydantic 模型
 class Pt(BaseModel):
     id: str = Field(..., description="命令的唯一标识") # 默认值为Field表示映射到json的key
     name: str = Field(..., description="命令的名称")
@@ -74,47 +73,42 @@ class S7(BasePlc):
             print(f"输入指令不能写入!{pt.iotype}")
             return False
 
-        if self.protocal == "modbus":
-            pass
+        addrs = pt.addr.split(",")
+        db = int(addrs[0].split(":")[1])  
+        start_byte = int(addrs[1].split(":")[1])  
 
-        elif self.protocal == "s7":
+        if (pt.vartype == "BOOL"):
+            offset = int(addrs[2].split(":")[1])
+            data = bytearray(1) 
+            set_bool(data, 0, offset, value==True)# 使用set_bool方法将指定位置设置为True
+            self.client.db_write(db, start_byte, data)# 写入数据到PLC的指定DB块和地址
+            print(f"布尔指令 {pt.name} 执行成功")
+            return True
 
-            addrs = pt.addr.split(",")
-            db = int(addrs[0].split(":")[1])  
-            start_byte = int(addrs[1].split(":")[1])  
+        elif (pt.vartype == "INT"):
+            data = bytearray(2)  
+            set_int(data, 0, value)  
+            self.client.db_write(db, start_byte, data)  
+            print(f"整形指令 {pt.name} 执行成功")
+            return True
 
-            if (pt.vartype == "BOOL"):
-                offset = int(addrs[2].split(":")[1])
-                data = bytearray(1) 
-                set_bool(data, 0, offset, value==True)# 使用set_bool方法将指定位置设置为True
-                self.client.db_write(db, start_byte, data)# 写入数据到PLC的指定DB块和地址
-                print(f"布尔指令 {pt.name} 执行成功")
-                return True
+        elif (pt.vartype == "WORD"):
+            data = bytearray(2) 
+            set_word(data, 0, value)  
+            self.client.db_write(db, start_byte, data)  
+            print(f"字指令 {pt.name} 执行成功")
+            return True
 
-            elif (pt.vartype == "INT"):
-                data = bytearray(2)  
-                set_int(data, 0, value)  
-                self.client.db_write(db, start_byte, data)  
-                print(f"整形指令 {pt.name} 执行成功")
-                return True
+        elif (pt.vartype == "REAL"):
+            data = bytearray(4)  
+            set_real(data, 0, value)  
+            self.client.db_write(db, start_byte, data)  
+            print(f"实数指令 {pt.name} 执行成功")
+            return True
 
-            elif (pt.vartype == "WORD"):
-                data = bytearray(2) 
-                set_word(data, 0, value)  
-                self.client.db_write(db, start_byte, data)  
-                print(f"字指令 {pt.name} 执行成功")
-                return True
-
-            elif (pt.vartype == "REAL"):
-                data = bytearray(4)  
-                set_real(data, 0, value)  
-                self.client.db_write(db, start_byte, data)  
-                print(f"实数指令 {pt.name} 执行成功")
-                return True
-
-            else:
-                print(f"点类型错误:{pt.vartype}")
-                return False
+        else:
+            print(f"点类型错误:{pt.vartype}")
+            return False
 
     def read(self, ptId)->[bool |int | float]:
         pt = self.pts.get(ptId)
@@ -127,46 +121,38 @@ class S7(BasePlc):
             print(f"PLC未连接!")
             return False
 
-        if self.protocal == "modbus":
-            pass
+        addrs = pt.addr.split(",")
+        db = int(addrs[0].split(":")[1])  
+        start_byte = int(addrs[1].split(":")[1])  
 
-        elif self.protocal == "s7":
+        if (pt.vartype == "BOOL"):
+            offset = int(addrs[2].split(":")[1])
+            data = self.client.db_read(db, start_byte, 1) # 读取1个字节
+            return get_bool(data, 0, offset)
 
-            addrs = pt.addr.split(",")
-            db = int(addrs[0].split(":")[1])  
-            start_byte = int(addrs[1].split(":")[1])  
+        elif (pt.vartype == "INT"):
+            data = self.client.db_read(db, start_byte, 2) # 读取2个字节
+            return get_int(data, 0)
 
-            if (pt.vartype == "BOOL"):
-                offset = int(addrs[2].split(":")[1])
-                data = self.client.db_read(db, start_byte, 1) # 读取1个字节
-                return get_bool(data, 0, offset)
+        elif (pt.vartype == "WORD"):
+            data = self.client.db_read(db, start_byte, 2) # 读取2个字节
+            return get_word(data, 0)
 
-            elif (pt.vartype == "INT"):
-                data = self.client.db_read(db, start_byte, 2) # 读取2个字节
-                return get_int(data, 0)
+        elif (pt.vartype == "REAL"):
+            data = self.client.db_read(db, start_byte, 4) # 读取4个字节
+            return get_real(data, 0)
 
-            elif (pt.vartype == "WORD"):
-                data = self.client.db_read(db, start_byte, 2) # 读取2个字节
-                return get_word(data, 0)
-
-            elif (pt.vartype == "REAL"):
-                data = self.client.db_read(db, start_byte, 4) # 读取4个字节
-                return get_real(data, 0)
-
-            else:
-                print(f"点类型错误!{pt.vartype}")
-                return None
+        else:
+            print(f"点类型错误!{pt.vartype}")
+            return None
 
     def scan(self):
         def readall():
             while True:
                 # print("-" * 40)
-                if self.protocal == "modbus":
-                    pass
-                elif self.protocal == "s7":
-                    for pt in self.pts.values():
-                        pt.value = self.read(pt.id)
-                        # print(f"ID: {pt.id}, Value: {pt.value}")
+                for pt in self.pts.values():
+                    pt.value = self.read(pt.id)
+                    # print(f"ID: {pt.id}, Value: {pt.value}")
                 time.sleep(self.interval / 1000)
                 self.trigger_callbacks()
 
