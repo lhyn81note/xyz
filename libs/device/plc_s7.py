@@ -10,11 +10,21 @@ from . import BasePlc
 class Pt(BaseModel):
     id: str = Field(..., description="命令的唯一标识") # 默认值为Field表示映射到json的key
     name: str = Field(..., description="命令的名称")
-    iotype: str = Field(..., description="读写类型")
     addr: str = Field(..., description="地址")
+    iotype: str = Field(..., description="读写类型")
     vartype: str = Field(..., description="变量类型")
     monitor: List[str] = Field(..., description="监控信号列表")
+    range: List[int] = Field(..., description="数值范围")
     value: Union[bool, int, float]= None  # 默认值不是Field表示不映射, 可以规定类型
+
+    @property
+    def isValid(self):
+        if self.vartype == "REAL":
+            return self.value is not None and self.range[0] <= self.value <= self.range[1]
+        elif self.vartype == "BOOL" and self.id.startswith("alarm"):
+            return self.value is not None and self.value == False
+        else:
+            return self.value is not None
 
 class S7(BasePlc):
 

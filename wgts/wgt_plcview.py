@@ -1,12 +1,13 @@
 from PySide6.QtWidgets import QApplication, QTableView, QComboBox, QSpinBox, QCheckBox, QStyledItemDelegate, QLineEdit, QRadioButton, QPushButton, QMessageBox, QMenu
 from PySide6.QtCore import QAbstractTableModel, Qt, QModelIndex, QDate
+from PySide6.QtGui import QColor, QBrush
 import os,sys
 _top = sys.modules['__main__']
 from libs.device.plc_modbus import MODBUS_AREA, MODBUS_VARTYPE, BYTE_ENDIAN, WORD_ENDIAN, IO
 from libs.device.plc_s7 import Pt
 
 class PlcData(QAbstractTableModel):
-    
+
     def __init__(self, pts, parent=None):
         super().__init__(parent)
         self.pts = pts  # List of Pt objects
@@ -21,17 +22,26 @@ class PlcData(QAbstractTableModel):
 
     def update(self):
         self.beginResetModel()
-        self.pts = list(_top.PLC.pts.values())  # Assuming _top.PLC.config['pts'] contains the updated data
+        self.pts = list(_top.PLC.pts.values())  # Assuming _top.PLC.pts contains the updated data
         self.endResetModel()
+        # Emit dataChanged signal to refresh the view including background colors
+        # if len(self.pts) > 0:
+        #     self.dataChanged.emit(
+        #         self.index(0, 0),
+        #         self.index(len(self.pts) - 1, self.columnCount() - 1),
+        #         [Qt.DisplayRole, Qt.BackgroundRole]
+        #     )
 
     def data(self, index, role=Qt.DisplayRole):
         if not index.isValid():
             return None
+
+        row = index.row()
+        column = index.column()
+        pt = self.pts[row]
+
         if role == Qt.DisplayRole or role == Qt.EditRole:
-            row = index.row()
-            column = index.column()
             # breakpoint()
-            pt = self.pts[row]
             if column == 0:
                 return pt.id
             elif column == 1:
@@ -46,6 +56,11 @@ class PlcData(QAbstractTableModel):
                 return ", ".join(pt.monitor) if pt.monitor else ""
             elif column == 6:
                 return pt.value
+        elif role == Qt.BackgroundRole:
+            # Check if the point is valid and set background color accordingly
+            if hasattr(pt, 'isValid') and not pt.isValid:
+                return QBrush(QColor(255, 0, 0, 100))  # Semi-transparent red
+
         return None
 
     # def setData(self, index, value, role=Qt.EditRole):

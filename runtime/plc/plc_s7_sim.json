@@ -1,0 +1,569 @@
+{
+    "data0": {
+        "id": "data0",
+        "name": "加载压力1",
+        "iotype": "i",
+        "addr": "db:1,start:0,offset:",
+        "vartype": "REAL",
+        "range" : [-4,20000],
+        "monitor": []
+    },
+    "data1": {
+        "id": "data1",
+        "name": "加载压力2",
+        "iotype": "i",
+        "addr": "db:1,start:1,offset:",
+        "vartype": "REAL",
+        "range" : [-4,20000],
+        "monitor": []
+    },
+    "data2": {
+        "id": "data2",
+        "name": "加载头垂向位移1",
+        "iotype": "i",
+        "addr": "db:1,start:2,offset:",
+        "vartype": "REAL",
+        "range" : [-4,20000],
+        "monitor": []
+    },
+    "data3": {
+        "id": "data3",
+        "name": "加载头垂向位移2",
+        "iotype": "i",
+        "addr": "db:1,start:3,offset:",
+        "vartype": "REAL",
+        "range" : [-4,20000],
+        "monitor": []
+    },
+    "data4": {
+        "id": "data4",
+        "name": "气压采集1",
+        "iotype": "i",
+        "addr": "db:1,start:4,offset:",
+        "vartype": "REAL",
+        "range" : [-4,20000],
+        "monitor": []
+    },
+    "data5": {
+        "id": "data5",
+        "name": "气压采集2",
+        "iotype": "i",
+        "addr": "db:1,start:5,offset:",
+        "vartype": "REAL",
+        "range" : [-4,20000],
+        "monitor": []
+    },
+    "data6": {
+        "id": "data6",
+        "name": "气压采集3",
+        "iotype": "i",
+        "addr": "db:1,start:6,offset:",
+        "vartype": "REAL",
+        "range" : [-4,20000],
+        "monitor": []
+    },
+    "data7": {
+        "id": "data7",
+        "name": "气压采集4",
+        "iotype": "i",
+        "addr": "db:1,start:7,offset:",
+        "vartype": "REAL",
+        "range" : [-4,20000],
+        "monitor": []
+    },
+    "data8": {
+        "id": "data8",
+        "name": "液压系统压力",
+        "iotype": "i",
+        "addr": "db:1,start:8,offset:",
+        "vartype": "REAL",
+        "range" : [-4,20000],
+        "monitor": []
+    },
+    "data9": {
+        "id": "data9",
+        "name": "加载头横向位移1",
+        "iotype": "i",
+        "addr": "db:1,start:9,offset:",
+        "vartype": "REAL",
+        "range" : [-4,20000],
+        "monitor": []
+    },
+    "data10": {
+        "id": "data10",
+        "name": "加载头横向位移2",
+        "iotype": "i",
+        "addr": "db:1,start:10,offset:",
+        "vartype": "REAL",
+        "range" : [-4,20000],
+        "monitor": []
+    },
+    "data11": {
+        "id": "data11",
+        "name": "液压油温",
+        "iotype": "i",
+        "addr": "db:1,start:11,offset:",
+        "vartype": "REAL",
+        "range" : [-4,20000],
+        "monitor": []
+    },
+    "data12": {
+        "id": "data12",
+        "name": "测重单元X向位移1",
+        "iotype": "i",
+        "addr": "db:1,start:12,offset:",
+        "vartype": "REAL",
+        "range" : [-4,20000],
+        "monitor": []
+    },
+    "data13": {
+        "id": "data13",
+        "name": "测重单元X向位移2",
+        "iotype": "i",
+        "addr": "db:1,start:13,offset:",
+        "vartype": "REAL",
+        "range" : [-4,20000],
+        "monitor": []
+    },
+    "data14": {
+        "id": "data14",
+        "name": "测重单元X向位移3",
+        "iotype": "i",
+        "addr": "db:1,start:14,offset:",
+        "vartype": "REAL",
+        "range" : [-4,20000],
+        "monitor": []
+    },
+    "data15": {
+        "id": "data15",
+        "name": "测重单元X向位移4",
+        "iotype": "i",
+        "addr": "db:1,start:15,offset:",
+        "vartype": "REAL",
+        "range" : [-4,20000],
+        "monitor": []
+    },
+    "data16": {
+        "id": "data16",
+        "name": "车轮内侧距1",
+        "iotype": "i",
+        "addr": "db:1,start:16,offset:",
+        "vartype": "REAL",
+        "range" : [-4,20000],
+        "monitor": []
+    },
+    "data17": {
+        "id": "data17",
+        "name": "车轮内侧距2",
+        "iotype": "i",
+        "addr": "db:1,start:17,offset:",
+        "vartype": "REAL",
+        "range" : [-4,20000],
+        "monitor": []
+    },
+    "data18": {
+        "id": "data18",
+        "name": "车轮内侧距3",
+        "iotype": "i",
+        "addr": "db:1,start:18,offset:",
+        "vartype": "REAL",
+        "range" : [-4,20000],
+        "monitor": []
+    },
+    "data19": {
+        "id": "data19",
+        "name": "车轮内侧距4",
+        "iotype": "i",
+        "addr": "db:1,start:19,offset:",
+        "vartype": "REAL",
+        "range" : [-4,20000],
+        "monitor": []
+    },
+    "data20": {
+        "id": "data20",
+        "name": "轮重测量1",
+        "iotype": "i",
+        "addr": "db:1,start:20,offset:",
+        "vartype": "REAL",
+        "range" : [-4,20000],
+        "monitor": []
+    },
+    "data21": {
+        "id": "data21",
+        "name": "轮重测量2",
+        "iotype": "i",
+        "addr": "db:1,start:21,offset:",
+        "vartype": "REAL",
+        "range" : [-4,20000],
+        "monitor": []
+    },
+    "data22": {
+        "id": "data22",
+        "name": "轮重测量3",
+        "iotype": "i",
+        "addr": "db:1,start:22,offset:",
+        "vartype": "REAL",
+        "range" : [-4,20000],
+        "monitor": []
+    },
+    "data23": {
+        "id": "data23",
+        "name": "轮重测量4",
+        "iotype": "i",
+        "addr": "db:1,start:23,offset:",
+        "vartype": "REAL",
+        "range" : [-4,20000],
+        "monitor": []
+    },
+    "sig25_00": {
+        "id": "sig25_00",
+        "name": "开始试验-执行完毕确认",
+        "iotype": "i",
+        "addr": "db:3,start:0,offset:0",
+        "vartype": "BOOL",
+        "range" : [],
+        "monitor": []
+    },
+    "sig25_01": {
+        "id": "sig25_01",
+        "name": "降下转向架-执行完毕确认",
+        "iotype": "i",
+        "addr": "db:3,start:0,offset:1",
+        "vartype": "BOOL",
+        "range" : [],
+        "monitor": []
+    },
+    "sig25_02": {
+        "id": "sig25_02",
+        "name": "确认转向架中心-执行完毕确认",
+        "iotype": "i",
+        "addr": "db:3,start:0,offset:2",
+        "vartype": "BOOL",
+        "range" : [],
+        "monitor": []
+    },
+    "sig25_03": {
+        "id": "sig25_03",
+        "name": "选择命令-执行完毕确认",
+        "iotype": "i",
+        "addr": "db:3,start:0,offset:3",
+        "vartype": "BOOL",
+        "range" : [],
+        "monitor": []
+    },
+    "sig25_04": {
+        "id": "sig25_04",
+        "name": "启动液压系统-执行完毕确认",
+        "iotype": "i",
+        "addr": "db:3,start:0,offset:4",
+        "vartype": "BOOL",
+        "range" : [],
+        "monitor": []
+    },
+    "sig25_05": {
+        "id": "sig25_05",
+        "name": "建立液压系统工作压力-执行完毕确认",
+        "iotype": "i",
+        "addr": "db:3,start:0,offset:5",
+        "vartype": "BOOL",
+        "range" : [],
+        "monitor": []
+    },
+    "sig25_06": {
+        "id": "sig25_06",
+        "name": "快进信息-执行完毕确认",
+        "iotype": "i",
+        "addr": "db:3,start:0,offset:6",
+        "vartype": "BOOL",
+        "range" : [],
+        "monitor": []
+    },
+    "sig25_07": {
+        "id": "sig25_07",
+        "name": "快进加载装置-执行完毕确认",
+        "iotype": "i",
+        "addr": "db:3,start:0,offset:7",
+        "vartype": "BOOL",
+        "range" : [],
+        "monitor": []
+    },
+    "sig25_08": {
+        "id": "sig25_08",
+        "name": "确认加载位置-执行完毕确认",
+        "iotype": "i",
+        "addr": "db:3,start:1,offset:0",
+        "vartype": "BOOL",
+        "range" : [],
+        "monitor": []
+    },
+    "sig25_09": {
+        "id": "sig25_09",
+        "name": "贴合加载-执行完毕确认",
+        "iotype": "i",
+        "addr": "db:3,start:1,offset:1",
+        "vartype": "BOOL",
+        "range" : [],
+        "monitor": []
+    },
+    "sig25_10": {
+        "id": "sig25_10",
+        "name": "确认贴合加载位置-执行完毕确认",
+        "iotype": "i",
+        "addr": "db:3,start:1,offset:2",
+        "vartype": "BOOL",
+        "range" : [],
+        "monitor": []
+    },
+    "sig25_11": {
+        "id": "sig25_11",
+        "name": "工进加载装置-执行完毕确认",
+        "iotype": "i",
+        "addr": "db:3,start:1,offset:3",
+        "vartype": "BOOL",
+        "range" : [],
+        "monitor": []
+    },
+    "sig25_12": {
+        "id": "sig25_12",
+        "name": "加载延时-执行完毕确认",
+        "iotype": "i",
+        "addr": "db:3,start:1,offset:4",
+        "vartype": "BOOL",
+        "range" : [],
+        "monitor": []
+    },
+    "sig25_13": {
+        "id": "sig25_13",
+        "name": "计算-执行完毕确认",
+        "iotype": "i",
+        "addr": "db:3,start:1,offset:5",
+        "vartype": "BOOL",
+        "range" : [],
+        "monitor": []
+    },
+    "sig25_14": {
+        "id": "sig25_14",
+        "name": "工退加载装置-执行完毕确认",
+        "iotype": "i",
+        "addr": "db:3,start:1,offset:6",
+        "vartype": "BOOL",
+        "range" : [],
+        "monitor": []
+    },
+    "sig25_15": {
+        "id": "sig25_15",
+        "name": "选择命令-执行完毕确认",
+        "iotype": "i",
+        "addr": "db:3,start:1,offset:7",
+        "vartype": "BOOL",
+        "range" : [],
+        "monitor": []
+    },
+    "cmd61_00": {
+        "id": "cmd61_00",
+        "name": "开始试验",
+        "iotype": "o",
+        "addr": "db:2,start:0,offset:0",
+        "vartype": "BOOL",
+        "range" : [],
+        "monitor": ["sig25_00"]
+    },
+    "cmd61_01": {
+        "id": "cmd61_01",
+        "name": "降下转向架",
+        "iotype": "o",
+        "addr": "db:2,start:0,offset:1",
+        "vartype": "BOOL",
+        "range" : [],
+        "monitor": ["sig25_01"]
+    },
+    "cmd61_02": {
+        "id": "cmd61_02",
+        "name": "确认转向架中心",
+        "iotype": "o",
+        "addr": "db:2,start:0,offset:2",
+        "vartype": "BOOL",
+        "range" : [],
+        "monitor": ["sig25_02"]
+    },
+    "cmd61_03": {
+        "id": "cmd61_03",
+        "name": "选择命令",
+        "iotype": "o",
+        "addr": "db:2,start:0,offset:3",
+        "vartype": "BOOL",
+        "range" : [],
+        "monitor": ["sig25_03"]
+    },
+    "cmd61_04": {
+        "id": "cmd61_04",
+        "name": "启动液压系统",
+        "iotype": "o",
+        "addr": "db:2,start:0,offset:4",
+        "vartype": "BOOL",
+        "range" : [],
+        "monitor": ["sig25_04"]
+    },
+    "cmd61_05": {
+        "id": "cmd61_05",
+        "name": "建立液压系统工作压力",
+        "iotype": "o",
+        "addr": "db:2,start:0,offset:5",
+        "vartype": "BOOL",
+        "range" : [],
+        "monitor": ["sig25_05"]
+    },
+    "data40": {
+        "id": "data40",
+        "name": "设定1位称重单元纵向移动目标位置",
+        "iotype": "o",
+        "addr": "db:2,start:40,offset:",
+        "vartype": "REAL",
+        "range" : [-4,20000],
+        "monitor": []
+    },
+    "data41": {
+        "id": "data41",
+        "name": "设定2位称重单元纵向移动目标位置",
+        "iotype": "o",
+        "addr": "db:2,start:41,offset:",
+        "vartype": "REAL",
+        "range" : [-4,20000],
+        "monitor": []
+    },
+    "data50": {
+        "id": "data50",
+        "name": "设定加载头1加载力",
+        "iotype": "o",
+        "addr": "db:2,start:50,offset:",
+        "vartype": "REAL",
+        "range" : [-4,20000],
+        "monitor": []
+    },
+    "data51": {
+        "id": "data51",
+        "name": "设定加载头2加载力",
+        "iotype": "o",
+        "addr": "db:2,start:51,offset:",
+        "vartype": "REAL",
+        "range" : [-4,20000],
+        "monitor": []
+    },
+    "data54": {
+        "id": "data54",
+        "name": "设定空气弹簧充气压力",
+        "iotype": "o",
+        "addr": "db:2,start:54,offset:",
+        "vartype": "REAL",
+        "range" : [-4,20000],
+        "monitor": []
+    },
+    "data55": {
+        "id": "data55",
+        "name": "设定停放制动管路充气压力",
+        "iotype": "o",
+        "addr": "db:2,start:55,offset:",
+        "vartype": "REAL",
+        "range" : [-4,20000],
+        "monitor": []
+    },
+    "data56": {
+        "id": "data56",
+        "name": "设定行车制动管路充气压力",
+        "iotype": "o",
+        "addr": "db:2,start:56,offset:",
+        "vartype": "REAL",
+        "range" : [-4,20000],
+        "monitor": []
+    },
+    "alarm28_04": {
+        "id": "alarm28_04",
+        "name": "伺服故障",
+        "iotype": "i",
+        "addr": "db:2,start:0,offset:4",
+        "vartype": "BOOL",
+        "range" : [],
+        "monitor": []
+    },
+    "alarm28_05": {
+        "id": "alarm28_05",
+        "name": "伺服网络故障",
+        "iotype": "i",
+        "addr": "db:2,start:0,offset:5",
+        "vartype": "BOOL",
+        "range" : [],
+        "monitor": []
+    },
+    "alarm29_07": {
+        "id": "alarm29_07",
+        "name": "出口油堵塞报警",
+        "iotype": "i",
+        "addr": "db:2,start:0,offset:7",
+        "vartype": "BOOL",
+        "range" : [],
+        "monitor": []
+    },
+    "alarm29_08": {
+        "id": "alarm29_08",
+        "name": "入口油堵塞报警",
+        "iotype": "i",
+        "addr": "db:2,start:1,offset:0",
+        "vartype": "BOOL",
+        "range" : [],
+        "monitor": []
+    },
+    "alarm31_00": {
+        "id": "alarm31_00",
+        "name": "引导轨到位或未合闸",
+        "iotype": "i",
+        "addr": "db:2,start:0,offset:0",
+        "vartype": "BOOL",
+        "range" : [],
+        "monitor": []
+    },
+    "alarm31_01": {
+        "id": "alarm31_01",
+        "name": "加载缸限制引导轨升",
+        "iotype": "i",
+        "addr": "db:2,start:0,offset:1",
+        "vartype": "BOOL",
+        "range" : [],
+        "monitor": []
+    },
+    "alarm31_02": {
+        "id": "alarm31_02",
+        "name": "液压电机未合闸驱动液压缸",
+        "iotype": "i",
+        "addr": "db:2,start:0,offset:2",
+        "vartype": "BOOL",
+        "range" : [],
+        "monitor": []
+    },
+    "alarm31_03": {
+        "id": "alarm31_03",
+        "name": "引导轨未到位油缸下降故障",
+        "iotype": "i",
+        "addr": "db:2,start:0,offset:3",
+        "vartype": "BOOL",
+        "range" : [],
+        "monitor": []
+    },
+    "alarm31_04": {
+        "id": "alarm31_04",
+        "name": "油箱上限报警",
+        "iotype": "i",
+        "addr": "db:2,start:0,offset:4",
+        "vartype": "BOOL",
+        "range" : [],
+        "monitor": []
+    },
+    "alarm31_05": {
+        "id": "alarm31_05",
+        "name": "油箱下限报警",
+        "iotype": "i",
+        "addr": "db:2,start:0,offset:5",
+        "vartype": "BOOL",
+        "range" : [],
+        "monitor": []
+    }
+}

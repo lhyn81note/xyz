@@ -14,14 +14,19 @@ class CmdMananger(QObject):
         self.flow_file = flow_file
         self.plc = plc
         self.meta = {}
-        self.flow = {}  # Placeholder for flow configuration
+
         self.head_node_id = None  # Placeholder for head node ID
+        self.flow = {}  # Placeholder for flow configuration
+
         self.cmds = {}
         self.cmdObjs = {}
-        self.nodes = {}
-        self.flowStatus = 0  # 0: idle, 1: running, 2: paused, 3: stopped 4: error
-        self.cursor = ""  # Placeholder for flow configuration
 
+        self.nodes = {}
+
+        self.cursor = ""  # Placeholder for flow configuration
+        self.flowStatus = 0  # 0: idle, 1: running, 2: paused, 3: stopped 4: error
+
+        # 初始化
         self.loadFlow()
         self.loadCmds()
 

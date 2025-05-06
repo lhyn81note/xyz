@@ -11,9 +11,9 @@ from .dbhelper import GenDbEnging
 print(f"{' Libs ':#^50}")
 
 class CoreProvider(containers.DeclarativeContainer):
+    Plc = providers.Singleton(S7)
     CmdManager = providers.Singleton(CmdMananger)
     Cmd = providers.Factory(Cmd)
-    Plc = providers.Singleton(S7)
     MsgBroker = providers.Singleton(MsgBroker)
     MsgSubscriber = providers.Factory(MsgSubscriber)
 

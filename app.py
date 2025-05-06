@@ -8,7 +8,7 @@ from models import *
 from wgts import TabWidget, PlcData, PlcTable
 from view import Views, Menus, MainFrame
 
-User="admin"
+User="eee"
 
 # 读取程序配置
 config = configparser.ConfigParser()
@@ -23,21 +23,21 @@ PLC.scan()
 
 Cmd = CoreProvider().Cmd
 CmdManager = {}
-CmdManager['测试流程'] = CoreProvider().CmdManager(config['flow']['try_test'], PLC)
-CmdManager['气压试验'] = CoreProvider().CmdManager(config['flow']['try_gas'], PLC)
-CmdManager['加载力试验'] = CoreProvider().CmdManager(config['flow']['try_force'], PLC)
+CmdManager['测试流程'] = CoreProvider().CmdManager(config.get('flow','try_test'), PLC)
+CmdManager['气压试验'] = CoreProvider().CmdManager(config.get('flow','try_gas'), PLC)
+CmdManager['加载力试验'] = CoreProvider().CmdManager(config.get('flow','try_force'), PLC)
 
 Broker = CoreProvider().MsgBroker()
 LibServices = UtilsProvider()
 
 # 全局数据库引擎初始化
-DbEng_Alarms = GenDbEnging(dbpath="sqlite:///db/Alarms.db")
-DbEng_AlarmsCode = GenDbEnging(dbpath="sqlite:///db/AlarmsCode.db")
-DbEng_BaseData = GenDbEnging(dbpath="sqlite:///db/BaseData.db")
-DbEng_Log = GenDbEnging(dbpath="sqlite:///db/Log.db")
-DbEng_model = GenDbEnging(dbpath="sqlite:///db/model.db")
-DbEng_result = GenDbEnging(dbpath="sqlite:///db/result.db")
-DbEng_user = GenDbEnging(dbpath="sqlite:///db/user.db")
+DbEng_Alarms = GenDbEnging(dbpath=config.get('db','alarm'))
+DbEng_AlarmsCode = GenDbEnging(dbpath=config.get('db','alarmCode'))
+DbEng_BaseData = GenDbEnging(dbpath=config.get('db','baseData'))
+DbEng_Log = GenDbEnging(dbpath=config.get('db','log'))
+DbEng_model = GenDbEnging(dbpath=config.get('db','model'))
+DbEng_result = GenDbEnging(dbpath=config.get('db','result'))
+DbEng_user = GenDbEnging(dbpath=config.get('db','user'))
 
 # 全局数据表模型初始化
 Log = Log(engine=DbEng_Log)
