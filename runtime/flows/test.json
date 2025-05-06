@@ -2,6 +2,7 @@
     "meta": {
         "schema": "test",
         "name": "\u6d4b\u8bd5\u6d41\u7a0b",
+        "desc": "\u8be5\u6d41\u7a0b\u7528\u4e8e\u6d4b\u8bd5",
         "time": "2024-04-25"
     },
     "flow": {
@@ -39,48 +40,48 @@
             "type": "plc",
             "name": "\u7b2c\u4e00\u6b65",
             "param": {
-                "out": "cmd1",
+                "out": "cmd61_00",
                 "args": [
                     {
-                        "data1": 111
+                        "data0": 30
                     }
                 ],
-                "monitor": "sig1"
+                "monitor": null
             }
         },
         "002": {
             "type": "plc",
             "name": "\u7b2c\u4e8c\u6b65",
             "param": {
-                "out": "cmd2",
+                "out": "cmd61_01",
                 "args": [
                     {
-                        "data1": 221
+                        "data0": 31
                     },
                     {
-                        "data2": 222
+                        "data1": 32
                     }
                 ],
-                "monitor": "sig2"
+                "monitor": null
             }
         },
         "003": {
             "type": "plc",
             "name": "\u7b2c\u4e09\u6b65",
             "param": {
-                "out": "cmd3",
+                "out": "cmd61_02",
                 "args": [
                     {
-                        "data1": 331
+                        "data0": 33
                     },
                     {
-                        "data2": 3332
+                        "data1": 34
                     },
                     {
-                        "data3": 333.33
+                        "data2": 35.5
                     }
                 ],
-                "monitor": "sig3"
+                "monitor": null
             }
         },
         "004": {
@@ -106,38 +107,38 @@
     },
     "nodes": {
         "000": {
-            "x": 65.0,
-            "y": 25.0,
+            "x": 51.0,
+            "y": 11.0,
             "text": "",
             "status": "idle"
         },
         "001": {
-            "x": 65.0,
-            "y": 79.0,
+            "x": 51.0,
+            "y": 57.0,
             "text": "",
             "status": "idle"
         },
         "002": {
-            "x": 225.0,
-            "y": 171.0,
+            "x": 247.0,
+            "y": 121.0,
             "text": "",
             "status": "idle"
         },
         "003": {
-            "x": 87.0,
-            "y": 310.0,
+            "x": 51.0,
+            "y": 239.0,
             "text": "",
             "status": "idle"
         },
         "004": {
-            "x": 225.0,
-            "y": 229.0,
+            "x": 248.0,
+            "y": 180.0,
             "text": "",
             "status": "idle"
         },
         "005": {
-            "x": 83.0,
-            "y": 406.0,
+            "x": 52.0,
+            "y": 335.0,
             "text": "",
             "status": "idle"
         }

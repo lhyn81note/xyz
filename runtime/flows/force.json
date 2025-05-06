@@ -40,48 +40,48 @@
             "type": "plc",
             "name": "\u7b2c\u4e00\u6b65",
             "param": {
-                "out": "cmd1",
+                "out": "cmd61_00",
                 "args": [
                     {
-                        "data1": 111
+                        "data0": 10
                     }
                 ],
-                "monitor": "sig1"
+                "monitor": null
             }
         },
         "002": {
             "type": "plc",
             "name": "\u7b2c\u4e8c\u6b65",
             "param": {
-                "out": "cmd2",
+                "out": "cmd61_01",
                 "args": [
                     {
-                        "data1": 221
+                        "data0": 11
                     },
                     {
-                        "data2": 222
+                        "data1": 12
                     }
                 ],
-                "monitor": "sig2"
+                "monitor": null
             }
         },
         "003": {
             "type": "plc",
             "name": "\u7b2c\u4e09\u6b65",
             "param": {
-                "out": "cmd3",
+                "out": "cmd61_02",
                 "args": [
                     {
-                        "data1": 331
+                        "data0": 12
                     },
                     {
-                        "data2": 3332
+                        "data1": 13
                     },
                     {
-                        "data3": 333.33
+                        "data2": 14.5
                     }
                 ],
-                "monitor": "sig3"
+                "monitor": null
             }
         },
         "004": {
@@ -119,8 +119,8 @@
             "status": "idle"
         },
         "002": {
-            "x": 247.0,
-            "y": 121.0,
+            "x": 182.0,
+            "y": 130.0,
             "text": "",
             "status": "idle"
         },

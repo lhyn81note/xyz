@@ -2,25 +2,25 @@
     "data0": {
         "id": "data0",
         "name": "加载压力1",
-        "iotype": "i",
+        "iotype": "o",
         "addr": "db:1,start:0,offset:",
-        "vartype": "REAL",
+        "vartype": "INT",
         "range" : [-4,20000],
         "monitor": []
     },
     "data1": {
         "id": "data1",
         "name": "加载压力2",
-        "iotype": "i",
+        "iotype": "o",
         "addr": "db:1,start:1,offset:",
-        "vartype": "REAL",
+        "vartype": "WORD",
         "range" : [-4,20000],
         "monitor": []
     },
     "data2": {
         "id": "data2",
         "name": "加载头垂向位移1",
-        "iotype": "i",
+        "iotype": "o",
         "addr": "db:1,start:2,offset:",
         "vartype": "REAL",
         "range" : [-4,20000],
@@ -29,7 +29,7 @@
     "data3": {
         "id": "data3",
         "name": "加载头垂向位移2",
-        "iotype": "i",
+        "iotype": "o",
         "addr": "db:1,start:3,offset:",
         "vartype": "REAL",
         "range" : [-4,20000],
@@ -38,7 +38,7 @@
     "data4": {
         "id": "data4",
         "name": "气压采集1",
-        "iotype": "i",
+        "iotype": "o",
         "addr": "db:1,start:4,offset:",
         "vartype": "REAL",
         "range" : [-4,20000],
@@ -508,60 +508,6 @@
         "name": "入口油堵塞报警",
         "iotype": "i",
         "addr": "db:2,start:1,offset:0",
-        "vartype": "BOOL",
-        "range" : [],
-        "monitor": []
-    },
-    "alarm31_00": {
-        "id": "alarm31_00",
-        "name": "引导轨到位或未合闸",
-        "iotype": "i",
-        "addr": "db:2,start:0,offset:0",
-        "vartype": "BOOL",
-        "range" : [],
-        "monitor": []
-    },
-    "alarm31_01": {
-        "id": "alarm31_01",
-        "name": "加载缸限制引导轨升",
-        "iotype": "i",
-        "addr": "db:2,start:0,offset:1",
-        "vartype": "BOOL",
-        "range" : [],
-        "monitor": []
-    },
-    "alarm31_02": {
-        "id": "alarm31_02",
-        "name": "液压电机未合闸驱动液压缸",
-        "iotype": "i",
-        "addr": "db:2,start:0,offset:2",
-        "vartype": "BOOL",
-        "range" : [],
-        "monitor": []
-    },
-    "alarm31_03": {
-        "id": "alarm31_03",
-        "name": "引导轨未到位油缸下降故障",
-        "iotype": "i",
-        "addr": "db:2,start:0,offset:3",
-        "vartype": "BOOL",
-        "range" : [],
-        "monitor": []
-    },
-    "alarm31_04": {
-        "id": "alarm31_04",
-        "name": "油箱上限报警",
-        "iotype": "i",
-        "addr": "db:2,start:0,offset:4",
-        "vartype": "BOOL",
-        "range" : [],
-        "monitor": []
-    },
-    "alarm31_05": {
-        "id": "alarm31_05",
-        "name": "油箱下限报警",
-        "iotype": "i",
-        "addr": "db:2,start:0,offset:5",
         "vartype": "BOOL",
         "range" : [],
         "monitor": []

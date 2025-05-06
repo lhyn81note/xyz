@@ -1,5 +1,5 @@
-DB1,REAL0;data0
-DB1,REAL1;data1
+DB1,INT0;data0
+DB1,WORD1;data1
 DB1,REAL2;data2
 DB1,REAL3;data3
 DB1,REAL4;data4
@@ -56,9 +56,3 @@ DB2,X0.4;alarm28_04
 DB2,X0.5;alarm28_05
 DB2,X0.7;alarm29_07
 DB2,X1.0;alarm29_08
-DB2,X0.0;alarm31_00
-DB2,X0.1;alarm31_01
-DB2,X0.2;alarm31_02
-DB2,X0.3;alarm31_03
-DB2,X0.4;alarm31_04
-DB2,X0.5;alarm31_05

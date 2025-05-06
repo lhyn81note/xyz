@@ -34,7 +34,8 @@ class S7(BasePlc):
         self.addr = addr
         self.protocal = "s7"
         self.interval = interval  # 默认间隔时间
-        self.client = None
+        self.client_r = None
+        self.client_w = None
         self.alive = False  # PLC是否在线
         self.pts = {}
         self.callbacks = []  # 用于存储回调函数
@@ -53,12 +54,17 @@ class S7(BasePlc):
 
     def connect(self) -> bool:
         try:
-            self.client = snap7.client.Client()
+            self.client_r = snap7.client.Client()
+            self.client_w = snap7.client.Client()
             ip = self.addr.split(":")[0]
             rack = int(self.addr.split(":")[1]) if ":" in self.addr else 0
             slot = int(self.addr.split(":")[2]) if ":" in self.addr else 1
-            self.client.connect(ip, rack, slot)  # Rack=0, Slot=1 are typical defaults
-            self.alive = self.client.get_connected()
+
+            self.client_r.connect(ip, rack, slot)  # Rack=0, Slot=1 are typical defaults 
+            self.client_w.connect(ip, rack, slot)  # Rack=0, Slot=1 are typical defaults
+
+            self.alive = self.client_r.get_connected() and self.client_w.get_connected()
+
             if self.alive:
                 print("Connection successful.")
             else:
@@ -75,7 +81,7 @@ class S7(BasePlc):
             print(f"指令不存在!{ptId}")
             return False
 
-        if (self.client is None) or self.alive==False:
+        if (self.client_w is None) or self.alive==False:
             print(f"PLC未连接!")
             return False
 
@@ -91,28 +97,28 @@ class S7(BasePlc):
             offset = int(addrs[2].split(":")[1])
             data = bytearray(1) 
             set_bool(data, 0, offset, value==True)# 使用set_bool方法将指定位置设置为True
-            self.client.db_write(db, start_byte, data)# 写入数据到PLC的指定DB块和地址
+            self.client_w.db_write(db, start_byte, data)# 写入数据到PLC的指定DB块和地址
             print(f"布尔指令 {pt.name} 执行成功")
             return True
 
         elif (pt.vartype == "INT"):
             data = bytearray(2)  
             set_int(data, 0, value)  
-            self.client.db_write(db, start_byte, data)  
+            self.client_w.db_write(db, start_byte, data)  
             print(f"整形指令 {pt.name} 执行成功")
             return True
 
         elif (pt.vartype == "WORD"):
             data = bytearray(2) 
             set_word(data, 0, value)  
-            self.client.db_write(db, start_byte, data)  
+            self.client_w.db_write(db, start_byte, data)  
             print(f"字指令 {pt.name} 执行成功")
             return True
 
         elif (pt.vartype == "REAL"):
             data = bytearray(4)  
             set_real(data, 0, value)  
-            self.client.db_write(db, start_byte, data)  
+            self.client_w.db_write(db, start_byte, data)  
             print(f"实数指令 {pt.name} 执行成功")
             return True
 
@@ -127,7 +133,7 @@ class S7(BasePlc):
             print(f"指令不存在!{ptId}")
             return False
 
-        if (self.client is None) or self.alive==False:
+        if (self.client_r is None) or self.alive==False:
             print(f"PLC未连接!")
             return False
 
@@ -137,19 +143,19 @@ class S7(BasePlc):
 
         if (pt.vartype == "BOOL"):
             offset = int(addrs[2].split(":")[1])
-            data = self.client.db_read(db, start_byte, 1) # 读取1个字节
+            data = self.client_r.db_read(db, start_byte, 1) # 读取1个字节
             return get_bool(data, 0, offset)
 
         elif (pt.vartype == "INT"):
-            data = self.client.db_read(db, start_byte, 2) # 读取2个字节
+            data = self.client_r.db_read(db, start_byte, 2) # 读取2个字节
             return get_int(data, 0)
 
         elif (pt.vartype == "WORD"):
-            data = self.client.db_read(db, start_byte, 2) # 读取2个字节
+            data = self.client_r.db_read(db, start_byte, 2) # 读取2个字节
             return get_word(data, 0)
 
         elif (pt.vartype == "REAL"):
-            data = self.client.db_read(db, start_byte, 4) # 读取4个字节
+            data = self.client_r.db_read(db, start_byte, 4) # 读取4个字节
             return get_real(data, 0)
 
         else:

@@ -237,7 +237,9 @@ class Cmd(QObject):
 
             pt_out = plc.pts.get(self.param.get("out"))
             pt_args = self.param.get("args")
-            pt_sig = plc.pts.get(self.param.get("monitor"))
+            pt_cmd = plc.pts.get(self.param.get("out")) # 取得plc点表中的实例
+            pt_sig_name = pt_cmd.monitor[0]  # 取得plc点表中的monitor覆盖当前cmd的monitor
+            pt_sig = plc.pts.get(pt_sig_name)
 
             for arg_kv in pt_args:
                 print(f"写入指令: {arg_kv}")
@@ -252,8 +254,7 @@ class Cmd(QObject):
 
             plc.write(pt_out.id, 1)
             while self.status == 1:
-                # pt_sig = plc.read(pt_sigs.id)
-                # print(pt_sig)
+                await asyncio.sleep(plc.interval/1000)
                 for k in plc.pts.keys():
                     if 'fault' in k:
                         print(f"capture:{plc.pts.get(k)}")
@@ -266,8 +267,7 @@ class Cmd(QObject):
                     self.result = "plc done." 
                     self.status = 2  # Set status to done
                     break
-                await asyncio.sleep(1)
-                # await asyncio.sleep(plc.interval/1000)
+                # await asyncio.sleep(1)
 
 
         if (self.status != 0):
