@@ -5,7 +5,7 @@
         "iotype": "o",
         "addr": "db:1,start:0,offset:",
         "vartype": "INT",
-        "range" : [-4,20000],
+        "range" : [-4,200],
         "monitor": []
     },
     "data1": {
@@ -14,7 +14,7 @@
         "iotype": "o",
         "addr": "db:1,start:1,offset:",
         "vartype": "WORD",
-        "range" : [-4,20000],
+        "range" : [-4,200],
         "monitor": []
     },
     "data2": {
@@ -23,7 +23,7 @@
         "iotype": "o",
         "addr": "db:1,start:2,offset:",
         "vartype": "REAL",
-        "range" : [-4,20000],
+        "range" : [-4,200],
         "monitor": []
     },
     "data3": {
@@ -32,7 +32,7 @@
         "iotype": "o",
         "addr": "db:1,start:3,offset:",
         "vartype": "REAL",
-        "range" : [-4,20000],
+        "range" : [-4,200],
         "monitor": []
     },
     "data4": {
@@ -41,7 +41,7 @@
         "iotype": "o",
         "addr": "db:1,start:4,offset:",
         "vartype": "REAL",
-        "range" : [-4,20000],
+        "range" : [-4,200],
         "monitor": []
     },
     "data5": {
@@ -50,7 +50,7 @@
         "iotype": "i",
         "addr": "db:1,start:5,offset:",
         "vartype": "REAL",
-        "range" : [-4,20000],
+        "range" : [-4,200],
         "monitor": []
     },
     "data6": {
@@ -59,7 +59,7 @@
         "iotype": "i",
         "addr": "db:1,start:6,offset:",
         "vartype": "REAL",
-        "range" : [-4,20000],
+        "range" : [-4,200],
         "monitor": []
     },
     "data7": {
@@ -68,7 +68,7 @@
         "iotype": "i",
         "addr": "db:1,start:7,offset:",
         "vartype": "REAL",
-        "range" : [-4,20000],
+        "range" : [-4,200],
         "monitor": []
     },
     "data8": {
@@ -77,7 +77,7 @@
         "iotype": "i",
         "addr": "db:1,start:8,offset:",
         "vartype": "REAL",
-        "range" : [-4,20000],
+        "range" : [-4,200],
         "monitor": []
     },
     "data9": {
@@ -86,7 +86,7 @@
         "iotype": "i",
         "addr": "db:1,start:9,offset:",
         "vartype": "REAL",
-        "range" : [-4,20000],
+        "range" : [-4,200],
         "monitor": []
     },
     "data10": {
@@ -95,7 +95,7 @@
         "iotype": "i",
         "addr": "db:1,start:10,offset:",
         "vartype": "REAL",
-        "range" : [-4,20000],
+        "range" : [-4,200],
         "monitor": []
     },
     "data11": {
@@ -104,7 +104,7 @@
         "iotype": "i",
         "addr": "db:1,start:11,offset:",
         "vartype": "REAL",
-        "range" : [-4,20000],
+        "range" : [-4,200],
         "monitor": []
     },
     "data12": {
@@ -113,7 +113,7 @@
         "iotype": "i",
         "addr": "db:1,start:12,offset:",
         "vartype": "REAL",
-        "range" : [-4,20000],
+        "range" : [-4,200],
         "monitor": []
     },
     "data13": {
@@ -122,7 +122,7 @@
         "iotype": "i",
         "addr": "db:1,start:13,offset:",
         "vartype": "REAL",
-        "range" : [-4,20000],
+        "range" : [-4,200],
         "monitor": []
     },
     "data14": {
@@ -131,7 +131,7 @@
         "iotype": "i",
         "addr": "db:1,start:14,offset:",
         "vartype": "REAL",
-        "range" : [-4,20000],
+        "range" : [-4,200],
         "monitor": []
     },
     "data15": {
@@ -140,7 +140,7 @@
         "iotype": "i",
         "addr": "db:1,start:15,offset:",
         "vartype": "REAL",
-        "range" : [-4,20000],
+        "range" : [-4,200],
         "monitor": []
     },
     "data16": {
@@ -149,7 +149,7 @@
         "iotype": "i",
         "addr": "db:1,start:16,offset:",
         "vartype": "REAL",
-        "range" : [-4,20000],
+        "range" : [-4,200],
         "monitor": []
     },
     "data17": {
@@ -158,7 +158,7 @@
         "iotype": "i",
         "addr": "db:1,start:17,offset:",
         "vartype": "REAL",
-        "range" : [-4,20000],
+        "range" : [-4,200],
         "monitor": []
     },
     "data18": {
@@ -167,7 +167,7 @@
         "iotype": "i",
         "addr": "db:1,start:18,offset:",
         "vartype": "REAL",
-        "range" : [-4,20000],
+        "range" : [-4,200],
         "monitor": []
     },
     "data19": {
@@ -176,7 +176,7 @@
         "iotype": "i",
         "addr": "db:1,start:19,offset:",
         "vartype": "REAL",
-        "range" : [-4,20000],
+        "range" : [-4,200],
         "monitor": []
     },
     "data20": {
@@ -185,7 +185,7 @@
         "iotype": "i",
         "addr": "db:1,start:20,offset:",
         "vartype": "REAL",
-        "range" : [-4,20000],
+        "range" : [-4,200],
         "monitor": []
     },
     "data21": {
@@ -194,7 +194,7 @@
         "iotype": "i",
         "addr": "db:1,start:21,offset:",
         "vartype": "REAL",
-        "range" : [-4,20000],
+        "range" : [-4,200],
         "monitor": []
     },
     "data22": {
@@ -203,7 +203,7 @@
         "iotype": "i",
         "addr": "db:1,start:22,offset:",
         "vartype": "REAL",
-        "range" : [-4,20000],
+        "range" : [-4,200],
         "monitor": []
     },
     "data23": {
@@ -212,7 +212,7 @@
         "iotype": "i",
         "addr": "db:1,start:23,offset:",
         "vartype": "REAL",
-        "range" : [-4,20000],
+        "range" : [-4,200],
         "monitor": []
     },
     "sig25_00": {
@@ -221,7 +221,7 @@
         "iotype": "i",
         "addr": "db:3,start:0,offset:0",
         "vartype": "BOOL",
-        "range" : [],
+        "range" : null,
         "monitor": []
     },
     "sig25_01": {
@@ -230,7 +230,7 @@
         "iotype": "i",
         "addr": "db:3,start:0,offset:1",
         "vartype": "BOOL",
-        "range" : [],
+        "range" : null,
         "monitor": []
     },
     "sig25_02": {
@@ -239,7 +239,7 @@
         "iotype": "i",
         "addr": "db:3,start:0,offset:2",
         "vartype": "BOOL",
-        "range" : [],
+        "range" : null,
         "monitor": []
     },
     "sig25_03": {
@@ -248,7 +248,7 @@
         "iotype": "i",
         "addr": "db:3,start:0,offset:3",
         "vartype": "BOOL",
-        "range" : [],
+        "range" : null,
         "monitor": []
     },
     "sig25_04": {
@@ -257,7 +257,7 @@
         "iotype": "i",
         "addr": "db:3,start:0,offset:4",
         "vartype": "BOOL",
-        "range" : [],
+        "range" : null,
         "monitor": []
     },
     "sig25_05": {
@@ -266,7 +266,7 @@
         "iotype": "i",
         "addr": "db:3,start:0,offset:5",
         "vartype": "BOOL",
-        "range" : [],
+        "range" : null,
         "monitor": []
     },
     "sig25_06": {
@@ -275,7 +275,7 @@
         "iotype": "i",
         "addr": "db:3,start:0,offset:6",
         "vartype": "BOOL",
-        "range" : [],
+        "range" : null,
         "monitor": []
     },
     "sig25_07": {
@@ -284,7 +284,7 @@
         "iotype": "i",
         "addr": "db:3,start:0,offset:7",
         "vartype": "BOOL",
-        "range" : [],
+        "range" : null,
         "monitor": []
     },
     "sig25_08": {
@@ -293,7 +293,7 @@
         "iotype": "i",
         "addr": "db:3,start:1,offset:0",
         "vartype": "BOOL",
-        "range" : [],
+        "range" : null,
         "monitor": []
     },
     "sig25_09": {
@@ -302,7 +302,7 @@
         "iotype": "i",
         "addr": "db:3,start:1,offset:1",
         "vartype": "BOOL",
-        "range" : [],
+        "range" : null,
         "monitor": []
     },
     "sig25_10": {
@@ -311,7 +311,7 @@
         "iotype": "i",
         "addr": "db:3,start:1,offset:2",
         "vartype": "BOOL",
-        "range" : [],
+        "range" : null,
         "monitor": []
     },
     "sig25_11": {
@@ -320,7 +320,7 @@
         "iotype": "i",
         "addr": "db:3,start:1,offset:3",
         "vartype": "BOOL",
-        "range" : [],
+        "range" : null,
         "monitor": []
     },
     "sig25_12": {
@@ -329,7 +329,7 @@
         "iotype": "i",
         "addr": "db:3,start:1,offset:4",
         "vartype": "BOOL",
-        "range" : [],
+        "range" : null,
         "monitor": []
     },
     "sig25_13": {
@@ -338,7 +338,7 @@
         "iotype": "i",
         "addr": "db:3,start:1,offset:5",
         "vartype": "BOOL",
-        "range" : [],
+        "range" : null,
         "monitor": []
     },
     "sig25_14": {
@@ -347,7 +347,7 @@
         "iotype": "i",
         "addr": "db:3,start:1,offset:6",
         "vartype": "BOOL",
-        "range" : [],
+        "range" : null,
         "monitor": []
     },
     "sig25_15": {
@@ -356,7 +356,7 @@
         "iotype": "i",
         "addr": "db:3,start:1,offset:7",
         "vartype": "BOOL",
-        "range" : [],
+        "range" : null,
         "monitor": []
     },
     "cmd61_00": {
@@ -365,7 +365,7 @@
         "iotype": "o",
         "addr": "db:2,start:0,offset:0",
         "vartype": "BOOL",
-        "range" : [],
+        "range" : null,
         "monitor": ["sig25_00"]
     },
     "cmd61_01": {
@@ -374,7 +374,7 @@
         "iotype": "o",
         "addr": "db:2,start:0,offset:1",
         "vartype": "BOOL",
-        "range" : [],
+        "range" : null,
         "monitor": ["sig25_01"]
     },
     "cmd61_02": {
@@ -383,7 +383,7 @@
         "iotype": "o",
         "addr": "db:2,start:0,offset:2",
         "vartype": "BOOL",
-        "range" : [],
+        "range" : null,
         "monitor": ["sig25_02"]
     },
     "cmd61_03": {
@@ -392,7 +392,7 @@
         "iotype": "o",
         "addr": "db:2,start:0,offset:3",
         "vartype": "BOOL",
-        "range" : [],
+        "range" : null,
         "monitor": ["sig25_03"]
     },
     "cmd61_04": {
@@ -401,7 +401,7 @@
         "iotype": "o",
         "addr": "db:2,start:0,offset:4",
         "vartype": "BOOL",
-        "range" : [],
+        "range" : null,
         "monitor": ["sig25_04"]
     },
     "cmd61_05": {
@@ -410,7 +410,7 @@
         "iotype": "o",
         "addr": "db:2,start:0,offset:5",
         "vartype": "BOOL",
-        "range" : [],
+        "range" : null,
         "monitor": ["sig25_05"]
     },
     "data40": {
@@ -419,7 +419,7 @@
         "iotype": "o",
         "addr": "db:2,start:40,offset:",
         "vartype": "REAL",
-        "range" : [-4,20000],
+        "range" : [-4,200],
         "monitor": []
     },
     "data41": {
@@ -428,7 +428,7 @@
         "iotype": "o",
         "addr": "db:2,start:41,offset:",
         "vartype": "REAL",
-        "range" : [-4,20000],
+        "range" : [-4,200],
         "monitor": []
     },
     "data50": {
@@ -437,7 +437,7 @@
         "iotype": "o",
         "addr": "db:2,start:50,offset:",
         "vartype": "REAL",
-        "range" : [-4,20000],
+        "range" : [-4,200],
         "monitor": []
     },
     "data51": {
@@ -446,7 +446,7 @@
         "iotype": "o",
         "addr": "db:2,start:51,offset:",
         "vartype": "REAL",
-        "range" : [-4,20000],
+        "range" : [-4,200],
         "monitor": []
     },
     "data54": {
@@ -455,7 +455,7 @@
         "iotype": "o",
         "addr": "db:2,start:54,offset:",
         "vartype": "REAL",
-        "range" : [-4,20000],
+        "range" : [-4,200],
         "monitor": []
     },
     "data55": {
@@ -464,7 +464,7 @@
         "iotype": "o",
         "addr": "db:2,start:55,offset:",
         "vartype": "REAL",
-        "range" : [-4,20000],
+        "range" : [-4,200],
         "monitor": []
     },
     "data56": {
@@ -473,7 +473,7 @@
         "iotype": "o",
         "addr": "db:2,start:56,offset:",
         "vartype": "REAL",
-        "range" : [-4,20000],
+        "range" : [-4,200],
         "monitor": []
     },
     "alarm28_04": {
@@ -482,7 +482,7 @@
         "iotype": "i",
         "addr": "db:2,start:0,offset:4",
         "vartype": "BOOL",
-        "range" : [],
+        "range" : null,
         "monitor": []
     },
     "alarm28_05": {
@@ -491,7 +491,7 @@
         "iotype": "i",
         "addr": "db:2,start:0,offset:5",
         "vartype": "BOOL",
-        "range" : [],
+        "range" : null,
         "monitor": []
     },
     "alarm29_07": {
@@ -500,7 +500,7 @@
         "iotype": "i",
         "addr": "db:2,start:0,offset:7",
         "vartype": "BOOL",
-        "range" : [],
+        "range" : null,
         "monitor": []
     },
     "alarm29_08": {
@@ -509,7 +509,7 @@
         "iotype": "i",
         "addr": "db:2,start:1,offset:0",
         "vartype": "BOOL",
-        "range" : [],
+        "range" : null,
         "monitor": []
     }
 }

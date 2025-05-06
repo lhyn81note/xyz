@@ -14,17 +14,20 @@ class Pt(BaseModel):
     iotype: str = Field(..., description="读写类型")
     vartype: str = Field(..., description="变量类型")
     monitor: List[str] = Field(..., description="监控信号列表")
-    range: List[int] = Field(..., description="数值范围")
+    range: Union[List[int], None] = Field(..., description="数值范围")
     value: Union[bool, int, float]= None  # 默认值不是Field表示不映射, 可以规定类型
 
     @property
     def isValid(self):
-        if self.vartype == "REAL":
-            return self.value is not None and self.range[0] <= self.value <= self.range[1]
-        elif self.vartype == "BOOL" and self.id.startswith("alarm"):
-            return self.value is not None and self.value == False
+        if self.value is not None:
+            if self.range is not None:
+                return self.range[0] <= self.value <= self.range[1]
+            if self.vartype == "BOOL" and self.id.startswith("alarm"):
+                return self.value == False
+            else:
+                return True
         else:
-            return self.value is not None
+            return False
 
 class S7(BasePlc):
 
@@ -41,14 +44,14 @@ class S7(BasePlc):
         self.callbacks = []  # 用于存储回调函数
 
     def load_config(self) -> bool:
-        try:
+        # try:
             with open(self.filepath, 'r', encoding='utf-8') as file:
                 data = json.load(file)
                 ptlist = [Pt(**value) for value in data.values()]
                 for pt in ptlist:
                     self.pts[pt.id] = pt
             return True
-        except Exception as e:
+        # except Exception as e:
             print(f"加载配置文件失败: {self.filepath}")
             return False
 
