@@ -21,9 +21,13 @@ class Pt(BaseModel):
     def isValid(self):
         if self.value is not None:
             if self.range is not None:
-                return self.range[0] <= self.value <= self.range[1]
+                check = self.range[0] <= self.value <= self.range[1]
+
+                return check
+
             if self.vartype == "BOOL" and self.id.startswith("alarm"):
-                return self.value == False
+                check = self.value == False
+                return check
             else:
                 return True
         else:
@@ -37,11 +41,11 @@ class S7(BasePlc):
         self.addr = addr
         self.protocal = "s7"
         self.interval = interval  # 默认间隔时间
-        self.client_r = None
-        self.client_w = None
-        self.alive = False  # PLC是否在线
-        self.pts = {}
-        self.callbacks = []  # 用于存储回调函数
+        # self.client_r = None
+        # self.client_w = None
+        # self.alive = False  # PLC是否在线
+        # self.pts = {}
+        # self.callbacks = []  # 用于存储回调函数
 
     def load_config(self) -> bool:
         # try:
@@ -169,6 +173,9 @@ class S7(BasePlc):
         def readall():
             while True:
                 # print("-" * 40)
+                if self.alive==False:
+                    self.connect()
+
                 for pt in self.pts.values():
                     pt.value = self.read(pt.id)
                     # print(f"ID: {pt.id}, Value: {pt.value}")

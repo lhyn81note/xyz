@@ -59,7 +59,7 @@ class PlcData(QAbstractTableModel):
         elif role == Qt.BackgroundRole:
             # Check if the point is valid and set background color accordingly
             if hasattr(pt, 'isValid') and not pt.isValid:
-                return QBrush(QColor(255, 0, 0, 100))  # Semi-transparent red
+                return QBrush(QColor(255, 0, 0, 150))  # Semi-transparent red
 
         return None
 

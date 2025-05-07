@@ -33,15 +33,16 @@ class Window(QWidget):
         buttons_layout.addWidget(btn1)
         buttons_layout.addWidget(btn2)
         buttons_layout.addWidget(btn3)
-        btn1.clicked.connect(lambda: broker.publish(msgtype=MsgType.alarm, msg="触发报警!"))
-        btn2.clicked.connect(lambda: broker.publish(msgtype=MsgType.info, msg="新消息!"))
-        btn3.clicked.connect(lambda: broker.publish(msgtype=MsgType.status, msg=True))
+
+        btn1.clicked.connect(lambda: broker.publish(msg_type=MsgType.alarm, content="触发报警!"))
+        btn2.clicked.connect(lambda: broker.publish(msg_type=MsgType.info, content="新消息!"))
+        btn3.clicked.connect(lambda: broker.publish(msg_type=MsgType.status, content=True))
         
         self.ui.horizontalLayout_2.addLayout(buttons_layout)
         self.ui.horizontalLayout_2.addLayout(labels_layout)
         
         broker = _top.Broker
-        broker.addSubscriber(MsgSubscriber(lambda msg: label1.setText(msg)), msgtype=MsgType.alarm)
-        broker.addSubscriber(MsgSubscriber(lambda msg: label2.setText(msg)), msgtype=MsgType.info)
-        broker.addSubscriber(MsgSubscriber(lambda msg: label3.setText("是" if msg else "否")), msgtype=MsgType.status)
+        broker.addSubscriber(MsgSubscriber(lambda msg: label1.setText(msg)), msg_type=MsgType.alarm)
+        broker.addSubscriber(MsgSubscriber(lambda msg: label2.setText(msg)), msg_type=MsgType.info)
+        broker.addSubscriber(MsgSubscriber(lambda msg: label3.setText("是" if msg else "否")), msg_type=MsgType.status)
         
