@@ -6,6 +6,7 @@ from snap7.util import set_bool, get_bool, set_int, get_int, set_real, get_real,
 from typing import Union
 import threading
 from . import BasePlc
+from ..notify import MsgType, MsgBroker
 
 class Pt(BaseModel):
     id: str = Field(..., description="命令的唯一标识") # 默认值为Field表示映射到json的key
@@ -35,12 +36,13 @@ class Pt(BaseModel):
 
 class S7(BasePlc):
 
-    def __init__(self, config_file: str, addr: str, interval: int):
+    def __init__(self, config_file: str, addr: str, interval: int, msgbroker: MsgBroker):
         super().__init__()
         self.filepath = config_file
         self.addr = addr
         self.protocal = "s7"
         self.interval = interval  # 默认间隔时间
+        self.msgbroker = msgbroker # 用于发布消息
         # self.client_r = None
         # self.client_w = None
         # self.alive = False  # PLC是否在线
@@ -179,11 +181,20 @@ class S7(BasePlc):
                 for pt in self.pts.values():
                     pt.value = self.read(pt.id)
                     # print(f"ID: {pt.id}, Value: {pt.value}")
+                    if not pt.isValid:
+                        msg = {
+                            'content': f"PLC点{pt.name}超出范围:{pt.value}",
+                            'source': "PLC",
+                            'timestamp': time.time()
+                        }
+                        self.msgbroker.publish(MsgType.alarm, msg, "PLC")
+
                 time.sleep(self.interval / 1000)
                 self.trigger_callbacks()
 
         thread = threading.Thread(target=readall, daemon=True)
         thread.start()
+
 
 if __name__ == "__main__":
 

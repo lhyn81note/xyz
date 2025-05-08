@@ -35,17 +35,11 @@ class Window(QMainWindow):
         if title:
             self.setWindowTitle(title)
         
-        broker = _top.Broker
-        broker.addSubscriber(_top.CoreProvider.MsgSubscriber(lambda msg: self.ui.lb_alarm.setText(msg)), msg_type=_top.MsgType.alarm)
-        broker.addSubscriber(_top.CoreProvider.MsgSubscriber(lambda msg: self.ui.lb_info.setText(msg)), msg_type=_top.MsgType.info)
-        def update_plc(msg):
-            if msg==True:
-                self.ui.lb_plc.setStyleSheet('font: 20pt "Agency FB";\ncolor: rgb(0, 255, 0);')
-            else:
-                self.ui.lb_plc.setStyleSheet('font: 20pt "Agency FB";\ncolor: rgb(255, 0, 0);')
-            self.ui.lb_plc.update()
-        broker.addSubscriber(_top.CoreProvider.MsgSubscriber(lambda msg: update_plc(msg)), msg_type=_top.MsgType.status)
         self.wgt_tabs.create_tab(_top.Views["view_index"]['obj'](), _top.Views["view_index"]['title'], view_id="view_index", fixed=True)
+
+
+        _top.Broker.addSubscriber(_top.CoreProvider.MsgSubscriber(self.update_plc, "View_index"), _top.MsgType.alarm)
+
     
     def dispach(self, act, view_id):
         print(view_id)
@@ -58,3 +52,10 @@ class Window(QMainWindow):
                 pass
             else:
                 self.wgt_tabs.create_tab(_top.Views[view_id]['obj'](), _top.Views[view_id]['title'], view_id=view_id, fixed=act['fixed'])
+
+
+    def update_plc(self,msg):
+        # print(f"ALARM: {msg.content} from {msg.source}")
+        self.ui.lb_info.setStyleSheet('color: rgb(255, 0, 0);')
+        self.ui.lb_info.setText(msg.getdata('content'))
+        self.ui.lb_info.update()

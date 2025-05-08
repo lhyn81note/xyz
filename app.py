@@ -14,8 +14,12 @@ User="eee"
 config = configparser.ConfigParser()
 config.read('app.ini')
 
+# 全局容器初始化
+Broker = CoreProvider().MsgBroker()
+LibServices = UtilsProvider()
+
 # 全局Service初始化
-PLC = CoreProvider().Plc(config_file=config.get('plc','pts'), addr=config['plc']['host'], interval=config.getint('plc','interval'))
+PLC = CoreProvider().Plc(config_file=config.get('plc','pts'), addr=config['plc']['host'], interval=config.getint('plc','interval'), msgbroker=Broker)
 PLC.load_config()
 PLC.connect()
 print(f"PLC is alive: {PLC.alive}")
@@ -26,9 +30,6 @@ CmdManager = {}
 CmdManager['测试流程'] = CoreProvider().CmdManager(config.get('flow','try_test'), PLC)
 CmdManager['气压试验'] = CoreProvider().CmdManager(config.get('flow','try_gas'), PLC)
 CmdManager['加载力试验'] = CoreProvider().CmdManager(config.get('flow','try_force'), PLC)
-
-Broker = CoreProvider().MsgBroker()
-LibServices = UtilsProvider()
 
 # 全局数据库引擎初始化
 DbEng_Alarms = GenDbEnging(dbpath=config.get('db','alarm'))

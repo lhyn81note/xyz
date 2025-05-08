@@ -1,8 +1,9 @@
 from abc import abstractmethod, ABCMeta
 from typing import List, Dict, TypeVar, Union
 from enum import Enum
+from ..notify import MsgType, MsgBroker, MsgSubscriber
 
-__all__ = ["plc_modbus", "plc_s7", "BasePlc"]
+__all__ = ["BasePlc", "plc_modbus", "plc_s7"]
 
 T=TypeVar("T")
 
@@ -18,6 +19,7 @@ class BasePlc(metaclass = ABCMeta):
         self.alive = False  # PLC是否在线
         self.pts = {}
         self.callbacks = []  # 用于存储回调函数
+        self.msgbroker = None
 
     def register_callback(self, callback):
         if callable(callback):

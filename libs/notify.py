@@ -27,9 +27,11 @@ logger = logging.getLogger(__name__)
 
 class MsgType(Enum):
     """Enumeration of supported message types."""
-    alarm = "alarm"     # Critical messages requiring immediate attention
-    info = "info"       # Informational messages
-    status = "status"   # Status updates
+    fatal = "fatal"
+    fault = "fault"     # Critical messages requiring immediate attention
+    alarm = "alarm"     # Informational messages
+    info = "info"       # Status updates
+    custom = "custom"   # Custom message types
 
 class Message:
     """Message container with type checking and validation."""
@@ -311,16 +313,15 @@ if __name__ == "__main__":
         all_subscriber = MsgSubscriber(handle_all, "AllHandler")
 
         # Add subscribers
-        broker.addSubscriber(alarm_subscriber, MsgType.alarm)
+        broker.addSubscriber(alarm_subscriber, MsgType.fatal)
         broker.addSubscriber(info_subscriber, MsgType.info)
-        broker.addSubscriber(status_subscriber, MsgType.status)
-        broker.addSubscriber(all_subscriber, [MsgType.alarm, MsgType.info, MsgType.status])
+        broker.addSubscriber(status_subscriber, MsgType.alarm)
+        broker.addSubscriber(all_subscriber, [MsgType.alarm, MsgType.info, MsgType.fatal])
 
         # Test publishing messages
         print("\n--- Publishing messages ---")
         broker.publish(MsgType.alarm, "System overheating", "TempSensor")
         broker.publish(MsgType.info, "User logged in", "AuthSystem")
-        broker.publish(MsgType.status, "Processing complete", "TaskManager")
 
         # Test subscriber removal
         print("\n--- After removing info subscriber ---")
@@ -345,7 +346,6 @@ if __name__ == "__main__":
         print("\n--- Subscriber counts ---")
         print(f"Alarm subscribers: {broker.getSubscriberCount(MsgType.alarm)}")
         print(f"Info subscribers: {broker.getSubscriberCount(MsgType.info)}")
-        print(f"Status subscribers: {broker.getSubscriberCount(MsgType.status)}")
         print(f"Total unique subscribers: {broker.getSubscriberCount()}")
 
         print("\n=== Notification System Test Complete ===")
