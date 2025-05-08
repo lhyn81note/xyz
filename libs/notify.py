@@ -33,27 +33,6 @@ class MsgType(Enum):
     info = "info"       # Status updates
     custom = "custom"   # Custom message types
 
-class Message:
-    """Message container with type checking and validation."""
-
-    def __init__(self, content: Any, source: Optional[str] = None, timestamp: Optional[float] = None):
-        """
-        Initialize a new message.
-
-        Args:
-            content: The message content
-            source: Optional source identifier
-            timestamp: Optional timestamp (if None, will be set when published)
-        """
-        import time
-        self.content = content
-        self.source = source
-        self.timestamp = timestamp or time.time()
-
-    def __str__(self) -> str:
-        """String representation of the message."""
-        return f"Message(source={self.source}, content={self.content})"
-
 class MsgBroker:
     """
     Message broker that manages subscriptions and distributes messages.
@@ -169,7 +148,7 @@ class MsgBroker:
 
         return removed
 
-    def publish(self, msg_type: MsgType, content: Any, source: Optional[str] = None) -> int:
+    def publish(self, msg_type: MsgType, message: Dict) -> int:
         """
         Publish a message to all subscribers of the specified message type.
 
@@ -185,10 +164,11 @@ class MsgBroker:
             ValueError: If msg_type is not a valid MsgType
         """
         if not isinstance(msg_type, MsgType):
-            raise ValueError(f"Invalid message type: {msg_type}")
+            raise ValueError(f"msg_type 消息类型必须为MsgType枚举类型!")
 
-        # Create message object
-        message = Message(content, source)
+        if not isinstance(message, Dict):
+            raise ValueError(f"message消息格式错误,必须为字典类型!")
+
         count = 0
 
         # Get a copy of the subscriber list to avoid issues if the list changes during iteration
@@ -204,7 +184,7 @@ class MsgBroker:
                 logger.error(f"Error notifying subscriber: {e}")
                 logger.debug(traceback.format_exc())
 
-        logger.debug(f"Published {msg_type.value} message to {count} subscribers: {content}")
+        logger.debug(f"Published {msg_type.value} message to {count} subscribers: {message}")
         return count
 
     def getSubscriberCount(self, msg_type: Optional[MsgType] = None) -> int:
@@ -235,7 +215,7 @@ class MsgSubscriber:
     removal by identity.
     """
 
-    def __init__(self, callback: Callable[[Message], None], name: Optional[str] = None):
+    def __init__(self, callback: Callable[[Dict] , None], name: Optional[str] = None):
         """
         Initialize a new message subscriber.
 
@@ -252,7 +232,7 @@ class MsgSubscriber:
         self._callback = callback
         self.name = name or f"Subscriber-{id(self)}"
 
-    def invoke(self, msg: Message) -> None:
+    def invoke(self, msg: Dict) -> None:
         """
         Invoke the callback function with the given message.
 

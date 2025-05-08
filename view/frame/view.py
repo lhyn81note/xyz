@@ -55,7 +55,21 @@ class Window(QMainWindow):
 
 
     def update_plc(self,msg):
-        # print(f"ALARM: {msg.content} from {msg.source}")
-        self.ui.lb_info.setStyleSheet('color: rgb(255, 0, 0);')
-        self.ui.lb_info.setText(msg.getdata('content'))
-        self.ui.lb_info.update()
+        
+        if msg['source']=='PLC':
+
+            if msg['subject']=='connect':
+                if msg['content']==True:
+                    self.ui.lb_status_plc.setStyleSheet('background-color: rgb(0, 255, 0);')
+                else:
+                    self.ui.lb_status_plc.setStyleSheet('background-color: rgb(255, 0, 0);')
+            elif msg['subject']=='alarm':
+                self.ui.lb_info.setStyleSheet('color: rgb(255, 0, 0);')
+                self.ui.lb_info.setText(msg['content'])
+
+            self.ui.lb_info.update()
+
+        elif msg['source']=='Serial':
+            pass
+        else:
+            pass

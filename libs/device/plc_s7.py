@@ -102,37 +102,42 @@ class S7(BasePlc):
         db = int(addrs[0].split(":")[1])  
         start_byte = int(addrs[1].split(":")[1])  
 
-        if (pt.vartype == "BOOL"):
-            offset = int(addrs[2].split(":")[1])
-            data = bytearray(1) 
-            set_bool(data, 0, offset, value==True)# 使用set_bool方法将指定位置设置为True
-            self.client_w.db_write(db, start_byte, data)# 写入数据到PLC的指定DB块和地址
-            print(f"布尔指令 {pt.name} 执行成功")
-            return True
+        try:
+            if (pt.vartype == "BOOL"):
+                offset = int(addrs[2].split(":")[1])
+                data = bytearray(1) 
+                set_bool(data, 0, offset, value==True)# 使用set_bool方法将指定位置设置为True
+                self.client_w.db_write(db, start_byte, data)# 写入数据到PLC的指定DB块和地址
+                print(f"布尔指令 {pt.name} 执行成功")
+                return True
 
-        elif (pt.vartype == "INT"):
-            data = bytearray(2)  
-            set_int(data, 0, value)  
-            self.client_w.db_write(db, start_byte, data)  
-            print(f"整形指令 {pt.name} 执行成功")
-            return True
+            elif (pt.vartype == "INT"):
+                data = bytearray(2)  
+                set_int(data, 0, value)  
+                self.client_w.db_write(db, start_byte, data)  
+                print(f"整形指令 {pt.name} 执行成功")
+                return True
 
-        elif (pt.vartype == "WORD"):
-            data = bytearray(2) 
-            set_word(data, 0, value)  
-            self.client_w.db_write(db, start_byte, data)  
-            print(f"字指令 {pt.name} 执行成功")
-            return True
+            elif (pt.vartype == "WORD"):
+                data = bytearray(2) 
+                set_word(data, 0, value)  
+                self.client_w.db_write(db, start_byte, data)  
+                print(f"字指令 {pt.name} 执行成功")
+                return True
 
-        elif (pt.vartype == "REAL"):
-            data = bytearray(4)  
-            set_real(data, 0, value)  
-            self.client_w.db_write(db, start_byte, data)  
-            print(f"实数指令 {pt.name} 执行成功")
-            return True
+            elif (pt.vartype == "REAL"):
+                data = bytearray(4)  
+                set_real(data, 0, value)  
+                self.client_w.db_write(db, start_byte, data)  
+                print(f"实数指令 {pt.name} 执行成功")
+                return True
 
-        else:
-            print(f"点类型错误:{pt.vartype}")
+            else:
+                print(f"点类型错误:{pt.vartype}")
+                return False
+
+        except Exception as e:
+            print(f"写入PLC错误:{e}")
             return False
 
     def read(self, ptId)->[bool |int | float]:
@@ -150,25 +155,31 @@ class S7(BasePlc):
         db = int(addrs[0].split(":")[1])  
         start_byte = int(addrs[1].split(":")[1])  
 
-        if (pt.vartype == "BOOL"):
-            offset = int(addrs[2].split(":")[1])
-            data = self.client_r.db_read(db, start_byte, 1) # 读取1个字节
-            return get_bool(data, 0, offset)
+        try:
 
-        elif (pt.vartype == "INT"):
-            data = self.client_r.db_read(db, start_byte, 2) # 读取2个字节
-            return get_int(data, 0)
+            if (pt.vartype == "BOOL"):
+                offset = int(addrs[2].split(":")[1])
+                data = self.client_r.db_read(db, start_byte, 1) # 读取1个字节
+                return get_bool(data, 0, offset)
 
-        elif (pt.vartype == "WORD"):
-            data = self.client_r.db_read(db, start_byte, 2) # 读取2个字节
-            return get_word(data, 0)
+            elif (pt.vartype == "INT"):
+                data = self.client_r.db_read(db, start_byte, 2) # 读取2个字节
+                return get_int(data, 0)
 
-        elif (pt.vartype == "REAL"):
-            data = self.client_r.db_read(db, start_byte, 4) # 读取4个字节
-            return get_real(data, 0)
+            elif (pt.vartype == "WORD"):
+                data = self.client_r.db_read(db, start_byte, 2) # 读取2个字节
+                return get_word(data, 0)
 
-        else:
-            print(f"点类型错误!{pt.vartype}")
+            elif (pt.vartype == "REAL"):
+                data = self.client_r.db_read(db, start_byte, 4) # 读取4个字节
+                return get_real(data, 0)
+
+            else:
+                print(f"点类型错误!{pt.vartype}")
+                return None
+                
+        except Exception as e:
+            print(f"读取PLC错误:{e}")
             return None
 
     def scan(self):
@@ -177,17 +188,29 @@ class S7(BasePlc):
                 # print("-" * 40)
                 if self.alive==False:
                     self.connect()
+        
+                self.msgbroker.publish(MsgType.alarm, {
+                    'source': "PLC",
+                    'subject':'connect',
+                    'content': self.alive,
+                })
 
                 for pt in self.pts.values():
                     pt.value = self.read(pt.id)
-                    # print(f"ID: {pt.id}, Value: {pt.value}")
-                    if not pt.isValid:
-                        msg = {
-                            'content': f"PLC点{pt.name}超出范围:{pt.value}",
+
+                    if pt.value is None:
+                        self.msgbroker.publish(MsgType.alarm, {
                             'source': "PLC",
-                            'timestamp': time.time()
-                        }
-                        self.msgbroker.publish(MsgType.alarm, msg, "PLC")
+                            'subject':'alarm',
+                            'content': "PLC扫描失败",
+                        })
+                    else:
+                        if not pt.isValid:
+                            self.msgbroker.publish(MsgType.alarm, {
+                                'source': "PLC",
+                                'subject':'alarm',
+                                'content': pt.name,
+                            })
 
                 time.sleep(self.interval / 1000)
                 self.trigger_callbacks()
