@@ -66,7 +66,7 @@ QPushButton:focus {
     border-color: #4d90fe;     /* 聚焦时显示深蓝色边框 */
 }</string>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
+   <layout class="QVBoxLayout" name="verticalLayout" stretch="1,1,5">
     <property name="spacing">
      <number>5</number>
     </property>
@@ -96,7 +96,7 @@ QPushButton:focus {
         <height>80</height>
        </size>
       </property>
-      <layout class="QHBoxLayout" name="horizontalLayout" stretch="4,1">
+      <layout class="QHBoxLayout" name="horizontalLayout" stretch="2,5">
        <property name="spacing">
         <number>5</number>
        </property>
@@ -113,6 +113,16 @@ QPushButton:focus {
         <number>3</number>
        </property>
        <item>
+        <widget class="QLabel" name="logo">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="scaledContents">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QWidget" name="wgt_info" native="true">
          <property name="minimumSize">
           <size>
@@ -127,34 +137,75 @@ QPushButton:focus {
           </size>
          </property>
          <property name="styleSheet">
-          <string notr="true">background-color: rgb(159, 159, 159);</string>
+          <string notr="true"/>
          </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="3,1">
           <item>
-           <widget class="QLabel" name="lb_alarm">
+           <widget class="QLabel" name="label">
+            <property name="font">
+             <font>
+              <family>微软雅黑</family>
+              <pointsize>26</pointsize>
+              <italic>false</italic>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">font: 26pt &quot;微软雅黑&quot;;</string>
+            </property>
             <property name="text">
-             <string>报警信息</string>
+             <string>转向架静载试验台上位机程序</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_2">
+            <property name="font">
+             <font>
+              <family>微软雅黑</family>
+              <pointsize>15</pointsize>
+              <italic>false</italic>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">font: 15pt &quot;微软雅黑&quot;;
+padding-bottom: 0px;  /* 底部内边距设为0 */
+padding-left: 0px;  /* 底部内边距设为0 */
+margin-bottom: 0px;   /* 底部外边距设为0 */
+height: 30px;  </string>
+            </property>
+            <property name="text">
+             <string>信创版 V1.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+            </property>
+            <property name="margin">
+             <number>0</number>
             </property>
            </widget>
           </item>
          </layout>
         </widget>
        </item>
-       <item>
-        <widget class="QLabel" name="logo">
-         <property name="text">
-          <string/>
-         </property>
-         <property name="scaledContents">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
       </layout>
      </widget>
     </item>
     <item>
-     <widget class="QWidget" name="wgt_view" native="true"/>
+     <widget class="QWidget" name="wgt_view" native="true">
+      <property name="font">
+       <font>
+        <family>微软雅黑</family>
+        <pointsize>10</pointsize>
+        <italic>false</italic>
+        <bold>false</bold>
+       </font>
+      </property>
+     </widget>
     </item>
     <item>
      <widget class="QWidget" name="wgt_status" native="true">

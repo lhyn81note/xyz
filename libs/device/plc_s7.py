@@ -45,7 +45,6 @@ class S7(BasePlc):
         self.msgbroker = msgbroker # 用于发布消息
         # self.client_r = None
         # self.client_w = None
-        # self.alive = False  # PLC是否在线
         # self.pts = {}
         # self.callbacks = []  # 用于存储回调函数
 
@@ -72,15 +71,16 @@ class S7(BasePlc):
             self.client_r.connect(ip, rack, slot)  # Rack=0, Slot=1 are typical defaults 
             self.client_w.connect(ip, rack, slot)  # Rack=0, Slot=1 are typical defaults
 
-            self.alive = self.client_r.get_connected() and self.client_w.get_connected()
-
             if self.alive:
                 print("Connection successful.")
+                return True
             else:
                 print("Failed to connect.")
+                return False
+
         except Exception as e:
             print(f"Error connecting to PLC: {e}")
-            self.alive = False
+            return False
 
     def write(self, ptId, value) -> bool:
 
@@ -141,6 +141,7 @@ class S7(BasePlc):
             return False
 
     def read(self, ptId)->[bool |int | float]:
+
         pt = self.pts.get(ptId)
 
         if pt is None:
@@ -148,7 +149,7 @@ class S7(BasePlc):
             return False
 
         if (self.client_r is None) or self.alive==False:
-            print(f"PLC未连接!")
+            print(f"PLC未连接,无法读取")
             return False
 
         addrs = pt.addr.split(",")
@@ -183,34 +184,36 @@ class S7(BasePlc):
             return None
 
     def scan(self):
+
         def readall():
             while True:
-                # print("-" * 40)
-                if self.alive==False:
-                    self.connect()
-        
+                # 先发一次连接状态
                 self.msgbroker.publish(MsgType.alarm, {
                     'source': "PLC",
                     'subject':'connect',
                     'content': self.alive,
                 })
 
-                for pt in self.pts.values():
-                    pt.value = self.read(pt.id)
+                if self.alive==False: # 如果断开则连接
+                    self.connect()
+    
+                else: # 如果连着则读取
+                    for pt in self.pts.values():
+                        pt.value = self.read(pt.id)
 
-                    if pt.value is None:
-                        self.msgbroker.publish(MsgType.alarm, {
-                            'source': "PLC",
-                            'subject':'alarm',
-                            'content': "PLC扫描失败",
-                        })
-                    else:
-                        if not pt.isValid:
+                        if pt.value is None:
                             self.msgbroker.publish(MsgType.alarm, {
                                 'source': "PLC",
                                 'subject':'alarm',
-                                'content': pt.name,
+                                'content': "PLC读点失败",
                             })
+                        else:
+                            if not pt.isValid:
+                                self.msgbroker.publish(MsgType.alarm, {
+                                    'source': "PLC",
+                                    'subject':'alarm',
+                                    'content': pt.name,
+                                })
 
                 time.sleep(self.interval / 1000)
                 self.trigger_callbacks()

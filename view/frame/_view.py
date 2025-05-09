@@ -87,34 +87,68 @@ class Ui_MainWindow(object):
         self.horizontalLayout.setSpacing(5)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.horizontalLayout.setContentsMargins(3, 3, 3, 3)
-        self.wgt_info = QWidget(self.wgt_head)
-        self.wgt_info.setObjectName(u"wgt_info")
-        self.wgt_info.setMinimumSize(QSize(0, 60))
-        self.wgt_info.setMaximumSize(QSize(16777215, 60))
-        self.wgt_info.setStyleSheet(u"background-color: rgb(159, 159, 159);")
-        self.horizontalLayout_2 = QHBoxLayout(self.wgt_info)
-        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
-        self.lb_alarm = QLabel(self.wgt_info)
-        self.lb_alarm.setObjectName(u"lb_alarm")
-
-        self.horizontalLayout_2.addWidget(self.lb_alarm)
-
-
-        self.horizontalLayout.addWidget(self.wgt_info)
-
         self.logo = QLabel(self.wgt_head)
         self.logo.setObjectName(u"logo")
         self.logo.setScaledContents(True)
 
         self.horizontalLayout.addWidget(self.logo)
 
-        self.horizontalLayout.setStretch(0, 4)
-        self.horizontalLayout.setStretch(1, 1)
+        self.wgt_info = QWidget(self.wgt_head)
+        self.wgt_info.setObjectName(u"wgt_info")
+        self.wgt_info.setMinimumSize(QSize(0, 60))
+        self.wgt_info.setMaximumSize(QSize(16777215, 60))
+        self.wgt_info.setStyleSheet(u"")
+        self.horizontalLayout_2 = QHBoxLayout(self.wgt_info)
+        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
+        self.label = QLabel(self.wgt_info)
+        self.label.setObjectName(u"label")
+        font = QFont()
+        font.setFamilies([u"\u5fae\u8f6f\u96c5\u9ed1"])
+        font.setPointSize(26)
+        font.setBold(False)
+        font.setItalic(False)
+        self.label.setFont(font)
+        self.label.setStyleSheet(u"font: 26pt \"\u5fae\u8f6f\u96c5\u9ed1\";")
+        self.label.setAlignment(Qt.AlignCenter)
+
+        self.horizontalLayout_2.addWidget(self.label)
+
+        self.label_2 = QLabel(self.wgt_info)
+        self.label_2.setObjectName(u"label_2")
+        font1 = QFont()
+        font1.setFamilies([u"\u5fae\u8f6f\u96c5\u9ed1"])
+        font1.setPointSize(15)
+        font1.setBold(False)
+        font1.setItalic(False)
+        self.label_2.setFont(font1)
+        self.label_2.setStyleSheet(u"font: 15pt \"\u5fae\u8f6f\u96c5\u9ed1\";\n"
+"padding-bottom: 0px;  /* \u5e95\u90e8\u5185\u8fb9\u8ddd\u8bbe\u4e3a0 */\n"
+"padding-left: 0px;  /* \u5e95\u90e8\u5185\u8fb9\u8ddd\u8bbe\u4e3a0 */\n"
+"margin-bottom: 0px;   /* \u5e95\u90e8\u5916\u8fb9\u8ddd\u8bbe\u4e3a0 */\n"
+"height: 30px;  ")
+        self.label_2.setAlignment(Qt.AlignBottom|Qt.AlignLeading|Qt.AlignLeft)
+        self.label_2.setMargin(0)
+
+        self.horizontalLayout_2.addWidget(self.label_2)
+
+        self.horizontalLayout_2.setStretch(0, 3)
+        self.horizontalLayout_2.setStretch(1, 1)
+
+        self.horizontalLayout.addWidget(self.wgt_info)
+
+        self.horizontalLayout.setStretch(0, 2)
+        self.horizontalLayout.setStretch(1, 5)
 
         self.verticalLayout.addWidget(self.wgt_head)
 
         self.wgt_view = QWidget(self.wgt_root)
         self.wgt_view.setObjectName(u"wgt_view")
+        font2 = QFont()
+        font2.setFamilies([u"\u5fae\u8f6f\u96c5\u9ed1"])
+        font2.setPointSize(10)
+        font2.setBold(False)
+        font2.setItalic(False)
+        self.wgt_view.setFont(font2)
 
         self.verticalLayout.addWidget(self.wgt_view)
 
@@ -174,6 +208,9 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addWidget(self.wgt_status)
 
+        self.verticalLayout.setStretch(0, 1)
+        self.verticalLayout.setStretch(1, 1)
+        self.verticalLayout.setStretch(2, 5)
         MainWindow.setCentralWidget(self.wgt_root)
 
         self.retranslateUi(MainWindow)
@@ -183,8 +220,9 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
-        self.lb_alarm.setText(QCoreApplication.translate("MainWindow", u"\u62a5\u8b66\u4fe1\u606f", None))
         self.logo.setText("")
+        self.label.setText(QCoreApplication.translate("MainWindow", u"\u8f6c\u5411\u67b6\u9759\u8f7d\u8bd5\u9a8c\u53f0\u4e0a\u4f4d\u673a\u7a0b\u5e8f", None))
+        self.label_2.setText(QCoreApplication.translate("MainWindow", u"\u4fe1\u521b\u7248 V1.0", None))
         self.lb_status_plc.setText(QCoreApplication.translate("MainWindow", u"PLC", None))
         self.lb_status_serial.setText(QCoreApplication.translate("MainWindow", u"\u4e32\u53e3\u670d\u52a1\u5668", None))
         self.lb_status_other.setText(QCoreApplication.translate("MainWindow", u"XX\u4f20\u611f\u5668", None))

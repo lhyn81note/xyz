@@ -21,7 +21,7 @@ class Window(QMainWindow):
                 if len(acts)>0:
                     btn.setPopupMode(QToolButton.MenuButtonPopup)
                     for act in acts:
-                        action = QAction(QIcon(f"res/icon/{act['icon']}"), act['title'], self)
+                        action = QAction(QIcon(f"runtime/res/icon/{act['icon']}"), act['title'], self)
                         action.triggered.connect(partial(self.dispach, act, act['view_id']))
                         btn.addAction(action)
                 bar.addWidget(btn)
@@ -30,7 +30,7 @@ class Window(QMainWindow):
         self.hlayout = QHBoxLayout(self.ui.wgt_view)
         self.wgt_tabs = _top.TabWidget(self)
         self.hlayout.addWidget(self.wgt_tabs)
-        _logo = QPixmap("res/image/xlt.png").scaled(self.ui.logo.size(), Qt.KeepAspectRatio, Qt.SmoothTransformation)
+        _logo = QPixmap("runtime/res/image/xlt.png").scaled(self.ui.logo.size(), Qt.KeepAspectRatio, Qt.SmoothTransformation)
         self.ui.logo.setPixmap(_logo)
         if title:
             self.setWindowTitle(title)

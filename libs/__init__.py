@@ -8,6 +8,8 @@ from .utils import impmod, enum2names
 from .notify import MsgType, MsgBroker, MsgSubscriber
 from .dbhelper import GenDbEnging
 
+from .logger import LogConfig
+
 print(f"{' Libs ':#^50}")
 
 class CoreProvider(containers.DeclarativeContainer):

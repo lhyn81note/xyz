@@ -8,6 +8,12 @@ from models import *
 from wgts import TabWidget, PlcData, PlcTable
 from view import Views, Menus, MainFrame
 
+import logging
+
+LogConfig.setup_logging()
+logger = logging.getLogger(__name__)
+logger.info("Application started.")
+
 User="eee"
 
 # 读取程序配置

@@ -1,0 +1,5 @@
+2025-05-09 13:41:36,638 - INFO - __main__ - app.py:15 - Application started.
+2025-05-09 13:41:36,640 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-09 13:41:36,640 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-09 13:41:36,640 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-09 13:41:36,646 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2

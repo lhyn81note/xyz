@@ -18,13 +18,6 @@ import logging
 import traceback
 from typing import Callable, Dict, List, Any, Optional, Set, Union
 
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-)
-logger = logging.getLogger(__name__)
-
 class MsgType(Enum):
     """Enumeration of supported message types."""
     fatal = "fatal"
@@ -52,7 +45,6 @@ class MsgBroker:
         self._all_subscribers: Set[MsgSubscriber] = set()
         # Lock for thread safety
         self._lock = threading.Lock()
-        logger.info("Message broker initialized")
 
     def addSubscriber(self, subscriber: 'MsgSubscriber', msg_type: Union[MsgType, List[MsgType]]) -> bool:
         """
@@ -88,7 +80,6 @@ class MsgBroker:
             # Add to the set of all subscribers
             self._all_subscribers.add(subscriber)
 
-            logger.debug(f"Added subscriber for message types: {msg_types}")
             return True
 
     def removeSubscriber(self, subscriber: 'MsgSubscriber',
@@ -184,7 +175,6 @@ class MsgBroker:
                 logger.error(f"Error notifying subscriber: {e}")
                 logger.debug(traceback.format_exc())
 
-        logger.debug(f"Published {msg_type.value} message to {count} subscribers: {message}")
         return count
 
     def getSubscriberCount(self, msg_type: Optional[MsgType] = None) -> int:

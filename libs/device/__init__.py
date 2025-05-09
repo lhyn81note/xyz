@@ -16,10 +16,16 @@ class BasePlc(metaclass = ABCMeta):
         self.interval = None
         self.client_r = None
         self.client_w = None
-        self.alive = False  # PLC是否在线
         self.pts = {}
         self.callbacks = []  # 用于存储回调函数
         self.msgbroker = None
+
+    @property
+    def alive(self)->bool:
+        try:
+            return self.client_r.get_connected() and self.client_w.get_connected()
+        except Exception as e:
+            return False
 
     def register_callback(self, callback):
         if callable(callback):
