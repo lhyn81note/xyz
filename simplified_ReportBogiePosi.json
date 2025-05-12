@@ -1,0 +1,114 @@
+{
+  "bogiePositionData": {
+    "reportTitle": "转向架试验数据项",
+    "parameter": {
+      "name": "BogieType",
+      "dataType": "String"
+    },
+    "fields": [
+      {
+        "name": "dataKind",
+        "type": "String",
+        "description": "数据类型"
+      },
+      {
+        "name": "dataXh",
+        "type": "Single",
+        "description": "序号"
+      },
+      {
+        "name": "diffLow",
+        "type": "Single",
+        "description": "标准值-"
+      },
+      {
+        "name": "diffUp",
+        "type": "Single",
+        "description": "标准值+"
+      },
+      {
+        "name": "IsPrint",
+        "type": "String",
+        "description": "是否打印"
+      },
+      {
+        "name": "memBz",
+        "type": "String",
+        "description": "备注"
+      },
+      {
+        "name": "stdValue",
+        "type": "Single",
+        "description": "标准值"
+      },
+      {
+        "name": "sybwAbbr",
+        "type": "String",
+        "description": "试验部位缩写"
+      },
+      {
+        "name": "sybwbh",
+        "type": "Int32",
+        "description": "试验部位编号"
+      },
+      {
+        "name": "sybwmc",
+        "type": "String",
+        "description": "数据项名称"
+      },
+      {
+        "name": "valueunit",
+        "type": "String",
+        "description": "数据单位"
+      },
+      {
+        "name": "zxjxh",
+        "type": "String",
+        "description": "转向架型号"
+      }
+    ],
+    "columns": [
+      {
+        "header": "序号",
+        "field": "dataXh",
+        "width": "2.5cm"
+      },
+      {
+        "header": "数据项名称",
+        "field": "sybwmc",
+        "width": "2.5cm"
+      },
+      {
+        "header": "标准值",
+        "field": "stdValue",
+        "width": "2.5cm"
+      },
+      {
+        "header": "标准值-",
+        "field": "diffLow",
+        "width": "2.5cm"
+      },
+      {
+        "header": "标准值+",
+        "field": "diffUp",
+        "width": "2.5cm"
+      },
+      {
+        "header": "数据单位",
+        "field": "valueunit",
+        "width": "2.5cm"
+      },
+      {
+        "header": "是否打印",
+        "field": "IsPrint",
+        "width": "2.5cm"
+      }
+    ],
+    "dataSource": {
+      "name": "BTModel",
+      "dataSetName": "DataSetBogiePosi",
+      "tableName": "Model_TblBogiePosi",
+      "objectDataSourceType": "BT.Model.Model_TblBogiePosi, 转向架静载试验, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+    }
+  }
+}

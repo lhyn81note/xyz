@@ -14,7 +14,7 @@ class Pt(BaseModel):
     addr: str = Field(..., description="地址")
     iotype: str = Field(..., description="读写类型")
     vartype: str = Field(..., description="变量类型")
-    monitor: List[str] = Field(..., description="监控信号列表")
+    done: List[str] = Field(..., description="监控信号列表")
     range: Union[List[int], None] = Field(..., description="数值范围")
     value: Union[bool, int, float]= None  # 默认值不是Field表示不映射, 可以规定类型
 

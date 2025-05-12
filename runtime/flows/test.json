@@ -31,7 +31,7 @@
             "name": "\u5f00\u59cb\u786e\u8ba4",
             "param": {
                 "args": null,
-                "monitor": {
+                "done": {
                     "code": 0
                 }
             }
@@ -46,7 +46,7 @@
                         "data0": 30
                     }
                 ],
-                "monitor": null
+                "done": null
             }
         },
         "002": {
@@ -62,7 +62,7 @@
                         "data1": 32
                     }
                 ],
-                "monitor": null
+                "done": null
             }
         },
         "003": {
@@ -81,7 +81,7 @@
                         "data2": 35.5
                     }
                 ],
-                "monitor": null
+                "done": null
             }
         },
         "004": {
@@ -89,7 +89,7 @@
             "name": "\u7b2c\u56db\u6b65",
             "param": {
                 "args": null,
-                "monitor": {
+                "done": {
                     "code": 0
                 }
             }
@@ -99,7 +99,7 @@
             "name": "\u7b2c\u4e94\u6b65",
             "param": {
                 "args": null,
-                "monitor": {
+                "done": {
                     "code": 0
                 }
             }
@@ -114,31 +114,31 @@
         },
         "001": {
             "x": 49.0,
-            "y": 48.0,
+            "y": 59.0,
             "text": "",
             "status": "idle"
         },
         "002": {
-            "x": 187.0,
-            "y": 90.0,
+            "x": 219.0,
+            "y": 106.0,
             "text": "",
             "status": "idle"
         },
         "003": {
-            "x": 49.0,
-            "y": 163.0,
+            "x": 47.0,
+            "y": 189.0,
             "text": "",
             "status": "idle"
         },
         "004": {
-            "x": 187.0,
-            "y": 127.0,
+            "x": 214.0,
+            "y": 152.0,
             "text": "",
             "status": "idle"
         },
         "005": {
-            "x": 49.0,
-            "y": 217.0,
+            "x": 46.0,
+            "y": 275.0,
             "text": "",
             "status": "idle"
         }

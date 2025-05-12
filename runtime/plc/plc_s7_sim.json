@@ -6,7 +6,7 @@
         "addr": "db:1,start:0,offset:",
         "vartype": "INT",
         "range" : [-4,200],
-        "monitor": []
+        "done": []
     },
     "data1": {
         "id": "data1",
@@ -15,7 +15,7 @@
         "addr": "db:1,start:2,offset:",
         "vartype": "WORD",
         "range" : [-4,200],
-        "monitor": []
+        "done": []
     },
     "data2": {
         "id": "data2",
@@ -24,7 +24,7 @@
         "addr": "db:1,start:4,offset:",
         "vartype": "REAL",
         "range" : [-4,200],
-        "monitor": []
+        "done": []
     },
     "data3": {
         "id": "data3",
@@ -33,7 +33,7 @@
         "addr": "db:1,start:8,offset:",
         "vartype": "REAL",
         "range" : [-4,200],
-        "monitor": []
+        "done": []
     },
     "data4": {
         "id": "data4",
@@ -42,7 +42,7 @@
         "addr": "db:1,start:12,offset:",
         "vartype": "REAL",
         "range" : [-4,200],
-        "monitor": []
+        "done": []
     },
     "sig25_00": {
         "id": "sig25_00",
@@ -51,7 +51,7 @@
         "addr": "db:3,start:0,offset:0",
         "vartype": "BOOL",
         "range" : null,
-        "monitor": []
+        "done": []
     },
     "sig25_01": {
         "id": "sig25_01",
@@ -60,7 +60,7 @@
         "addr": "db:3,start:0,offset:1",
         "vartype": "BOOL",
         "range" : null,
-        "monitor": []
+        "done": []
     },
     "sig25_02": {
         "id": "sig25_02",
@@ -69,7 +69,7 @@
         "addr": "db:3,start:0,offset:2",
         "vartype": "BOOL",
         "range" : null,
-        "monitor": []
+        "done": []
     },
     "sig25_03": {
         "id": "sig25_03",
@@ -78,7 +78,7 @@
         "addr": "db:3,start:0,offset:3",
         "vartype": "BOOL",
         "range" : null,
-        "monitor": []
+        "done": []
     },
     "sig25_04": {
         "id": "sig25_04",
@@ -87,7 +87,7 @@
         "addr": "db:3,start:0,offset:4",
         "vartype": "BOOL",
         "range" : null,
-        "monitor": []
+        "done": []
     },
     "sig25_05": {
         "id": "sig25_05",
@@ -96,7 +96,7 @@
         "addr": "db:3,start:0,offset:5",
         "vartype": "BOOL",
         "range" : null,
-        "monitor": []
+        "done": []
     },
     "sig25_06": {
         "id": "sig25_06",
@@ -105,7 +105,7 @@
         "addr": "db:3,start:0,offset:6",
         "vartype": "BOOL",
         "range" : null,
-        "monitor": []
+        "done": []
     },
     "sig25_07": {
         "id": "sig25_07",
@@ -114,7 +114,7 @@
         "addr": "db:3,start:0,offset:7",
         "vartype": "BOOL",
         "range" : null,
-        "monitor": []
+        "done": []
     },
     "sig25_08": {
         "id": "sig25_08",
@@ -123,7 +123,7 @@
         "addr": "db:3,start:1,offset:0",
         "vartype": "BOOL",
         "range" : null,
-        "monitor": []
+        "done": []
     },
     "sig25_09": {
         "id": "sig25_09",
@@ -132,7 +132,7 @@
         "addr": "db:3,start:1,offset:1",
         "vartype": "BOOL",
         "range" : null,
-        "monitor": []
+        "done": []
     },
     "sig25_10": {
         "id": "sig25_10",
@@ -141,7 +141,7 @@
         "addr": "db:3,start:1,offset:2",
         "vartype": "BOOL",
         "range" : null,
-        "monitor": []
+        "done": []
     },
     "sig25_11": {
         "id": "sig25_11",
@@ -150,7 +150,7 @@
         "addr": "db:3,start:1,offset:3",
         "vartype": "BOOL",
         "range" : null,
-        "monitor": []
+        "done": []
     },
     "sig25_12": {
         "id": "sig25_12",
@@ -159,7 +159,7 @@
         "addr": "db:3,start:1,offset:4",
         "vartype": "BOOL",
         "range" : null,
-        "monitor": []
+        "done": []
     },
     "sig25_13": {
         "id": "sig25_13",
@@ -168,7 +168,7 @@
         "addr": "db:3,start:1,offset:5",
         "vartype": "BOOL",
         "range" : null,
-        "monitor": []
+        "done": []
     },
     "sig25_14": {
         "id": "sig25_14",
@@ -177,7 +177,7 @@
         "addr": "db:3,start:1,offset:6",
         "vartype": "BOOL",
         "range" : null,
-        "monitor": []
+        "done": []
     },
     "sig25_15": {
         "id": "sig25_15",
@@ -186,7 +186,7 @@
         "addr": "db:3,start:1,offset:7",
         "vartype": "BOOL",
         "range" : null,
-        "monitor": []
+        "done": []
     },
     "cmd61_00": {
         "id": "cmd61_00",
@@ -195,7 +195,7 @@
         "addr": "db:2,start:0,offset:0",
         "vartype": "BOOL",
         "range" : null,
-        "monitor": ["sig25_00"]
+        "done": ["sig25_00"]
     },
     "cmd61_01": {
         "id": "cmd61_01",
@@ -204,7 +204,7 @@
         "addr": "db:2,start:0,offset:1",
         "vartype": "BOOL",
         "range" : null,
-        "monitor": ["sig25_01"]
+        "done": ["sig25_01"]
     },
     "cmd61_02": {
         "id": "cmd61_02",
@@ -213,7 +213,7 @@
         "addr": "db:2,start:0,offset:2",
         "vartype": "BOOL",
         "range" : null,
-        "monitor": ["sig25_02"]
+        "done": ["sig25_02"]
     },
     "cmd61_03": {
         "id": "cmd61_03",
@@ -222,7 +222,7 @@
         "addr": "db:2,start:0,offset:3",
         "vartype": "BOOL",
         "range" : null,
-        "monitor": ["sig25_03"]
+        "done": ["sig25_03"]
     },
     "cmd61_04": {
         "id": "cmd61_04",
@@ -231,7 +231,7 @@
         "addr": "db:2,start:0,offset:4",
         "vartype": "BOOL",
         "range" : null,
-        "monitor": ["sig25_04"]
+        "done": ["sig25_04"]
     },
     "cmd61_05": {
         "id": "cmd61_05",
@@ -240,7 +240,7 @@
         "addr": "db:2,start:0,offset:5",
         "vartype": "BOOL",
         "range" : null,
-        "monitor": ["sig25_05"]
+        "done": ["sig25_05"]
     },
     "data40": {
         "id": "data40",
@@ -249,7 +249,7 @@
         "addr": "db:2,start:40,offset:",
         "vartype": "REAL",
         "range" : [-4,200],
-        "monitor": []
+        "done": []
     },
     "data41": {
         "id": "data41",
@@ -258,7 +258,7 @@
         "addr": "db:2,start:41,offset:",
         "vartype": "REAL",
         "range" : [-4,200],
-        "monitor": []
+        "done": []
     },
     "data50": {
         "id": "data50",
@@ -267,7 +267,7 @@
         "addr": "db:2,start:50,offset:",
         "vartype": "REAL",
         "range" : [-4,200],
-        "monitor": []
+        "done": []
     },
     "data51": {
         "id": "data51",
@@ -276,7 +276,7 @@
         "addr": "db:2,start:51,offset:",
         "vartype": "REAL",
         "range" : [-4,200],
-        "monitor": []
+        "done": []
     },
     "data54": {
         "id": "data54",
@@ -285,7 +285,7 @@
         "addr": "db:2,start:54,offset:",
         "vartype": "REAL",
         "range" : [-4,200],
-        "monitor": []
+        "done": []
     },
     "data55": {
         "id": "data55",
@@ -294,7 +294,7 @@
         "addr": "db:2,start:55,offset:",
         "vartype": "REAL",
         "range" : [-4,200],
-        "monitor": []
+        "done": []
     },
     "data56": {
         "id": "data56",
@@ -303,42 +303,42 @@
         "addr": "db:2,start:56,offset:",
         "vartype": "REAL",
         "range" : [-4,200],
-        "monitor": []
+        "done": []
     },
     "alarm28_04": {
-        "id": "alarm28_04",
+        "id": "alarm1",
         "name": "伺服故障",
         "iotype": "i",
         "addr": "db:2,start:0,offset:4",
         "vartype": "BOOL",
         "range" : null,
-        "monitor": []
+        "done": []
     },
     "alarm28_05": {
-        "id": "alarm28_05",
+        "id": "alarm2",
         "name": "伺服网络故障",
         "iotype": "i",
         "addr": "db:2,start:0,offset:5",
         "vartype": "BOOL",
         "range" : null,
-        "monitor": []
+        "done": []
     },
     "alarm29_07": {
-        "id": "alarm29_07",
+        "id": "alarm3",
         "name": "出口油堵塞报警",
+        "iotype": "i",
+        "addr": "db:2,start:0,offset:6",
+        "vartype": "BOOL",
+        "range" : null,
+        "done": []
+    },
+    "alarm29_08": {
+        "id": "alarm4",
+        "name": "入口油堵塞报警",
         "iotype": "i",
         "addr": "db:2,start:0,offset:7",
         "vartype": "BOOL",
         "range" : null,
-        "monitor": []
-    },
-    "alarm29_08": {
-        "id": "alarm29_08",
-        "name": "入口油堵塞报警",
-        "iotype": "i",
-        "addr": "db:2,start:1,offset:0",
-        "vartype": "BOOL",
-        "range" : null,
-        "monitor": []
+        "done": []
     }
 }

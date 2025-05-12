@@ -16,8 +16,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QComboBox, QHBoxLayout, QLabel,
-    QPlainTextEdit, QPushButton, QSizePolicy, QSpacerItem,
-    QVBoxLayout, QWidget)
+    QPlainTextEdit, QPushButton, QSizePolicy, QVBoxLayout,
+    QWidget)
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -48,16 +48,19 @@ class Ui_Form(object):
 "				color: rgb(255, 255, 255);\n"
 "            }")
         self.verticalLayout = QVBoxLayout(Form)
+        self.verticalLayout.setSpacing(0)
         self.verticalLayout.setObjectName(u"verticalLayout")
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.widget = QWidget(Form)
         self.widget.setObjectName(u"widget")
         self.widget.setStyleSheet(u"")
         self.horizontalLayout = QHBoxLayout(self.widget)
-        self.horizontalLayout.setSpacing(2)
+        self.horizontalLayout.setSpacing(3)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.horizontalLayout.setContentsMargins(-1, 5, 5, 5)
+        self.horizontalLayout.setContentsMargins(3, 3, 3, 3)
         self.wgt_flow = QWidget(self.widget)
         self.wgt_flow.setObjectName(u"wgt_flow")
+        self.wgt_flow.setStyleSheet(u"margin: 0;")
 
         self.horizontalLayout.addWidget(self.wgt_flow)
 
@@ -99,82 +102,70 @@ class Ui_Form(object):
         self.widget_5 = QWidget(self.widget_4)
         self.widget_5.setObjectName(u"widget_5")
         self.verticalLayout_5 = QVBoxLayout(self.widget_5)
+        self.verticalLayout_5.setSpacing(3)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
-        self.label_2 = QLabel(self.widget_5)
-        self.label_2.setObjectName(u"label_2")
-        font2 = QFont()
-        font2.setPointSize(10)
-        self.label_2.setFont(font2)
-
-        self.verticalLayout_5.addWidget(self.label_2)
-
+        self.verticalLayout_5.setContentsMargins(3, 3, 3, 3)
         self.lb_flow_desc = QLabel(self.widget_5)
         self.lb_flow_desc.setObjectName(u"lb_flow_desc")
         self.lb_flow_desc.setFont(font1)
+        self.lb_flow_desc.setStyleSheet(u"color: rgb(93, 93, 93);")
+        self.lb_flow_desc.setWordWrap(True)
 
         self.verticalLayout_5.addWidget(self.lb_flow_desc)
 
-        self.label_4 = QLabel(self.widget_5)
-        self.label_4.setObjectName(u"label_4")
-        self.label_4.setFont(font2)
+        self.pushButton = QPushButton(self.widget_5)
+        self.pushButton.setObjectName(u"pushButton")
 
-        self.verticalLayout_5.addWidget(self.label_4)
+        self.verticalLayout_5.addWidget(self.pushButton)
 
-        self.lb_flow_time = QLabel(self.widget_5)
-        self.lb_flow_time.setObjectName(u"lb_flow_time")
-        self.lb_flow_time.setFont(font1)
+        self.label_3 = QLabel(self.widget_5)
+        self.label_3.setObjectName(u"label_3")
+        font2 = QFont()
+        font2.setPointSize(11)
+        font2.setBold(True)
+        self.label_3.setFont(font2)
+        self.label_3.setAlignment(Qt.AlignCenter)
 
-        self.verticalLayout_5.addWidget(self.lb_flow_time)
+        self.verticalLayout_5.addWidget(self.label_3)
 
-        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+        self.pt_cmd_info = QPlainTextEdit(self.widget_5)
+        self.pt_cmd_info.setObjectName(u"pt_cmd_info")
 
-        self.verticalLayout_5.addItem(self.verticalSpacer)
+        self.verticalLayout_5.addWidget(self.pt_cmd_info)
+
+        self.btn_start = QPushButton(self.widget_5)
+        self.btn_start.setObjectName(u"btn_start")
+
+        self.verticalLayout_5.addWidget(self.btn_start)
+
+        self.btb_stop_2 = QPushButton(self.widget_5)
+        self.btb_stop_2.setObjectName(u"btb_stop_2")
+        self.btb_stop_2.setStyleSheet(u"background-color: rgb(255, 170, 0);")
+
+        self.verticalLayout_5.addWidget(self.btb_stop_2)
+
+        self.btb_stop_3 = QPushButton(self.widget_5)
+        self.btb_stop_3.setObjectName(u"btb_stop_3")
+        self.btb_stop_3.setStyleSheet(u"background-color: rgb(186, 112, 9);")
+
+        self.verticalLayout_5.addWidget(self.btb_stop_3)
+
+        self.btb_stop = QPushButton(self.widget_5)
+        self.btb_stop.setObjectName(u"btb_stop")
+        self.btb_stop.setStyleSheet(u"background-color: rgb(255, 0, 0);")
+
+        self.verticalLayout_5.addWidget(self.btb_stop)
 
 
         self.verticalLayout_4.addWidget(self.widget_5)
 
-        self.widget_6 = QWidget(self.widget_4)
-        self.widget_6.setObjectName(u"widget_6")
-        self.verticalLayout_6 = QVBoxLayout(self.widget_6)
-        self.verticalLayout_6.setSpacing(5)
-        self.verticalLayout_6.setObjectName(u"verticalLayout_6")
-        self.verticalLayout_6.setContentsMargins(0, -1, 0, 0)
-        self.label_3 = QLabel(self.widget_6)
-        self.label_3.setObjectName(u"label_3")
-        font3 = QFont()
-        font3.setPointSize(11)
-        font3.setBold(True)
-        self.label_3.setFont(font3)
-
-        self.verticalLayout_6.addWidget(self.label_3)
-
-        self.pt_cmd_info = QPlainTextEdit(self.widget_6)
-        self.pt_cmd_info.setObjectName(u"pt_cmd_info")
-
-        self.verticalLayout_6.addWidget(self.pt_cmd_info)
-
-
-        self.verticalLayout_4.addWidget(self.widget_6)
-
         self.verticalLayout_4.setStretch(0, 1)
-        self.verticalLayout_4.setStretch(1, 2)
 
         self.verticalLayout_3.addWidget(self.widget_4)
 
         self.verticalLayout_3.setStretch(2, 1)
 
         self.verticalLayout_2.addWidget(self.widget_3)
-
-        self.btn_start = QPushButton(self.widget_2)
-        self.btn_start.setObjectName(u"btn_start")
-
-        self.verticalLayout_2.addWidget(self.btn_start)
-
-        self.btb_stop = QPushButton(self.widget_2)
-        self.btb_stop.setObjectName(u"btb_stop")
-        self.btb_stop.setStyleSheet(u"background-color: rgb(255, 0, 0);")
-
-        self.verticalLayout_2.addWidget(self.btb_stop)
 
 
         self.horizontalLayout.addWidget(self.widget_2)
@@ -194,12 +185,12 @@ class Ui_Form(object):
     def retranslateUi(self, Form):
         Form.setWindowTitle(QCoreApplication.translate("Form", u"Form", None))
         self.label.setText(QCoreApplication.translate("Form", u"\u9009\u62e9\u6d4b\u8bd5\u6d41\u7a0b", None))
-        self.label_2.setText(QCoreApplication.translate("Form", u"\u6d41\u7a0b\u63cf\u8ff0", None))
         self.lb_flow_desc.setText("")
-        self.label_4.setText(QCoreApplication.translate("Form", u"\u521b\u5efa\u65f6\u95f4", None))
-        self.lb_flow_time.setText("")
-        self.label_3.setText(QCoreApplication.translate("Form", u"\u6307\u4ee4\u4fe1\u606f", None))
-        self.btn_start.setText(QCoreApplication.translate("Form", u"\u5f00\u59cb\u6d41\u7a0b", None))
-        self.btb_stop.setText(QCoreApplication.translate("Form", u"\u505c\u6b62\u6d41\u7a0b", None))
+        self.pushButton.setText(QCoreApplication.translate("Form", u"\u57fa\u4e8e\u8be5\u6d41\u7a0b\u521b\u5efa\u8bd5\u9a8c\u4efb\u52a1", None))
+        self.label_3.setText(QCoreApplication.translate("Form", u"\u4efb\u52a1\u5217\u8868", None))
+        self.btn_start.setText(QCoreApplication.translate("Form", u"\u5f00\u59cb\u4efb\u52a1", None))
+        self.btb_stop_2.setText(QCoreApplication.translate("Form", u"\u6682\u505c\u4efb\u52a1", None))
+        self.btb_stop_3.setText(QCoreApplication.translate("Form", u"\u590d\u4f4d\u4efb\u52a1", None))
+        self.btb_stop.setText(QCoreApplication.translate("Form", u"\u4e2d\u6b62\u4efb\u52a1", None))
     # retranslateUi
 

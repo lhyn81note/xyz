@@ -3,16 +3,13 @@ from PySide6.QtCore import QAbstractTableModel, Qt, QModelIndex, QDate
 from PySide6.QtGui import QColor, QBrush
 import os,sys
 _top = sys.modules['__main__']
-from libs.device.plc_modbus import MODBUS_AREA, MODBUS_VARTYPE, BYTE_ENDIAN, WORD_ENDIAN, IO
-from libs.device.plc_s7 import Pt
 
-class PlcData(QAbstractTableModel):
+class TaskData(QAbstractTableModel):
 
     def __init__(self, pts, parent=None):
         super().__init__(parent)
         self.pts = pts  # List of Pt objects
-        self.cmbName_io = ["i", "o"]
-        self.cmbName_type = ["BOOL", "INT", "WORD", "REAL"]
+
 
     def rowCount(self, parent=QModelIndex()):
         return len(self.pts)
@@ -109,20 +106,9 @@ class myCellDelegate(QStyledItemDelegate):
 
     def setModelData(self, editor, model, index):
         print(f"### Editor text now is :: {editor.currentText()} ###")
-        # pt_index = index.row()
-        # pt = _top.PLC.config['pts'][pt_index]
-        # print(f"### Out pt :: {pt['name']} ###")
-        # if isinstance(editor, QComboBox):
-        #     _top.PLC.write_pt(pt, editor.currentText()=='True')
-        # elif isinstance(editor, QSpinBox):
-        #     if pt['type']==MODBUS_VARTYPE.Int_16 or pt['type']==MODBUS_VARTYPE.Int_32:
-        #         _top.PLC.write_pt(pt, int(editor.value()))
-        #     elif pt['type']==MODBUS_VARTYPE.Real_32:
-        #         _top.PLC.write_pt(pt, float(editor.value()))
-        #     else:
-        #         raise f"写入类型错误::{pt['type']}"
 
-class PlcTable(QTableView):
+
+class TaskTable(QTableView):
     def __init__(self, plcmodel, parent=None):
 
         super().__init__(parent)

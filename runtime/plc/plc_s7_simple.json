@@ -5,7 +5,7 @@
         "iotype": "o",
         "addr":"db:1,start:0,offset:1",
         "vartype":"BOOL",
-        "monitor":["sig1"]
+        "done":["sig1"]
     },
     "cmd2": {
         "id": "cmd2",
@@ -13,7 +13,7 @@
         "iotype": "o",
         "addr":"db:1,start:0,offset:2",
         "vartype":"BOOL",
-        "monitor":["sig2"]
+        "done":["sig2"]
     },
     "cmd3": {
         "id": "cmd3",
@@ -21,7 +21,7 @@
         "iotype": "o",
         "addr":"db:1,start:0,offset:3",
         "vartype":"BOOL",
-        "monitor":["sig3"]
+        "done":["sig3"]
     },
     "sig1": {
         "id": "sig1",
@@ -29,7 +29,7 @@
         "iotype": "i",
         "addr":"db:2,start:0,offset:1",
         "vartype":"BOOL",
-        "monitor":[]
+        "done":[]
     },
     "sig2": {
         "id": "sig2",
@@ -37,7 +37,7 @@
         "iotype": "i",
         "addr":"db:2,start:0,offset:2",
         "vartype":"BOOL",
-        "monitor":[]
+        "done":[]
     },
     "sig3": {
         "id": "sig3",
@@ -45,7 +45,7 @@
         "iotype": "i",
         "addr":"db:2,start:0,offset:3",
         "vartype":"BOOL",
-        "monitor":[]
+        "done":[]
     },
     "data1": {
         "id": "data1",
@@ -53,7 +53,7 @@
         "iotype": "o",
         "addr":"db:3,start:10,offset:",
         "vartype":"INT",
-        "monitor":[]
+        "done":[]
     },
     "data2": {
         "id": "data2",
@@ -61,7 +61,7 @@
         "iotype": "o",
         "addr":"db:3,start:20,offset:",
         "vartype":"WORD",
-        "monitor":[]
+        "done":[]
     },
     "data3": {
         "id": "data3",
@@ -69,7 +69,7 @@
         "iotype": "o",
         "addr":"db:3,start:30,offset:",
         "vartype":"REAL",
-        "monitor":[]
+        "done":[]
     },
     "fault1": {
         "id": "fault1",
@@ -77,7 +77,7 @@
         "iotype": "i",
         "addr":"db:2,start:1,offset:1",
         "vartype":"BOOL",
-        "monitor":[]
+        "done":[]
     },
     "fault2": {
         "id": "fault2",
@@ -85,7 +85,7 @@
         "iotype": "i",
         "addr":"db:2,start:1,offset:2",
         "vartype":"BOOL",
-        "monitor":[]
+        "done":[]
     },
     "fault3": {
         "id": "fault3",
@@ -93,7 +93,7 @@
         "iotype": "i",
         "addr":"db:2,start:1,offset:3",
         "vartype":"BOOL",
-        "monitor":[]
+        "done":[]
     },
     "warn1": {
         "id": "warn1",
@@ -101,7 +101,7 @@
         "iotype": "i",
         "addr":"db:2,start:1,offset:4",
         "vartype":"BOOL",
-        "monitor":[]
+        "done":[]
     },
     "warn2": {
         "id": "warn2",
@@ -109,7 +109,7 @@
         "iotype": "i",
         "addr":"db:2,start:1,offset:5",
         "vartype":"BOOL",
-        "monitor":[]
+        "done":[]
     },
     "warn3": {
         "id": "warn3",
@@ -117,6 +117,6 @@
         "iotype": "i",
         "addr":"db:2,start:1,offset:6",
         "vartype":"BOOL",
-        "monitor":[]
+        "done":[]
     }
 }

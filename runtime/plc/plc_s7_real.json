@@ -6,7 +6,7 @@
         "addr": "db:3,start:0,offset:",
         "vartype": "REAL",
         "range" : [4000,20000],
-        "monitor": []
+        "done": []
     },
     "var1": {
         "id": "var1",
@@ -15,7 +15,7 @@
         "addr": "db:3,start:1,offset:",
         "vartype": "REAL",
         "range" : [4000,20000],
-        "monitor": []
+        "done": []
     },
     "var2": {
         "id": "var2",
@@ -24,7 +24,7 @@
         "addr": "db:3,start:2,offset:",
         "vartype": "REAL",
         "range" : [4000,20000],
-        "monitor": []
+        "done": []
     },
     "var3": {
         "id": "var3",
@@ -33,7 +33,7 @@
         "addr": "db:3,start:3,offset:",
         "vartype": "REAL",
         "range" : [4000,20000],
-        "monitor": []
+        "done": []
     },
     "var4": {
         "id": "var4",
@@ -42,7 +42,7 @@
         "addr": "db:3,start:4,offset:",
         "vartype": "REAL",
         "range" : [4000,20000],
-        "monitor": []
+        "done": []
     },
     "var5": {
         "id": "var5",
@@ -51,7 +51,7 @@
         "addr": "db:3,start:5,offset:",
         "vartype": "REAL",
         "range" : [4000,20000],
-        "monitor": []
+        "done": []
     },
     "var6": {
         "id": "var6",
@@ -60,7 +60,7 @@
         "addr": "db:3,start:6,offset:",
         "vartype": "REAL",
         "range" : [4000,20000],
-        "monitor": []
+        "done": []
     },
     "var7": {
         "id": "var7",
@@ -69,7 +69,7 @@
         "addr": "db:3,start:7,offset:",
         "vartype": "REAL",
         "range" : [4000,20000],
-        "monitor": []
+        "done": []
     },
     "var8": {
         "id": "var8",
@@ -78,7 +78,7 @@
         "addr": "db:3,start:8,offset:",
         "vartype": "REAL",
         "range" : [4000,20000],
-        "monitor": []
+        "done": []
     },
     "var9": {
         "id": "var9",
@@ -87,7 +87,7 @@
         "addr": "db:3,start:9,offset:",
         "vartype": "REAL",
         "range" : [4000,20000],
-        "monitor": []
+        "done": []
     },
     "var10": {
         "id": "var10",
@@ -96,7 +96,7 @@
         "addr": "db:3,start:10,offset:",
         "vartype": "REAL",
         "range" : [4000,20000],
-        "monitor": []
+        "done": []
     },
     "var11": {
         "id": "var11",
@@ -105,7 +105,7 @@
         "addr": "db:3,start:11,offset:",
         "vartype": "REAL",
         "range" : [4000,20000],
-        "monitor": []
+        "done": []
     },
     "var12": {
         "id": "var12",
@@ -114,7 +114,7 @@
         "addr": "db:3,start:12,offset:",
         "vartype": "REAL",
         "range" : [4000,20000],
-        "monitor": []
+        "done": []
     },
     "var13": {
         "id": "var13",
@@ -123,7 +123,7 @@
         "addr": "db:3,start:13,offset:",
         "vartype": "REAL",
         "range" : [4000,20000],
-        "monitor": []
+        "done": []
     },
     "var14": {
         "id": "var14",
@@ -132,7 +132,7 @@
         "addr": "db:3,start:14,offset:",
         "vartype": "REAL",
         "range" : [4000,20000],
-        "monitor": []
+        "done": []
     },
     "var15": {
         "id": "var15",
@@ -141,7 +141,7 @@
         "addr": "db:3,start:15,offset:",
         "vartype": "REAL",
         "range" : [4000,20000],
-        "monitor": []
+        "done": []
     },
     "var16": {
         "id": "var16",
@@ -150,7 +150,7 @@
         "addr": "db:3,start:16,offset:",
         "vartype": "REAL",
         "range" : [4000,20000],
-        "monitor": []
+        "done": []
     },
     "var17": {
         "id": "var17",
@@ -159,7 +159,7 @@
         "addr": "db:3,start:17,offset:",
         "vartype": "REAL",
         "range" : [4000,20000],
-        "monitor": []
+        "done": []
     },
     "var18": {
         "id": "var18",
@@ -168,7 +168,7 @@
         "addr": "db:3,start:18,offset:",
         "vartype": "REAL",
         "range" : [4000,20000],
-        "monitor": []
+        "done": []
     },
     "var19": {
         "id": "var19",
@@ -177,7 +177,7 @@
         "addr": "db:3,start:19,offset:",
         "vartype": "REAL",
         "range" : [4000,20000],
-        "monitor": []
+        "done": []
     },
     "var20": {
         "id": "var20",
@@ -186,7 +186,7 @@
         "addr": "db:3,start:20,offset:",
         "vartype": "REAL",
         "range" : [4000,20000],
-        "monitor": []
+        "done": []
     },
     "var21": {
         "id": "var21",
@@ -195,7 +195,7 @@
         "addr": "db:3,start:21,offset:",
         "vartype": "REAL",
         "range" : [4000,20000],
-        "monitor": []
+        "done": []
     },
     "var22": {
         "id": "var22",
@@ -204,7 +204,7 @@
         "addr": "db:3,start:22,offset:",
         "vartype": "REAL",
         "range" : [4000,20000],
-        "monitor": []
+        "done": []
     },
     "var23": {
         "id": "var23",
@@ -213,7 +213,7 @@
         "addr": "db:3,start:23,offset:",
         "vartype": "REAL",
         "range" : [4000,20000],
-        "monitor": []
+        "done": []
     },
     "bit25_00": {
         "id": "bit25_00",
@@ -222,7 +222,7 @@
         "addr": "db:25,start:0,offset:0",
         "vartype": "BOOL",
         "range" : [],
-        "monitor": []
+        "done": []
     },
     "bit25_01": {
         "id": "bit25_01",
@@ -231,7 +231,7 @@
         "addr": "db:25,start:0,offset:1",
         "vartype": "BOOL",
         "range" : [],
-        "monitor": []
+        "done": []
     },
     "bit25_02": {
         "id": "bit25_02",
@@ -240,7 +240,7 @@
         "addr": "db:25,start:0,offset:2",
         "vartype": "BOOL",
         "range" : [],
-        "monitor": []
+        "done": []
     },
     "bit25_03": {
         "id": "bit25_03",
@@ -249,7 +249,7 @@
         "addr": "db:25,start:0,offset:3",
         "vartype": "BOOL",
         "range" : [],
-        "monitor": []
+        "done": []
     },
     "bit25_04": {
         "id": "bit25_04",
@@ -258,7 +258,7 @@
         "addr": "db:25,start:0,offset:4",
         "vartype": "BOOL",
         "range" : [],
-        "monitor": []
+        "done": []
     },
     "bit25_05": {
         "id": "bit25_05",
@@ -267,7 +267,7 @@
         "addr": "db:25,start:0,offset:5",
         "vartype": "BOOL",
         "range" : [],
-        "monitor": []
+        "done": []
     },
     "bit25_06": {
         "id": "bit25_06",
@@ -276,7 +276,7 @@
         "addr": "db:25,start:0,offset:6",
         "vartype": "BOOL",
         "range" : [],
-        "monitor": []
+        "done": []
     },
     "bit25_07": {
         "id": "bit25_07",
@@ -285,7 +285,7 @@
         "addr": "db:25,start:0,offset:7",
         "vartype": "BOOL",
         "range" : [],
-        "monitor": []
+        "done": []
     },
     "bit25_08": {
         "id": "bit25_08",
@@ -294,7 +294,7 @@
         "addr": "db:25,start:1,offset:0",
         "vartype": "BOOL",
         "range" : [],
-        "monitor": []
+        "done": []
     },
     "bit25_09": {
         "id": "bit25_09",
@@ -303,7 +303,7 @@
         "addr": "db:25,start:1,offset:1",
         "vartype": "BOOL",
         "range" : [],
-        "monitor": []
+        "done": []
     },
     "bit25_10": {
         "id": "bit25_10",
@@ -312,7 +312,7 @@
         "addr": "db:25,start:1,offset:2",
         "vartype": "BOOL",
         "range" : [],
-        "monitor": []
+        "done": []
     },
     "bit25_11": {
         "id": "bit25_11",
@@ -321,7 +321,7 @@
         "addr": "db:25,start:1,offset:3",
         "vartype": "BOOL",
         "range" : [],
-        "monitor": []
+        "done": []
     },
     "bit25_12": {
         "id": "bit25_12",
@@ -330,7 +330,7 @@
         "addr": "db:25,start:1,offset:4",
         "vartype": "BOOL",
         "range" : [],
-        "monitor": []
+        "done": []
     },
     "bit25_13": {
         "id": "bit25_13",
@@ -339,7 +339,7 @@
         "addr": "db:25,start:1,offset:5",
         "vartype": "BOOL",
         "range" : [],
-        "monitor": []
+        "done": []
     },
     "bit25_14": {
         "id": "bit25_14",
@@ -348,7 +348,7 @@
         "addr": "db:25,start:1,offset:6",
         "vartype": "BOOL",
         "range" : [],
-        "monitor": []
+        "done": []
     },
     "bit25_15": {
         "id": "bit25_15",
@@ -357,7 +357,7 @@
         "addr": "db:25,start:1,offset:7",
         "vartype": "BOOL",
         "range" : [],
-        "monitor": []
+        "done": []
     },
     "cmd61_00": {
         "id": "cmd61_00",
@@ -366,7 +366,7 @@
         "addr": "db:61,start:0,offset:0",
         "vartype": "BOOL",
         "range" : [],
-        "monitor": ["bit25_00"]
+        "done": ["bit25_00"]
     },
     "cmd61_01": {
         "id": "cmd61_01",
@@ -375,7 +375,7 @@
         "addr": "db:61,start:0,offset:1",
         "vartype": "BOOL",
         "range" : [],
-        "monitor": ["bit25_01"]
+        "done": ["bit25_01"]
     },
     "cmd61_02": {
         "id": "cmd61_02",
@@ -384,7 +384,7 @@
         "addr": "db:61,start:0,offset:2",
         "vartype": "BOOL",
         "range" : [],
-        "monitor": ["bit25_02"]
+        "done": ["bit25_02"]
     },
     "cmd61_03": {
         "id": "cmd61_03",
@@ -393,7 +393,7 @@
         "addr": "db:61,start:0,offset:3",
         "vartype": "BOOL",
         "range" : [],
-        "monitor": ["bit25_03"]
+        "done": ["bit25_03"]
     },
     "cmd61_04": {
         "id": "cmd61_04",
@@ -402,7 +402,7 @@
         "addr": "db:61,start:0,offset:4",
         "vartype": "BOOL",
         "range" : [],
-        "monitor": ["bit25_04"]
+        "done": ["bit25_04"]
     },
     "cmd61_05": {
         "id": "cmd61_05",
@@ -411,7 +411,7 @@
         "addr": "db:61,start:0,offset:5",
         "vartype": "BOOL",
         "range" : [],
-        "monitor": ["bit25_05"]
+        "done": ["bit25_05"]
     },
     "var40": {
         "id": "var40",
@@ -420,7 +420,7 @@
         "addr": "db:4,start:40,offset:",
         "vartype": "REAL",
         "range" : [4000,20000],
-        "monitor": []
+        "done": []
     },
     "var41": {
         "id": "var41",
@@ -429,7 +429,7 @@
         "addr": "db:4,start:41,offset:",
         "vartype": "REAL",
         "range" : [4000,20000],
-        "monitor": []
+        "done": []
     },
     "var50": {
         "id": "var50",
@@ -438,7 +438,7 @@
         "addr": "db:4,start:50,offset:",
         "vartype": "REAL",
         "range" : [4000,20000],
-        "monitor": []
+        "done": []
     },
     "var51": {
         "id": "var51",
@@ -447,7 +447,7 @@
         "addr": "db:4,start:51,offset:",
         "vartype": "REAL",
         "range" : [4000,20000],
-        "monitor": []
+        "done": []
     },
     "var54": {
         "id": "var54",
@@ -456,7 +456,7 @@
         "addr": "db:4,start:54,offset:",
         "vartype": "REAL",
         "range" : [4000,20000],
-        "monitor": []
+        "done": []
     },
     "var55": {
         "id": "var55",
@@ -465,7 +465,7 @@
         "addr": "db:4,start:55,offset:",
         "vartype": "REAL",
         "range" : [4000,20000],
-        "monitor": []
+        "done": []
     },
     "var56": {
         "id": "var56",
@@ -474,7 +474,7 @@
         "addr": "db:4,start:56,offset:",
         "vartype": "REAL",
         "range" : [4000,20000],
-        "monitor": []
+        "done": []
     },
     "alarm28_04": {
         "id": "alarm28_04",
@@ -483,7 +483,7 @@
         "addr": "db:28,start:0,offset:4",
         "vartype": "BOOL",
         "range" : [],
-        "monitor": []
+        "done": []
     },
     "alarm28_05": {
         "id": "alarm28_05",
@@ -492,7 +492,7 @@
         "addr": "db:28,start:0,offset:5",
         "vartype": "BOOL",
         "range" : [],
-        "monitor": []
+        "done": []
     },
     "alarm29_07": {
         "id": "alarm29_07",
@@ -501,7 +501,7 @@
         "addr": "db:29,start:0,offset:7",
         "vartype": "BOOL",
         "range" : [],
-        "monitor": []
+        "done": []
     },
     "alarm29_08": {
         "id": "alarm29_08",
@@ -510,7 +510,7 @@
         "addr": "db:29,start:1,offset:0",
         "vartype": "BOOL",
         "range" : [],
-        "monitor": []
+        "done": []
     },
     "alarm31_00": {
         "id": "alarm31_00",
@@ -519,7 +519,7 @@
         "addr": "db:31,start:0,offset:0",
         "vartype": "BOOL",
         "range" : [],
-        "monitor": []
+        "done": []
     },
     "alarm31_01": {
         "id": "alarm31_01",
@@ -528,7 +528,7 @@
         "addr": "db:31,start:0,offset:1",
         "vartype": "BOOL",
         "range" : [],
-        "monitor": []
+        "done": []
     },
     "alarm31_02": {
         "id": "alarm31_02",
@@ -537,7 +537,7 @@
         "addr": "db:31,start:0,offset:2",
         "vartype": "BOOL",
         "range" : [],
-        "monitor": []
+        "done": []
     },
     "alarm31_03": {
         "id": "alarm31_03",
@@ -546,7 +546,7 @@
         "addr": "db:31,start:0,offset:3",
         "vartype": "BOOL",
         "range" : [],
-        "monitor": []
+        "done": []
     },
     "alarm31_04": {
         "id": "alarm31_04",
@@ -555,7 +555,7 @@
         "addr": "db:31,start:0,offset:4",
         "vartype": "BOOL",
         "range" : [],
-        "monitor": []
+        "done": []
     },
     "alarm31_05": {
         "id": "alarm31_05",
@@ -564,6 +564,6 @@
         "addr": "db:31,start:0,offset:5",
         "vartype": "BOOL",
         "range" : [],
-        "monitor": []
+        "done": []
     }
 }

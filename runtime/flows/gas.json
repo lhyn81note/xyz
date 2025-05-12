@@ -1,8 +1,8 @@
 {
     "meta": {
         "schema": "test",
-        "name": "\u6d4b\u8bd5\u6d41\u7a0b",
-        "desc": "\u8be5\u6d41\u7a0b\u7528\u4e8e\u6d4b\u8bd5",
+        "name": "\u6c14\u538b\u8bd5\u9a8c\u6d41\u7a0b",
+        "desc": "\u8be5\u6d41\u7a0b\u7528\u4e8e\u6c14\u538b\u8bd5\u9a8c,\u6d41\u7a0b\u5df2\u7ecf\u7f16\u8f91\u597d\u8bf7\u52ff\u4fee\u6539",
         "time": "2024-04-25"
     },
     "flow": {
@@ -31,7 +31,7 @@
             "name": "\u5f00\u59cb\u786e\u8ba4",
             "param": {
                 "args": null,
-                "monitor": {
+                "done": {
                     "code": 0
                 }
             }
@@ -46,7 +46,7 @@
                         "data0": 20
                     }
                 ],
-                "monitor": null
+                "done": null
             }
         },
         "002": {
@@ -62,7 +62,7 @@
                         "data1": 22
                     }
                 ],
-                "monitor": null
+                "done": null
             }
         },
         "003": {
@@ -81,7 +81,7 @@
                         "data2": 24.5
                     }
                 ],
-                "monitor": null
+                "done": null
             }
         },
         "004": {
@@ -89,7 +89,7 @@
             "name": "\u7b2c\u56db\u6b65",
             "param": {
                 "args": null,
-                "monitor": {
+                "done": {
                     "code": 0
                 }
             }
@@ -99,7 +99,7 @@
             "name": "\u7b2c\u4e94\u6b65",
             "param": {
                 "args": null,
-                "monitor": {
+                "done": {
                     "code": 0
                 }
             }

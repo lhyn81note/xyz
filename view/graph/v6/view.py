@@ -32,6 +32,7 @@ class Window(QWidget):
         self.qml_flow.setResizeMode(QQuickWidget.ResizeMode.SizeRootObjectToView)
         self.layout_qml = QVBoxLayout(self.ui.wgt_flow)
         self.layout_qml.addWidget(self.qml_flow)
+        self.qml_flow.setStyleSheet('margin:0px;\npadding:0px;')
 
         # 初始化qml根对象
         self.qml_root = None
@@ -67,6 +68,9 @@ class Window(QWidget):
         for _, cmdobj in self.CmdManagerAgent.cmdObjs.items():
             self.qml_root.updateNodeStatus(cmdobj.id, cmdobj.status)
 
+        self.ui.lb_flow_desc.setText(self.CmdManagerAgent.meta['desc'])
+
+
     @Slot()
     def onSelectFlow(self):
         flowname = self.ui.cmb_flow.currentText()
@@ -75,6 +79,14 @@ class Window(QWidget):
     @Slot()
     def onStart(self):
         self.CmdManagerAgent.runflow()
+
+    @Slot()
+    def onPauseContinue(self):
+        self.CmdManagerAgent.pause()
+
+    @Slot()
+    def onStop(self):
+        self.CmdManagerAgent.stop()
 
     @Slot(dict)
     def onAny(self, response):

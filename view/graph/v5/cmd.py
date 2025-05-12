@@ -221,7 +221,7 @@ class Cmd(QObject):
 
             pt_out = plc.pts.get(self.param.get("out"))
             pt_args = self.param.get("args")
-            pt_sigs = plc.pts.get(self.param.get("monitor"))
+            pt_sigs = plc.pts.get(self.param.get("done"))
 
             for arg_kv in pt_args:
                 print(f"写入指令: {arg_kv}")

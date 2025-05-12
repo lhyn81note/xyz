@@ -56,6 +56,8 @@ class Window(QMainWindow):
 
     def update_plc(self,msg):
         
+        self.ui.lb_info.setStyleSheet('color: rgb(0, 0, 0);')
+        self.ui.lb_info.setText('无故障')
         if msg['source']=='PLC':
 
             if msg['subject']=='connect':
@@ -63,6 +65,7 @@ class Window(QMainWindow):
                     self.ui.lb_status_plc.setStyleSheet('background-color: rgb(0, 255, 0);')
                 else:
                     self.ui.lb_status_plc.setStyleSheet('background-color: rgb(255, 0, 0);')
+
             elif msg['subject']=='alarm':
                 self.ui.lb_info.setStyleSheet('color: rgb(255, 0, 0);')
                 self.ui.lb_info.setText(msg['content'])

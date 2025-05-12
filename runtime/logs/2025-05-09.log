@@ -3,3 +3,58 @@
 2025-05-09 13:41:36,640 - INFO - snap7.client - client.py:78 - creating snap7 client
 2025-05-09 13:41:36,640 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
 2025-05-09 13:41:36,646 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-09 13:58:30,334 - INFO - __main__ - app.py:15 - Application started.
+2025-05-09 13:58:30,335 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-09 13:58:30,338 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-09 13:58:30,338 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-09 13:58:30,343 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-09 14:01:23,643 - INFO - __main__ - app.py:15 - Application started.
+2025-05-09 14:01:23,645 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-09 14:01:23,645 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-09 14:01:23,645 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-09 14:01:23,650 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-09 14:02:01,431 - INFO - __main__ - app.py:15 - Application started.
+2025-05-09 14:02:01,433 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-09 14:02:01,433 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-09 14:02:01,433 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-09 14:02:01,438 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-09 14:19:08,726 - INFO - __main__ - app.py:15 - Application started.
+2025-05-09 14:19:08,727 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-09 14:19:08,728 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-09 14:19:08,728 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-09 14:19:08,732 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-09 14:26:19,277 - INFO - __main__ - app.py:15 - Application started.
+2025-05-09 14:26:19,279 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-09 14:26:19,279 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-09 14:26:19,279 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-09 14:26:19,284 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-09 14:27:23,735 - INFO - __main__ - app.py:15 - Application started.
+2025-05-09 14:27:23,737 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-09 14:27:23,737 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-09 14:27:23,737 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-09 14:27:23,742 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-09 14:30:13,474 - INFO - __main__ - app.py:15 - Application started.
+2025-05-09 14:30:13,476 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-09 14:30:13,476 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-09 14:30:13,476 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-09 14:30:13,482 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-09 14:35:01,759 - INFO - __main__ - app.py:15 - Application started.
+2025-05-09 14:35:01,761 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-09 14:35:01,761 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-09 14:35:01,761 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-09 14:35:01,766 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-09 14:38:02,359 - INFO - __main__ - app.py:15 - Application started.
+2025-05-09 14:38:02,361 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-09 14:38:02,361 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-09 14:38:02,362 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-09 14:38:02,367 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-09 14:39:04,627 - INFO - __main__ - app.py:15 - Application started.
+2025-05-09 14:39:04,628 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-09 14:39:04,629 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-09 14:39:04,629 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-09 14:39:04,634 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-09 17:32:33,937 - INFO - __main__ - app.py:15 - Application started.
+2025-05-09 17:32:33,938 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-09 17:32:33,938 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-09 17:32:33,938 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-09 17:32:33,943 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
