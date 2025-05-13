@@ -1,12 +1,13 @@
 import asyncio
 from datetime import datetime
 import json
-from PySide6.QtCore import  QObject, Signal, Slot
+from PySide6.QtCore import QObject, Signal, Slot
 import threading
 
 class CmdMananger(QObject):
 
     evtCmdChanged = Signal(str, int)  # Signal to emit status changes with id and status
+    evtPathSelection = Signal(str, list, dict)  # Signal to request path selection (current_node, paths, cmd_names)
 
     def __init__(self, flow_file, plc):
 
@@ -77,7 +78,7 @@ class CmdMananger(QObject):
             # raise ValueError("JSON must contain 'flow'")
             print("必须包含flow")
             return False
-        
+
         # 2.必须包含cmds
         if not data.get("cmds"):
             # raise ValueError("JSON must contain 'cmds'")
@@ -112,23 +113,23 @@ class CmdMananger(QObject):
 
     def getCmd(self, cmd_id):
         return self.cmdObjs.get(cmd_id)
-    
+
     def addCmd(self, cmd):
         pass
-    
+
     def delCmd(self, cmd):
         pass
 
-    def delCmdLink(self, cmd):
+    def delCmdChain(self, cmd):
         pass
-    
+
     def setCmd(self, cmd):
         pass
 
     '''
     视图操作
     '''
-    
+
     def genQmlModel(self):
         nodes_model = []
         connections_model = []
@@ -165,8 +166,53 @@ class CmdMananger(QObject):
                             self.flowStatus = 4  # Set status to error
                             break
                     else:
-                        print(f"流指令 {self.cursor} 有多条路径, 请手动选择")
-                        next_cmd_count = 1
+                        print(f"流指令 {self.cursor} 有多条路径, 请求用户选择")
+                        # Get the available paths
+                        available_paths = self.flow[self.cursor]
+
+                        # Create a dictionary of command names for display
+                        cmd_names = {cmd_id: self.cmds[cmd_id]['name'] for cmd_id in available_paths if cmd_id in self.cmds}
+
+                        # Create a synchronization event to wait for the selection
+                        selection_event = threading.Event()
+                        selected_path = None
+
+                        # Define a callback to receive the selection result
+                        def on_path_selected(path):
+                            nonlocal selected_path
+                            selected_path = path
+                            selection_event.set()
+
+                        # Store the callback in the manager for the main form to call
+                        self.path_selection_callback = on_path_selected
+
+                        # Emit signal to request path selection from the main form
+                        self.evtPathSelection.emit(self.cursor, available_paths, cmd_names)
+
+                        # Wait for the selection (with timeout to prevent deadlock)
+                        selection_timeout = 300  # 5 minutes timeout
+                        if not selection_event.wait(selection_timeout):
+                            print(f"路径选择超时 ({selection_timeout}秒)")
+                            self.flowStatus = 3  # Set status to stopped
+                            break
+
+                        # Process the selection result
+                        if selected_path:
+                            print(f"用户选择了路径: {selected_path}")
+                            self.cursor = selected_path
+                            theCmd = self.getCmd(self.cursor)
+                            asyncio.run(theCmd.run_async(self.plc))
+                            if theCmd.status == 2:
+                                next_cmd_count = len(self.flow[self.cursor])
+                            else:
+                                print(f"流指令 {self.cursor} 执行失败")
+                                self.flowStatus = 4  # Set status to error
+                                break
+                            
+                        else:
+                            print("用户取消了选择，流程中断")
+                            self.flowStatus = 3  # Set status to stopped
+                            break
             else:
                 print(f"流指令 {self.cursor} 执行失败")
                 self.flowStatus = 4  # Set status to error
@@ -229,12 +275,11 @@ class Cmd(QObject):
     async def run_async(self, plc):
 
         async def run_sys(self):
-            await asyncio.sleep(1) 
-            self.result = "sys done." 
+            await asyncio.sleep(1)
+            self.result = "sys done."
             self.status = 2  # Set status to done
 
         async def run_plc(self, plc):
-
             pt_out = plc.pts.get(self.param.get("out"))
             pt_args = self.param.get("args")
             pt_cmd = plc.pts.get(self.param.get("out")) # 取得plc点表中的实例
@@ -258,15 +303,15 @@ class Cmd(QObject):
                 # print(pt_sig)
                 for k in plc.pts.keys():
                     if 'alarm' in k:
-                        print(f"capture:{plc.pts.get(k)}")
+                        # print(f"capture:{plc.pts.get(k)}")0
                         if plc.pts.get(k).value==True:
-                            self.result = "plc fault." 
+                            self.result = "plc fault."
                             self.status = 3  # Set status to done
                             break
 
                 if pt_sig.value == 1:
                     print(f"监控点 {pt_sig.id} 触发!!!")
-                    self.result = "plc done." 
+                    self.result = "plc done."
                     self.status = 2  # Set status to done
                     break
                 # await asyncio.sleep(1)
