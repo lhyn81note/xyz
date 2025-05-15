@@ -184,9 +184,18 @@ class CmdMananger(QObject):
                         while self.popper.done == False:
                             time.sleep(1)
                         print(f"路径选择结果: {self.popper.result}")
-                        self.cursor = self.popper.result  # Set the selected path as the next cursor
-                        next_cmd_count = 1 if self.popper.result else  0
                         self.popper.done = False
+
+                        self.cursor = self.popper.result  # Set the selected path as the next cursor
+                        theCmd = self.getCmd(self.cursor)
+                        theCmd.run(self.plc)
+
+                        if theCmd.status == 2:
+                            next_cmd_count = len(self.flow[self.cursor])
+                        else:
+                            print(f"流指令 {self.cursor} 执行失败")
+                            self.flowStatus = 4  # Set status to error
+                            break
 
 
             else:
