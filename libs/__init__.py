@@ -10,7 +10,7 @@ from .dbhelper import GenDbEnging
 
 from .logger import LogConfig
 
-from .worker  import Worker, WorkerSignals
+from .popup import Popup
 
 print(f"{' Libs ':#^50}")
 

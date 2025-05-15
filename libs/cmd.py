@@ -1,15 +1,16 @@
 import asyncio
 from datetime import datetime
 import json
-from PySide6.QtCore import QObject, Signal, Slot
+import time
 import threading
+from PySide6.QtCore import QObject, Signal, Slot
 
 class CmdMananger(QObject):
 
     evtCmdChanged = Signal(str, int)  # Signal to emit status changes with id and status
     evtPopup = Signal(str, dict)  # Signal to request path selection (current_node, paths, cmd_names)
 
-    def __init__(self, flow_file, plc):
+    def __init__(self, flow_file, plc, popper):
 
         super().__init__()
         self.flow_file = flow_file
@@ -27,7 +28,7 @@ class CmdMananger(QObject):
         self.cursor = ""  # Placeholder for flow configuration
         self.flowStatus = 0  # 0: idle, 1: running, 2: paused, 3: stopped 4: error
 
-        self.popup_callback = None
+        self.popper = popper
 
         # 初始化
         self.loadFlow()
@@ -145,101 +146,64 @@ class CmdMananger(QObject):
         # print("Nodes model:", nodes_model)
         # print("Connections model:", connections_model)
         return nodes_model, connections_model
-
-    '''
-    核心操作
-    '''
-    async def popup(self, dialog_id=None, args=None):
-
-        future = asyncio.Future()
-        print(id(future))
-
-        # Define a callback to set the Future result
-        def onReturn(results):
-            # if not future.done():
-            future.set_result(results)
-            # future.done()
-            print(id(future))
-            print("Return!!!")
-            return True
-
-
-        # We need to use the main thread to create and show the dialog
-        # This is done by emitting a signal that the main thread will handle
-        self.evtPopup.emit("test",{
-            "dialog_id": "abc",
-            "args": "123"
-        })
-
-        # Store the callback for the main thread to call
-        self.popup_callback = onReturn
-
-        # Wait for the result with a timeout
-        result = await future  # 5 minutes timeout
-        print("路径选择结果:", result)
-        return result
         
 
-    async def run_flow_async(self):
-        """Run the flow asynchronously."""
-        self.cursor = self.head_node_id
-        self.flowStatus = 0  # Reset flow status
+    def run_flow(self):
+        
+        def core():
+            """Run the flow asynchronously."""
+            self.cursor = self.head_node_id
+            self.flowStatus = 0  # Reset flow status
 
-        theCmd = self.getCmd(self.cursor)
-        await theCmd.run_async(self.plc)
+            theCmd = self.getCmd(self.cursor)
+            theCmd.run(self.plc)
 
-        if theCmd.status == 2:
-            next_cmd_count = len(self.flow[self.cursor])
-            while next_cmd_count > 0:
-                if next_cmd_count == 1:
-                    # Only one path, take it automatically
-                    self.cursor = self.flow[self.cursor][0]
-                    theCmd = self.getCmd(self.cursor)
-                    await theCmd.run_async(self.plc)
+            if theCmd.status == 2:
+                next_cmd_count = len(self.flow[self.cursor])
 
-                    if theCmd.status == 2:
-                        next_cmd_count = len(self.flow[self.cursor])
+                while next_cmd_count > 0:
+
+                    if next_cmd_count == 1:
+                        self.cursor = self.flow[self.cursor][0]
+                        theCmd = self.getCmd(self.cursor)
+                        theCmd.run(self.plc)
+
+                        if theCmd.status == 2:
+                            next_cmd_count = len(self.flow[self.cursor])
+                        else:
+                            print(f"流指令 {self.cursor} 执行失败")
+                            self.flowStatus = 4  # Set status to error
+                            break
+
                     else:
-                        print(f"流指令 {self.cursor} 执行失败")
-                        self.flowStatus = 4  # Set status to error
-                        break
-                else:
-                    # Multiple paths, request user selection
-                    print(f"流指令 {self.cursor} 有多条路径, 请求用户选择")
-                    self.evtPopup.emit("test",{
-                        "dialog_id": "abc",
-                        "args": "123"
-                    })
+                        print(f"流指令 {self.cursor} 有多条路径, 发射Popup!")
+                        self.popper.evtBegin.emit("路径选择弹窗",{
+                            "next":self.flow[self.cursor]  # ["alex", "bob", "cindy"]
+                        })
 
-        else:
-            print(f"流指令 {self.cursor} 执行失败")
-            self.flowStatus = 4  # Set status to error
+                        while self.popper.done == False:
+                            time.sleep(1)
+                        print(f"路径选择结果: {self.popper.result}")
+                        self.cursor = self.popper.result  # Set the selected path as the next cursor
+                        next_cmd_count = 1 if self.popper.result else  0
+                        self.popper.done = False
 
-        if self.flowStatus == 4:
-            print(f'有故障,流程中断')
-        else:
-            print(f'流程执行完毕')
 
-        return self.flowStatus
+            else:
+                print(f"流指令 {self.cursor} 执行失败")
+                self.flowStatus = 4  # Set status to error
 
-    def runflow(self):
-        """Start the flow execution in a background thread."""
-        def run_flow_wrapper():
-            asyncio.run(self.run_flow_async())
+            if self.flowStatus == 4:
+                print(f'有故障,流程中断')
+            else:
+                print(f'流程执行完毕')
 
-        thread = threading.Thread(target=run_flow_wrapper)
+            return self.flowStatus
+    
+        thread = threading.Thread(target=core, daemon=True)
         thread.start()
 
-    async def run_step_async(self, theCmd):
-        """Run a single step asynchronously."""
-        await theCmd.run_async(self.plc)
-        if theCmd.status == 2:
-            print(f"单步指令 {theCmd.name} 执行成功")
-        else:
-            print(f"单步指令 {theCmd.name} 执行失败")
-        return theCmd.status
-
-    def runstep(self, theCmd):
+    def run_step(self, theCmd):
         """Start a single step execution in a background thread."""
         def run_step_wrapper():
             asyncio.run(self.run_step_async(theCmd))
@@ -260,6 +224,7 @@ class CmdMananger(QObject):
 class Cmd(QObject):
 
     evtStatusChanged = Signal(str, int)  # Signal to emit status changes with id and status
+    evtCmdNotify = Signal(str, dict)
 
     def __init__(self, id, cmd_dict):
         super().__init__()
@@ -282,14 +247,14 @@ class Cmd(QObject):
         return None
 
 
-    async def run_async(self, plc):
+    def run(self, plc):
 
-        async def run_sys(self):
-            await asyncio.sleep(1)
+        def run_sys(self):
+            time.sleep(1)
             self.result = "sys done."
             self.status = 2  # Set status to done
 
-        async def run_plc(self, plc):
+        def run_plc(self, plc):
             pt_out = plc.pts.get(self.param.get("out"))
             pt_args = self.param.get("args")
             pt_cmd = plc.pts.get(self.param.get("out")) # 取得plc点表中的实例
@@ -309,7 +274,7 @@ class Cmd(QObject):
 
             plc.write(pt_out.id, 1)
             while self.status == 1:
-                await asyncio.sleep(plc.interval/1000)
+                time.sleep(plc.interval/1000)
                 # print(pt_sig)
                 for k in plc.pts.keys():
                     if 'alarm' in k:
@@ -336,10 +301,10 @@ class Cmd(QObject):
 
         try:
             if self.type == "sys":
-                await run_sys(self)
+                run_sys(self)
 
             elif self.type == "plc":
-                await run_plc(self, plc)
+                run_plc(self, plc)
 
         except Exception as e:
             self.result = str(e)  # Capture exception as result

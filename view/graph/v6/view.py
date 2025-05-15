@@ -42,9 +42,7 @@ class Window(QWidget):
 
         self.SetGraph("测试流程")
 
-        _top.CmdManager['测试流程'].evtPopup.connect(self.onPopup)
-        _top.CmdManager['气压试验'].evtPopup.connect(self.onPopup)
-        _top.CmdManager['加载力试验'].evtPopup.connect(self.onPopup)
+        _top.popper.evtBegin.connect(self.onPopup)
 
 
     def SetGraph(self, flowname):
@@ -83,7 +81,7 @@ class Window(QWidget):
 
     @Slot()
     def onStart(self):
-        self.CmdManagerAgent.runflow()
+        self.CmdManagerAgent.run_flow()
 
     @Slot()
     def onPauseContinue(self):
@@ -118,43 +116,5 @@ class Window(QWidget):
 
     @Slot(str, dict)
     def onPopup(self, dialog_id, args):
-        try:
-            dialog = SubDialog(self)
-            result = dialog.exec()
-            print(f"Dialog result: {result}")
-            
-            if result == QDialog.Accepted:
-                choice = dialog.get_selected_item()
-                print(f"Selected item: {choice}")
-            else:
-                print("Dialog cancelled")
-        finally:
-            print("Finally block executed")
+        _top.popper.pop(dialog_id, args)
         
-class SubDialog(QDialog):
-    def __init__(self, parent=None):
-        super().__init__(parent)
-        self.setWindowTitle("Sub Dialog")
-        self.setModal(True)
-        self.setFixedSize(200, 150)
-        
-        layout = QVBoxLayout()
-        
-        self.combobox = QComboBox()
-        self.combobox.addItems(["Apple", "Banana", "Orange"])
-        self.combobox.setCurrentIndex(0)
-        
-        self.confirm_button = QPushButton("Confirm")
-        self.cancel_button = QPushButton("Cancel")
-        
-        layout.addWidget(QLabel("Select an item:"))
-        layout.addWidget(self.combobox)
-        layout.addWidget(self.confirm_button)
-        layout.addWidget(self.cancel_button)
-        self.setLayout(layout)
-        
-        self.confirm_button.clicked.connect(self.accept)
-        self.cancel_button.clicked.connect(self.reject)
-    
-    def get_selected_item(self):
-        return self.combobox.currentText()

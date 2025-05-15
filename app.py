@@ -31,11 +31,13 @@ PLC.connect()
 print(f"PLC is alive: {PLC.alive}")
 PLC.scan()
 
+popper = Popup()  # Create a new instance of PopSignal
 Cmd = CoreProvider().Cmd
 CmdManager = {}
-CmdManager['测试流程'] = CoreProvider().CmdManager(config.get('flow','try_test'), PLC)
-CmdManager['气压试验'] = CoreProvider().CmdManager(config.get('flow','try_gas'), PLC)
-CmdManager['加载力试验'] = CoreProvider().CmdManager(config.get('flow','try_force'), PLC)
+CmdManager['测试流程'] = CoreProvider().CmdManager(config.get('flow','try_test'), PLC, popper)
+CmdManager['气压试验'] = CoreProvider().CmdManager(config.get('flow','try_gas'), PLC, popper)
+CmdManager['加载力试验'] = CoreProvider().CmdManager(config.get('flow','try_force'), PLC, popper)
+
 
 # 全局数据库引擎初始化
 DbEng_Alarms = GenDbEnging(dbpath=config.get('db','alarm'))
