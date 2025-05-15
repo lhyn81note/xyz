@@ -10,6 +10,8 @@ from .dbhelper import GenDbEnging
 
 from .logger import LogConfig
 
+from .worker  import Worker, WorkerSignals
+
 print(f"{' Libs ':#^50}")
 
 class CoreProvider(containers.DeclarativeContainer):

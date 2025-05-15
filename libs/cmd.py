@@ -7,7 +7,7 @@ import threading
 class CmdMananger(QObject):
 
     evtCmdChanged = Signal(str, int)  # Signal to emit status changes with id and status
-    evtPathSelection = Signal(str, list, dict)  # Signal to request path selection (current_node, paths, cmd_names)
+    evtPopup = Signal(str, dict)  # Signal to request path selection (current_node, paths, cmd_names)
 
     def __init__(self, flow_file, plc):
 
@@ -26,6 +26,8 @@ class CmdMananger(QObject):
 
         self.cursor = ""  # Placeholder for flow configuration
         self.flowStatus = 0  # 0: idle, 1: running, 2: paused, 3: stopped 4: error
+
+        self.popup_callback = None
 
         # 初始化
         self.loadFlow()
@@ -148,47 +150,35 @@ class CmdMananger(QObject):
     核心操作
     '''
     async def popup(self, dialog_id=None, args=None):
-        """
-        Request path selection from the main form and wait for the result asynchronously.
 
-        Args:
-            current_node (str): Current node ID
-            available_paths (list): List of available path IDs
-            cmd_names (dict): Dictionary mapping command IDs to command names
-
-        Returns:
-            str: Selected path ID or None if selection was canceled
-        """
-        # Create a Future to get the result asynchronously
         future = asyncio.Future()
+        print(id(future))
 
         # Define a callback to set the Future result
-        def onReturn(any_result):
-            if not future.done():
-                print("选择了!!!")
-                future.set_result(any_result)
+        def onReturn(results):
+            # if not future.done():
+            future.set_result(results)
+            # future.done()
+            print(id(future))
+            print("Return!!!")
+            return True
 
-        # Store the callback in the manager for the main form to call
-        self.path_selection_callback = onReturn
 
-        # Emit signal to request path selection from the main form
-        # self.evtPathSelection.emit(current_node, available_paths, cmd_names)
+        # We need to use the main thread to create and show the dialog
+        # This is done by emitting a signal that the main thread will handle
+        self.evtPopup.emit("test",{
+            "dialog_id": "abc",
+            "args": "123"
+        })
 
-        # open PathSelectorDialog
-        from libs.path_selector import PathSelectorDialog
-        print("1 PathSelectorDialog")
-        dialog = PathSelectorDialog(["1","2","3"])
-        print("2 PathSelectorDialog done")
-        dialog.evtReturn.connect(onReturn)
-        print("3 PathSelectorDialog done")
-        dialog.exec()
-        print("4 PathSelectorDialog done")
+        # Store the callback for the main thread to call
+        self.popup_callback = onReturn
 
-        try:
-            return await asyncio.wait_for(future, timeout=300)  # 5 minutes timeout
-        except asyncio.TimeoutError:
-            print(f"路径选择超时 (300秒)")
-            return None
+        # Wait for the result with a timeout
+        result = await future  # 5 minutes timeout
+        print("路径选择结果:", result)
+        return result
+        
 
     async def run_flow_async(self):
         """Run the flow asynchronously."""
@@ -216,33 +206,11 @@ class CmdMananger(QObject):
                 else:
                     # Multiple paths, request user selection
                     print(f"流指令 {self.cursor} 有多条路径, 请求用户选择")
+                    self.evtPopup.emit("test",{
+                        "dialog_id": "abc",
+                        "args": "123"
+                    })
 
-                    # Get the available paths
-                    available_paths = self.flow[self.cursor]
-
-                    # Create a dictionary of command names for display
-                    cmd_names = {cmd_id: self.cmds[cmd_id]['name'] for cmd_id in available_paths if cmd_id in self.cmds}
-
-                    # Request path selection asynchronously
-                    selected_path = await self.popup()
-
-                    # Process the selection result
-                    if selected_path:
-                        print(f"用户选择了路径: {selected_path}")
-                        self.cursor = selected_path
-                        theCmd = self.getCmd(self.cursor)
-                        await theCmd.run_async(self.plc)
-
-                        if theCmd.status == 2:
-                            next_cmd_count = len(self.flow[self.cursor])
-                        else:
-                            print(f"流指令 {self.cursor} 执行失败")
-                            self.flowStatus = 4  # Set status to error
-                            break
-                    else:
-                        print("用户取消了选择，流程中断")
-                        self.flowStatus = 3  # Set status to stopped
-                        break
         else:
             print(f"流指令 {self.cursor} 执行失败")
             self.flowStatus = 4  # Set status to error

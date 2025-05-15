@@ -91,3 +91,23 @@
 2025-05-13 16:38:17,940 - INFO - snap7.client - client.py:78 - creating snap7 client
 2025-05-13 16:38:17,940 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
 2025-05-13 16:38:17,946 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-13 17:06:38,786 - INFO - __main__ - app.py:15 - Application started.
+2025-05-13 17:06:38,789 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-13 17:06:38,789 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-13 17:06:38,789 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-13 17:06:38,793 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-13 17:07:24,471 - INFO - __main__ - app.py:15 - Application started.
+2025-05-13 17:07:24,473 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-13 17:07:24,473 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-13 17:07:24,473 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-13 17:07:24,479 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-13 17:08:19,311 - INFO - __main__ - app.py:15 - Application started.
+2025-05-13 17:08:19,313 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-13 17:08:19,313 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-13 17:08:19,313 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-13 17:08:19,318 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-13 17:12:16,799 - INFO - __main__ - app.py:15 - Application started.
+2025-05-13 17:12:16,801 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-13 17:12:16,801 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-13 17:12:16,802 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-13 17:12:16,807 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
