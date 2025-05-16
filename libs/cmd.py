@@ -6,6 +6,15 @@ import threading
 import uuid
 from PySide6.QtCore import QObject, Signal, Slot
 
+# 导入所有的弹窗类
+from .algos.wait import algoWait
+
+# 弹窗表映射
+algoMap = {
+    "algoWait": algoWait,
+}
+
+
 class CmdMananger(QObject):
 
     evtCmdChanged = Signal(str, int)  # Signal to emit status changes with id and status
@@ -127,8 +136,9 @@ class CmdMananger(QObject):
             "type": "algo",
             "name": "空指令",
             "param": {
-                "args": {},
-                "done": {}
+                "algo_id":"algoWait",
+                "args": 1,
+                "done": None
             }
         }
 
@@ -314,9 +324,10 @@ class Cmd(QObject):
     def run(self, plc):
 
         def run_algo(self, plc):
-            time.sleep(1)
-            self.result = "algo done."
-            self.status = 2  # Set status to done
+            algoMap[self.param.get("algo_id")](self.param.get("args"))
+            print(f"执行算法:{self.param.get('algo_id')}")
+            self.result = 'done'
+            self.status = 2
 
         def run_pop(self, plc, top_popper):
             top_popper.evtBegin.emit(self.params["dialog_id"], self.params["args"])
@@ -373,14 +384,17 @@ class Cmd(QObject):
         self.evtStatusChanged.emit(self.id, self.status)
 
         try:
-            if self.type == "alog":
-                run_algo(self)
+            if self.type == "algo":
+                run_algo(self, plc)
 
             elif self.type == "pop":
                 run_pop(self)
 
             elif self.type == "plc":
                 run_plc(self, plc)
+
+            else:
+                self.result = "指令类型不对吧?"
 
         except Exception as e:
             self.result = str(e)  # Capture exception as result

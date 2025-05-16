@@ -122,6 +122,7 @@ class Window(QWidget):
                 nodeId = response["data"]
 
                 if response["type"] == "edit_self":
+                    if nodeId == "head" or nodeId == "end": return
                     cmd_data = self.CmdManagerAgent.cmds[nodeId]
                     
                     # Create dialog with text editor

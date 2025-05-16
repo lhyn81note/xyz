@@ -7,9 +7,16 @@
     },
     "flow": {
         "head": [
-            "end"
+            "a03455ce"
         ],
         "end": [],
+        "a03455ce": [
+            "end",
+            "3cd9094d"
+        ],
+        "3cd9094d": [
+            "end"
+        ],
         "head_node_id": "head"
     },
     "cmds": {
@@ -17,16 +24,36 @@
             "type": "algo",
             "name": "开始",
             "param": {
-                "args": {},
-                "done": {}
+                "algo_id": "algoWait",
+                "args": 1,
+                "done": null
             }
         },
         "end": {
             "type": "algo",
             "name": "结束",
             "param": {
-                "args": {},
-                "done": {}
+                "algo_id": "algoWait",
+                "args": 1,
+                "done": null
+            }
+        },
+        "a03455ce": {
+            "type": "algo",
+            "name": "空指令",
+            "param": {
+                "algo_id": "algoWait",
+                "args": 1,
+                "done": null
+            }
+        },
+        "3cd9094d": {
+            "type": "algo",
+            "name": "空指令",
+            "param": {
+                "algo_id": "algoWait",
+                "args": 1,
+                "done": null
             }
         }
     },
@@ -39,8 +66,20 @@
         },
         "end": {
             "x": 47.0,
-            "y": 461.0,
+            "y": 460.0,
             "text": "",
+            "status": "idle"
+        },
+        "a03455ce": {
+            "x": 47.0,
+            "y": 139.0,
+            "text": "空指令",
+            "status": "idle"
+        },
+        "3cd9094d": {
+            "x": 177.0,
+            "y": 228.0,
+            "text": "空指令",
             "status": "idle"
         }
     }
