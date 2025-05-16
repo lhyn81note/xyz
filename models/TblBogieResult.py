@@ -1,6 +1,6 @@
 from models.__base__ import *
-from libs.Bind.dtobase import DtoBase
-from libs.Bind.observableCollection import ObservableCollection
+from libs.binding.dtobase import DtoBase
+from libs.binding.observableCollection import ObservableCollection
 
 class TblBogieResult(declarative_base()):
     __tablename__ = 'TblBogieResult'

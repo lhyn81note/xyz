@@ -33,8 +33,8 @@ def get_table_structure(db_path, table_name):
 def generate_class_code(table_name, columns):
     # 定义类代码模板
     class_template =  f"from models.__base__ import *\n"
-    class_template += f"from libs.Bind.dtobase import DtoBase\n"
-    class_template += f"from libs.Bind.observableCollection import ObservableCollection\n"
+    class_template += f"from libs.binding.dtobase import DtoBase\n"
+    class_template += f"from libs.binding.observableCollection import ObservableCollection\n"
     class_template += f"\nclass {table_name}(declarative_base()):\n"  # capitalize()
     class_template += f"    __tablename__ = '{table_name}'\n"
     

@@ -5,29 +5,29 @@ import os,sys
 _top = sys.modules['__main__']
 from view.template_bindpage._view import  Ui_PageBogieModel
 
-from libs.Bind.dtobase import DtoBase
-from libs.Bind.context import Context
-from libs.Bind.relayCommand import RelayCommand
+from libs.binding.dtobase import DtoBase
+from libs.binding.context import Context
+from libs.binding.relayCommand import RelayCommand
 
-from libs.Bind.tableViewbinding import TableViewBinding
-from libs.Bind.tableWidgetbinding import TableWidgetBinding
-from libs.Bind.tableViewColumn import TableViewColumn
-from libs.Bind.bind import Bind
-from libs.Bind.bindingMode import BindingMode
-from libs.Bind.observableCollection import ObservableCollection
-from libs.Bind.textEditBinding import TextEditBinding
-from libs.Bind.labelBinding import LabelBinding
-from libs.Bind.checkBoxBinding import CheckBoxBinding
-from libs.Bind.radioButtonBinding import RadioButtonBinding
-from libs.Bind.dateTimeEditBinding import DateTimeEditBinding
-from libs.Bind.dateEditBinding import DateEditBinding
-from libs.Bind.timeEditBinding import TimeEditBinding
-from libs.Bind.comboBoxBinding import ComboBoxBinding
-from libs.Bind.pushButtonBinding import PushButtonBinding
-from libs.Bind.plainTextEditBinding import PlainTextEditBinding
-from libs.Bind.spinBoxBinding import SpinBoxBinding
-from libs.Bind.doubleSpinBoxBinding import DoubleSpinBoxBinding
-from libs.Bind.listViewBinding import ListViewBinding
+from libs.binding.tableViewbinding import TableViewBinding
+from libs.binding.tableWidgetbinding import TableWidgetBinding
+from libs.binding.tableViewColumn import TableViewColumn
+from libs.binding.bind import Bind
+from libs.binding.bindingMode import BindingMode
+from libs.binding.observableCollection import ObservableCollection
+from libs.binding.textEditBinding import TextEditBinding
+from libs.binding.labelBinding import LabelBinding
+from libs.binding.checkBoxBinding import CheckBoxBinding
+from libs.binding.radioButtonBinding import RadioButtonBinding
+from libs.binding.dateTimeEditBinding import DateTimeEditBinding
+from libs.binding.dateEditBinding import DateEditBinding
+from libs.binding.timeEditBinding import TimeEditBinding
+from libs.binding.comboBoxBinding import ComboBoxBinding
+from libs.binding.pushButtonBinding import PushButtonBinding
+from libs.binding.plainTextEditBinding import PlainTextEditBinding
+from libs.binding.spinBoxBinding import SpinBoxBinding
+from libs.binding.doubleSpinBoxBinding import DoubleSpinBoxBinding
+from libs.binding.listViewBinding import ListViewBinding
 
 class PageBogieModel(QWidget):
 

@@ -37,6 +37,7 @@ class Popup(QObject):
 
         print("Dialog closed")
 
+        # 注意这里不能采用多线程, 否则会卡死在TestDialog窗口
         # thread = threading.Thread(target=core, daemon=True)
         # thread.start()
 
