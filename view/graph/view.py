@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import os,sys,json
 from view.graph._view import Ui_Form
-from PySide6.QtWidgets import (QComboBox, QVBoxLayout, QLabel, QPushButton,  QWidget, QDialog, QMessageBox)
+from PySide6.QtWidgets import (QComboBox, QVBoxLayout, QLabel, QPushButton,  QWidget, QDialog, QMessageBox, QPlainTextEdit)
 from PySide6.QtQuickWidgets import QQuickWidget
 from PySide6.QtCore import Slot, QUrl, QObject, QAbstractListModel, Qt, QSize, QMimeData
 from PySide6.QtQml import QJSValue
@@ -111,7 +111,6 @@ class Window(QWidget):
             QMessageBox.warning(None, "警告", response["msg"])
 
         else:
-
             # 移动不需要重新加载配置
             if response["type"] == "move":
                 self.CmdManagerAgent.nodes[response["data"]["id"]]['x'] = response["data"]["x"]
@@ -120,17 +119,80 @@ class Window(QWidget):
 
             # 其余需要重新加载配置
             else:
+                nodeId = response["data"]
 
-                if response["type"] == "add_child":
-                    nodeId = response["data"]
+                if response["type"] == "edit_self":
+                    cmd_data = self.CmdManagerAgent.cmds[nodeId]
+                    
+                    # Create dialog with text editor
+                    dialog = QDialog(self)
+                    dialog.setWindowTitle("编辑指令")
+                    dialog.setMinimumSize(QSize(200, 200))
+                    
+                    layout = QVBoxLayout(dialog)
+                    
+                    # Add text editor
+                    text_editor = QPlainTextEdit(dialog)
+                    text_editor.setPlainText(json.dumps(cmd_data, indent=4, ensure_ascii=False))
+                    layout.addWidget(text_editor)
+                    
+                    # Add OK button
+                    ok_button = QPushButton("确认", dialog)
+                    ok_button.clicked.connect(dialog.accept)
+                    layout.addWidget(ok_button)
+                    
+                    # Show dialog
+                    if dialog.exec() == QDialog.Accepted:
+                        try:
+                            # Parse JSON and update command
+                            new_cmd_data = json.loads(text_editor.toPlainText())
+                            self.CmdManagerAgent.cmds[nodeId] = new_cmd_data
+                            self.CmdManagerAgent.saveFlow()
+                        except json.JSONDecodeError:
+                            QMessageBox.critical(None, "错误", "JSON格式错误，请检查输入")
+
+                elif response["type"] == "add_child":
+                    if nodeId == "end": return
                     self.CmdManagerAgent.addCmd(nodeId)
                     self.reloadFlow()
                         
                 elif response["type"] == "del_self":
-                    pass
+                    if nodeId == "head" or nodeId == "end": return
+                    confirm = QMessageBox.question(
+                        self,
+                        "确认删除",
+                        f"确定要删除指令 '{self.CmdManagerAgent.cmds[nodeId]['name']}' 吗？",
+                        QMessageBox.Yes | QMessageBox.No
+                    )
+                    
+                    if confirm == QMessageBox.Yes:
+                        # Remove the node from flow connections
+                        for parent_id, children in self.CmdManagerAgent.flow.items():
+                            if nodeId in children:
+                                children.remove(nodeId)
+                        
+                        # Remove the node's own flow entry
+                        if nodeId in self.CmdManagerAgent.flow:
+                            del self.CmdManagerAgent.flow[nodeId]
+                        
+                        # Remove from nodes dictionary
+                        if nodeId in self.CmdManagerAgent.nodes:
+                            del self.CmdManagerAgent.nodes[nodeId]
+                        
+                        # Remove from cmds dictionary
+                        if nodeId in self.CmdManagerAgent.cmds:
+                            del self.CmdManagerAgent.cmds[nodeId]
+                        
+                        # Remove from cmdObjs dictionary
+                        if nodeId in self.CmdManagerAgent.cmdObjs:
+                            del self.CmdManagerAgent.cmdObjs[nodeId]
+                        
+                        # Save changes
+                        self.CmdManagerAgent.saveFlow()
+                        self.reloadFlow()
 
                 elif response["type"] == "set_child":
-                    nodeId = response["data"]
+                    if nodeId == "end": return
                     cmd_items = [f"{id}:{cmd.name}" for id, cmd in self.CmdManagerAgent.cmdObjs.items()]
                     
                     dialog_args = {
@@ -144,9 +206,6 @@ class Window(QWidget):
                         # self.CmdManagerAgent.setChildCmd(nodeId, selected_cmd_id)
                         _top.popper.done = True
                         self.CmdManagerAgent.setCmd(nodeId, selected_cmd_id)  
-
-                elif response["type"] == "edit_self":
-                    pass
 
                 else:
                     pass

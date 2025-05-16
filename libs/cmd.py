@@ -120,7 +120,7 @@ class CmdMananger(QObject):
 
     def addCmd(self, parent_id):
         # Generate a new UUID for the new command
-        new_cmd_id = str(uuid.uuid4())
+        new_cmd_id = str(uuid.uuid4())[:8]
 
         # Create a new empty command with type "algo"
         new_cmd = {
