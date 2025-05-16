@@ -12,7 +12,11 @@ if "%~1"=="dev" (
         del /f /q "%%i\_view.py"
         pyside6-uic "%%i\view.ui" -o "%%i\_view.py"
     )
-    pyside6-uic view\graph\v6\view.ui -o view\graph\v6\_view.py
+    for /d %%i in (view\pops\*) do (
+        set folder_name=%%~nxi
+        del /f /q "%%i\_view.py"
+        pyside6-uic "%%i\view.ui" -o "%%i\_view.py"
+    )    
     python app.py
 )
 

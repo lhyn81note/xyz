@@ -46,7 +46,7 @@ class TestDialog(QDialog):
     def __init__(self, parent=None, next_cmd=[]):
         super().__init__(parent)
         self.ret = None
-        self.setWindowTitle("Sub Dialog")
+        self.setWindowTitle("流程选择")
         self.setModal(True)
         self.setFixedSize(200, 150)
 
@@ -56,10 +56,10 @@ class TestDialog(QDialog):
         self.combobox.addItems(next_cmd)
         self.combobox.setCurrentIndex(0)
 
-        self.confirm_button = QPushButton("Confirm")
-        self.cancel_button = QPushButton("Cancel")
+        self.confirm_button = QPushButton("确认")
+        self.cancel_button = QPushButton("取消")
 
-        layout.addWidget(QLabel("Select an item:"))
+        layout.addWidget(QLabel("可选流程:"))
         layout.addWidget(self.combobox)
         layout.addWidget(self.confirm_button)
         layout.addWidget(self.cancel_button)

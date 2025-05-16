@@ -139,7 +139,14 @@ class CmdMananger(QObject):
 
         for key in self.nodes:
             # print(key)
-            nodes_model.append({"id": key, "text": self.cmds[key]['name'], "x": self.nodes[key]["x"], "y": self.nodes[key]["y"]})
+            nodes_model.append({
+                "id": key, 
+                "text": self.cmds[key]['name'], 
+                "x": self.nodes[key]["x"], 
+                "y": self.nodes[key]["y"],
+                "type": self.cmds[key]['type']
+            })
+            
             for child in self.flow[key]:
                 connections_model.append({"from": key, "to": child})
 
@@ -150,7 +157,7 @@ class CmdMananger(QObject):
 
     def run_flow(self):
         
-        def core():
+        def job():
             """Run the flow asynchronously."""
             self.cursor = self.head_node_id
             self.flowStatus = 0  # Reset flow status
@@ -165,37 +172,35 @@ class CmdMananger(QObject):
 
                     if next_cmd_count == 1:
                         self.cursor = self.flow[self.cursor][0]
-                        theCmd = self.getCmd(self.cursor)
-                        theCmd.run(self.plc)
-
-                        if theCmd.status == 2:
-                            next_cmd_count = len(self.flow[self.cursor])
-                        else:
-                            print(f"流指令 {self.cursor} 执行失败")
-                            self.flowStatus = 4  # Set status to error
-                            break
 
                     else:
-                        print(f"流指令 {self.cursor} 有多条路径, 发射Popup!")
+                        path_names = list(map(lambda cmdkey: f'{cmdkey}:{self.cmds[cmdkey]['name']}', self.flow[self.cursor]))
                         self.popper.evtBegin.emit("路径选择弹窗",{
-                            "next":self.flow[self.cursor]  # ["alex", "bob", "cindy"]
+                            "next":path_names
                         })
 
                         while self.popper.done == False:
                             time.sleep(1)
-                        print(f"路径选择结果: {self.popper.result}")
+
                         self.popper.done = False
+                        self.cursor = self.popper.result.split(":")[0]
 
-                        self.cursor = self.popper.result  # Set the selected path as the next cursor
-                        theCmd = self.getCmd(self.cursor)
-                        theCmd.run(self.plc)
+                    print(self.cursor)
+                    if self.cursor==None:
+                        print("路径为空,流程中断")
+                        self.flowStatus = 3
+                        break
 
-                        if theCmd.status == 2:
-                            next_cmd_count = len(self.flow[self.cursor])
-                        else:
-                            print(f"流指令 {self.cursor} 执行失败")
-                            self.flowStatus = 4  # Set status to error
-                            break
+                    # 执行指针指令
+                    theCmd = self.getCmd(self.cursor)
+                    theCmd.run(self.plc)
+
+                    if theCmd.status == 2:
+                        next_cmd_count = len(self.flow[self.cursor])
+                    else:
+                        print(f"流指令 {self.cursor} 执行失败")
+                        self.flowStatus = 4  # Set status to error
+                        break
 
 
             else:
@@ -209,7 +214,7 @@ class CmdMananger(QObject):
 
             return self.flowStatus
     
-        thread = threading.Thread(target=core, daemon=True)
+        thread = threading.Thread(target=job, daemon=True)
         thread.start()
 
     def run_step(self, theCmd):
@@ -245,7 +250,6 @@ class Cmd(QObject):
         self.beginTime = ""
         self.endTime = ""
         self.result = None
-
 
     @property
     def duration(self):
