@@ -1,145 +1,82 @@
 {
     "meta": {
         "schema": "test",
-        "name": "\u6d4b\u8bd5\u6d41\u7a0b",
-        "desc": "\u8be5\u6d41\u7a0b\u7528\u4e8e\u6d4b\u8bd5",
+        "name": "测试流程",
+        "desc": "该流程用于测试",
         "time": "2024-04-25"
     },
     "flow": {
-        "000": [
-            "001"
+        "head": [
+            "end",
+            "dcf0e515"
         ],
-        "001": [
-            "002",
-            "003"
+        "end": [],
+        "dcf0e515": [
+            "end",
+            "bf00a33a-9468-42ed-a7f3-e1e308388b1b"
         ],
-        "002": [
-            "004"
+        "bf00a33a-9468-42ed-a7f3-e1e308388b1b": [
+            "end"
         ],
-        "003": [
-            "005"
-        ],
-        "004": [
-            "003"
-        ],
-        "005": [],
-        "head_node_id": "000"
+        "head_node_id": "head"
     },
     "cmds": {
-        "000": {
-            "type": "sys",
-            "name": "\u5f00\u59cb\u786e\u8ba4",
+        "head": {
+            "type": "algo",
+            "name": "开始",
             "param": {
-                "args": null,
-                "done": {
-                    "code": 0
-                }
+                "args": {},
+                "done": {}
             }
         },
-        "001": {
-            "type": "plc",
-            "name": "\u7b2c\u4e00\u6b65",
+        "end": {
+            "type": "algo",
+            "name": "结束",
             "param": {
-                "out": "cmd61_00",
-                "args": [
-                    {
-                        "data0": 30
-                    }
-                ],
-                "done": null
+                "args": {},
+                "done": {}
             }
         },
-        "002": {
-            "type": "plc",
-            "name": "\u7b2c\u4e8c\u6b65",
+        "dcf0e515": {
+            "type": "algo",
+            "name": "空指令",
             "param": {
-                "out": "cmd61_01",
-                "args": [
-                    {
-                        "data0": 31
-                    },
-                    {
-                        "data1": 32
-                    }
-                ],
-                "done": null
+                "args": {},
+                "done": {}
             }
         },
-        "003": {
-            "type": "plc",
-            "name": "\u7b2c\u4e09\u6b65",
+        "bf00a33a-9468-42ed-a7f3-e1e308388b1b": {
+            "type": "algo",
+            "name": "空指令",
             "param": {
-                "out": "cmd61_02",
-                "args": [
-                    {
-                        "data0": 33
-                    },
-                    {
-                        "data1": 34
-                    },
-                    {
-                        "data2": 35.5
-                    }
-                ],
-                "done": null
-            }
-        },
-        "004": {
-            "type": "sys",
-            "name": "\u7b2c\u56db\u6b65",
-            "param": {
-                "args": null,
-                "done": {
-                    "code": 0
-                }
-            }
-        },
-        "005": {
-            "type": "sys",
-            "name": "\u7b2c\u4e94\u6b65",
-            "param": {
-                "args": null,
-                "done": {
-                    "code": 0
-                }
+                "args": {},
+                "done": {}
             }
         }
     },
     "nodes": {
-        "000": {
-            "x": 49.0,
-            "y": 11.0,
+        "head": {
+            "x": 48.0,
+            "y": 12.0,
             "text": "",
             "status": "idle"
         },
-        "001": {
-            "x": 49.0,
-            "y": 59.0,
+        "end": {
+            "x": 42.0,
+            "y": 354.0,
             "text": "",
             "status": "idle"
         },
-        "002": {
-            "x": 181.0,
-            "y": 100.0,
-            "text": "",
+        "dcf0e515": {
+            "x": 189.0,
+            "y": 107.0,
+            "text": "空指令",
             "status": "idle"
         },
-        "003": {
-            "x": 47.0,
-            "y": 189.0,
-            "text": "",
-            "status": "idle"
-        },
-        "004": {
-            "x": 181.0,
-            "y": 135.0,
-            "text": "",
-            "status": "idle"
-        },
-        "005": {
-            "x": 47.0,
-            "y": 269.0,
-            "text": "",
+        "bf00a33a-9468-42ed-a7f3-e1e308388b1b": {
+            "x": 284.0,
+            "y": 238.0,
+            "text": "空指令",
             "status": "idle"
         }
     }

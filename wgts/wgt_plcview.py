@@ -41,7 +41,6 @@ class PlcData(QAbstractTableModel):
         pt = self.pts[row]
 
         if role == Qt.DisplayRole or role == Qt.EditRole:
-            # breakpoint()
             if column == 0:
                 return pt.id
             elif column == 1:

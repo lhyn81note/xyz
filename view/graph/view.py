@@ -15,16 +15,15 @@ class Window(QWidget):
         self.ui = Ui_Form()
         self.ui.setupUi(self)
         self.ui.retranslateUi(self)
-        
+
         # 设置本页面的CmdMananger代理
         self.CmdManagerAgent = None
 
         # 设置下拉菜单
-        # breakpoint()
         # flownames = list(map(lambda cmdkey: _top.CmdManager[cmdkey].meta['name'], list(_top.CmdManager.keys())))
         flownames = list(_top.CmdManager.keys())
 
-        self.ui.cmb_flow.addItems(flownames) 
+        self.ui.cmb_flow.addItems(flownames)
         self.ui.cmb_flow.currentIndexChanged.connect(self.onSelectFlow)
 
         # 初始化QML控件
@@ -55,14 +54,14 @@ class Window(QWidget):
 
         if not self.CmdManagerAgent:
             print("流程信息调取出错!")
-            return 
+            return
 
         nodes_model, connections_model = self.CmdManagerAgent.genQmlModel()
         self.qml_flow.rootContext().setContextProperty("editable", _top.User=="admin")
         self.qml_flow.rootContext().setContextProperty("nodesData", nodes_model)
         self.qml_flow.rootContext().setContextProperty("connectionsData", connections_model)
 
-        self.qml_flow.setSource(QUrl.fromLocalFile('view/graph/Canvas.qml'))       
+        self.qml_flow.setSource(QUrl.fromLocalFile('view/graph/Canvas.qml'))
         self.qml_root = self.qml_flow.rootObject()
         self.qml_root.evtAny.disconnect()
         self.qml_root.evtAny.connect(self.onAny)
@@ -73,11 +72,21 @@ class Window(QWidget):
 
         self.ui.lb_flow_desc.setText(self.CmdManagerAgent.meta['desc'])
 
+    # Force a complete refresh of the QML widget by recreating it
+    def reloadFlow(self):
+        self.qml_flow.deleteLater()
+        self.qml_flow = QQuickWidget()
+        self.qml_flow.setResizeMode(QQuickWidget.ResizeMode.SizeRootObjectToView)
+        self.layout_qml.replaceWidget(self.layout_qml.itemAt(0).widget(), self.qml_flow)
+        self.qml_flow.setStyleSheet('margin:0px;\npadding:0px;')
+        flowname = self.ui.cmb_flow.currentText()
+        self.SetGraph(flowname)
+
 
     @Slot()
     def onSelectFlow(self):
         flowname = self.ui.cmb_flow.currentText()
-        self.SetGraph(flowname)   
+        self.SetGraph(flowname)
 
     @Slot()
     def onStart(self):
@@ -94,20 +103,55 @@ class Window(QWidget):
     @Slot(dict)
     def onAny(self, response):
         response = response.toVariant()
+
         if response["code"] == -2:
             QMessageBox.critical(None, "错误", response["msg"])
+
         elif response["code"] == -1:
             QMessageBox.warning(None, "警告", response["msg"])
-        else:
-            # QMessageBox.information(None, "信息", f"{response['type']}\n{response['msg']}\n{response['data']}")
-            # print(f"{response['type']}\n{response['msg']}\n{response['data']}")
 
+        else:
+
+            # 移动不需要重新加载配置
             if response["type"] == "move":
                 self.CmdManagerAgent.nodes[response["data"]["id"]]['x'] = response["data"]["x"]
                 self.CmdManagerAgent.nodes[response["data"]["id"]]['y'] = response["data"]["y"]
                 self.CmdManagerAgent.saveFlow()
+
+            # 其余需要重新加载配置
             else:
-                pass
+
+                if response["type"] == "add_child":
+                    nodeId = response["data"]
+                    self.CmdManagerAgent.addCmd(nodeId)
+                    self.reloadFlow()
+                        
+                elif response["type"] == "del_self":
+                    pass
+
+                elif response["type"] == "set_child":
+                    nodeId = response["data"]
+                    cmd_items = [f"{id}:{cmd.name}" for id, cmd in self.CmdManagerAgent.cmdObjs.items()]
+                    
+                    dialog_args = {
+                        "next_cmds": cmd_items
+                    }
+                    
+                    _top.popper.pop("dialogPath", dialog_args)
+                    if _top.popper.done and _top.popper.result:
+                        selected_cmd_id = _top.popper.result.split(":")[0]
+                        # Add logic to set the child relationship
+                        # self.CmdManagerAgent.setChildCmd(nodeId, selected_cmd_id)
+                        _top.popper.done = True
+                        self.CmdManagerAgent.setCmd(nodeId, selected_cmd_id)  
+
+                elif response["type"] == "edit_self":
+                    pass
+
+                else:
+                    pass
+
+                self.reloadFlow()
 
     @Slot(str, int)
     def onChildStatusChanged(self, cmd_id, status):
@@ -117,4 +161,4 @@ class Window(QWidget):
     @Slot(str, dict)
     def onPopup(self, dialog_id, args):
         _top.popper.pop(dialog_id, args)
-        
+

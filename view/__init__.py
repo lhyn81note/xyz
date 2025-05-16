@@ -5,8 +5,6 @@ from .db_users.view import Window as view_db_user
 from .db_basic.view import Window as view_db_basic
 from .db_types.view import Window as view_db_types
 
-from .pops.chart.view import Window as pop_chart
-
 Views = {
     'view_index':{'title':'自动流程','obj':view_graph},
     'view_plc':{'title':'PLC功能测试','obj':view_plc},

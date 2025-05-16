@@ -3,6 +3,7 @@ from datetime import datetime
 import json
 import time
 import threading
+import uuid
 from PySide6.QtCore import QObject, Signal, Slot
 
 class CmdMananger(QObject):
@@ -43,7 +44,7 @@ class CmdMananger(QObject):
     '''
     def loadFlow(self) -> bool:
 
-        with open(self.flow_file, 'r', encoding='utf-8') as file:
+        with open(self.flow_file, 'r', encoding='gbk') as file:
 
             json_str = file.read()
             data = json.loads(json_str)
@@ -66,7 +67,7 @@ class CmdMananger(QObject):
             }
             data["flow"]["head_node_id"] = self.head_node_id
             print(f'保存{self.flow_file}')
-            json.dump(data, file, indent=4)
+            json.dump(data, file, indent=4, ensure_ascii=False)
 
     def validateFlow(self, data):
 
@@ -117,8 +118,57 @@ class CmdMananger(QObject):
     def getCmd(self, cmd_id):
         return self.cmdObjs.get(cmd_id)
 
-    def addCmd(self, cmd):
-        pass
+    def addCmd(self, parent_id):
+        # Generate a new UUID for the new command
+        new_cmd_id = str(uuid.uuid4())
+
+        # Create a new empty command with type "algo"
+        new_cmd = {
+            "type": "algo",
+            "name": "空指令",
+            "param": {
+                "args": {},
+                "done": {}
+            }
+        }
+
+        # Add the new command to the cmds dictionary
+        self.cmds[new_cmd_id] = new_cmd
+
+        # Add the new command to the flow as a child of the parent command
+        if parent_id in self.flow:
+            self.flow[parent_id].append(new_cmd_id)
+        else:
+            self.flow[parent_id] = [new_cmd_id]
+
+        # Initialize the flow for the new command (empty list of children)
+        self.flow[new_cmd_id] = []
+
+        # Calculate position for the new node based on parent node
+        parent_x = self.nodes[parent_id]["x"]
+        parent_y = self.nodes[parent_id]["y"]
+
+        # Position the new node slightly to the right and below the parent
+        new_x = parent_x + 15
+        new_y = parent_y + 15
+
+        # Add the new node to the nodes dictionary
+        self.nodes[new_cmd_id] = {
+            "x": new_x,
+            "y": new_y,
+            "text": "空指令",
+            "status": "idle"
+        }
+
+        # Create a new Cmd object and add it to cmdObjs
+        newCmd = Cmd(new_cmd_id, new_cmd)
+        newCmd.evtStatusChanged.connect(self.onChildStatusChanged)
+        self.cmdObjs[new_cmd_id] = newCmd
+
+        # Save the updated flow to the JSON file
+        self.saveFlow()
+
+        print(f"Added new command: {new_cmd_id} as child of {parent_id}")
 
     def delCmd(self, cmd):
         pass
@@ -126,8 +176,9 @@ class CmdMananger(QObject):
     def delCmdChain(self, cmd):
         pass
 
-    def setCmd(self, cmd):
-        pass
+    def setCmd(self, cmd_id, child_id):
+        self.flow[cmd_id] = [child_id]
+        self.saveFlow()
 
     '''
     视图操作
@@ -175,8 +226,8 @@ class CmdMananger(QObject):
 
                     else:
                         path_names = list(map(lambda cmdkey: f'{cmdkey}:{self.cmds[cmdkey]['name']}', self.flow[self.cursor]))
-                        self.popper.evtBegin.emit("路径选择弹窗",{
-                            "next":path_names
+                        self.popper.evtBegin.emit("dialogPath",{
+                            "next_cmds":path_names
                         })
 
                         while self.popper.done == False:
@@ -262,10 +313,19 @@ class Cmd(QObject):
 
     def run(self, plc):
 
-        def run_sys(self):
+        def run_algo(self, plc):
             time.sleep(1)
-            self.result = "sys done."
+            self.result = "algo done."
             self.status = 2  # Set status to done
+
+        def run_pop(self, plc, top_popper):
+            top_popper.evtBegin.emit(self.params["dialog_id"], self.params["args"])
+
+            while top_popper.done == False:
+                time.sleep(1)
+
+            top_popper.done = False
+            self.cursor = top_popper.result.split(":")[0]
 
         def run_plc(self, plc):
             pt_out = plc.pts.get(self.param.get("out"))
@@ -313,8 +373,11 @@ class Cmd(QObject):
         self.evtStatusChanged.emit(self.id, self.status)
 
         try:
-            if self.type == "sys":
-                run_sys(self)
+            if self.type == "alog":
+                run_algo(self)
+
+            elif self.type == "pop":
+                run_pop(self)
 
             elif self.type == "plc":
                 run_plc(self, plc)

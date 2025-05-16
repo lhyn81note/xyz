@@ -19,7 +19,7 @@ Rectangle {
 
     signal evtAddChild(string nodeId)
     signal evtDelSelf(string nodeId)
-    signal evtDelChildren(string nodeId)
+    signal evtSetChild(string nodeId)
     signal evtDoubleClick(string nodeId)
     signal evtMove(string nodeId, real x, real y) // New signal for move event
 
@@ -92,8 +92,8 @@ Rectangle {
             onTriggered: evtDelSelf(node.nodeId)
         }
         MenuItem {
-            text: "删除指令链"
-            onTriggered: evtDelChildren(node.nodeId)
+            text: "设置下级指令"
+            onTriggered: evtSetChild(node.nodeId)
         }
     }
 

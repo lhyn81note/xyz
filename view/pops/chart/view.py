@@ -1,16 +1,14 @@
-# -*- coding: utf-8 -*-
-
 from view.pops.chart._view import Ui_Form
 import os,sys
 _top = sys.modules['__main__']
-from PySide6.QtWidgets import  QWidget, QVBoxLayout, QPushButton
+from PySide6.QtWidgets import  QDialog, QWidget, QVBoxLayout, QPushButton
 from PySide6.QtCore import QTimer
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
 
 from __main__ import *
 
-class Window(QWidget):
+class Dialog(QDialog):
     def __init__(self, menus=None, title=None):
         super().__init__()
         self.ui = Ui_Form()

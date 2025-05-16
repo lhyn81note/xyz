@@ -14,7 +14,7 @@ LogConfig.setup_logging()
 logger = logging.getLogger(__name__)
 logger.info("Application started.")
 
-User="eee"
+User="admin"
 
 # 读取程序配置
 config = configparser.ConfigParser()

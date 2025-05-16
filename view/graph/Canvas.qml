@@ -72,11 +72,11 @@ Rectangle {
                 }
             }
 
-            onEvtDelChildren :{
+            onEvtSetChild :{
                 if (!editable) {
-                    evtAny({code: -1, type:"del_children", msg: "非管理员无法编辑流程!",data: null})
+                    evtAny({code: -1, type:"set_child", msg: "非管理员无法编辑流程!",data: null})
                 } else {
-                    evtAny({code: 0, type:"del_children", msg: "接受请求",data: model.id})
+                    evtAny({code: 0, type:"set_child", msg: "接受请求",data: model.id})
                 }
             }
 
