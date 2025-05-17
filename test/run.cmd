@@ -25,7 +25,7 @@ if "%~1"=="build" (
     rmdir /S /Q build
     rmdir /S /Q dist
     
-    pyinstaller build.spec
+    pyinstaller ..\build.spec
     mkdir dist\res
     xcopy res dist\res /E /I
     copy setting.py dist

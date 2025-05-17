@@ -3,8 +3,8 @@ from PySide6.QtCore import QAbstractTableModel, Qt, QModelIndex, QDate
 from PySide6.QtGui import QColor, QBrush
 import os,sys
 _top = sys.modules['__main__']
-from libs.device.plc_modbus import MODBUS_AREA, MODBUS_VARTYPE, BYTE_ENDIAN, WORD_ENDIAN, IO
-from libs.device.plc_s7 import Pt
+from libs.device.plc_modbus import Pt
+# from libs.device.plc_s7 import Pt
 
 class PlcData(QAbstractTableModel):
 

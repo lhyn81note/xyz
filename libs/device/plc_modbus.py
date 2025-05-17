@@ -1,216 +1,304 @@
-from abc import abstractmethod, ABCMeta
-from typing import List, Dict, TypeVar, Union
+import json, time
+import logging
+from pydantic import BaseModel, Field
+from typing import List, Union
 import threading
-import time
-from . import BasePlc
 from pymodbus.client import ModbusTcpClient
-from pymodbus.payload import BinaryPayloadDecoder, BinaryPayloadBuilder
 from pymodbus.constants import Endian
-from enum import Enum
+from pymodbus.payload import BinaryPayloadBuilder, BinaryPayloadDecoder
+from . import BasePlc
+from ..notify import MsgType, MsgBroker
 
-class MODBUS_AREA(Enum):
-    Coil=0
-    InCoil=1
-    Reg=2
-    InReg=3
+# Constants for Modbus configuration
+# class MODBUS_AREA:
+#     Coil = "Coil"       # Coil (output) - 0xxxx
+#     InCoil = "InCoil"   # Discrete Input - 1xxxx
+#     InReg = "InReg"     # Input Register - 3xxxx
+#     Reg = "Reg"         # Holding Register - 4xxxx
 
-class IO(Enum):
-    IN=0
-    OUT=1
+# class MODBUS_VARTYPE:
+#     Bool = "Bool"       # Boolean
+#     Int_16 = "Int_16"   # 16-bit integer
+#     Int_32 = "Int_32"   # 32-bit integer
+#     Real_32 = "Real_32" # 32-bit float
+#     Word = "Word"       # 16-bit unsigned integer
 
-class MODBUS_VARTYPE(Enum):
-    Bool=0
-    Int_16=1
-    Int_32=2
-    Real_32=4
-    
-class BYTE_ENDIAN(Enum):
-    BIG=0
-    LITTLE=1
+# class BYTE_ENDIAN:
+#     BIG = Endian.BIG
+#     LITTLE = Endian.LITTLE
 
-class WORD_ENDIAN(Enum):
-    BIG=0
-    LITTLE=1
+# class WORD_ENDIAN:
+#     BIG = Endian.BIG
+#     LITTLE = Endian.LITTLE
+
+# class IO:
+#     IN = "i"
+#     OUT = "o"
+
+class Pt(BaseModel):
+    id: str = Field(..., description="命令的唯一标识")
+    name: str = Field(..., description="命令的名称")
+    addr: str = Field(..., description="地址")
+    iotype: str = Field(..., description="读写类型")
+    vartype: str = Field(..., description="变量类型")
+    done: List[str] = Field(..., description="监控信号列表")
+    range: Union[List[int], None] = Field(..., description="数值范围")
+    value: Union[bool, int, float] = None
+
+    @property
+    def isValid(self):
+        if self.value is not None:
+            if self.range is not None:
+                check = self.range[0] <= self.value <= self.range[1]
+                return check
+
+            if self.vartype == "BOOL" and self.id.startswith("alarm"):
+                check = self.value == False
+                return check
+            else:
+                return True
+        else:
+            return False
 
 class ModbusTcp(BasePlc):
-
-    def __init__(self):
+    def __init__(self, config_file: str, addr: str, interval: int, msgbroker: MsgBroker):
         super().__init__()
-        self.client=None
-        self.config=None
-        self.running=False
-        self.callbacks = []
+        self.filepath = config_file
+        self.addr = addr
+        self.protocal = "modbus"
+        self.interval = interval  # 默认间隔时间，单位毫秒
+        self.msgbroker = msgbroker  # 用于发布消息
+        self.byte_order = Endian.BIG
+        self.word_order = Endian.LITTLE
+        # self.client_r = None
+        # self.client_w = None
+        # self.pts = {}
+        # self.callbacks = []  # 用于存储回调函数
 
-    def register_callback(self, callback):
-        if callable(callback):
-            self.callbacks.append(callback)
-        else:
-            raise ValueError("无法调用对象")
-
-    def trigger_callbacks(self, *args, **kwargs):
-        for callback in self.callbacks:
-            if callback is not None:
-                callback(*args, **kwargs)
-
-    def init(self, config=None, host=None, port=502, timeout=1000) -> bool:
-        if config:
-            self.config = config
-            self.client = ModbusTcpClient(self.config['host'], self.config['port'], timeout=self.config['timeout'])
-        else:
-            if host:
-                self.client = ModbusTcpClient(host, port=port, timeout=timeout)
-            else:
-                raise "未指定PLC地址!"
-
-    def __str__(self)->str:
-        if self.config:
-            return f"{self.config['host']}::{self.config['port']}::{len(self.config['pts'])}"
-        else:
-            return f"无配置文件"
-            
-    def conn(self)->bool: 
-        self.client.connect()
-        return self.client.connected
-    
-    def disconn(self)->bool:
+    def load_config(self) -> bool:
         try:
-            self.client.close()
+            with open(self.filepath, 'r', encoding='utf-8') as file:
+                data = json.load(file)
+                ptlist = [Pt(**value) for value in data.values()]
+                for pt in ptlist:
+                    self.pts[pt.id] = pt
             return True
         except Exception as e:
-            #log
+            logging.error(f"加载配置文件失败: {self.filepath}, 错误: {e}")
             return False
-        
-    def isalive(self) -> bool:
-        return self.client.connected
 
-    def read_coils(self, area:MODBUS_AREA, start_address:int, count:int, slave:int=1) -> Union[List[bool] , None] :
-        ret=None
-        if area==MODBUS_AREA.Coil:
-            ret = self.client.read_coils(start_address,count,slave=slave)
-        elif area==MODBUS_AREA.InCoil:
-            ret = self.client.read_discrete_inputs(start_address,count,slave=slave)
-        else:
-            #log
-            raise f"错误区:{area}!"
-        if ret.isError():
-            #log
-            return False
-        else:
-            return ret.bits
-        
-    def write_coil(self, address:int, value:bool, slave:int=1) -> bool:
-        ret = self.client.write_coil(address,value,slave=slave)        
-        if ret.isError():
-            #log
-            return False
-        else:
-            return True
-        
-    def read_regs(self, area:MODBUS_AREA, start_address:int, count:int, slave:int=1) -> Union[List[int] , None] :
-        ret=None
-        if area==MODBUS_AREA.Reg:
-            ret = self.client.read_holding_registers(start_address,count,slave=slave)
-        elif area==MODBUS_AREA.InReg:
-            ret = self.client.read_input_registers(start_address,count,slave=slave)
-        else:
-            #log
-            raise f"错误区:{area}!"
-        if ret.isError():
-            #log
-            return False
-        else:
-            return ret     
-           
-    def write_reg(self, address:int,  value:int, slave:int=1) -> bool:
-        ret = self.client.write_register(address,value,slave=slave)        
-        if ret.isError():
-            #log
-            return False
-        else:
-            return True
-        
-    def read_pt(self, pt, byte_order=Endian.BIG, word_order=Endian.BIG):
+    def connect(self) -> bool:
+        try:
+            # Parse address (format: "ip:port")
+            ip = self.addr.split(":")[0]
+            port = int(self.addr.split(":")[1]) if ":" in self.addr else 502
 
-        # if pt['io']==IO.OUT:
-        #     return
-        
-        ret=None
+            # Create ModbusTcpClient instances for reading and writing
+            self.client_r = ModbusTcpClient(host=ip, port=port)
+            self.client_w = ModbusTcpClient(host=ip, port=port)
 
-        if pt['type']==MODBUS_VARTYPE.Bool:
-            addrs = [int(x) for x in pt['address'].split('.')]
-            if pt['area']==MODBUS_AREA.Coil:
-                ret = self.client.read_coils(addrs[0]*8+addrs[1], 1, pt['slave']).bits
-                ret = ret[0]
-            elif pt['area']==MODBUS_AREA.InCoil:
-                ret = self.client.read_discrete_inputs(addrs[0]*8+addrs[1], 1, pt['slave']).bits
-                ret = ret[0]
-            elif pt['area']==MODBUS_AREA.Reg:
-                ret = self.client.read_holding_registers(int(addrs[0]), 1, slave=pt['slave'])
-                decoder = BinaryPayloadDecoder.fromRegisters(ret.registers, byteorder=byte_order, wordorder=word_order)
-                ret = decoder.decode_bits(package_len=1)  
-                ret = ret[addrs[1]]    
+            # Connect to the Modbus server
+            self.client_r.connect()
+            self.client_w.connect()
+
+            if self.alive:
+                logging.info("Modbus TCP连接成功.")
+                return True
             else:
-                raise "错误点位"
-        else:
-            bytes = -1
-            if pt['type']==MODBUS_VARTYPE.Int_16: bytes=1
-            elif pt['type']==MODBUS_VARTYPE.Int_32: bytes=2
-            elif pt['type']==MODBUS_VARTYPE.Real_32: bytes=2            
-            ret = self.client.read_holding_registers(int(pt['address']), bytes, pt['slave'])
-            decoder = BinaryPayloadDecoder.fromRegisters(ret.registers, Endian.BIG, Endian.BIG)
-            if pt['type']==MODBUS_VARTYPE.Int_16: ret=decoder.decode_16bit_int()
-            elif pt['type']==MODBUS_VARTYPE.Int_32: ret=decoder.decode_32bit_int()
-            elif pt['type']==MODBUS_VARTYPE.Real_32: ret=decoder.decode_32bit_float()      
-        pt['value']=ret
+                logging.error("Modbus TCP连接失败")
+                return False
 
-    def write_pt(self, pt, val):
+        except Exception as e:
+            logging.error(f"Modbus TCP连接出错: {e}")
+            return False
 
-        if pt['io']==IO.IN:
-            return
+    @property
+    def alive(self) -> bool:
+        try:
+            return self.client_r.is_socket_open() and self.client_w.is_socket_open()
+        except Exception as e:
+            return False
 
-        if pt['type']==MODBUS_VARTYPE.Bool:
-            addrs = [int(x) for x in pt['address'].split('.')]
-            if pt['area']==MODBUS_AREA.Coil:
-                ret = self.client.write_coil(addrs[0]*8+addrs[1], val, pt['slave'])
-            elif pt['area']==MODBUS_AREA.Reg:
-                pass   
+    def write(self, ptId, value) -> bool:
+        pt = self.pts.get(ptId)
+
+        if pt is None:
+            logging.error(f"指令不存在!{ptId}")
+            return False
+
+        if (self.client_w is None) or self.alive == False:
+            logging.error(f"PLC未连接!")
+            return False
+
+        if pt.iotype == "i":
+            logging.error(f"输入指令不能写入!{pt.iotype}")
+            return False
+
+        try:
+            # Parse address
+            addrs = pt.addr.split(",")
+            address_parts = addrs[0].split(":")
+
+            # Get the register/coil address
+            if len(address_parts) > 1:
+                address = int(address_parts[1])
             else:
-                raise "错误点位"
+                address = int(address_parts[0])
+
+            # Handle different variable types
+            if pt.vartype == "BOOL":
+                # For boolean values, write to coil
+                result = self.client_w.write_coil(address, value == True)
+                return not result.isError()
+
+            elif pt.vartype == "INT":
+                # For 16-bit integers
+                builder = BinaryPayloadBuilder(byteorder=self.byte_order, wordorder=self.word_order)
+                builder.add_16bit_int(value)
+                registers = builder.to_registers()
+                result = self.client_w.write_registers(address, registers)
+                return not result.isError()
+
+            elif pt.vartype == "WORD":
+                # For 16-bit unsigned integers
+                builder = BinaryPayloadBuilder(byteorder=self.byte_order, wordorder=self.word_order)
+                builder.add_16bit_uint(value)
+                registers = builder.to_registers()
+                result = self.client_w.write_registers(address, registers)
+                return not result.isError()
+
+            elif pt.vartype == "REAL":
+                # For 32-bit floating point values
+                builder = BinaryPayloadBuilder(byteorder=self.byte_order, wordorder=self.word_order)
+                builder.add_32bit_float(value)
+                registers = builder.to_registers()
+                result = self.client_w.write_registers(address, registers)
+                return not result.isError()
+
+            else:
+                logging.error(f"点类型错误:{pt.vartype}")
+                return False
+
+        except Exception as e:
+            logging.error(f"写入PLC错误:{e}")
+            return False
+
+    def read(self, ptId) -> Union[bool, int, float, None]:
+        pt = self.pts.get(ptId)
+
+        if pt is None:
+            logging.error(f"PLC指令不存在!{ptId}")
+            return False
+
+        if (self.client_r is None) or self.alive == False:
+            logging.error(f"PLC未连接,无法读取")
+            return False
+
+        # try:
+        # Parse address
+        addrs = pt.addr.split(",")
+        address_parts = addrs[0].split(":")
+
+        # Get the register/coil address
+        if len(address_parts) > 1:
+            address = int(address_parts[1])
         else:
-            builder = BinaryPayloadBuilder(byteorder=Endian.BIG, wordorder=Endian.BIG)
-            if pt['type']==MODBUS_VARTYPE.Int_16: builder.add_16bit_int(val)
-            elif pt['type']==MODBUS_VARTYPE.Int_32: builder.add_32bit_int(val)
-            elif pt['type']==MODBUS_VARTYPE.Real_32: builder.add_32bit_float(val)    
-            payload = builder.to_registers()
-            self.client.write_registers(int(pt['address']), payload)
+            address = int(address_parts[0])
 
-    def read_all(self):
-        while self.running:
-            for i in range(len(self.config['pts'])):
-                pt=self.config['pts'][i]
-                # if pt['io']==IO.OUT: continue
-                self.read_pt(pt)
-                self.trigger_callbacks((i,pt['value']))
-            time.sleep(self.config['interval'])
-        
-        # # get max address
-        # ADDRS = [pt['address'].split('.')[1] for pt in self.config['pts'].values() if pt['io']==IO.IN]
-        # MAX_ADDR = max(ADDRS)
-        # MIN_ADDR = min(ADDRS)
-        # COUNT = MAX_ADDR-MIN_ADDR+1
+        # Handle different variable types
+        if pt.vartype == "BOOL":
+            # For boolean values, read from coil or discrete input
+            if pt.iotype == "i":
+                result = self.client_r.read_discrete_inputs(address, 1)
+            else:
+                result = self.client_r.read_coils(address, 1)
 
-        # # read all bytes
-        # all_coils = self.client.read_holding_registers(address=MIN_ADDR, count=COUNT)
-        # decoder = BinaryPayloadDecoder.fromRegisters(all_coils.registers)
-        # decoder.decode_bits(COUNT)
+            if result.isError():
+                return None
+            return result.bits[0]
 
-    def loop(self):
-        thread = threading.Thread(target=self.read_all)
-        thread.daemon = True 
+        elif pt.vartype == "INT":
+            # For 16-bit integers
+            result = self.client_r.read_holding_registers(address, 1)
+            if result.isError():
+                return None
+            decoder = BinaryPayloadDecoder.fromRegisters(
+                result.registers, byteorder=self.byte_order, wordorder=self.word_order
+            )
+            return decoder.decode_16bit_int()
+
+        elif pt.vartype == "WORD":
+            # For 16-bit unsigned integers
+            result = self.client_r.read_holding_registers(address, 1)
+            if result.isError():
+                return None
+            decoder = BinaryPayloadDecoder.fromRegisters(
+                result.registers, byteorder=self.byte_order, wordorder=self.word_order
+            )
+            return decoder.decode_16bit_uint()
+
+        elif pt.vartype == "REAL":
+            # For 32-bit floating point values
+            result = self.client_r.read_holding_registers(address, 2)
+            if result.isError():
+                return None
+            decoder = BinaryPayloadDecoder.fromRegisters(
+                result.registers, byteorder=self.byte_order, wordorder=self.word_order
+            )
+            return decoder.decode_32bit_float()
+
+        else:
+            logging.error(f"点类型错误!{pt.vartype}")
+            return None
+
+        # except Exception as e:
+        #     logging.error(f"读取PLC错误:{e}")
+        #     return None
+
+    def scan(self):
+        def readall():
+            while True:
+                # 先发一次连接状态
+                self.msgbroker.publish(MsgType.alarm, {
+                    'source': "PLC",
+                    'subject': 'connect',
+                    'content': self.alive,
+                })
+
+                if self.alive == False:  # 如果断开则连接
+                    self.connect()
+                else:  # 如果连着则读取
+                    for pt in self.pts.values():
+                        pt.value = self.read(pt.id)
+
+                        if pt.value is None:
+                            print(pt)
+                            self.msgbroker.publish(MsgType.alarm, {
+                                'source': "PLC",
+                                'subject': 'alarm',
+                                'content': "PLC读点失败",
+                            })
+                        else:
+                            if not pt.isValid:
+                                self.msgbroker.publish(MsgType.alarm, {
+                                    'source': "PLC",
+                                    'subject': 'alarm',
+                                    'content': pt.name,
+                                })
+
+                time.sleep(self.interval / 1000)
+                self.trigger_callbacks()
+
+        thread = threading.Thread(target=readall, daemon=True)
         thread.start()
 
-    def stop(self):
-        self.running = False
 
-    def start(self):
-        self.running = True
+if __name__ == "__main__":
+    # Example usage
+    plc = ModbusTcp(config_file="plc_modbus.json", addr="127.0.0.1:502", interval=500, msgbroker=None)
+    plc.load_config()
+    plc.connect()
+    plc.write("data1", 100)
+    plc.write("data2", 65523)
+    plc.write("data3", 11.22)
+    plc.scan()

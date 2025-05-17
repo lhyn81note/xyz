@@ -220,14 +220,10 @@ class S7(BasePlc):
 
 
 if __name__ == "__main__":
-
     plc = Plc(config_file="plc.json", addr="172.16.1.95:0:2", protocal="s7", interval=500)
     plc.load_config()
-
     plc.connect()
-
     plc.write("data1",100)
     plc.write("data2",65523)
     plc.write("data3",11.22)
-
     plc.scan()

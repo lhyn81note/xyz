@@ -1,21 +1,74 @@
 {
-    'host':'127.0.0.1',
-    'port':502,
-    'timeout':5,
-    'interval':0.5,
-    'byte_order': "BIG",
-    'word_order': "LITTLE",
-    'pts':[
-        {"io":IO.IN, "slave":1, "area":MODBUS_AREA.Coil, "address":"0.1", "type":MODBUS_VARTYPE.Bool, "name":"测试点1", "value":"null"},
-        {"io":IO.IN, "slave":1, "area":MODBUS_AREA.InCoil, "address":"0.1", "type":MODBUS_VARTYPE.Bool, "name":"测试点2", "value":"null"},
-        {"io":IO.IN, "slave":1, "area":MODBUS_AREA.Reg, "address":"0.4", "type":MODBUS_VARTYPE.Bool, "name":"测试点3", "value":"null"},
-        {"io":IO.IN, "slave":1, "area":MODBUS_AREA.Reg, "address":"2", "type":MODBUS_VARTYPE.Int_16, "name":"测试点6", "value":"null"},
-        {"io":IO.IN, "slave":1, "area":MODBUS_AREA.Reg, "address":"3", "type":MODBUS_VARTYPE.Int_32, "name":"测试点8", "value":"null"},
-        {"io":IO.IN, "slave":1, "area":MODBUS_AREA.Reg, "address":"10", "type":MODBUS_VARTYPE.Real_32, "name":"测试点10", "value":"null"},
-        {"io":IO.OUT, "slave":1, "area":MODBUS_AREA.Coil, "address":"0.3", "type":MODBUS_VARTYPE.Bool, "name":"测试点13", "value":"null"},
-        {"io":IO.OUT, "slave":1, "area":MODBUS_AREA.Reg, "address":"15", "type":MODBUS_VARTYPE.Int_16, "name":"测试点14", "value":"null"},
-        {"io":IO.OUT, "slave":1, "area":MODBUS_AREA.Reg, "address":"16", "type":MODBUS_VARTYPE.Int_32, "name":"测试点15", "value":"null"},
-        {"io":IO.OUT, "slave":1, "area":MODBUS_AREA.Reg, "address":"18", "type":MODBUS_VARTYPE.Real_32, "name":"测试点16", "value":"null"},
-        {"io":IO.OUT, "slave":1, "area":MODBUS_AREA.Reg, "address":"18", "type":MODBUS_VARTYPE.Real_32, "name":"测试点16", "value":"null"},
-    ],
+    "data1": {
+        "id": "data1",
+        "name": "测试点1",
+        "iotype": "i",
+        "addr": "0",
+        "vartype": "BOOL",
+        "range": null,
+        "done": []
+    },
+    "data2": {
+        "id": "data2",
+        "name": "测试点2",
+        "iotype": "i",
+        "addr": "1",
+        "vartype": "INT",
+        "range": [-32768, 32767],
+        "done": []
+    },
+    "data3": {
+        "id": "data3",
+        "name": "测试点3",
+        "iotype": "i",
+        "addr": "3",
+        "vartype": "WORD",
+        "range": [0, 65535],
+        "done": []
+    },
+    "data4": {
+        "id": "data4",
+        "name": "测试点4",
+        "iotype": "i",
+        "addr": "5",
+        "vartype": "REAL",
+        "range": [-100, 100],
+        "done": []
+    },
+    "cmd1": {
+        "id": "cmd1",
+        "name": "命令1",
+        "iotype": "o",
+        "addr": "10",
+        "vartype": "BOOL",
+        "range": null,
+        "done": []
+    },
+    "cmd2": {
+        "id": "cmd2",
+        "name": "命令2",
+        "iotype": "o",
+        "addr": "11",
+        "vartype": "INT",
+        "range": [-32768, 32767],
+        "done": []
+    },
+    "cmd3": {
+        "id": "cmd3",
+        "name": "命令3",
+        "iotype": "o",
+        "addr": "13",
+        "vartype": "WORD",
+        "range": [0, 65535],
+        "done": []
+    },
+    "cmd4": {
+        "id": "cmd4",
+        "name": "命令4",
+        "iotype": "o",
+        "addr": "15",
+        "vartype": "REAL",
+        "range": [-100, 100],
+        "done": []
+    }
 }

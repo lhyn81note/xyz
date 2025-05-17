@@ -1,0 +1,60 @@
+2025-05-18 00:25:23,457 - INFO - __main__ - app.py:15 - ********** 程序启动 **********
+2025-05-18 00:25:23,459 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-18 00:25:23,459 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-18 00:25:23,460 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-18 00:25:26,463 - ERROR - snap7.common - error.py:142 - b' ISO : An error occurred during recv TCP : Connection timed out'
+2025-05-18 00:25:26,464 - ERROR - root - plc_s7.py:83 - S7连接出错: b' ISO : An error occurred during recv TCP : Connection timed out'
+2025-05-18 00:25:26,467 - INFO - root - app.py:31 - PLC连接状态: False
+2025-05-18 00:25:26,469 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-18 00:25:26,470 - INFO - snap7.client - client.py:92 - destroying snap7 client
+2025-05-18 00:25:26,471 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-18 00:25:26,472 - INFO - snap7.client - client.py:92 - destroying snap7 client
+2025-05-18 00:25:26,472 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-18 00:25:29,474 - ERROR - snap7.common - error.py:142 - b' ISO : An error occurred during recv TCP : Connection timed out'
+2025-05-18 00:25:29,476 - ERROR - root - plc_s7.py:83 - S7连接出错: b' ISO : An error occurred during recv TCP : Connection timed out'
+2025-05-18 00:25:30,478 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-18 00:25:30,479 - INFO - snap7.client - client.py:92 - destroying snap7 client
+2025-05-18 00:25:30,479 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-18 00:25:30,480 - INFO - snap7.client - client.py:92 - destroying snap7 client
+2025-05-18 00:25:30,480 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-18 00:25:33,481 - ERROR - snap7.common - error.py:142 - b' ISO : An error occurred during recv TCP : Connection timed out'
+2025-05-18 00:25:33,482 - ERROR - root - plc_s7.py:83 - S7连接出错: b' ISO : An error occurred during recv TCP : Connection timed out'
+2025-05-18 00:25:34,484 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-18 00:25:34,485 - INFO - snap7.client - client.py:92 - destroying snap7 client
+2025-05-18 00:25:34,486 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-18 00:25:34,486 - INFO - snap7.client - client.py:92 - destroying snap7 client
+2025-05-18 00:25:34,486 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-18 00:33:23,735 - INFO - __main__ - app.py:15 - ********** 程序启动 **********
+2025-05-18 00:33:25,768 - ERROR - pymodbus.logging - logging.py:115 - Connection to (127.0.0.1, 502) failed: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+2025-05-18 00:33:27,807 - ERROR - pymodbus.logging - logging.py:115 - Connection to (127.0.0.1, 502) failed: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+2025-05-18 00:33:27,807 - ERROR - root - plc_modbus.py:108 - Modbus TCP连接失败
+2025-05-18 00:33:27,807 - INFO - root - app.py:31 - PLC连接状态: False
+2025-05-18 00:33:29,832 - ERROR - pymodbus.logging - logging.py:115 - Connection to (127.0.0.1, 502) failed: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+2025-05-18 00:33:31,858 - ERROR - pymodbus.logging - logging.py:115 - Connection to (127.0.0.1, 502) failed: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+2025-05-18 00:33:31,859 - ERROR - root - plc_modbus.py:108 - Modbus TCP连接失败
+2025-05-18 00:33:34,906 - ERROR - pymodbus.logging - logging.py:115 - Connection to (127.0.0.1, 502) failed: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+2025-05-18 00:33:36,948 - ERROR - pymodbus.logging - logging.py:115 - Connection to (127.0.0.1, 502) failed: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+2025-05-18 00:33:36,948 - ERROR - root - plc_modbus.py:108 - Modbus TCP连接失败
+2025-05-18 00:33:38,482 - INFO - root - plc_modbus.py:105 - Modbus TCP连接成功.
+2025-05-18 00:35:51,147 - INFO - __main__ - app.py:15 - ********** 程序启动 **********
+2025-05-18 00:35:51,148 - INFO - root - plc_modbus.py:105 - Modbus TCP连接成功.
+2025-05-18 00:35:51,148 - INFO - root - app.py:31 - PLC连接状态: True
+2025-05-18 00:41:10,640 - INFO - __main__ - app.py:15 - ********** 程序启动 **********
+2025-05-18 00:41:10,644 - INFO - root - plc_modbus.py:105 - Modbus TCP连接成功.
+2025-05-18 00:41:10,644 - INFO - root - app.py:31 - PLC连接状态: True
+2025-05-18 00:42:09,308 - INFO - __main__ - app.py:15 - ********** 程序启动 **********
+2025-05-18 00:42:09,324 - INFO - root - plc_modbus.py:105 - Modbus TCP连接成功.
+2025-05-18 00:42:09,325 - INFO - root - app.py:31 - PLC连接状态: True
+2025-05-18 00:46:06,923 - INFO - __main__ - app.py:15 - ********** 程序启动 **********
+2025-05-18 00:46:06,940 - INFO - root - plc_modbus.py:105 - Modbus TCP连接成功.
+2025-05-18 00:46:06,941 - INFO - root - app.py:31 - PLC连接状态: True
+2025-05-18 00:47:23,716 - INFO - root - cmd.py:216 - ########### 开始执行流程<测试流程>
+2025-05-18 00:47:23,717 - INFO - root - cmd.py:324 - >>> 开始执行指令: 名称<开始> 类型<algo> 算法类型:<algoWait>
+2025-05-18 00:47:24,721 - INFO - root - cmd.py:404 - <<< 指令<开始> 执行完毕 ---> 执行结果:True
+2025-05-18 00:47:24,722 - INFO - root - cmd.py:324 - >>> 开始执行指令: 名称<空指令> 类型<algo> 算法类型:<algoWait>
+2025-05-18 00:47:25,724 - INFO - root - cmd.py:404 - <<< 指令<空指令> 执行完毕 ---> 执行结果:True
+2025-05-18 00:47:27,730 - INFO - root - cmd.py:329 - >>> 开始执行指令: 名称<实时曲线> 类型<pop> 弹窗类型:<dialogChart>
+2025-05-18 00:47:41,738 - INFO - root - cmd.py:404 - <<< 指令<实时曲线> 执行完毕 ---> 执行结果:True
+2025-05-18 00:47:41,738 - INFO - root - cmd.py:324 - >>> 开始执行指令: 名称<结束> 类型<algo> 算法类型:<algoWait>
+2025-05-18 00:47:42,742 - INFO - root - cmd.py:404 - <<< 指令<结束> 执行完毕 ---> 执行结果:True
+2025-05-18 00:47:42,742 - INFO - root - cmd.py:272 - ########### 流程执行完毕<测试流程>

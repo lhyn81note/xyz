@@ -36,3 +36,24 @@
 2025-05-17 23:19:37,760 - INFO - root - cmd.py:324 - >>> 开始执行指令: 名称<结束> 类型<algo> 算法类型:<algoWait>
 2025-05-17 23:19:38,762 - INFO - root - cmd.py:404 - <<< 指令<结束> 执行完毕 ---> 执行结果:True
 2025-05-17 23:19:38,763 - INFO - root - cmd.py:272 - ########### 流程执行完毕<测试流程>
+2025-05-17 23:26:58,293 - INFO - __main__ - app.py:15 - ********** 程序启动 **********
+2025-05-17 23:26:58,295 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-17 23:26:58,296 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-17 23:26:58,296 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-17 23:26:58,301 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-17 23:26:58,306 - INFO - root - plc_s7.py:76 - S7连接成功.
+2025-05-17 23:26:58,306 - INFO - root - app.py:31 - PLC连接状态: True
+2025-05-17 23:39:11,325 - INFO - __main__ - app.py:15 - ********** 程序启动 **********
+2025-05-17 23:39:11,327 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-17 23:39:11,327 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-17 23:39:11,327 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-17 23:39:11,333 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-17 23:39:11,338 - INFO - root - plc_s7.py:76 - S7连接成功.
+2025-05-17 23:39:11,338 - INFO - root - app.py:31 - PLC连接状态: True
+2025-05-17 23:52:33,054 - INFO - __main__ - app.py:15 - ********** 程序启动 **********
+2025-05-17 23:52:33,057 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-17 23:52:33,057 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-17 23:52:33,058 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-17 23:52:33,064 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-17 23:52:33,069 - INFO - root - plc_s7.py:76 - S7连接成功.
+2025-05-17 23:52:33,069 - INFO - root - app.py:31 - PLC连接状态: True
