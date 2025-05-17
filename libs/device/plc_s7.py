@@ -1,4 +1,5 @@
 import json,time
+import logging
 from pydantic import BaseModel, Field
 from typing import List
 import snap7
@@ -57,7 +58,7 @@ class S7(BasePlc):
                     self.pts[pt.id] = pt
             return True
         # except Exception as e:
-            print(f"加载配置文件失败: {self.filepath}")
+            logging.error(f"加载配置文件失败: {self.filepath}")
             return False
 
     def connect(self) -> bool:
@@ -72,14 +73,14 @@ class S7(BasePlc):
             self.client_w.connect(ip, rack, slot)  # Rack=0, Slot=1 are typical defaults
 
             if self.alive:
-                print("Connection successful.")
+                logging.info("S7连接成功.")
                 return True
             else:
-                print("Failed to connect.")
+                logging.error("S7链接失败")
                 return False
 
         except Exception as e:
-            print(f"Error connecting to PLC: {e}")
+            logging.error(f"S7连接出错: {e}")
             return False
 
     def write(self, ptId, value) -> bool:
@@ -87,15 +88,15 @@ class S7(BasePlc):
         pt = self.pts.get(ptId)
 
         if pt is None:
-            print(f"指令不存在!{ptId}")
+            logging.error(f"指令不存在!{ptId}")
             return False
 
         if (self.client_w is None) or self.alive==False:
-            print(f"PLC未连接!")
+            logging.error(f"PLC未连接!")
             return False
 
         if pt.iotype == "i":
-            print(f"输入指令不能写入!{pt.iotype}")
+            logging.error(f"输入指令不能写入!{pt.iotype}")
             return False
 
         addrs = pt.addr.split(",")
@@ -108,36 +109,32 @@ class S7(BasePlc):
                 data = bytearray(1) 
                 set_bool(data, 0, offset, value==True)# 使用set_bool方法将指定位置设置为True
                 self.client_w.db_write(db, start_byte, data)# 写入数据到PLC的指定DB块和地址
-                print(f"布尔指令 {pt.name} 执行成功")
                 return True
 
             elif (pt.vartype == "INT"):
                 data = bytearray(2)  
                 set_int(data, 0, value)  
                 self.client_w.db_write(db, start_byte, data)  
-                print(f"整形指令 {pt.name} 执行成功")
                 return True
 
             elif (pt.vartype == "WORD"):
                 data = bytearray(2) 
                 set_word(data, 0, value)  
                 self.client_w.db_write(db, start_byte, data)  
-                print(f"字指令 {pt.name} 执行成功")
                 return True
 
             elif (pt.vartype == "REAL"):
                 data = bytearray(4)  
                 set_real(data, 0, value)  
                 self.client_w.db_write(db, start_byte, data)  
-                print(f"实数指令 {pt.name} 执行成功")
                 return True
 
             else:
-                print(f"点类型错误:{pt.vartype}")
+                logging.error(f"点类型错误:{pt.vartype}")
                 return False
 
         except Exception as e:
-            print(f"写入PLC错误:{e}")
+            logging.error(f"写入PLC错误:{e}")
             return False
 
     def read(self, ptId)->[bool |int | float]:
@@ -145,11 +142,11 @@ class S7(BasePlc):
         pt = self.pts.get(ptId)
 
         if pt is None:
-            print(f"指令不存在!{ptId}")
+            logging.error(f"PLC指令不存在!{ptId}")
             return False
 
         if (self.client_r is None) or self.alive==False:
-            print(f"PLC未连接,无法读取")
+            logging.error(f"PLC未连接,无法读取")
             return False
 
         addrs = pt.addr.split(",")
@@ -176,11 +173,11 @@ class S7(BasePlc):
                 return get_real(data, 0)
 
             else:
-                print(f"点类型错误!{pt.vartype}")
+                logging.error(f"点类型错误!{pt.vartype}")
                 return None
                 
         except Exception as e:
-            print(f"读取PLC错误:{e}")
+            logging.error(f"读取PLC错误:{e}")
             return None
 
     def scan(self):
@@ -228,13 +225,9 @@ if __name__ == "__main__":
     plc.load_config()
 
     plc.connect()
-    print(f"PLC is alive: {plc.alive}")
 
     plc.write("data1",100)
     plc.write("data2",65523)
     plc.write("data3",11.22)
-
-    # ret = plc.read("data1")
-    # print(f"读取数据: {ret}")
 
     plc.scan()

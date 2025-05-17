@@ -84,5 +84,3 @@ class Bind:
             return None
 if __name__ == "__main1__":
     b=Bind(None,"property","ElementName",Converter=None,Mode=BindingMode.TwoWay)
-    print(b.Converter)
-    print(b.Mode)

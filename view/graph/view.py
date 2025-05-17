@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import os,sys,json
+import logging,sys,json
 from view.graph._view import Ui_Form
 from PySide6.QtWidgets import (QComboBox, QVBoxLayout, QLabel, QPushButton,  QWidget, QDialog, QMessageBox, QPlainTextEdit)
 from PySide6.QtQuickWidgets import QQuickWidget
@@ -46,14 +46,13 @@ class Window(QWidget):
 
     def SetGraph(self, flowname):
 
-        print(f"######### 创建Graph:{flowname} ############")
-        for k,v  in _top.CmdManager.items():
+        for k, _  in _top.CmdManager.items():
             if k==flowname:
                 self.CmdManagerAgent = _top.CmdManager.get(flowname)
                 break
 
         if not self.CmdManagerAgent:
-            print("流程信息调取出错!")
+            logging.error(f"无法获取CmdManager:{flowname}")
             return
 
         nodes_model, connections_model = self.CmdManagerAgent.genQmlModel()
@@ -217,7 +216,6 @@ class Window(QWidget):
 
     @Slot(str, int)
     def onChildStatusChanged(self, cmd_id, status):
-        print(f"Node状态变化: {cmd_id}, {status}")
         self.qml_root.updateNodeStatus(cmd_id, status)
 
     @Slot(str, dict)

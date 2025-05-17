@@ -27,7 +27,7 @@
         "description": "标准值+"
       },
       {
-        "name": "IsPrint",
+        "name": "Is# print",
         "type": "String",
         "description": "是否打印"
       },
@@ -100,7 +100,7 @@
       },
       {
         "header": "是否打印",
-        "field": "IsPrint",
+        "field": "Is# print",
         "width": "2.5cm"
       }
     ],

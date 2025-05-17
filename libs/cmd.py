@@ -76,7 +76,7 @@ class CmdMananger(QObject):
                 "nodes": self.nodes
             }
             data["flow"]["head_node_id"] = self.head_node_id
-            print(f'保存{self.flow_file}')
+            logging.info(f'保存{self.flow_file}')
             json.dump(data, file, indent=4, ensure_ascii=False)
 
     def validateFlow(self, data):
@@ -84,32 +84,27 @@ class CmdMananger(QObject):
         # 0.必须包含meta
         if not data.get("meta"):
             # raise ValueError("JSON must contain 'meta'")
-            print("必须包含meta")
             return False
 
         # 1.必须包含flow
         if not data.get("flow"):
-            # raise ValueError("JSON must contain 'flow'")
-            print("必须包含flow")
+            logging.error("flow配置文件缺少meta")
             return False
 
         # 2.必须包含cmds
         if not data.get("cmds"):
-            # raise ValueError("JSON must contain 'cmds'")
-            print("必须包含cmds")
+            logging.error("flow配置文件缺少cmds")
             return False
 
         # 3.必须包含nodes
         if not data.get("nodes"):
-            # raise ValueError("JSON must contain 'nodes'")
-            print("必须包含nodes")
+            logging.error("flow配置文件缺少nodes")
             return False
 
         # 1.必须包含head_node_id
         flow = data.get("flow")
         if not flow.get("head_node_id"):
-            # raise ValueError("JSON must contain 'head_node_id'")
-            print("必须包含head_node_id")
+            logging.error("flow配置文件缺少head_node_id")
             return False
 
         # 通过验证
@@ -202,7 +197,6 @@ class CmdMananger(QObject):
         connections_model = []
 
         for key in self.nodes:
-            # print(key)
             nodes_model.append({
                 "id": key, 
                 "text": self.cmds[key]['name'], 
@@ -214,14 +208,12 @@ class CmdMananger(QObject):
             for child in self.flow[key]:
                 connections_model.append({"from": key, "to": child})
 
-        # print("Nodes model:", nodes_model)
-        # print("Connections model:", connections_model)
         return nodes_model, connections_model
         
 
     def run_flow(self):
         
-        logging.info(f"开始执行流程:{self.meta['name']}")
+        logging.info(f"########### 开始执行流程<{self.meta['name']}>")
         def job():
             self.cursor = self.head_node_id
             self.flowStatus = 0  # Reset flow status
@@ -252,9 +244,8 @@ class CmdMananger(QObject):
                         self.popper.done = False
                         self.cursor = self.popper.result.split(":")[0]
 
-                    print(self.cursor)
                     if self.cursor==None:
-                        print("路径为空,流程中断")
+                        logging.error("指令指针为空,流程中断")
                         self.flowStatus = 3
                         break
 
@@ -265,19 +256,20 @@ class CmdMananger(QObject):
                     if theCmd.status == 2:
                         next_cmd_count = len(self.flow[self.cursor])
                     else:
-                        print(f"流指令 {self.cursor} 执行失败")
+                        logging.error(f"指令<{self.cursor}>执行失败")
                         self.flowStatus = 4  # Set status to error
                         break
 
 
             else:
-                print(f"流指令 {self.cursor} 执行失败")
+                logging.error(f"流指令<{self.cursor}>执行失败")
                 self.flowStatus = 4  # Set status to error
 
             if self.flowStatus == 4:
-                print(f'有故障,流程中断')
+                logging.error(f'有故障,流程中断')
+
             else:
-                print(f'流程执行完毕')
+                logging.info(f'########### 流程执行完毕<{self.meta['name']}>')
 
             return self.flowStatus
     
@@ -285,7 +277,6 @@ class CmdMananger(QObject):
         thread.start()
 
     def run_step(self, theCmd):
-        """Start a single step execution in a background thread."""
         def run_step_wrapper():
             asyncio.run(self.run_step_async(theCmd))
 
@@ -330,11 +321,12 @@ class Cmd(QObject):
     def run(self, plc, top_popper):
 
         def run_algo(self, plc):
-            print(f"执行算法:{self.param.get('algo_id')}")
+            logging.info(f">>> 开始执行指令: 名称<{self.name}> 类型<algo> 算法类型:<{self.param.get('algo_id')}>")
             self.result = algoMap[self.param.get("algo_id")](self.param.get("args"))
             self.status = 2
 
         def run_pop(self, plc):
+            logging.info(f">>> 开始执行指令: 名称<{self.name}> 类型<pop> 弹窗类型:<{self.param.get('dialog_id')}>")
             top_popper.evtBegin.emit(
                 self.param["dialog_id"], 
                 self.param["args"])
@@ -347,6 +339,7 @@ class Cmd(QObject):
             self.status = 2
 
         def run_plc(self, plc):
+            logging.info(f">>> 开始执行指令: 名称<{self.name}> 类型<plc> 动作:<{self.param.get('out')}>")
             pt_out = plc.pts.get(self.param.get("out"))
             pt_args = self.param.get("args")
             pt_cmd = plc.pts.get(self.param.get("out")) # 取得plc点表中的实例
@@ -354,12 +347,10 @@ class Cmd(QObject):
             pt_sig = plc.pts.get(pt_sig_name)
 
             for arg_kv in pt_args:
-                print(f"写入指令: {arg_kv}")
                 for k,v in arg_kv.items():
-                    print(f"写入指令: {k} = {v}")
                     pt_arg = plc.pts.get(k)
                     if pt_arg is None:
-                        print(f"指令不存在!{k}")
+                        logging.error(f"指令<{k}>不存在!")
                         return False
                     else:
                         plc.write(k, v)
@@ -367,17 +358,14 @@ class Cmd(QObject):
             plc.write(pt_out.id, 1)
             while self.status == 1:
                 time.sleep(plc.interval/1000)
-                # print(pt_sig)
                 for k in plc.pts.keys():
                     if 'alarm' in k:
-                        # print(f"capture:{plc.pts.get(k)}")0
                         if plc.pts.get(k).value==True:
                             self.result = "plc fault."
                             self.status = 3  # Set status to done
                             break
 
                 if pt_sig.value == 1:
-                    print(f"监控点 {pt_sig.id} 触发!!!")
                     self.result = "plc done."
                     self.status = 2  # Set status to done
                     break
@@ -385,6 +373,7 @@ class Cmd(QObject):
 
 
         if (self.status != 0):
+            logging.error("无法运行非空闲状态指令!")
             raise RuntimeError("无法运行非空闲状态指令!")
 
         self.status = 1  # Set status to running
@@ -402,7 +391,8 @@ class Cmd(QObject):
                 run_plc(self, plc)
 
             else:
-                self.result = "指令类型不对吧?"
+                logging.error(f"指令类型不对<{self.type}>")
+                raise RuntimeError(f"指令类型不对<{self.type}>")
 
         except Exception as e:
             self.result = str(e)  # Capture exception as result
@@ -411,4 +401,4 @@ class Cmd(QObject):
         finally:
             self.endTime = datetime.now().strftime("%Y-%m-%d %H:%M:%S")  # Replace with actual end time logic
             self.evtStatusChanged.emit(self.id, self.status)
-            print(f"指令 {self.name} 执行完毕: {self.result}")
+            logging.info(f"<<< 指令<{self.name}> 执行完毕 ---> 执行结果:{self.result}")

@@ -30,7 +30,7 @@ graph TD
     Fields --> Field2[Field: dataXh]
     Fields --> Field3[Field: diffLow]
     Fields --> Field4[Field: diffUp]
-    Fields --> Field5[Field: IsPrint]
+    Fields --> Field5[Field: Is# print]
     Fields --> Field6[Field: memBz]
     Fields --> Field7[Field: stdValue]
     Fields --> Field8[Field: sybwAbbr]
@@ -83,7 +83,7 @@ graph TD
     DetailRow --> DetailCell4[diffLow]
     DetailRow --> DetailCell5[diffUp]
     DetailRow --> DetailCell6[valueunit]
-    DetailRow --> DetailCell7[IsPrint]
+    DetailRow --> DetailCell7[Is# print]
     
     Page --> PageHeader
     Page --> PageFooter
@@ -131,4 +131,4 @@ graph TD
 6. **Embedded Resources**:
    - Contains an embedded logo image (logo2_1)
 
-This report appears to be designed for displaying and printing bogie position test data with standard values and acceptable ranges.
+This report appears to be designed for displaying and # printing bogie position test data with standard values and acceptable ranges.

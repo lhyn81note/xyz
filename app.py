@@ -12,7 +12,7 @@ import logging
 
 LogConfig.setup_logging()
 logger = logging.getLogger(__name__)
-logger.info("Application started.")
+logger.info("********** 程序启动 **********")
 
 User="admin"
 
@@ -28,7 +28,7 @@ LibServices = UtilsProvider()
 PLC = CoreProvider().Plc(config_file=config.get('plc','pts'), addr=config['plc']['host'], interval=config.getint('plc','interval'), msgbroker=Broker)
 PLC.load_config()
 PLC.connect()
-print(f"PLC连接状态: {PLC.alive}")
+logging.info(f"PLC连接状态: {PLC.alive}")
 PLC.scan()
 
 popper = Popup()  # Create a new instance of PopSignal

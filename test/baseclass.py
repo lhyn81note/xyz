@@ -49,5 +49,5 @@ class C2(baseclass):
 c1=C1(2)
 c2=C2(3)
 c1.x=100
-print(c1.x)
-print(c2.x)
+# print(c1.x)
+# print(c2.x)

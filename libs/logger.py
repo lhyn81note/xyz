@@ -1,4 +1,3 @@
-# logger.py
 import logging
 import sys
 from logging.handlers import TimedRotatingFileHandler
@@ -23,8 +22,7 @@ class LogConfig:
         for handler in logger.handlers[:]:
             logger.removeHandler(handler)
         
-        # 在 LogConfig 类的 setup_logging 方法中修改
-        
+        # 创建文件处理器
         file_handler = TimedRotatingFileHandler(
             filename=os.path.join(cls.LOG_DIR, cls.LOG_FILE),
             when="midnight",

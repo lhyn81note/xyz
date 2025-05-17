@@ -104,13 +104,12 @@ class myCellDelegate(QStyledItemDelegate):
     def setEditorData(self, editor, index):
         value = index.model().data(index, Qt.EditRole)
         if isinstance(editor, QComboBox):
-            print(f"### Editor text now is :: {value} ###")
+            pass
 
     def setModelData(self, editor, model, index):
-        print(f"### Editor text now is :: {editor.currentText()} ###")
+        pass
         # pt_index = index.row()
         # pt = _top.PLC.config['pts'][pt_index]
-        # print(f"### Out pt :: {pt['name']} ###")
         # if isinstance(editor, QComboBox):
         #     _top.PLC.write_pt(pt, editor.currentText()=='True')
         # elif isinstance(editor, QSpinBox):

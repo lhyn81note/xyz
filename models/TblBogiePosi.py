@@ -13,7 +13,7 @@ class TblBogiePosi(declarative_base()):
     diffUp = Column(Float)
     valueunit = Column(String)
     sybwAbbr = Column(String)
-    IsPrint = Column(String)
+    Isprint = Column(String)
     dataKind = Column(String)
     dataXh = Column(Float)
     memBz = Column(String)

@@ -82,12 +82,12 @@ def save_class_to_file(table_name, class_code):
 db_folder = '..\db'
 for db_file in os.listdir(db_folder):
     db_path = os.path.join(db_folder, db_file)
-    print(f"######## 处理数据库:{db_path} #########")
+    # print(f"######## 处理数据库:{db_path} #########")
     tables = get_all_tables(db_path)
 
     for table_name in tables:
-        print(f"处理数据表:{table_name}")
+        # print(f"处理数据表:{table_name}")
         columns = get_table_structure(db_path, table_name)
         class_code = generate_class_code(table_name, columns)
         save_class_to_file(table_name, class_code)
-    print(f"生成了{len(tables)}个类文件")
+    # print(f"生成了{len(tables)}个类文件")

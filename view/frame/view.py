@@ -42,7 +42,6 @@ class Window(QMainWindow):
 
     
     def dispach(self, act, view_id):
-        print(view_id)
         if act['pop']:
             diag = _top.Views[view_id]['obj']()
             diag.setWindowTitle(_top.Views[view_id]['title'])
@@ -52,7 +51,6 @@ class Window(QMainWindow):
                 pass
             else:
                 self.wgt_tabs.create_tab(_top.Views[view_id]['obj'](), _top.Views[view_id]['title'], view_id=view_id, fixed=act['fixed'])
-
 
     def update_plc(self,msg):
         

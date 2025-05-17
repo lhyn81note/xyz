@@ -1,4 +1,5 @@
 from PySide6.QtCore import QObject, Signal
+import logging
 
 # 导入所有的弹窗类
 from view.pops.path.view import Dialog as DialogPath
@@ -25,14 +26,11 @@ class Popup(QObject):
         
         # def core():
         self.done = False
-        print(f"弹窗 {dialog_id}")
         theDialog = dialogMap[dialog_id](None, dialog_args)
         theDialog.exec()
-        print("Dialog opened")  
         self.dialog_result = theDialog.get_result()
         self.done = True
         self.result = self.dialog_result
-        print("Dialog closed")
 
         # 注意这里不能采用多线程, 否则会卡死在Dialog窗口
         # thread = threading.Thread(target=core, daemon=True)

@@ -140,17 +140,14 @@ class ModbusTcp(BasePlc):
             addrs = [int(x) for x in pt['address'].split('.')]
             if pt['area']==MODBUS_AREA.Coil:
                 ret = self.client.read_coils(addrs[0]*8+addrs[1], 1, pt['slave']).bits
-                # print(f"{pt['address']}-->{ret}")
                 ret = ret[0]
             elif pt['area']==MODBUS_AREA.InCoil:
                 ret = self.client.read_discrete_inputs(addrs[0]*8+addrs[1], 1, pt['slave']).bits
-                # print(f"{pt['address']}-->{ret}")
                 ret = ret[0]
             elif pt['area']==MODBUS_AREA.Reg:
                 ret = self.client.read_holding_registers(int(addrs[0]), 1, slave=pt['slave'])
                 decoder = BinaryPayloadDecoder.fromRegisters(ret.registers, byteorder=byte_order, wordorder=word_order)
                 ret = decoder.decode_bits(package_len=1)  
-                # print(f"--->{ret}")
                 ret = ret[addrs[1]]    
             else:
                 raise "错误点位"
@@ -188,14 +185,12 @@ class ModbusTcp(BasePlc):
             self.client.write_registers(int(pt['address']), payload)
 
     def read_all(self):
-        print("开始读取?")
         while self.running:
             for i in range(len(self.config['pts'])):
                 pt=self.config['pts'][i]
                 # if pt['io']==IO.OUT: continue
                 self.read_pt(pt)
                 self.trigger_callbacks((i,pt['value']))
-                # print(pt_obj['value'])
             time.sleep(self.config['interval'])
         
         # # get max address

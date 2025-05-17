@@ -21,7 +21,6 @@ class QComboBoxWidgetDelegate (QStyledItemDelegate):
         value = index.model().data(index, Qt.EditRole)   
         if isinstance(value,int):
             value = str(value)
-        # print(f"cell ({index.row()},{index.column()}) data: {value}")     
         if value:   # 如果不在combo中，添加进来。
             if not editor.findText(value):
                 editor.addItem(value)

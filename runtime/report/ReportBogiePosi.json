@@ -43,8 +43,8 @@
               "rd:TypeName": "System.Single"
             },
             {
-              "@Name": "IsPrint",
-              "DataField": "IsPrint",
+              "@Name": "Is# print",
+              "DataField": "Is# print",
               "rd:TypeName": "System.String"
             },
             {
@@ -565,14 +565,14 @@
                           {
                             "CellContents": {
                               "Textbox": {
-                                "@Name": "IsPrint",
+                                "@Name": "Is# print",
                                 "CanGrow": "true",
                                 "KeepTogether": "true",
                                 "Paragraphs": {
                                   "Paragraph": {
                                     "TextRuns": {
                                       "TextRun": {
-                                        "Value": "=Fields!IsPrint.Value",
+                                        "Value": "=Fields!Is# print.Value",
                                         "Style": {
                                           "FontFamily": "仿宋",
                                           "FontSize": "12pt"
@@ -582,7 +582,7 @@
                                     "Style": null
                                   }
                                 },
-                                "rd:DefaultName": "IsPrint",
+                                "rd:DefaultName": "Is# print",
                                 "Style": {
                                   "Border": {
                                     "Style": "Solid"
@@ -647,8 +647,8 @@
         "Page": {
           "PageHeader": {
             "Height": "2.61938cm",
-            "PrintOnFirstPage": "true",
-            "PrintOnLastPage": "true",
+            "# printOnFirstPage": "true",
+            "# printOnLastPage": "true",
             "ReportItems": {
               "Image": {
                 "@Name": "Image1",
@@ -781,8 +781,8 @@
           },
           "PageFooter": {
             "Height": "0.9525cm",
-            "PrintOnFirstPage": "true",
-            "PrintOnLastPage": "true",
+            "# printOnFirstPage": "true",
+            "# printOnLastPage": "true",
             "ReportItems": {
               "Textbox": {
                 "@Name": "PageNumber",

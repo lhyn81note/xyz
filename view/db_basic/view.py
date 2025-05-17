@@ -55,7 +55,6 @@ class Window(QWidget):
         for i in self.datamodel.table1:
             db = _top.FaultCode.fromDto(i)
             _top.FaultCode.Handler.update(db)
-            print(db.Code)
 
     # def add(self):
     #     data=TestDTO('x',1,'sssss')

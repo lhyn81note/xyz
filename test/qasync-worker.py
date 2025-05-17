@@ -83,7 +83,7 @@ class MainWindow(QMainWindow):
         try:
             dialog = SubDialog(self)
             result = dialog.exec()
-            print(f"Dialog result: {result}")
+            # print(f"Dialog result: {result}")
             
             if result == QDialog.Accepted:
                 choice = dialog.get_selected_item()
