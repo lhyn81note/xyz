@@ -48,11 +48,11 @@
             }
         },
         "3cd9094d": {
-            "type": "algo",
-            "name": "空指令",
+            "type": "pop",
+            "name": "实时曲线",
             "param": {
-                "algo_id": "algoWait",
-                "args": 1,
+                "dialog_id": "dialogChart",
+                "args": null,
                 "done": null
             }
         }
@@ -77,8 +77,8 @@
             "status": "idle"
         },
         "3cd9094d": {
-            "x": 177.0,
-            "y": 228.0,
+            "x": 172.0,
+            "y": 247.0,
             "text": "空指令",
             "status": "idle"
         }

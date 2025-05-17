@@ -96,7 +96,7 @@ class MsgBroker:
             bool: True if the subscriber was removed from at least one message type
         """
         if not isinstance(subscriber, MsgSubscriber):
-            logger.warning(f"Attempted to remove non-MsgSubscriber object: {subscriber}")
+            logging.warning(f"Attempted to remove non-MsgSubscriber object: {subscriber}")
             return False
 
         removed = False
@@ -119,7 +119,7 @@ class MsgBroker:
                 # Validate message types
                 for mt in msg_types:
                     if not isinstance(mt, MsgType):
-                        logger.warning(f"Invalid message type in removal: {mt}")
+                        logging.warning(f"Invalid message type in removal: {mt}")
                         continue
 
                     # Remove from specified message type
@@ -133,9 +133,9 @@ class MsgBroker:
                     self._all_subscribers.remove(subscriber)
 
         if removed:
-            logger.debug(f"Removed subscriber: {subscriber}")
+            logging.debug(f"Removed subscriber: {subscriber}")
         else:
-            logger.debug(f"Subscriber not found for removal: {subscriber}")
+            logging.debug(f"Subscriber not found for removal: {subscriber}")
 
         return removed
 
@@ -172,8 +172,8 @@ class MsgBroker:
                 subscriber.invoke(message)
                 count += 1
             except Exception as e:
-                logger.error(f"Error notifying subscriber: {e}")
-                logger.debug(traceback.format_exc())
+                logging.error(f"Error notifying subscriber: {e}")
+                logging.debug(traceback.format_exc())
 
         return count
 
@@ -235,8 +235,8 @@ class MsgSubscriber:
         try:
             self._callback(msg)
         except Exception as e:
-            logger.error(f"Error in subscriber {self.name}: {e}")
-            logger.debug(traceback.format_exc())
+            logging.error(f"Error in subscriber {self.name}: {e}")
+            logging.debug(traceback.format_exc())
             raise
 
     def __eq__(self, other: object) -> bool:

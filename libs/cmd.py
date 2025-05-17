@@ -5,6 +5,7 @@ import time
 import threading
 import uuid
 from PySide6.QtCore import QObject, Signal, Slot
+import logging
 
 # 导入所有的弹窗类
 from .algos.wait import algoWait
@@ -177,18 +178,20 @@ class CmdMananger(QObject):
 
         # Save the updated flow to the JSON file
         self.saveFlow()
-
-        print(f"Added new command: {new_cmd_id} as child of {parent_id}")
+        self.loadFlow()
+        self.loadCmds()
 
     def delCmd(self, cmd):
-        pass
+        self.saveFlow()
+        self.loadFlow()
+        self.loadCmds()
 
-    def delCmdChain(self, cmd):
-        pass
 
     def setCmd(self, cmd_id, child_id):
         self.flow[cmd_id] = [child_id]
         self.saveFlow()
+        self.loadFlow()
+        self.loadCmds()
 
     '''
     视图操作
@@ -218,13 +221,13 @@ class CmdMananger(QObject):
 
     def run_flow(self):
         
+        logging.info(f"开始执行流程:{self.meta['name']}")
         def job():
-            """Run the flow asynchronously."""
             self.cursor = self.head_node_id
             self.flowStatus = 0  # Reset flow status
 
             theCmd = self.getCmd(self.cursor)
-            theCmd.run(self.plc)
+            theCmd.run(self.plc, self.popper)
 
             if theCmd.status == 2:
                 next_cmd_count = len(self.flow[self.cursor])
@@ -236,9 +239,12 @@ class CmdMananger(QObject):
 
                     else:
                         path_names = list(map(lambda cmdkey: f'{cmdkey}:{self.cmds[cmdkey]['name']}', self.flow[self.cursor]))
-                        self.popper.evtBegin.emit("dialogPath",{
+                        self.popper.evtBegin.emit(
+                            "dialogPath",
+                            {
                             "next_cmds":path_names
-                        })
+                            }
+                        )
 
                         while self.popper.done == False:
                             time.sleep(1)
@@ -254,7 +260,7 @@ class CmdMananger(QObject):
 
                     # 执行指针指令
                     theCmd = self.getCmd(self.cursor)
-                    theCmd.run(self.plc)
+                    theCmd.run(self.plc, self.popper)
 
                     if theCmd.status == 2:
                         next_cmd_count = len(self.flow[self.cursor])
@@ -321,22 +327,24 @@ class Cmd(QObject):
         return None
 
 
-    def run(self, plc):
+    def run(self, plc, top_popper):
 
         def run_algo(self, plc):
-            algoMap[self.param.get("algo_id")](self.param.get("args"))
             print(f"执行算法:{self.param.get('algo_id')}")
-            self.result = 'done'
+            self.result = algoMap[self.param.get("algo_id")](self.param.get("args"))
             self.status = 2
 
-        def run_pop(self, plc, top_popper):
-            top_popper.evtBegin.emit(self.params["dialog_id"], self.params["args"])
+        def run_pop(self, plc):
+            top_popper.evtBegin.emit(
+                self.param["dialog_id"], 
+                self.param["args"])
 
             while top_popper.done == False:
                 time.sleep(1)
 
             top_popper.done = False
-            self.cursor = top_popper.result.split(":")[0]
+            self.result = top_popper.result
+            self.status = 2
 
         def run_plc(self, plc):
             pt_out = plc.pts.get(self.param.get("out"))
@@ -388,7 +396,7 @@ class Cmd(QObject):
                 run_algo(self, plc)
 
             elif self.type == "pop":
-                run_pop(self)
+                run_pop(self, plc)
 
             elif self.type == "plc":
                 run_plc(self, plc)

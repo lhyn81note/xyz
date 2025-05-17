@@ -73,7 +73,7 @@ class Window(QWidget):
         self.ui.lb_flow_desc.setText(self.CmdManagerAgent.meta['desc'])
 
     # Force a complete refresh of the QML widget by recreating it
-    def reloadFlow(self):
+    def reloadGraph(self):
         self.qml_flow.deleteLater()
         self.qml_flow = QQuickWidget()
         self.qml_flow.setResizeMode(QQuickWidget.ResizeMode.SizeRootObjectToView)
@@ -149,13 +149,15 @@ class Window(QWidget):
                             new_cmd_data = json.loads(text_editor.toPlainText())
                             self.CmdManagerAgent.cmds[nodeId] = new_cmd_data
                             self.CmdManagerAgent.saveFlow()
+                            self.CmdManagerAgent.loadFlow()
+                            self.CmdManagerAgent.loadCmds()
                         except json.JSONDecodeError:
                             QMessageBox.critical(None, "错误", "JSON格式错误，请检查输入")
 
                 elif response["type"] == "add_child":
                     if nodeId == "end": return
                     self.CmdManagerAgent.addCmd(nodeId)
-                    self.reloadFlow()
+                    self.reloadGraph()
                         
                 elif response["type"] == "del_self":
                     if nodeId == "head" or nodeId == "end": return
@@ -190,7 +192,7 @@ class Window(QWidget):
                         
                         # Save changes
                         self.CmdManagerAgent.saveFlow()
-                        self.reloadFlow()
+                        self.reloadGraph()
 
                 elif response["type"] == "set_child":
                     if nodeId == "end": return
@@ -211,7 +213,7 @@ class Window(QWidget):
                 else:
                     pass
 
-                self.reloadFlow()
+                self.reloadGraph()
 
     @Slot(str, int)
     def onChildStatusChanged(self, cmd_id, status):

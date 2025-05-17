@@ -28,7 +28,7 @@ LibServices = UtilsProvider()
 PLC = CoreProvider().Plc(config_file=config.get('plc','pts'), addr=config['plc']['host'], interval=config.getint('plc','interval'), msgbroker=Broker)
 PLC.load_config()
 PLC.connect()
-print(f"PLC is alive: {PLC.alive}")
+print(f"PLC连接状态: {PLC.alive}")
 PLC.scan()
 
 popper = Popup()  # Create a new instance of PopSignal
