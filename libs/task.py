@@ -16,21 +16,21 @@ class Task:
         self.reseted = kwargs.get('reseted', False)
 
         # clone the CmdManager not reference
-        self.theCmdManager = deepcopy(theCmdManager)
+        self.theCmdManager = theCmdManager
 
         # Initialize other properties
-        self.columns = self.getColumns(self.carType)
-        self.values = self.getValues(self.carType)
+        self.columns = self.getColumns()
+        self.values = self.getValues()
 
         # Set initial status from CmdManager if available
         if self.theCmdManager:
             self.status = self.theCmdManager.flowStatus
 
-    def getColumns(self, carType):
+    def getColumns(self):
         # 从数据库中获取列信息
-        return ["任务ID", "数据名称", "数值", "最小值", "最大值", "是否合格"]
+        return ["序号", "数据名称", "数值", "最小值", "最大值", "是否合格"]
 
-    def getValues(self, carType):
+    def getValues(self):
         # 从数据库中获取值信息
         return ["测试数据1", "测试数据2", "测试数据3"]
 

@@ -35,7 +35,7 @@ CmdManager = {}
 CmdManager['测试流程'] = CoreProvider().CmdManager(config.get('flow','try_test'), PLC, popper)
 CmdManager['气压试验'] = CoreProvider().CmdManager(config.get('flow','try_gas'), PLC, popper)
 CmdManager['加载力试验'] = CoreProvider().CmdManager(config.get('flow','try_force'), PLC, popper)
-CurrentCmdManager = CmdManager['测试流程'] # 设定当前流程
+curTask = None # 设定当前流程
 
 # 数据库引擎初始化
 DbEng_Alarms = GenDbEnging(dbpath=config.get('db','alarm'))

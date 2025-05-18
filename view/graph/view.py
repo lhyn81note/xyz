@@ -13,7 +13,7 @@ class TaskTableModel(QAbstractTableModel):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.tasks = []
-        self.headers = ["TaskID", "WorkerID", "Cartype", "FlowName", "Status"]
+        self.headers = ["任务ID", "操作员", "车型", "流程", "任务状态"]
 
     def rowCount(self, parent=QModelIndex()):
         return len(self.tasks)
@@ -106,25 +106,24 @@ class Window(QWidget):
         header.setSectionResizeMode(0, header.ResizeMode.ResizeToContents)
         header.setSectionResizeMode(1, header.ResizeMode.ResizeToContents)
         header.setSectionResizeMode(2, header.ResizeMode.ResizeToContents)
-        header.setSectionResizeMode(3, header.ResizeMode.Stretch)
+        header.setSectionResizeMode(3, header.ResizeMode.ResizeToContents)
         header.setSectionResizeMode(4, header.ResizeMode.ResizeToContents)
 
         # 连接表格选择信号
         self.ui.tb_tasks.selectionModel().selectionChanged.connect(self.onTaskSelected)
 
         # 当前选中的任务
-        self.current_task = None
+        _top.curTask = None
 
         # 绑定事件
+        self.ui.btn_newtask.clicked.connect(self.onNewTask)
         self.ui.btn_start.clicked.connect(self.onStart)
         self.ui.btn_stop.clicked.connect(self.onStop)
         self.ui.btn_reset.clicked.connect(self.onReset)
-        self.ui.btn_newtask.clicked.connect(self.onNewTask)
 
         self.SetGraph("测试流程")
 
         _top.popper.evtBegin.connect(self.onPopup)
-
 
     def SetGraph(self, flowname):
 
@@ -172,49 +171,39 @@ class Window(QWidget):
 
     @Slot()
     def onStart(self):
-        if self.current_task:
+        if _top.curTask:
             # Start the selected task
-            self.current_task.startTask()
+            _top.curTask.startTask()
             # Update the task status in the model
             self.task_model.layoutChanged.emit()
-            QMessageBox.information(self, "成功", f"已开始任务: {self.current_task.taskId}")
+            QMessageBox.information(self, "成功", f"已开始任务: {_top.curTask.taskId}")
         else:
-            # If no task is selected, run the current flow directly
-            self.CmdManagerAgent.run_flow()
+            QMessageBox.warning(self, "错误", "未选择任务!")
 
-    @Slot()
-    def onPauseContinue(self):
-        if self.current_task:
-            # Pause the selected task
-            self.current_task.theCmdManager.pause()
-            # Update the task status in the model
-            self.task_model.layoutChanged.emit()
-        else:
-            self.CmdManagerAgent.pause()
 
     @Slot()
     def onStop(self):
-        if self.current_task:
+        if _top.curTask:
             # Stop the selected task
-            self.current_task.theCmdManager.stop()
+            _top.curTask.theCmdManager.stop()
             # Update the task status in the model
-            self.current_task.status = 3  # Set status to stopped
+            _top.curTask.status = 3  # Set status to stopped
             self.task_model.layoutChanged.emit()
-            QMessageBox.information(self, "成功", f"已停止任务: {self.current_task.taskId}")
+            QMessageBox.information(self, "成功", f"已停止任务: {_top.curTask.taskId}")
         else:
-            self.CmdManagerAgent.stop()
+            QMessageBox.warning(self, "错误", "未选择任务!")
 
     def onReset(self):
-        if self.current_task:
+        if _top.curTask:
             # Reset the selected task
-            self.current_task.theCmdManager.reset()
+            _top.curTask.theCmdManager.reset()
             # Update the task status in the model
-            self.current_task.status = 0  # Set status to idle
-            self.current_task.reseted = True
+            _top.curTask.status = 0  # Set status to idle
+            _top.curTask.reseted = True
             self.task_model.layoutChanged.emit()
-            QMessageBox.information(self, "成功", f"已重置任务: {self.current_task.taskId}")
+            QMessageBox.information(self, "成功", f"已重置任务: {_top.curTask.taskId}")
         else:
-            self.CmdManagerAgent.reset()
+            QMessageBox.warning(self, "错误", "未选择任务!")
 
     @Slot(dict)
     def onAny(self, response):
@@ -374,7 +363,6 @@ class Window(QWidget):
         # Get the selected task
         indexes = selected.indexes()
         if not indexes:
-            self.current_task = None
             return
 
         # Get the task from the model
@@ -383,7 +371,7 @@ class Window(QWidget):
 
         if task:
             # Set the current task
-            self.current_task = task
+            _top.curTask = task
 
             # Update the UI to show the selected task's flow
             flowname = task.theCmdManager.meta['name']
