@@ -13,7 +13,7 @@ class TaskTableModel(QAbstractTableModel):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.tasks = []
-        self.headers = ["任务ID", "操作员", "车型", "流程", "任务状态"]
+        self.headers = ["任务ID", "操作员", "车型", "流程", "状态"]
 
     def rowCount(self, parent=QModelIndex()):
         return len(self.tasks)
@@ -22,6 +22,7 @@ class TaskTableModel(QAbstractTableModel):
         return len(self.headers)
 
     def data(self, index, role=Qt.DisplayRole):
+        print("fuck3")
         if not index.isValid() or not (0 <= index.row() < len(self.tasks)):
             return None
 
@@ -62,6 +63,10 @@ class TaskTableModel(QAbstractTableModel):
         self.tasks.append(task)
         self.endInsertRows()
         return True
+
+    def updateTask(self, task):
+        index = self.tasks.index(task)
+        self.dataChanged.emit(self.index(index, 0), self.index(index, self.columnCount() - 1))
 
     def getTask(self, index):
         if 0 <= index < len(self.tasks):
@@ -130,7 +135,6 @@ class Window(QWidget):
         for k, _  in _top.CmdManager.items():
             if k==flowname:
                 self.CmdManagerAgent = _top.CmdManager.get(flowname)
-                _top.CurrentCmdManager = self.CmdManagerAgent
                 break
 
         if not self.CmdManagerAgent:
@@ -176,7 +180,6 @@ class Window(QWidget):
             _top.curTask.startTask()
             # Update the task status in the model
             self.task_model.layoutChanged.emit()
-            QMessageBox.information(self, "成功", f"已开始任务: {_top.curTask.taskId}")
         else:
             QMessageBox.warning(self, "错误", "未选择任务!")
 
@@ -347,6 +350,14 @@ class Window(QWidget):
 
             # Create the task
             task = Task(carType=cartype, workerId=worker_id, theCmdManager=cmd_manager)
+                    # Register a callback to update task status when flow completes
+            def update_status(status):
+                if status in [2, 3, 4]:  # If completed, stopped, or error
+                    task.endTime = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                    self.task_model.updateTask(task)
+
+            task.theCmdManager.evtFlowStatusChanged.connect(update_status)
+
 
             # Add the task to the model
             if self.task_model.addTask(task):

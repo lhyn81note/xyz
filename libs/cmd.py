@@ -24,6 +24,7 @@ class CmdManager(QObject):
 
     evtCmdChanged = Signal(str, int)  # Signal to emit status changes with id and status
     evtPopup = Signal(str, dict)  # Signal to request path selection (current_node, paths, cmd_names)
+    evtFlowStatusChanged = Signal(int)
 
     def __init__(self, flow_file, plc, popper):
 
@@ -297,6 +298,7 @@ class CmdManager(QObject):
             else:
                 logging.info(f'########### 流程执行结束,但状态异常<{self.meta['name']}>')
 
+            self.evtFlowStatusChanged.emit(self.flowStatus)
             return self.flowStatus
     
         thread = threading.Thread(target=job, daemon=True)

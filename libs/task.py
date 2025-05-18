@@ -10,10 +10,13 @@ class Task:
         self.taskId = kwargs.get('taskId', str(uuid.uuid4())[:8])  # 8 character UUID
         self.carType = carType
         self.workerId = workerId
-        self.status = kwargs.get('status', 0)  # Default to idle
         self.startTime = kwargs.get('startTime', datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
         self.endTime = kwargs.get('endTime', None)
         self.reseted = kwargs.get('reseted', False)
+
+        @property
+        def status(self):
+            return self.theCmdManager.flowStatus
 
         # clone the CmdManager not reference
         self.theCmdManager = theCmdManager
@@ -50,12 +53,3 @@ class Task:
 
         # Run the flow
         self.theCmdManager.run_flow()
-
-        # Register a callback to update task status when flow completes
-        def update_status():
-            self.status = self.theCmdManager.flowStatus
-            if self.status in [2, 3, 4]:  # If completed, stopped, or error
-                self.endTime = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-
-        # Add the callback to the CmdManager
-        self.theCmdManager.register_callback(update_status)

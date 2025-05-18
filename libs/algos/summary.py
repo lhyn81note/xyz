@@ -4,7 +4,7 @@ _top = sys.modules['__main__']
 
 def algoSummary(args=None,input=None):
     summary = []
-    for cmd in _top.CurrentCmdManager.cmdObjs.values():
+    for cmd in _top.curTask.theCmdManager.cmdObjs.values():
         try:
             print(f"{cmd.result}")
             if cmd.result is not None:
