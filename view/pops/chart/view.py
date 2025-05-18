@@ -89,6 +89,7 @@ class Dialog(QDialog):
 
         self.canvas.draw()
 
+
     def get_result(self):
         return {
             "name": "绘图结果",

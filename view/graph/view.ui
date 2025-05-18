@@ -195,9 +195,46 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QPushButton" name="pushButton">
+                   <widget class="QLabel" name="label_2">
+                    <property name="font">
+                     <font>
+                      <pointsize>12</pointsize>
+                      <bold>true</bold>
+                     </font>
+                    </property>
                     <property name="text">
-                     <string>基于该流程创建试验任务</string>
+                     <string>选择车型</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QComboBox" name="cmb_cartypes">
+                    <property name="font">
+                     <font>
+                      <pointsize>11</pointsize>
+                     </font>
+                    </property>
+                    <item>
+                     <property name="text">
+                      <string>车型1</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>车型2</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>车型3</string>
+                     </property>
+                    </item>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="btn_newtask">
+                    <property name="text">
+                     <string>创建试验任务</string>
                     </property>
                    </widget>
                   </item>
@@ -218,7 +255,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QPlainTextEdit" name="pt_cmd_info"/>
+                   <widget class="QTableView" name="tb_tasks"/>
                   </item>
                   <item>
                    <widget class="QPushButton" name="btn_start">
@@ -228,17 +265,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QPushButton" name="btb_stop_2">
-                    <property name="styleSheet">
-                     <string notr="true">background-color: rgb(255, 170, 0);</string>
-                    </property>
-                    <property name="text">
-                     <string>暂停任务</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QPushButton" name="btb_stop_3">
+                   <widget class="QPushButton" name="btn_reset">
                     <property name="styleSheet">
                      <string notr="true">background-color: rgb(186, 112, 9);</string>
                     </property>
@@ -248,7 +275,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QPushButton" name="btb_stop">
+                   <widget class="QPushButton" name="btn_stop">
                     <property name="styleSheet">
                      <string notr="true">background-color: rgb(255, 0, 0);</string>
                     </property>

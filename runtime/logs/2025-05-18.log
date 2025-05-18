@@ -1,326 +1,291 @@
-2025-05-18 15:19:28,739 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
-2025-05-18 15:19:28,741 - INFO - snap7.client - client.py:78 - creating snap7 client
-2025-05-18 15:19:28,741 - INFO - snap7.client - client.py:78 - creating snap7 client
-2025-05-18 15:19:28,742 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
-2025-05-18 15:19:28,747 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
-2025-05-18 15:19:28,751 - INFO - root - plc_s7.py:76 - S7连接成功.
-2025-05-18 15:19:28,751 - INFO - root - app.py:28 - PLC连接结果: True
-2025-05-18 15:19:28,754 - INFO - root - app.py:30 - PLC开始轮询
-2025-05-18 15:19:32,177 - INFO - root - cmd.py:218 - ########### 开始执行流程<测试流程>
-2025-05-18 15:19:32,179 - INFO - root - cmd.py:329 - >>> 开始执行指令: 名称<开始> 类型<algo> 算法类型:<algoWait>
-2025-05-18 15:19:33,180 - INFO - root - cmd.py:414 - <<< 指令<开始> 执行完毕 ---> 执行结果:{'name': '等待时间', 'value': 1}
-2025-05-18 15:19:33,182 - INFO - root - cmd.py:329 - >>> 开始执行指令: 名称<空指令> 类型<algo> 算法类型:<algoWait>
-2025-05-18 15:19:34,183 - INFO - root - cmd.py:414 - <<< 指令<空指令> 执行完毕 ---> 执行结果:{'name': '等待时间', 'value': 1}
-2025-05-18 15:19:36,186 - INFO - root - cmd.py:335 - >>> 开始执行指令: 名称<实时曲线> 类型<pop> 弹窗类型:<dialogChart>
-2025-05-18 15:19:49,195 - INFO - root - cmd.py:414 - <<< 指令<实时曲线> 执行完毕 ---> 执行结果:{'name': '绘图结果', 'value': [4.324663132693074, 2.983064520846928, 4.4790757384930355, 6.082919374679605, 4.752163328827825, -1.2301591735496389, -1.0460928771059932, -4.523028846840527, -3.1383307905468256, -3.008976043842573]}
-2025-05-18 15:19:49,195 - INFO - root - cmd.py:329 - >>> 开始执行指令: 名称<输出报告> 类型<algo> 算法类型:<algoSummary>
-2025-05-18 15:19:49,209 - INFO - root - cmd.py:414 - <<< 指令<输出报告> 执行完毕 ---> 执行结果:'float' object is not callable
-2025-05-18 15:19:49,210 - ERROR - root - cmd.py:264 - 指令<9949c442>执行失败
-2025-05-18 15:19:49,210 - ERROR - root - cmd.py:274 - 有故障,流程中断
-2025-05-18 15:20:47,555 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
-2025-05-18 15:20:47,558 - INFO - snap7.client - client.py:78 - creating snap7 client
-2025-05-18 15:20:47,558 - INFO - snap7.client - client.py:78 - creating snap7 client
-2025-05-18 15:20:47,558 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
-2025-05-18 15:20:47,563 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
-2025-05-18 15:20:47,567 - INFO - root - plc_s7.py:76 - S7连接成功.
-2025-05-18 15:20:47,567 - INFO - root - app.py:28 - PLC连接结果: True
-2025-05-18 15:20:47,567 - INFO - root - app.py:30 - PLC开始轮询
-2025-05-18 15:21:12,345 - INFO - root - cmd.py:218 - ########### 开始执行流程<测试流程>
-2025-05-18 15:21:12,346 - INFO - root - cmd.py:329 - >>> 开始执行指令: 名称<开始> 类型<algo> 算法类型:<algoWait>
-2025-05-18 15:21:13,348 - INFO - root - cmd.py:414 - <<< 指令<开始> 执行完毕 ---> 执行结果:{'name': '等待时间', 'value': 1}
-2025-05-18 15:21:13,349 - INFO - root - cmd.py:329 - >>> 开始执行指令: 名称<空指令> 类型<algo> 算法类型:<algoWait>
-2025-05-18 15:21:14,350 - INFO - root - cmd.py:414 - <<< 指令<空指令> 执行完毕 ---> 执行结果:{'name': '等待时间', 'value': 1}
-2025-05-18 15:21:17,353 - INFO - root - cmd.py:335 - >>> 开始执行指令: 名称<实时曲线> 类型<pop> 弹窗类型:<dialogChart>
-2025-05-18 15:21:30,360 - INFO - root - cmd.py:414 - <<< 指令<实时曲线> 执行完毕 ---> 执行结果:{'name': '绘图结果', 'value': [4.1166778172461935, 4.675847908418808, 6.337499957701315, 3.8354438232620245, 2.2077889970922353, 1.4953354532662921, 0.20150382461650707, -2.1036320586779014, -4.814880631086327, -3.227460880487071]}
-2025-05-18 15:21:30,362 - INFO - root - cmd.py:329 - >>> 开始执行指令: 名称<输出报告> 类型<algo> 算法类型:<algoSummary>
-2025-05-18 15:21:30,370 - INFO - root - cmd.py:414 - <<< 指令<输出报告> 执行完毕 ---> 执行结果:'float' object is not callable
-2025-05-18 15:21:30,370 - ERROR - root - cmd.py:264 - 指令<9949c442>执行失败
-2025-05-18 15:21:30,371 - ERROR - root - cmd.py:274 - 有故障,流程中断
-2025-05-18 15:27:04,404 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
-2025-05-18 15:27:04,406 - INFO - snap7.client - client.py:78 - creating snap7 client
-2025-05-18 15:27:04,407 - INFO - snap7.client - client.py:78 - creating snap7 client
-2025-05-18 15:27:04,407 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
-2025-05-18 15:27:04,412 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
-2025-05-18 15:27:04,416 - INFO - root - plc_s7.py:76 - S7连接成功.
-2025-05-18 15:27:04,416 - INFO - root - app.py:28 - PLC连接结果: True
-2025-05-18 15:27:04,417 - INFO - root - app.py:30 - PLC开始轮询
-2025-05-18 15:27:06,978 - INFO - root - cmd.py:81 - 保存runtime/flows/test.json
-2025-05-18 15:27:34,540 - INFO - root - cmd.py:81 - 保存runtime/flows/test.json
-2025-05-18 15:27:40,281 - INFO - root - cmd.py:81 - 保存runtime/flows/test.json
-2025-05-18 15:27:43,353 - INFO - root - cmd.py:218 - ########### 开始执行流程<测试流程>
-2025-05-18 15:27:43,354 - INFO - root - cmd.py:329 - >>> 开始执行指令: 名称<开始> 类型<algo> 算法类型:<algoWait>
-2025-05-18 15:27:44,355 - INFO - root - cmd.py:414 - <<< 指令<开始> 执行完毕 ---> 执行结果:{'name': '等待时间', 'value': 1}
-2025-05-18 15:27:44,355 - INFO - root - cmd.py:329 - >>> 开始执行指令: 名称<空指令> 类型<algo> 算法类型:<algoWait>
-2025-05-18 15:27:45,356 - INFO - root - cmd.py:414 - <<< 指令<空指令> 执行完毕 ---> 执行结果:{'name': '等待时间', 'value': 1}
-2025-05-18 15:27:47,359 - INFO - root - cmd.py:335 - >>> 开始执行指令: 名称<实时曲线> 类型<pop> 弹窗类型:<dialogChart>
-2025-05-18 15:27:55,365 - INFO - root - cmd.py:414 - <<< 指令<实时曲线> 执行完毕 ---> 执行结果:{'name': '绘图结果', 'value': [0.6911591886799293, 4.991103337240104, 5.959766666000522, 2.563131470893885, 3.0497160235022123]}
-2025-05-18 15:27:55,366 - INFO - root - cmd.py:329 - >>> 开始执行指令: 名称<输出报告> 类型<algo> 算法类型:<algoSummary>
-2025-05-18 15:27:55,371 - INFO - root - cmd.py:414 - <<< 指令<输出报告> 执行完毕 ---> 执行结果:{'name': '总结', 'value': []}
-2025-05-18 15:27:55,371 - INFO - root - cmd.py:329 - >>> 开始执行指令: 名称<结束> 类型<algo> 算法类型:<algoWait>
-2025-05-18 15:27:56,372 - INFO - root - cmd.py:414 - <<< 指令<结束> 执行完毕 ---> 执行结果:{'name': '等待时间', 'value': 1}
-2025-05-18 15:27:56,373 - INFO - root - cmd.py:277 - ########### 流程执行完毕<测试流程>
-2025-05-18 15:30:59,084 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
-2025-05-18 15:30:59,088 - INFO - snap7.client - client.py:78 - creating snap7 client
-2025-05-18 15:30:59,088 - INFO - snap7.client - client.py:78 - creating snap7 client
-2025-05-18 15:30:59,088 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
-2025-05-18 15:30:59,093 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
-2025-05-18 15:30:59,098 - INFO - root - plc_s7.py:76 - S7连接成功.
-2025-05-18 15:30:59,098 - INFO - root - app.py:28 - PLC连接结果: True
-2025-05-18 15:30:59,098 - INFO - root - app.py:30 - PLC开始轮询
-2025-05-18 15:31:01,748 - INFO - root - cmd.py:218 - ########### 开始执行流程<测试流程>
-2025-05-18 15:31:01,749 - INFO - root - cmd.py:329 - >>> 开始执行指令: 名称<开始> 类型<algo> 算法类型:<algoWait>
-2025-05-18 15:31:02,751 - INFO - root - cmd.py:414 - <<< 指令<开始> 执行完毕 ---> 执行结果:{'name': '等待时间', 'value': 1}
-2025-05-18 15:31:02,753 - INFO - root - cmd.py:329 - >>> 开始执行指令: 名称<空指令> 类型<algo> 算法类型:<algoWait>
-2025-05-18 15:31:03,754 - INFO - root - cmd.py:414 - <<< 指令<空指令> 执行完毕 ---> 执行结果:{'name': '等待时间', 'value': 1}
-2025-05-18 15:31:07,757 - INFO - root - cmd.py:335 - >>> 开始执行指令: 名称<实时曲线> 类型<pop> 弹窗类型:<dialogChart>
-2025-05-18 15:31:16,763 - INFO - root - cmd.py:414 - <<< 指令<实时曲线> 执行完毕 ---> 执行结果:{'name': '绘图结果', 'value': [1.0710487323979732, 2.3307853872838074, 6.073301487688754, 2.9939068804229674, 3.942555994162207]}
-2025-05-18 15:31:16,765 - INFO - root - cmd.py:329 - >>> 开始执行指令: 名称<输出报告> 类型<algo> 算法类型:<algoSummary>
-2025-05-18 15:31:16,776 - INFO - root - cmd.py:414 - <<< 指令<输出报告> 执行完毕 ---> 执行结果:{'name': '总结', 'value': ['等待时间,1,指令耗时:1.0', '等待时间,1,指令耗时:1.0', '绘图结果,[1.0710487323979732, 2.3307853872838074, 6.073301487688754, 2.9939068804229674, 3.942555994162207],指令耗时:9.0']}
-2025-05-18 15:31:16,776 - INFO - root - cmd.py:329 - >>> 开始执行指令: 名称<结束> 类型<algo> 算法类型:<algoWait>
-2025-05-18 15:31:17,778 - INFO - root - cmd.py:414 - <<< 指令<结束> 执行完毕 ---> 执行结果:{'name': '等待时间', 'value': 1}
-2025-05-18 15:31:17,778 - INFO - root - cmd.py:277 - ########### 流程执行完毕<测试流程>
-2025-05-18 15:40:45,317 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
-2025-05-18 15:40:45,320 - INFO - snap7.client - client.py:78 - creating snap7 client
-2025-05-18 15:40:45,320 - INFO - snap7.client - client.py:78 - creating snap7 client
-2025-05-18 15:40:45,320 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
-2025-05-18 15:40:45,325 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
-2025-05-18 15:40:45,330 - INFO - root - plc_s7.py:76 - S7连接成功.
-2025-05-18 15:40:45,330 - INFO - root - app.py:28 - PLC连接结果: True
-2025-05-18 15:40:45,331 - INFO - root - app.py:30 - PLC开始轮询
-2025-05-18 15:40:53,182 - INFO - root - cmd.py:81 - 保存runtime/flows/test.json
-2025-05-18 15:40:56,182 - INFO - root - cmd.py:81 - 保存runtime/flows/test.json
-2025-05-18 15:40:57,835 - INFO - root - cmd.py:81 - 保存runtime/flows/test.json
-2025-05-18 15:40:59,381 - INFO - root - cmd.py:81 - 保存runtime/flows/test.json
-2025-05-18 15:41:01,893 - INFO - root - cmd.py:81 - 保存runtime/flows/test.json
-2025-05-18 15:41:05,032 - INFO - root - cmd.py:81 - 保存runtime/flows/test.json
-2025-05-18 15:41:20,518 - ERROR - root - notify.py:238 - Error in subscriber View_index: Internal C++ object (PySide6.QtWidgets.QLabel) already deleted.
-2025-05-18 15:41:20,519 - ERROR - root - notify.py:175 - Error notifying subscriber: Internal C++ object (PySide6.QtWidgets.QLabel) already deleted.
-2025-05-18 15:42:03,272 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
-2025-05-18 15:42:03,274 - INFO - snap7.client - client.py:78 - creating snap7 client
-2025-05-18 15:42:03,275 - INFO - snap7.client - client.py:78 - creating snap7 client
-2025-05-18 15:42:03,275 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
-2025-05-18 15:42:03,281 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
-2025-05-18 15:42:03,286 - INFO - root - plc_s7.py:76 - S7连接成功.
-2025-05-18 15:42:03,286 - INFO - root - app.py:28 - PLC连接结果: True
-2025-05-18 15:42:03,286 - INFO - root - app.py:30 - PLC开始轮询
-2025-05-18 15:42:06,672 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 15:42:07,723 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 15:42:09,746 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 15:42:10,403 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 15:42:34,414 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
-2025-05-18 15:42:34,417 - INFO - snap7.client - client.py:78 - creating snap7 client
-2025-05-18 15:42:34,417 - INFO - snap7.client - client.py:78 - creating snap7 client
-2025-05-18 15:42:34,417 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
-2025-05-18 15:42:34,422 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
-2025-05-18 15:42:34,426 - INFO - root - plc_s7.py:76 - S7连接成功.
-2025-05-18 15:42:34,426 - INFO - root - app.py:28 - PLC连接结果: True
-2025-05-18 15:42:34,426 - INFO - root - app.py:30 - PLC开始轮询
-2025-05-18 15:42:36,547 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 15:42:36,991 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 15:42:49,889 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 15:42:56,400 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 15:43:01,331 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 15:43:05,823 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 15:43:07,263 - INFO - root - cmd.py:220 - ########### 开始执行流程<测试流程>
-2025-05-18 15:43:07,265 - INFO - root - cmd.py:331 - >>> 开始执行指令: 名称<开始> 类型<algo> 算法类型:<algoWait>
-2025-05-18 15:43:08,265 - INFO - root - cmd.py:416 - <<< 指令<开始> 执行完毕 ---> 执行结果:{'name': '等待时间', 'value': 1}
-2025-05-18 15:43:08,268 - INFO - root - cmd.py:331 - >>> 开始执行指令: 名称<空指令> 类型<algo> 算法类型:<algoWait>
-2025-05-18 15:43:09,270 - INFO - root - cmd.py:416 - <<< 指令<空指令> 执行完毕 ---> 执行结果:{'name': '等待时间', 'value': 1}
-2025-05-18 15:43:09,271 - INFO - root - cmd.py:331 - >>> 开始执行指令: 名称<输出报告> 类型<algo> 算法类型:<algoSummary>
-2025-05-18 15:43:09,277 - INFO - root - cmd.py:416 - <<< 指令<输出报告> 执行完毕 ---> 执行结果:{'name': '总结', 'value': ['等待时间,1,指令耗时:1.0', '等待时间,1,指令耗时:1.0']}
-2025-05-18 15:43:09,277 - INFO - root - cmd.py:331 - >>> 开始执行指令: 名称<结束> 类型<algo> 算法类型:<algoWait>
-2025-05-18 15:43:10,278 - INFO - root - cmd.py:416 - <<< 指令<结束> 执行完毕 ---> 执行结果:{'name': '等待时间', 'value': 1}
-2025-05-18 15:43:10,278 - INFO - root - cmd.py:279 - ########### 流程执行完毕<测试流程>
-2025-05-18 15:43:23,073 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
-2025-05-18 15:43:23,076 - INFO - snap7.client - client.py:78 - creating snap7 client
-2025-05-18 15:43:23,077 - INFO - snap7.client - client.py:78 - creating snap7 client
-2025-05-18 15:43:23,077 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
-2025-05-18 15:43:23,083 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
-2025-05-18 15:43:23,089 - INFO - root - plc_s7.py:76 - S7连接成功.
-2025-05-18 15:43:23,089 - INFO - root - app.py:28 - PLC连接结果: True
-2025-05-18 15:43:23,090 - INFO - root - app.py:30 - PLC开始轮询
-2025-05-18 15:43:27,821 - INFO - root - cmd.py:220 - ########### 开始执行流程<测试流程>
-2025-05-18 15:43:27,822 - INFO - root - cmd.py:331 - >>> 开始执行指令: 名称<开始> 类型<algo> 算法类型:<algoWait>
-2025-05-18 15:43:28,824 - INFO - root - cmd.py:416 - <<< 指令<开始> 执行完毕 ---> 执行结果:{'name': '等待时间', 'value': 1}
-2025-05-18 15:43:28,825 - INFO - root - cmd.py:331 - >>> 开始执行指令: 名称<空指令> 类型<algo> 算法类型:<algoWait>
-2025-05-18 15:43:29,826 - INFO - root - cmd.py:416 - <<< 指令<空指令> 执行完毕 ---> 执行结果:{'name': '等待时间', 'value': 1}
-2025-05-18 15:43:32,831 - INFO - root - cmd.py:337 - >>> 开始执行指令: 名称<实时曲线> 类型<pop> 弹窗类型:<dialogChart>
-2025-05-18 15:43:41,838 - INFO - root - cmd.py:416 - <<< 指令<实时曲线> 执行完毕 ---> 执行结果:{'name': '绘图结果', 'value': [1.1683050054570003, 2.623974033229311, 5.673312115765112, 5.027537635632104, 4.427105445851817]}
-2025-05-18 15:43:41,839 - INFO - root - cmd.py:331 - >>> 开始执行指令: 名称<统计数据> 类型<algo> 算法类型:<algoStatics>
-2025-05-18 15:43:41,840 - INFO - root - cmd.py:416 - <<< 指令<统计数据> 执行完毕 ---> 执行结果:{'name': '统计', 'value': 18.920234235935343}
-2025-05-18 15:43:41,841 - INFO - root - cmd.py:331 - >>> 开始执行指令: 名称<输出报告> 类型<algo> 算法类型:<algoSummary>
-2025-05-18 15:43:41,850 - INFO - root - cmd.py:416 - <<< 指令<输出报告> 执行完毕 ---> 执行结果:{'name': '总结', 'value': ['等待时间,1,指令耗时:1.0', '等待时间,1,指令耗时:1.0', '绘图结果,[1.1683050054570003, 2.623974033229311, 5.673312115765112, 5.027537635632104, 4.427105445851817],指令耗时:9.0', '统计,18.920234235935343,指令耗时:0.0']}
-2025-05-18 15:43:41,851 - INFO - root - cmd.py:331 - >>> 开始执行指令: 名称<结束> 类型<algo> 算法类型:<algoWait>
-2025-05-18 15:43:42,853 - INFO - root - cmd.py:416 - <<< 指令<结束> 执行完毕 ---> 执行结果:{'name': '等待时间', 'value': 1}
-2025-05-18 15:43:42,853 - INFO - root - cmd.py:279 - ########### 流程执行完毕<测试流程>
-2025-05-18 15:45:51,162 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
-2025-05-18 15:45:51,165 - INFO - snap7.client - client.py:78 - creating snap7 client
-2025-05-18 15:45:51,165 - INFO - snap7.client - client.py:78 - creating snap7 client
-2025-05-18 15:45:51,166 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
-2025-05-18 15:45:51,172 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
-2025-05-18 15:45:51,177 - INFO - root - plc_s7.py:76 - S7连接成功.
-2025-05-18 15:45:51,177 - INFO - root - app.py:28 - PLC连接结果: True
-2025-05-18 15:45:51,177 - INFO - root - app.py:30 - PLC开始轮询
-2025-05-18 15:46:51,945 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 15:47:28,375 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
-2025-05-18 15:47:28,377 - INFO - snap7.client - client.py:78 - creating snap7 client
-2025-05-18 15:47:28,378 - INFO - snap7.client - client.py:78 - creating snap7 client
-2025-05-18 15:47:28,378 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
-2025-05-18 15:47:28,384 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
-2025-05-18 15:47:28,388 - INFO - root - plc_s7.py:76 - S7连接成功.
-2025-05-18 15:47:28,388 - INFO - root - app.py:28 - PLC连接结果: True
-2025-05-18 15:47:28,388 - INFO - root - app.py:30 - PLC开始轮询
-2025-05-18 15:47:34,086 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 15:52:10,547 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
-2025-05-18 15:52:10,550 - INFO - snap7.client - client.py:78 - creating snap7 client
-2025-05-18 15:52:10,550 - INFO - snap7.client - client.py:78 - creating snap7 client
-2025-05-18 15:52:10,550 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
-2025-05-18 15:52:10,555 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
-2025-05-18 15:52:10,560 - INFO - root - plc_s7.py:76 - S7连接成功.
-2025-05-18 15:52:10,560 - INFO - root - app.py:28 - PLC连接结果: True
-2025-05-18 15:52:10,561 - INFO - root - app.py:30 - PLC开始轮询
-2025-05-18 15:53:02,625 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
-2025-05-18 15:53:02,628 - INFO - snap7.client - client.py:78 - creating snap7 client
-2025-05-18 15:53:02,628 - INFO - snap7.client - client.py:78 - creating snap7 client
-2025-05-18 15:53:02,629 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
-2025-05-18 15:53:02,634 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
-2025-05-18 15:53:02,638 - INFO - root - plc_s7.py:76 - S7连接成功.
-2025-05-18 15:53:02,638 - INFO - root - app.py:28 - PLC连接结果: True
-2025-05-18 15:53:02,640 - INFO - root - app.py:30 - PLC开始轮询
-2025-05-18 15:53:23,386 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
-2025-05-18 15:53:23,388 - INFO - snap7.client - client.py:78 - creating snap7 client
-2025-05-18 15:53:23,389 - INFO - snap7.client - client.py:78 - creating snap7 client
-2025-05-18 15:53:23,389 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
-2025-05-18 15:53:23,395 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
-2025-05-18 15:53:23,400 - INFO - root - plc_s7.py:76 - S7连接成功.
-2025-05-18 15:53:23,400 - INFO - root - app.py:28 - PLC连接结果: True
-2025-05-18 15:53:23,401 - INFO - root - app.py:30 - PLC开始轮询
-2025-05-18 15:54:34,889 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
-2025-05-18 15:54:34,891 - INFO - snap7.client - client.py:78 - creating snap7 client
-2025-05-18 15:54:34,891 - INFO - snap7.client - client.py:78 - creating snap7 client
-2025-05-18 15:54:34,891 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
-2025-05-18 15:54:34,897 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
-2025-05-18 15:54:34,901 - INFO - root - plc_s7.py:76 - S7连接成功.
-2025-05-18 15:54:34,902 - INFO - root - app.py:28 - PLC连接结果: True
-2025-05-18 15:54:34,902 - INFO - root - app.py:30 - PLC开始轮询
-2025-05-18 15:54:52,873 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 15:54:59,695 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 15:55:02,818 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 15:55:09,647 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 15:55:12,308 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 15:55:17,043 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 15:55:19,855 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 15:55:21,779 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 15:55:27,470 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 15:55:32,026 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 15:56:09,218 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
-2025-05-18 15:56:09,220 - INFO - snap7.client - client.py:78 - creating snap7 client
-2025-05-18 15:56:09,221 - INFO - snap7.client - client.py:78 - creating snap7 client
-2025-05-18 15:56:09,221 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
-2025-05-18 15:56:09,225 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
-2025-05-18 15:56:09,229 - INFO - root - plc_s7.py:76 - S7连接成功.
-2025-05-18 15:56:09,229 - INFO - root - app.py:28 - PLC连接结果: True
-2025-05-18 15:56:09,230 - INFO - root - app.py:30 - PLC开始轮询
-2025-05-18 15:56:25,358 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
-2025-05-18 15:56:25,362 - INFO - snap7.client - client.py:78 - creating snap7 client
-2025-05-18 15:56:25,362 - INFO - snap7.client - client.py:78 - creating snap7 client
-2025-05-18 15:56:25,362 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
-2025-05-18 15:56:25,368 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
-2025-05-18 15:56:25,373 - INFO - root - plc_s7.py:76 - S7连接成功.
-2025-05-18 15:56:25,374 - INFO - root - app.py:28 - PLC连接结果: True
-2025-05-18 15:56:25,374 - INFO - root - app.py:30 - PLC开始轮询
-2025-05-18 15:56:39,925 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
-2025-05-18 15:56:39,927 - INFO - snap7.client - client.py:78 - creating snap7 client
-2025-05-18 15:56:39,928 - INFO - snap7.client - client.py:78 - creating snap7 client
-2025-05-18 15:56:39,928 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
-2025-05-18 15:56:39,934 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
-2025-05-18 15:56:39,939 - INFO - root - plc_s7.py:76 - S7连接成功.
-2025-05-18 15:56:39,939 - INFO - root - app.py:28 - PLC连接结果: True
-2025-05-18 15:56:39,940 - INFO - root - app.py:30 - PLC开始轮询
-2025-05-18 15:57:29,864 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
-2025-05-18 15:57:29,866 - INFO - snap7.client - client.py:78 - creating snap7 client
-2025-05-18 15:57:29,867 - INFO - snap7.client - client.py:78 - creating snap7 client
-2025-05-18 15:57:29,868 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
-2025-05-18 15:57:29,874 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
-2025-05-18 15:57:29,878 - INFO - root - plc_s7.py:76 - S7连接成功.
-2025-05-18 15:57:29,878 - INFO - root - app.py:28 - PLC连接结果: True
-2025-05-18 15:57:29,878 - INFO - root - app.py:30 - PLC开始轮询
-2025-05-18 15:57:33,393 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 15:57:33,603 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 15:57:35,384 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 15:57:35,564 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 15:57:43,643 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 15:57:56,156 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 15:58:01,304 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 15:58:03,108 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 15:58:19,795 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 15:58:38,265 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 15:58:40,398 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 15:58:43,035 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 15:58:43,355 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 15:59:29,473 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 15:59:32,835 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 15:59:35,623 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 15:59:37,898 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 15:59:38,550 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 16:00:19,536 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 16:00:26,235 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 16:00:30,237 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 16:00:36,119 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 16:00:40,732 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 16:01:08,013 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 16:01:08,210 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 16:01:09,255 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 16:01:11,628 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 16:01:24,919 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 16:01:26,967 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 16:01:27,682 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 16:01:33,667 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 16:01:40,575 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 16:01:46,352 - INFO - root - cmd.py:220 - ########### 开始执行流程<测试流程>
-2025-05-18 16:01:46,353 - INFO - root - cmd.py:331 - >>> 开始执行指令: 名称<开始> 类型<algo> 算法类型:<algoWait>
-2025-05-18 16:01:47,354 - INFO - root - cmd.py:416 - <<< 指令<开始> 执行完毕 ---> 执行结果:{'name': '等待时间', 'value': 1}
-2025-05-18 16:01:47,355 - INFO - root - cmd.py:331 - >>> 开始执行指令: 名称<等待> 类型<algo> 算法类型:<algoWait>
-2025-05-18 16:01:50,356 - INFO - root - cmd.py:416 - <<< 指令<等待> 执行完毕 ---> 执行结果:{'name': '等待时间', 'value': 3}
-2025-05-18 16:01:50,358 - INFO - root - cmd.py:337 - >>> 开始执行指令: 名称<实时采集> 类型<pop> 弹窗类型:<None>
-2025-05-18 16:01:50,358 - INFO - root - cmd.py:416 - <<< 指令<实时采集> 执行完毕 ---> 执行结果:'dialog_id'
-2025-05-18 16:01:50,358 - ERROR - root - cmd.py:266 - 指令<7d0e7fa4>执行失败
-2025-05-18 16:01:50,359 - ERROR - root - cmd.py:276 - 有故障,流程中断
-2025-05-18 16:01:55,839 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 16:02:03,426 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 16:02:11,282 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 16:02:14,593 - INFO - root - cmd.py:220 - ########### 开始执行流程<测试流程>
-2025-05-18 16:02:14,595 - INFO - root - cmd.py:331 - >>> 开始执行指令: 名称<开始> 类型<algo> 算法类型:<algoWait>
-2025-05-18 16:02:15,596 - INFO - root - cmd.py:416 - <<< 指令<开始> 执行完毕 ---> 执行结果:{'name': '等待时间', 'value': 1}
-2025-05-18 16:02:15,597 - INFO - root - cmd.py:331 - >>> 开始执行指令: 名称<等待> 类型<algo> 算法类型:<algoWait>
-2025-05-18 16:02:18,597 - INFO - root - cmd.py:416 - <<< 指令<等待> 执行完毕 ---> 执行结果:{'name': '等待时间', 'value': 3}
-2025-05-18 16:02:18,597 - INFO - root - cmd.py:337 - >>> 开始执行指令: 名称<实时采集> 类型<pop> 弹窗类型:<dialogChart>
-2025-05-18 16:02:18,598 - INFO - root - cmd.py:416 - <<< 指令<实时采集> 执行完毕 ---> 执行结果:a3630325:等待
-2025-05-18 16:02:18,600 - INFO - root - cmd.py:331 - >>> 开始执行指令: 名称<计算结果> 类型<algo> 算法类型:<algoStatics>
-2025-05-18 16:02:18,613 - INFO - root - cmd.py:416 - <<< 指令<计算结果> 执行完毕 ---> 执行结果:{'name': '统计', 'value': -1}
-2025-05-18 16:02:18,614 - INFO - root - cmd.py:331 - >>> 开始执行指令: 名称<生成报告> 类型<algo> 算法类型:<algoSummary>
-2025-05-18 16:02:18,623 - INFO - root - cmd.py:416 - <<< 指令<生成报告> 执行完毕 ---> 执行结果:{'name': '总结', 'value': ['等待时间,1,指令耗时:1.0', '等待时间,3,指令耗时:3.0', '统计,-1,指令耗时:0.0']}
-2025-05-18 16:02:18,628 - INFO - root - cmd.py:279 - ########### 流程执行完毕<测试流程>
-2025-05-18 16:03:28,871 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
-2025-05-18 16:03:28,873 - INFO - snap7.client - client.py:78 - creating snap7 client
-2025-05-18 16:03:28,873 - INFO - snap7.client - client.py:78 - creating snap7 client
-2025-05-18 16:03:28,873 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
-2025-05-18 16:03:28,879 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
-2025-05-18 16:03:28,883 - INFO - root - plc_s7.py:76 - S7连接成功.
-2025-05-18 16:03:28,883 - INFO - root - app.py:28 - PLC连接结果: True
-2025-05-18 16:03:28,884 - INFO - root - app.py:30 - PLC开始轮询
-2025-05-18 16:03:43,645 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 16:04:04,480 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 16:04:07,286 - INFO - root - cmd.py:83 - 保存runtime/flows/test.json
-2025-05-18 16:04:23,059 - INFO - root - cmd.py:220 - ########### 开始执行流程<测试流程>
-2025-05-18 16:04:23,060 - INFO - root - cmd.py:331 - >>> 开始执行指令: 名称<开始> 类型<algo> 算法类型:<algoWait>
-2025-05-18 16:04:24,062 - INFO - root - cmd.py:416 - <<< 指令<开始> 执行完毕 ---> 执行结果:{'name': '等待时间', 'value': 1}
-2025-05-18 16:04:24,064 - INFO - root - cmd.py:331 - >>> 开始执行指令: 名称<等待> 类型<algo> 算法类型:<algoWait>
-2025-05-18 16:04:27,065 - INFO - root - cmd.py:416 - <<< 指令<等待> 执行完毕 ---> 执行结果:{'name': '等待时间', 'value': 3}
-2025-05-18 16:04:27,067 - INFO - root - cmd.py:337 - >>> 开始执行指令: 名称<实时采集> 类型<pop> 弹窗类型:<dialogChart>
-2025-05-18 16:04:40,076 - INFO - root - cmd.py:416 - <<< 指令<实时采集> 执行完毕 ---> 执行结果:{'name': '绘图结果', 'value': [1.2921849964220211, 4.642128454211521, 3.5664322248480693, 3.868881888051439, 4.911864564847233, -0.45950062659622337, -0.46240075098713773, -4.895110672492274, -3.5558979296964868, -6.602390611814515]}
-2025-05-18 16:04:40,077 - INFO - root - cmd.py:331 - >>> 开始执行指令: 名称<计算结果> 类型<algo> 算法类型:<algoStatics>
-2025-05-18 16:04:40,077 - INFO - root - cmd.py:416 - <<< 指令<计算结果> 执行完毕 ---> 执行结果:{'name': '统计', 'value': 2.306191536793647}
-2025-05-18 16:04:40,077 - INFO - root - cmd.py:331 - >>> 开始执行指令: 名称<生成报告> 类型<algo> 算法类型:<algoSummary>
-2025-05-18 16:04:40,082 - INFO - root - cmd.py:416 - <<< 指令<生成报告> 执行完毕 ---> 执行结果:{'name': '总结', 'value': ['等待时间,1,指令耗时:1.0', '等待时间,3,指令耗时:3.0', '绘图结果,[1.2921849964220211, 4.642128454211521, 3.5664322248480693, 3.868881888051439, 4.911864564847233, -0.45950062659622337, -0.46240075098713773, -4.895110672492274, -3.5558979296964868, -6.602390611814515],指令耗时:13.0', '统计,2.306191536793647,指令耗时:0.0']}
-2025-05-18 16:04:40,082 - INFO - root - cmd.py:279 - ########### 流程执行完毕<测试流程>
+2025-05-18 19:39:11,223 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
+2025-05-18 19:39:11,225 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-18 19:39:11,226 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-18 19:39:11,226 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-18 19:39:11,232 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-18 19:39:11,237 - INFO - root - plc_s7.py:76 - S7连接成功.
+2025-05-18 19:39:11,237 - INFO - root - app.py:28 - PLC连接结果: True
+2025-05-18 19:39:11,238 - INFO - root - app.py:30 - PLC开始轮询
+2025-05-18 19:39:22,654 - INFO - root - cmd.py:219 - ########### 开始执行流程<测试流程>
+2025-05-18 19:39:22,656 - INFO - root - cmd.py:344 - >>> 开始执行指令: 名称<开始> 类型<algo> 算法类型:<algoWait>
+2025-05-18 19:39:23,658 - INFO - root - cmd.py:428 - <<< 指令<开始> 执行完毕 ---> 执行结果:{'name': '等待时间', 'value': 1}
+2025-05-18 19:39:23,659 - INFO - root - cmd.py:344 - >>> 开始执行指令: 名称<等待> 类型<algo> 算法类型:<algoWait>
+2025-05-18 19:39:26,660 - INFO - root - cmd.py:428 - <<< 指令<等待> 执行完毕 ---> 执行结果:{'name': '等待时间', 'value': 3}
+2025-05-18 19:39:26,661 - INFO - root - cmd.py:350 - >>> 开始执行指令: 名称<实时采集> 类型<pop> 弹窗类型:<dialogChart>
+2025-05-18 19:39:39,670 - INFO - root - cmd.py:428 - <<< 指令<实时采集> 执行完毕 ---> 执行结果:{'name': '绘图结果', 'value': [1.9602301352636844, 5.193378949590237, 3.3926212182578652, 4.2180600537061945, 1.912005527867858, -0.25558606488409175, -0.8821473997480787, -3.8971758004979975, -5.62943022683761, -3.943744583337977]}
+2025-05-18 19:39:39,672 - INFO - root - cmd.py:344 - >>> 开始执行指令: 名称<计算结果> 类型<algo> 算法类型:<algoStatics>
+2025-05-18 19:39:39,673 - INFO - root - cmd.py:428 - <<< 指令<计算结果> 执行完毕 ---> 执行结果:{'name': '统计', 'value': 2.0682118093800836}
+2025-05-18 19:39:39,674 - INFO - root - cmd.py:344 - >>> 开始执行指令: 名称<生成报告> 类型<algo> 算法类型:<algoSummary>
+2025-05-18 19:39:39,684 - INFO - root - cmd.py:428 - <<< 指令<生成报告> 执行完毕 ---> 执行结果:{'name': '总结', 'value': ['等待时间,1,指令耗时:1.0', '等待时间,3,指令耗时:3.0', '绘图结果,[1.9602301352636844, 5.193378949590237, 3.3926212182578652, 4.2180600537061945, 1.912005527867858, -0.25558606488409175, -0.8821473997480787, -3.8971758004979975, -5.62943022683761, -3.943744583337977],指令耗时:13.0', '统计,2.0682118093800836,指令耗时:0.0']}
+2025-05-18 19:39:39,685 - INFO - root - cmd.py:288 - ########### 流程执行完毕<测试流程>
+2025-05-18 19:40:15,439 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
+2025-05-18 19:40:15,441 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-18 19:40:15,441 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-18 19:40:15,442 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-18 19:40:15,447 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-18 19:40:15,451 - INFO - root - plc_s7.py:76 - S7连接成功.
+2025-05-18 19:40:15,451 - INFO - root - app.py:28 - PLC连接结果: True
+2025-05-18 19:40:15,452 - INFO - root - app.py:30 - PLC开始轮询
+2025-05-18 19:40:18,525 - INFO - root - cmd.py:219 - ########### 开始执行流程<测试流程>
+2025-05-18 19:40:18,526 - INFO - root - cmd.py:344 - >>> 开始执行指令: 名称<开始> 类型<algo> 算法类型:<algoWait>
+2025-05-18 19:40:19,527 - INFO - root - cmd.py:428 - <<< 指令<开始> 执行完毕 ---> 执行结果:{'name': '等待时间', 'value': 1}
+2025-05-18 19:40:19,528 - INFO - root - cmd.py:344 - >>> 开始执行指令: 名称<等待> 类型<algo> 算法类型:<algoWait>
+2025-05-18 19:40:22,530 - INFO - root - cmd.py:428 - <<< 指令<等待> 执行完毕 ---> 执行结果:{'name': '等待时间', 'value': 3}
+2025-05-18 19:40:22,532 - INFO - root - cmd.py:350 - >>> 开始执行指令: 名称<实时采集> 类型<pop> 弹窗类型:<dialogChart>
+2025-05-18 19:40:24,534 - INFO - root - cmd.py:428 - <<< 指令<实时采集> 执行完毕 ---> 执行结果:{'name': '绘图结果', 'value': [0, 0, 0, 0, 0, 0, 0, 0, 0, 3.5958481628778483]}
+2025-05-18 19:40:24,534 - INFO - root - cmd.py:344 - >>> 开始执行指令: 名称<计算结果> 类型<algo> 算法类型:<algoStatics>
+2025-05-18 19:40:24,535 - INFO - root - cmd.py:428 - <<< 指令<计算结果> 执行完毕 ---> 执行结果:{'name': '统计', 'value': 3.5958481628778483}
+2025-05-18 19:40:24,535 - INFO - root - cmd.py:344 - >>> 开始执行指令: 名称<生成报告> 类型<algo> 算法类型:<algoSummary>
+2025-05-18 19:40:24,538 - INFO - root - cmd.py:428 - <<< 指令<生成报告> 执行完毕 ---> 执行结果:{'name': '总结', 'value': ['等待时间,1,指令耗时:1.0', '等待时间,3,指令耗时:3.0', '绘图结果,[0, 0, 0, 0, 0, 0, 0, 0, 0, 3.5958481628778483],指令耗时:2.0', '统计,3.5958481628778483,指令耗时:0.0']}
+2025-05-18 19:40:24,539 - INFO - root - cmd.py:288 - ########### 流程执行完毕<测试流程>
+2025-05-18 20:37:56,696 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
+2025-05-18 20:37:56,699 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-18 20:37:56,700 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-18 20:37:56,700 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-18 20:37:56,706 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-18 20:37:56,710 - INFO - root - plc_s7.py:76 - S7连接成功.
+2025-05-18 20:37:56,710 - INFO - root - app.py:28 - PLC连接结果: True
+2025-05-18 20:37:56,711 - INFO - root - app.py:30 - PLC开始轮询
+2025-05-18 20:39:02,527 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
+2025-05-18 20:39:02,529 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-18 20:39:02,529 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-18 20:39:02,530 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-18 20:39:02,535 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-18 20:39:02,541 - INFO - root - plc_s7.py:76 - S7连接成功.
+2025-05-18 20:39:02,541 - INFO - root - app.py:28 - PLC连接结果: True
+2025-05-18 20:39:02,542 - INFO - root - app.py:30 - PLC开始轮询
+2025-05-18 20:39:48,110 - INFO - root - cmd.py:219 - ########### 开始执行流程<测试流程>
+2025-05-18 20:39:48,111 - INFO - root - cmd.py:344 - >>> 开始执行指令: 名称<开始> 类型<algo> 算法类型:<algoWait>
+2025-05-18 20:39:49,112 - INFO - root - cmd.py:428 - <<< 指令<开始> 执行完毕 ---> 执行结果:{'name': '等待时间', 'value': 1}
+2025-05-18 20:39:49,114 - INFO - root - cmd.py:344 - >>> 开始执行指令: 名称<生成报告> 类型<algo> 算法类型:<algoSummary>
+2025-05-18 20:39:49,127 - INFO - root - cmd.py:428 - <<< 指令<生成报告> 执行完毕 ---> 执行结果:{'name': '总结', 'value': ['等待时间,1,指令耗时:1.0']}
+2025-05-18 20:39:49,128 - INFO - root - cmd.py:288 - ########### 流程执行完毕<测试流程>
+2025-05-18 20:40:12,126 - ERROR - root - notify.py:238 - Error in subscriber View_index: Internal C++ object (PySide6.QtWidgets.QLabel) already deleted.
+2025-05-18 20:40:12,127 - ERROR - root - notify.py:175 - Error notifying subscriber: Internal C++ object (PySide6.QtWidgets.QLabel) already deleted.
+2025-05-18 20:41:49,312 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
+2025-05-18 20:41:49,315 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-18 20:41:49,315 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-18 20:41:49,315 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-18 20:41:49,321 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-18 20:41:49,326 - INFO - root - plc_s7.py:76 - S7连接成功.
+2025-05-18 20:41:49,326 - INFO - root - app.py:28 - PLC连接结果: True
+2025-05-18 20:41:49,326 - INFO - root - app.py:30 - PLC开始轮询
+2025-05-18 20:41:56,535 - INFO - root - cmd.py:224 - ########### 开始执行流程<测试流程>
+2025-05-18 20:41:56,537 - INFO - root - cmd.py:350 - >>> 开始执行指令: 名称<开始> 类型<algo> 算法类型:<algoWait>
+2025-05-18 20:41:57,538 - INFO - root - cmd.py:434 - <<< 指令<开始> 执行完毕 ---> 执行结果:{'name': '等待时间', 'value': 1}
+2025-05-18 20:42:00,542 - INFO - root - cmd.py:350 - >>> 开始执行指令: 名称<空指令> 类型<algo> 算法类型:<algoWait>
+2025-05-18 20:42:01,543 - INFO - root - cmd.py:434 - <<< 指令<空指令> 执行完毕 ---> 执行结果:{'name': '等待时间', 'value': 1}
+2025-05-18 20:42:01,546 - INFO - root - cmd.py:350 - >>> 开始执行指令: 名称<生成报告> 类型<algo> 算法类型:<algoSummary>
+2025-05-18 20:42:01,557 - INFO - root - cmd.py:434 - <<< 指令<生成报告> 执行完毕 ---> 执行结果:{'name': '总结', 'value': ['等待时间,1,指令耗时:1.0', '等待时间,1,指令耗时:1.0']}
+2025-05-18 20:42:01,557 - INFO - root - cmd.py:294 - ########### 流程执行完毕<测试流程>
+2025-05-18 20:45:52,056 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
+2025-05-18 20:45:52,060 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-18 20:45:52,060 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-18 20:45:52,060 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-18 20:45:52,066 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-18 20:45:52,070 - INFO - root - plc_s7.py:76 - S7连接成功.
+2025-05-18 20:45:52,070 - INFO - root - app.py:28 - PLC连接结果: True
+2025-05-18 20:45:52,071 - INFO - root - app.py:30 - PLC开始轮询
+2025-05-18 20:45:55,691 - INFO - root - cmd.py:224 - ########### 开始执行流程<测试流程>
+2025-05-18 20:45:55,692 - INFO - root - cmd.py:350 - >>> 开始执行指令: 名称<开始> 类型<algo> 算法类型:<algoWait>
+2025-05-18 20:45:56,692 - INFO - root - cmd.py:434 - <<< 指令<开始> 执行完毕 ---> 执行结果:{'name': '等待时间', 'value': 1}
+2025-05-18 20:46:00,699 - INFO - root - cmd.py:350 - >>> 开始执行指令: 名称<空指令> 类型<algo> 算法类型:<algoWait>
+2025-05-18 20:46:01,702 - INFO - root - cmd.py:434 - <<< 指令<空指令> 执行完毕 ---> 执行结果:{'name': '等待时间', 'value': 1}
+2025-05-18 20:46:01,703 - INFO - root - cmd.py:350 - >>> 开始执行指令: 名称<生成报告> 类型<algo> 算法类型:<algoSummary>
+2025-05-18 20:46:01,712 - INFO - root - cmd.py:434 - <<< 指令<生成报告> 执行完毕 ---> 执行结果:{'name': '总结', 'value': ['等待时间,1,指令耗时:1.0', '等待时间,1,指令耗时:1.0']}
+2025-05-18 20:46:01,713 - INFO - root - cmd.py:294 - ########### 流程执行完毕<测试流程>
+2025-05-18 20:46:36,514 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
+2025-05-18 20:46:36,519 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-18 20:46:36,520 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-18 20:46:36,521 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-18 20:46:36,527 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-18 20:46:36,532 - INFO - root - plc_s7.py:76 - S7连接成功.
+2025-05-18 20:46:36,532 - INFO - root - app.py:28 - PLC连接结果: True
+2025-05-18 20:46:36,533 - INFO - root - app.py:30 - PLC开始轮询
+2025-05-18 20:46:43,387 - INFO - root - cmd.py:224 - ########### 开始执行流程<测试流程>
+2025-05-18 20:46:43,388 - INFO - root - cmd.py:350 - >>> 开始执行指令: 名称<开始> 类型<algo> 算法类型:<algoWait>
+2025-05-18 20:46:44,389 - INFO - root - cmd.py:434 - <<< 指令<开始> 执行完毕 ---> 执行结果:{'name': '等待时间', 'value': 1}
+2025-05-18 20:46:47,393 - INFO - root - cmd.py:350 - >>> 开始执行指令: 名称<空指令> 类型<algo> 算法类型:<algoWait>
+2025-05-18 20:46:48,394 - INFO - root - cmd.py:434 - <<< 指令<空指令> 执行完毕 ---> 执行结果:{'name': '等待时间', 'value': 1}
+2025-05-18 20:46:48,395 - INFO - root - cmd.py:350 - >>> 开始执行指令: 名称<生成报告> 类型<algo> 算法类型:<algoSummary>
+2025-05-18 20:46:48,401 - INFO - root - cmd.py:434 - <<< 指令<生成报告> 执行完毕 ---> 执行结果:{'name': '总结', 'value': ['等待时间,1,指令耗时:1.0', '等待时间,1,指令耗时:1.0']}
+2025-05-18 20:46:48,401 - INFO - root - cmd.py:294 - ########### 流程执行完毕<测试流程>
+2025-05-18 20:46:52,978 - INFO - root - cmd.py:224 - ########### 开始执行流程<测试流程>
+2025-05-18 20:46:52,979 - INFO - root - cmd.py:350 - >>> 开始执行指令: 名称<开始> 类型<algo> 算法类型:<algoWait>
+2025-05-18 20:46:53,981 - INFO - root - cmd.py:434 - <<< 指令<开始> 执行完毕 ---> 执行结果:{'name': '等待时间', 'value': 1}
+2025-05-18 20:46:57,985 - INFO - root - cmd.py:350 - >>> 开始执行指令: 名称<等待> 类型<algo> 算法类型:<algoWait>
+2025-05-18 20:47:00,987 - INFO - root - cmd.py:434 - <<< 指令<等待> 执行完毕 ---> 执行结果:{'name': '等待时间', 'value': 3}
+2025-05-18 20:47:00,989 - INFO - root - cmd.py:356 - >>> 开始执行指令: 名称<实时采集> 类型<pop> 弹窗类型:<dialogChart>
+2025-05-18 20:47:14,998 - INFO - root - cmd.py:434 - <<< 指令<实时采集> 执行完毕 ---> 执行结果:{'name': '绘图结果', 'value': [1.350597894604673, 4.997940743533066, 3.896355111477695, 3.1958219242042682, 3.72715874166505, -0.38021308863052483, -3.452336952402839, -3.3271308385974976, -3.037864969346576, -4.484219983443918]}
+2025-05-18 20:47:14,999 - INFO - root - cmd.py:350 - >>> 开始执行指令: 名称<计算结果> 类型<algo> 算法类型:<algoStatics>
+2025-05-18 20:47:14,999 - INFO - root - cmd.py:434 - <<< 指令<计算结果> 执行完毕 ---> 执行结果:{'name': '统计', 'value': 2.4861085830633973}
+2025-05-18 20:47:14,999 - INFO - root - cmd.py:350 - >>> 开始执行指令: 名称<生成报告> 类型<algo> 算法类型:<algoSummary>
+2025-05-18 20:47:15,001 - INFO - root - cmd.py:434 - <<< 指令<生成报告> 执行完毕 ---> 执行结果:{'name': '总结', 'value': ['等待时间,1,指令耗时:1.0', "总结,['等待时间,1,指令耗时:1.0', '等待时间,1,指令耗时:1.0'],指令耗时:-26.0", '等待时间,3,指令耗时:3.0', '绘图结果,[1.350597894604673, 4.997940743533066, 3.896355111477695, 3.1958219242042682, 3.72715874166505, -0.38021308863052483, -3.452336952402839, -3.3271308385974976, -3.037864969346576, -4.484219983443918],指令耗时:14.0', '统计,2.4861085830633973,指令耗时:0.0', '等待时间,1,指令耗时:1.0']}
+2025-05-18 20:47:15,002 - INFO - root - cmd.py:294 - ########### 流程执行完毕<测试流程>
+2025-05-18 21:27:07,187 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
+2025-05-18 21:27:07,190 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-18 21:27:07,191 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-18 21:27:07,191 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-18 21:27:07,196 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-18 21:27:07,201 - INFO - root - plc_s7.py:76 - S7连接成功.
+2025-05-18 21:27:07,201 - INFO - root - app.py:28 - PLC连接结果: True
+2025-05-18 21:27:07,203 - INFO - root - app.py:30 - PLC开始轮询
+2025-05-18 22:16:04,614 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
+2025-05-18 22:16:04,617 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-18 22:16:04,617 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-18 22:16:04,618 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-18 22:16:04,624 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-18 22:16:04,628 - INFO - root - plc_s7.py:76 - S7连接成功.
+2025-05-18 22:16:04,628 - INFO - root - app.py:28 - PLC连接结果: True
+2025-05-18 22:16:04,628 - INFO - root - app.py:30 - PLC开始轮询
+2025-05-18 22:16:07,581 - ERROR - root - notify.py:238 - Error in subscriber View_index: Internal C++ object (PySide6.QtWidgets.QLabel) already deleted.
+2025-05-18 22:16:07,582 - ERROR - root - notify.py:175 - Error notifying subscriber: Internal C++ object (PySide6.QtWidgets.QLabel) already deleted.
+2025-05-18 22:23:42,105 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
+2025-05-18 22:23:42,108 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-18 22:23:42,108 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-18 22:23:42,109 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-18 22:23:42,114 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-18 22:23:42,119 - INFO - root - plc_s7.py:76 - S7连接成功.
+2025-05-18 22:23:42,119 - INFO - root - app.py:28 - PLC连接结果: True
+2025-05-18 22:23:42,119 - INFO - root - app.py:30 - PLC开始轮询
+2025-05-18 22:30:26,009 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
+2025-05-18 22:30:26,014 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-18 22:30:26,014 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-18 22:30:26,014 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-18 22:30:26,019 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-18 22:30:26,023 - INFO - root - plc_s7.py:76 - S7连接成功.
+2025-05-18 22:30:26,023 - INFO - root - app.py:28 - PLC连接结果: True
+2025-05-18 22:30:26,024 - INFO - root - app.py:30 - PLC开始轮询
+2025-05-18 22:30:39,015 - ERROR - root - view.py:365 - 创建任务出错: "Task" object has no field "theCmdManger"
+2025-05-18 22:31:23,653 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
+2025-05-18 22:31:23,656 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-18 22:31:23,657 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-18 22:31:23,657 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-18 22:31:23,663 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-18 22:31:23,667 - INFO - root - plc_s7.py:76 - S7连接成功.
+2025-05-18 22:31:23,667 - INFO - root - app.py:28 - PLC连接结果: True
+2025-05-18 22:31:23,667 - INFO - root - app.py:30 - PLC开始轮询
+2025-05-18 22:31:26,287 - ERROR - root - view.py:365 - 创建任务出错: "Task" object has no field "theCmdManger"
+2025-05-18 22:32:02,055 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
+2025-05-18 22:32:02,058 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-18 22:32:02,058 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-18 22:32:02,058 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-18 22:32:02,063 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-18 22:32:02,068 - INFO - root - plc_s7.py:76 - S7连接成功.
+2025-05-18 22:32:02,068 - INFO - root - app.py:28 - PLC连接结果: True
+2025-05-18 22:32:02,068 - INFO - root - app.py:30 - PLC开始轮询
+2025-05-18 22:32:04,272 - ERROR - root - view.py:365 - 创建任务出错: "Task" object has no field "theCmdManager"
+2025-05-18 22:36:47,870 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
+2025-05-18 22:36:47,873 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-18 22:36:47,873 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-18 22:36:47,874 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-18 22:36:47,879 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-18 22:36:47,883 - INFO - root - plc_s7.py:76 - S7连接成功.
+2025-05-18 22:36:47,883 - INFO - root - app.py:28 - PLC连接结果: True
+2025-05-18 22:36:47,884 - INFO - root - app.py:30 - PLC开始轮询
+2025-05-18 22:36:50,053 - ERROR - root - view.py:366 - 创建任务出错: "Task" object has no field "theCmdManager"
+2025-05-18 22:37:18,677 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
+2025-05-18 22:37:18,679 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-18 22:37:18,680 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-18 22:37:18,680 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-18 22:37:18,685 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-18 22:37:18,689 - INFO - root - plc_s7.py:76 - S7连接成功.
+2025-05-18 22:37:18,689 - INFO - root - app.py:28 - PLC连接结果: True
+2025-05-18 22:37:18,691 - INFO - root - app.py:30 - PLC开始轮询
+2025-05-18 22:37:31,225 - ERROR - root - view.py:366 - 创建任务出错: 
+2025-05-18 22:38:14,584 - ERROR - root - view.py:366 - 创建任务出错: "Task" object has no field "theCmdManager"
+2025-05-18 22:38:19,857 - ERROR - root - view.py:366 - 创建任务出错: "Task" object has no field "theCmdManager"
+2025-05-18 22:38:27,972 - ERROR - root - view.py:366 - 创建任务出错: "Task" object has no field "theCmdManager"
+2025-05-18 22:39:43,040 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
+2025-05-18 22:39:43,043 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-18 22:39:43,043 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-18 22:39:43,043 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-18 22:39:43,048 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-18 22:39:43,053 - INFO - root - plc_s7.py:76 - S7连接成功.
+2025-05-18 22:39:43,053 - INFO - root - app.py:28 - PLC连接结果: True
+2025-05-18 22:39:43,054 - INFO - root - app.py:30 - PLC开始轮询
+2025-05-18 22:39:44,882 - ERROR - root - view.py:366 - 创建任务出错: "Task" object has no field "theCmdManager"
+2025-05-18 22:47:09,726 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
+2025-05-18 22:47:09,728 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-18 22:47:09,729 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-18 22:47:09,729 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-18 22:47:09,733 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-18 22:47:09,737 - INFO - root - plc_s7.py:76 - S7连接成功.
+2025-05-18 22:47:09,737 - INFO - root - app.py:28 - PLC连接结果: True
+2025-05-18 22:47:09,738 - INFO - root - app.py:30 - PLC开始轮询
+2025-05-18 22:47:11,948 - ERROR - root - view.py:366 - 创建任务出错: "Task" object has no field "theCmdManager"
+2025-05-18 22:48:20,758 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
+2025-05-18 22:48:20,761 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-18 22:48:20,761 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-18 22:48:20,761 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-18 22:48:20,767 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-18 22:48:20,772 - INFO - root - plc_s7.py:76 - S7连接成功.
+2025-05-18 22:48:20,772 - INFO - root - app.py:28 - PLC连接结果: True
+2025-05-18 22:48:20,773 - INFO - root - app.py:30 - PLC开始轮询
+2025-05-18 22:48:22,745 - ERROR - root - view.py:366 - 创建任务出错: 'Task' object has no attribute '__pydantic_fields_set__'
+2025-05-18 22:49:46,038 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
+2025-05-18 22:49:46,041 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-18 22:49:46,041 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-18 22:49:46,042 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-18 22:49:46,047 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-18 22:49:46,052 - INFO - root - plc_s7.py:76 - S7连接成功.
+2025-05-18 22:49:46,052 - INFO - root - app.py:28 - PLC连接结果: True
+2025-05-18 22:49:46,053 - INFO - root - app.py:30 - PLC开始轮询
+2025-05-18 22:49:48,267 - ERROR - root - view.py:366 - 创建任务出错: 'Task' object has no attribute '__pydantic_fields_set__'
+2025-05-18 22:53:30,614 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
+2025-05-18 22:53:30,616 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-18 22:53:30,616 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-18 22:53:30,616 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-18 22:53:30,620 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-18 22:53:30,624 - INFO - root - plc_s7.py:76 - S7连接成功.
+2025-05-18 22:53:30,624 - INFO - root - app.py:28 - PLC连接结果: True
+2025-05-18 22:53:30,625 - INFO - root - app.py:30 - PLC开始轮询
+2025-05-18 22:53:38,735 - INFO - root - cmd.py:224 - ########### 开始执行流程<测试流程>
+2025-05-18 22:53:38,736 - INFO - root - cmd.py:350 - >>> 开始执行指令: 名称<开始> 类型<algo> 算法类型:<algoWait>
+2025-05-18 22:53:39,738 - INFO - root - cmd.py:434 - <<< 指令<开始> 执行完毕 ---> 执行结果:{'name': '等待时间', 'value': 1}
+2025-05-18 22:53:44,743 - INFO - root - cmd.py:350 - >>> 开始执行指令: 名称<空指令> 类型<algo> 算法类型:<algoWait>
+2025-05-18 22:53:45,744 - INFO - root - cmd.py:434 - <<< 指令<空指令> 执行完毕 ---> 执行结果:{'name': '等待时间', 'value': 1}
+2025-05-18 22:53:45,744 - INFO - root - cmd.py:350 - >>> 开始执行指令: 名称<生成报告> 类型<algo> 算法类型:<algoSummary>
+2025-05-18 22:53:45,749 - INFO - root - cmd.py:434 - <<< 指令<生成报告> 执行完毕 ---> 执行结果:{'name': '总结', 'value': ['等待时间,1,指令耗时:1.0', '等待时间,1,指令耗时:1.0']}
+2025-05-18 22:53:45,749 - INFO - root - cmd.py:294 - ########### 流程执行完毕<测试流程>
+2025-05-18 22:53:59,737 - INFO - root - cmd.py:224 - ########### 开始执行流程<测试流程>
+2025-05-18 22:53:59,738 - INFO - root - cmd.py:350 - >>> 开始执行指令: 名称<开始> 类型<algo> 算法类型:<algoWait>
+2025-05-18 22:54:00,739 - INFO - root - cmd.py:434 - <<< 指令<开始> 执行完毕 ---> 执行结果:{'name': '等待时间', 'value': 1}
+2025-05-18 22:54:05,741 - INFO - root - cmd.py:350 - >>> 开始执行指令: 名称<等待> 类型<algo> 算法类型:<algoWait>
+2025-05-18 22:54:08,744 - INFO - root - cmd.py:434 - <<< 指令<等待> 执行完毕 ---> 执行结果:{'name': '等待时间', 'value': 3}
+2025-05-18 22:54:08,745 - INFO - root - cmd.py:356 - >>> 开始执行指令: 名称<实时采集> 类型<pop> 弹窗类型:<dialogChart>
+2025-05-18 22:54:21,752 - INFO - root - cmd.py:434 - <<< 指令<实时采集> 执行完毕 ---> 执行结果:{'name': '绘图结果', 'value': [2.9996265027592726, 2.7354925262526253, 5.4174318971657875, 5.795414659885667, 1.639767263357986, 0.6480894995524478, -2.6509832226370476, -2.6277928521771057, -6.485043108446543, -3.1319528641548167]}
+2025-05-18 22:54:21,753 - INFO - root - cmd.py:350 - >>> 开始执行指令: 名称<计算结果> 类型<algo> 算法类型:<algoStatics>
+2025-05-18 22:54:21,754 - INFO - root - cmd.py:434 - <<< 指令<计算结果> 执行完毕 ---> 执行结果:{'name': '统计', 'value': 4.340050301558273}
+2025-05-18 22:54:21,754 - INFO - root - cmd.py:350 - >>> 开始执行指令: 名称<生成报告> 类型<algo> 算法类型:<algoSummary>
+2025-05-18 22:54:21,757 - INFO - root - cmd.py:434 - <<< 指令<生成报告> 执行完毕 ---> 执行结果:{'name': '总结', 'value': ['等待时间,1,指令耗时:1.0', "总结,['等待时间,1,指令耗时:1.0', '等待时间,1,指令耗时:1.0'],指令耗时:-36.0", '等待时间,3,指令耗时:3.0', '绘图结果,[2.9996265027592726, 2.7354925262526253, 5.4174318971657875, 5.795414659885667, 1.639767263357986, 0.6480894995524478, -2.6509832226370476, -2.6277928521771057, -6.485043108446543, -3.1319528641548167],指令耗时:13.0', '统计,4.340050301558273,指令耗时:0.0', '等待时间,1,指令耗时:1.0']}
+2025-05-18 22:54:21,757 - INFO - root - cmd.py:294 - ########### 流程执行完毕<测试流程>
+2025-05-18 22:55:07,273 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
+2025-05-18 22:55:07,275 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-18 22:55:07,275 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-18 22:55:07,275 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-18 22:55:07,281 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-18 22:55:07,284 - INFO - root - plc_s7.py:76 - S7连接成功.
+2025-05-18 22:55:07,284 - INFO - root - app.py:28 - PLC连接结果: True
+2025-05-18 22:55:07,285 - INFO - root - app.py:30 - PLC开始轮询
+2025-05-18 22:55:25,939 - INFO - root - cmd.py:224 - ########### 开始执行流程<测试流程>
+2025-05-18 22:55:25,940 - INFO - root - cmd.py:350 - >>> 开始执行指令: 名称<开始> 类型<algo> 算法类型:<algoWait>
+2025-05-18 22:55:26,941 - INFO - root - cmd.py:434 - <<< 指令<开始> 执行完毕 ---> 执行结果:{'name': '等待时间', 'value': 1}
+2025-05-18 22:55:28,943 - INFO - root - cmd.py:350 - >>> 开始执行指令: 名称<等待> 类型<algo> 算法类型:<algoWait>
+2025-05-18 22:55:31,944 - INFO - root - cmd.py:434 - <<< 指令<等待> 执行完毕 ---> 执行结果:{'name': '等待时间', 'value': 3}
+2025-05-18 22:55:31,944 - INFO - root - cmd.py:356 - >>> 开始执行指令: 名称<实时采集> 类型<pop> 弹窗类型:<dialogChart>
+2025-05-18 22:55:44,952 - INFO - root - cmd.py:434 - <<< 指令<实时采集> 执行完毕 ---> 执行结果:{'name': '绘图结果', 'value': [4.176715359767402, 2.4141410142732584, 5.626201922964908, 5.4685294720325235, 3.6155153198047176, -0.21894358088503352, -2.054228135156756, -4.835222791703215, -3.591892251729458, -5.756547512930356]}
+2025-05-18 22:55:44,952 - INFO - root - cmd.py:350 - >>> 开始执行指令: 名称<计算结果> 类型<algo> 算法类型:<algoStatics>
+2025-05-18 22:55:44,953 - INFO - root - cmd.py:434 - <<< 指令<计算结果> 执行完毕 ---> 执行结果:{'name': '统计', 'value': 4.8442688164379915}
+2025-05-18 22:55:44,953 - INFO - root - cmd.py:350 - >>> 开始执行指令: 名称<生成报告> 类型<algo> 算法类型:<algoSummary>
+2025-05-18 22:55:44,959 - INFO - root - cmd.py:434 - <<< 指令<生成报告> 执行完毕 ---> 执行结果:{'name': '总结', 'value': ['等待时间,1,指令耗时:1.0', '等待时间,3,指令耗时:3.0', '绘图结果,[4.176715359767402, 2.4141410142732584, 5.626201922964908, 5.4685294720325235, 3.6155153198047176, -0.21894358088503352, -2.054228135156756, -4.835222791703215, -3.591892251729458, -5.756547512930356],指令耗时:13.0', '统计,4.8442688164379915,指令耗时:0.0']}
+2025-05-18 22:55:44,960 - INFO - root - cmd.py:294 - ########### 流程执行完毕<测试流程>
+2025-05-18 22:57:14,911 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
+2025-05-18 22:57:14,913 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-18 22:57:14,913 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-18 22:57:14,914 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-18 22:57:14,917 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-18 22:57:14,922 - INFO - root - plc_s7.py:76 - S7连接成功.
+2025-05-18 22:57:14,922 - INFO - root - app.py:28 - PLC连接结果: True
+2025-05-18 22:57:14,923 - INFO - root - app.py:30 - PLC开始轮询
+2025-05-18 22:57:23,433 - ERROR - root - view.py:369 - 创建任务出错: cannot pickle 'CmdManager' object

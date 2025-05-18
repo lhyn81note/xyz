@@ -7,7 +7,8 @@
     },
     "flow": {
         "head": [
-            "a3630325"
+            "a3630325",
+            "fde7d20a"
         ],
         "end": [],
         "a3630325": [
@@ -19,6 +20,9 @@
         "84b8e2bc": [
             "end"
         ],
+        "fde7d20a": [
+            "end"
+        ],
         "head_node_id": "head"
     },
     "cmds": {
@@ -26,7 +30,7 @@
             "type": "algo",
             "name": "开始",
             "param": {
-                "algo_id": "algoWait",
+                "funcID": "algoWait",
                 "args": 1,
                 "done": null
             }
@@ -35,7 +39,7 @@
             "type": "algo",
             "name": "生成报告",
             "param": {
-                "algo_id": "algoSummary",
+                "funcID": "algoSummary",
                 "args": null,
                 "done": null
             }
@@ -44,7 +48,7 @@
             "type": "algo",
             "name": "等待",
             "param": {
-                "algo_id": "algoWait",
+                "funcID": "algoWait",
                 "args": 3,
                 "done": null
             }
@@ -53,7 +57,7 @@
             "type": "pop",
             "name": "实时采集",
             "param": {
-                "dialog_id": "dialogChart",
+                "funcID": "dialogChart",
                 "args": {
                     "count": 10
                 },
@@ -64,8 +68,17 @@
             "type": "algo",
             "name": "计算结果",
             "param": {
-                "algo_id": "algoStatics",
+                "funcID": "algoStatics",
                 "args": null,
+                "done": null
+            }
+        },
+        "fde7d20a": {
+            "type": "algo",
+            "name": "空指令",
+            "param": {
+                "funcID": "algoWait",
+                "args": 1,
                 "done": null
             }
         }
@@ -98,6 +111,12 @@
         "84b8e2bc": {
             "x": 128.0,
             "y": 305.0,
+            "text": "空指令",
+            "status": "idle"
+        },
+        "fde7d20a": {
+            "x": 48.0,
+            "y": 355.0,
             "text": "空指令",
             "status": "idle"
         }

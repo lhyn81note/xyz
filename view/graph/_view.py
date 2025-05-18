@@ -15,9 +15,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QComboBox, QHBoxLayout, QLabel,
-    QPlainTextEdit, QPushButton, QSizePolicy, QVBoxLayout,
-    QWidget)
+from PySide6.QtWidgets import (QApplication, QComboBox, QHBoxLayout, QHeaderView,
+    QLabel, QPushButton, QSizePolicy, QTableView,
+    QVBoxLayout, QWidget)
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -113,10 +113,25 @@ class Ui_Form(object):
 
         self.verticalLayout_5.addWidget(self.lb_flow_desc)
 
-        self.pushButton = QPushButton(self.widget_5)
-        self.pushButton.setObjectName(u"pushButton")
+        self.label_2 = QLabel(self.widget_5)
+        self.label_2.setObjectName(u"label_2")
+        self.label_2.setFont(font)
 
-        self.verticalLayout_5.addWidget(self.pushButton)
+        self.verticalLayout_5.addWidget(self.label_2)
+
+        self.cmb_cartypes = QComboBox(self.widget_5)
+        self.cmb_cartypes.addItem("")
+        self.cmb_cartypes.addItem("")
+        self.cmb_cartypes.addItem("")
+        self.cmb_cartypes.setObjectName(u"cmb_cartypes")
+        self.cmb_cartypes.setFont(font1)
+
+        self.verticalLayout_5.addWidget(self.cmb_cartypes)
+
+        self.btn_newtask = QPushButton(self.widget_5)
+        self.btn_newtask.setObjectName(u"btn_newtask")
+
+        self.verticalLayout_5.addWidget(self.btn_newtask)
 
         self.label_3 = QLabel(self.widget_5)
         self.label_3.setObjectName(u"label_3")
@@ -128,33 +143,27 @@ class Ui_Form(object):
 
         self.verticalLayout_5.addWidget(self.label_3)
 
-        self.pt_cmd_info = QPlainTextEdit(self.widget_5)
-        self.pt_cmd_info.setObjectName(u"pt_cmd_info")
+        self.tb_tasks = QTableView(self.widget_5)
+        self.tb_tasks.setObjectName(u"tb_tasks")
 
-        self.verticalLayout_5.addWidget(self.pt_cmd_info)
+        self.verticalLayout_5.addWidget(self.tb_tasks)
 
         self.btn_start = QPushButton(self.widget_5)
         self.btn_start.setObjectName(u"btn_start")
 
         self.verticalLayout_5.addWidget(self.btn_start)
 
-        self.btb_stop_2 = QPushButton(self.widget_5)
-        self.btb_stop_2.setObjectName(u"btb_stop_2")
-        self.btb_stop_2.setStyleSheet(u"background-color: rgb(255, 170, 0);")
+        self.btn_reset = QPushButton(self.widget_5)
+        self.btn_reset.setObjectName(u"btn_reset")
+        self.btn_reset.setStyleSheet(u"background-color: rgb(186, 112, 9);")
 
-        self.verticalLayout_5.addWidget(self.btb_stop_2)
+        self.verticalLayout_5.addWidget(self.btn_reset)
 
-        self.btb_stop_3 = QPushButton(self.widget_5)
-        self.btb_stop_3.setObjectName(u"btb_stop_3")
-        self.btb_stop_3.setStyleSheet(u"background-color: rgb(186, 112, 9);")
+        self.btn_stop = QPushButton(self.widget_5)
+        self.btn_stop.setObjectName(u"btn_stop")
+        self.btn_stop.setStyleSheet(u"background-color: rgb(255, 0, 0);")
 
-        self.verticalLayout_5.addWidget(self.btb_stop_3)
-
-        self.btb_stop = QPushButton(self.widget_5)
-        self.btb_stop.setObjectName(u"btb_stop")
-        self.btb_stop.setStyleSheet(u"background-color: rgb(255, 0, 0);")
-
-        self.verticalLayout_5.addWidget(self.btb_stop)
+        self.verticalLayout_5.addWidget(self.btn_stop)
 
 
         self.verticalLayout_4.addWidget(self.widget_5)
@@ -186,11 +195,15 @@ class Ui_Form(object):
         Form.setWindowTitle(QCoreApplication.translate("Form", u"Form", None))
         self.label.setText(QCoreApplication.translate("Form", u"\u9009\u62e9\u6d4b\u8bd5\u6d41\u7a0b", None))
         self.lb_flow_desc.setText("")
-        self.pushButton.setText(QCoreApplication.translate("Form", u"\u57fa\u4e8e\u8be5\u6d41\u7a0b\u521b\u5efa\u8bd5\u9a8c\u4efb\u52a1", None))
+        self.label_2.setText(QCoreApplication.translate("Form", u"\u9009\u62e9\u8f66\u578b", None))
+        self.cmb_cartypes.setItemText(0, QCoreApplication.translate("Form", u"\u8f66\u578b1", None))
+        self.cmb_cartypes.setItemText(1, QCoreApplication.translate("Form", u"\u8f66\u578b2", None))
+        self.cmb_cartypes.setItemText(2, QCoreApplication.translate("Form", u"\u8f66\u578b3", None))
+
+        self.btn_newtask.setText(QCoreApplication.translate("Form", u"\u521b\u5efa\u8bd5\u9a8c\u4efb\u52a1", None))
         self.label_3.setText(QCoreApplication.translate("Form", u"\u4efb\u52a1\u5217\u8868", None))
         self.btn_start.setText(QCoreApplication.translate("Form", u"\u5f00\u59cb\u4efb\u52a1", None))
-        self.btb_stop_2.setText(QCoreApplication.translate("Form", u"\u6682\u505c\u4efb\u52a1", None))
-        self.btb_stop_3.setText(QCoreApplication.translate("Form", u"\u590d\u4f4d\u4efb\u52a1", None))
-        self.btb_stop.setText(QCoreApplication.translate("Form", u"\u4e2d\u6b62\u4efb\u52a1", None))
+        self.btn_reset.setText(QCoreApplication.translate("Form", u"\u590d\u4f4d\u4efb\u52a1", None))
+        self.btn_stop.setText(QCoreApplication.translate("Form", u"\u4e2d\u6b62\u4efb\u52a1", None))
     # retranslateUi
 

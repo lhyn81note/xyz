@@ -1,6 +1,6 @@
 from dependency_injector import containers, providers
 
-from .cmd import CmdMananger, Cmd
+from .cmd import Cmd, CmdManager
 from .device.plc_s7 import S7
 from .device.plc_modbus import ModbusTcp
 
@@ -17,7 +17,7 @@ print(f"{' Libs ':#^50}")
 class CoreProvider(containers.DeclarativeContainer):
     Plc = providers.Singleton(S7)
     # Plc = providers.Singleton(ModbusTcp)
-    CmdManager = providers.Singleton(CmdMananger)
+    CmdManager = providers.Singleton(CmdManager)
     Cmd = providers.Factory(Cmd)
     MsgBroker = providers.Singleton(MsgBroker)
     MsgSubscriber = providers.Factory(MsgSubscriber)

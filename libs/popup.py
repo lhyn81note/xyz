@@ -22,11 +22,11 @@ class Popup(QObject):
         self.done = False
         self.result = None # 默认结果为None
 
-    def pop(self, dialog_id, dialog_args, input=None):
+    def pop(self, funcID, dialog_args, input=None):
         
         # def core():
         self.done = False
-        theDialog = dialogMap[dialog_id](None, dialog_args, input)
+        theDialog = dialogMap[funcID](None, dialog_args, input)
         theDialog.exec()
         self.result = theDialog.get_result() # 这里有结果了
         self.done = True # 通知CmdManager弹窗任务完成

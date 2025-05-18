@@ -20,7 +20,7 @@ algoMap = {
 }
 
 
-class CmdMananger(QObject):
+class CmdManager(QObject):
 
     evtCmdChanged = Signal(str, int)  # Signal to emit status changes with id and status
     evtPopup = Signal(str, dict)  # Signal to request path selection (current_node, paths, cmd_names)
@@ -80,7 +80,6 @@ class CmdMananger(QObject):
                 "nodes": self.nodes
             }
             data["flow"]["head_node_id"] = self.head_node_id
-            logging.info(f'保存{self.flow_file}')
             json.dump(data, file, indent=4, ensure_ascii=False)
 
     def validateFlow(self, data):
@@ -113,6 +112,11 @@ class CmdMananger(QObject):
 
         # 通过验证
         return True
+    
+    def reset(self):
+        for cmd in self.cmdObjs.values():
+            cmd.cmdStatus = 0
+            cmd.evtStatusChanged.emit(cmd.id, cmd.cmdStatus)
 
 
     '''
@@ -136,7 +140,7 @@ class CmdMananger(QObject):
             "type": "algo",
             "name": "空指令",
             "param": {
-                "algo_id":"algoWait",
+                "funcID":"algoWait",
                 "args": 1,
                 "done": None
             }
@@ -220,63 +224,78 @@ class CmdMananger(QObject):
         logging.info(f"########### 开始执行流程<{self.meta['name']}>")
         def job():
             self.cursor = self.head_node_id
-            self.flowStatus = 0  # Reset flow status
+            self.flowStatus = 1  # Reset flow status
 
+            # 执行第一条指令
             theCmd = self.getCmd(self.cursor)
             theCmd.run(input=None, plc=self.plc, top_popper=self.popper)
 
-            if theCmd.status == 2:
-                next_cmd_count = len(self.flow[self.cursor])
+            # 第一条指令执行完毕
+            if theCmd.cmdStatus == 2:
 
+                next_cmd_count = len(self.flow[self.cursor]) # 计算下一步指令数量, 0表示end, 1表示下一步, 2表示下一步多个
+
+                # 开始执行下一条指令, 直到end
                 while next_cmd_count > 0:
 
-                    if next_cmd_count == 1:
-                        self.cursor = self.flow[self.cursor][0]
+                    # 整体异常捕获
+                    try:
 
-                    else:
-                        path_names = list(map(lambda cmdkey: f'{cmdkey}:{self.cmds[cmdkey]['name']}', self.flow[self.cursor]))
-                        self.popper.evtBegin.emit(
-                            "dialogPath",
-                            {
-                            "next_cmds":path_names
-                            },
-                            None # last input is not used here
-                        )
+                        if next_cmd_count == 1:
+                            self.cursor = self.flow[self.cursor][0]
 
-                        while self.popper.done == False:
-                            time.sleep(1)
+                        else:
+                            path_names = list(map(lambda cmdkey: f'{cmdkey}:{self.cmds[cmdkey]['name']}', self.flow[self.cursor]))
+                            self.popper.evtBegin.emit(
+                                "dialogPath",
+                                {
+                                "next_cmds":path_names
+                                },
+                                None # last input is not used here
+                            )
 
-                        self.popper.done = False
-                        self.cursor = self.popper.result.split(":")[0]
+                            while self.popper.done == False:
+                                time.sleep(1)
 
-                    if self.cursor==None:
-                        logging.error("指令指针为空,流程中断")
-                        self.flowStatus = 3
+                            self.popper.done = False
+                            self.cursor = self.popper.result.split(":")[0]
+
+                        if self.cursor==None: # 这里指令还为空说明有问题
+                            logging.error("执行错误:此处指令不应该为None")
+                            self.flowStatus = 4
+                            break
+
+                        # 这里已经获取到下一步指令指针了
+                        lastCmdResult = theCmd.result # 先保存上一步指令结果
+                        theCmd = self.getCmd(self.cursor) # 切换指令
+                        theCmd.run(input=lastCmdResult, plc=self.plc, top_popper=self.popper)
+
+                        if theCmd.cmdStatus == 2: # 如果当前指令执行成功
+                            next_cmd_count = len(self.flow[self.cursor])
+                        else: # 如果当前指令执行失败
+                            logging.error(f"流程异常:指令执行返回2")
+                            self.flowStatus = 4 
+                            break
+                
+                    except Exception as e:
+                        logging.error(f"流程异常:异常原因:{e}")
+                        self.flowStatus = 4
                         break
-
-                    # 执行指针指令
-                    lastCmdResult = theCmd.result
-                    # logging.warning(f"???上一步结果:{lastCmdResult}")
-                    theCmd = self.getCmd(self.cursor)
-                    theCmd.run(input=lastCmdResult, plc=self.plc, top_popper=self.popper)
-
-                    if theCmd.status == 2:
-                        next_cmd_count = len(self.flow[self.cursor])
-                    else:
-                        logging.error(f"指令<{self.cursor}>执行失败")
-                        self.flowStatus = 4  # Set status to error
-                        break
-
-
+                
+                if self.flowStatus == 1:
+                    self.flowStatus = 2 # 正常执行完毕, 状态为2
+                    
+                    
             else:
-                logging.error(f"流指令<{self.cursor}>执行失败")
+                logging.error(f"流程异常:第一条指令状态应为2")
                 self.flowStatus = 4  # Set status to error
 
-            if self.flowStatus == 4:
-                logging.error(f'有故障,流程中断')
-
-            else:
+            if self.flowStatus == 2:
                 logging.info(f'########### 流程执行完毕<{self.meta['name']}>')
+            elif  self.flowStatus == 3:
+                logging.info(f'########### 流程执行被停止<{self.meta['name']}>')
+            else:
+                logging.info(f'########### 流程执行结束,但状态异常<{self.meta['name']}>')
 
             return self.flowStatus
     
@@ -311,7 +330,7 @@ class Cmd(QObject):
         self.type = cmd_dict.get("type")
         self.name = cmd_dict.get("name")
         self.param = cmd_dict.get("param")
-        self.status = 0  # 0: idle, 1: running, 2: done, 3: error
+        self.cmdStatus = 0  # 0: idle, 1: running, 2: done, 3: error
         self.beginTime = ""
         self.endTime = ""
         self.result = None
@@ -328,15 +347,15 @@ class Cmd(QObject):
     def run(self, input=None, plc=None, top_popper=None):
 
         def run_algo(self):
-            logging.info(f">>> 开始执行指令: 名称<{self.name}> 类型<algo> 算法类型:<{self.param.get('algo_id')}>")
+            logging.info(f">>> 开始执行指令: 名称<{self.name}> 类型<algo> 算法类型:<{self.param.get('funcID')}>")
             # Algo类型Cmd的结果为Algo返回值
-            self.result = algoMap[self.param.get("algo_id")](self.param.get("args"), input=input)
-            self.status = 2
+            self.result = algoMap[self.param.get("funcID")](self.param.get("args"), input=input)
+            self.cmdStatus = 2
 
         def run_pop(self):
-            logging.info(f">>> 开始执行指令: 名称<{self.name}> 类型<pop> 弹窗类型:<{self.param.get('dialog_id')}>")
+            logging.info(f">>> 开始执行指令: 名称<{self.name}> 类型<pop> 弹窗类型:<{self.param.get('funcID')}>")
             top_popper.evtBegin.emit(
-                self.param["dialog_id"], 
+                self.param["funcID"], 
                 self.param["args"],
                 input)
 
@@ -345,7 +364,7 @@ class Cmd(QObject):
 
             top_popper.done = False
             self.result = top_popper.result # Pop类型Cmd的结果为弹窗内部结果(这里result已经被赋值了)
-            self.status = 2
+            self.cmdStatus = 2
 
         def run_plc(self):
             logging.info(f">>> 开始执行指令: 名称<{self.name}> 类型<plc> 动作:<{self.param.get('out')}>")
@@ -369,28 +388,27 @@ class Cmd(QObject):
             plc.write(pt_out.id, 1)
 
             # 监控完成
-            while self.status == 1:
+            while self.cmdStatus == 1:
                 time.sleep(plc.interval/1000)
                 for k in plc.pts.keys():
                     if 'alarm' in k:
                         if plc.pts.get(k).value==True:
-                            self.status = 3  # Set status to done
+                            self.cmdStatus = 3  # Set status to done
                             break
                 
                 # 完成了!
                 if pt_sig.value == 1:
-                    self.status = 2  # Set status to done
+                    self.cmdStatus = 2  # Set status to done
                     break
 
-
-        if (self.status != 0):
+        if (self.cmdStatus != 0):
             logging.error("无法运行非空闲状态指令!")
             raise RuntimeError("无法运行非空闲状态指令!")
 
         # 设定状态为运行中
-        self.status = 1  # Set status to running
+        self.cmdStatus = 1  # Set status to running
         self.beginTime = datetime.now().strftime("%Y-%m-%d %H:%M:%S")  # Set start time in "yyyy-mm-dd hh:mm:ss" format
-        self.evtStatusChanged.emit(self.id, self.status)
+        self.evtStatusChanged.emit(self.id, self.cmdStatus)
 
         try:
             if self.type == "algo":
@@ -408,9 +426,9 @@ class Cmd(QObject):
 
         except Exception as e:
             self.result = str(e)  # Capture exception as result
-            self.status = 3  # Set status to error
+            self.cmdStatus = 3  # Set status to error
 
         finally:
             self.endTime = datetime.now().strftime("%Y-%m-%d %H:%M:%S")  # Replace with actual end time logic
-            self.evtStatusChanged.emit(self.id, self.status)
+            self.evtStatusChanged.emit(self.id, self.cmdStatus)
             logging.info(f"<<< 指令<{self.name}> 执行完毕 ---> 执行结果:{self.result}")
