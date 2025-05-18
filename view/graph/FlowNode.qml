@@ -4,8 +4,8 @@ import QtQuick.Shapes 1.15
 
 Rectangle {
     id: node
-    width: 150
-    height: 25
+    width: 100
+    height: 20
     color: bgColor
     border.color: "black"
 

@@ -10,11 +10,13 @@ from PySide6.QtCore import QObject, Signal, Slot
 # 导入所有的弹窗类
 from .algos.wait import algoWait
 from .algos.summary import algoSummary
+from .algos.statics import algoStatics
 
 # 弹窗表映射
 algoMap = {
     "algoWait": algoWait,
     "algoSummary": algoSummary,
+    "algoStatics": algoStatics,
 }
 
 

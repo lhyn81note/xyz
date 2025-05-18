@@ -7,17 +7,16 @@
     },
     "flow": {
         "head": [
-            "a03455ce"
+            "a3630325"
         ],
         "end": [],
-        "a03455ce": [
-            "end",
-            "3cd9094d"
+        "a3630325": [
+            "7d0e7fa4"
         ],
-        "3cd9094d": [
-            "9949c442"
+        "7d0e7fa4": [
+            "84b8e2bc"
         ],
-        "9949c442": [
+        "84b8e2bc": [
             "end"
         ],
         "head_node_id": "head"
@@ -34,39 +33,39 @@
         },
         "end": {
             "type": "algo",
-            "name": "结束",
+            "name": "生成报告",
             "param": {
-                "algo_id": "algoWait",
-                "args": 1,
+                "algo_id": "algoSummary",
+                "args": null,
                 "done": null
             }
         },
-        "a03455ce": {
+        "a3630325": {
             "type": "algo",
-            "name": "空指令",
+            "name": "等待",
             "param": {
                 "algo_id": "algoWait",
-                "args": 1,
+                "args": 3,
                 "done": null
             }
         },
-        "3cd9094d": {
+        "7d0e7fa4": {
             "type": "pop",
-            "name": "实时曲线",
+            "name": "实时采集",
             "param": {
                 "dialog_id": "dialogChart",
                 "args": {
-                    "count": 5
+                    "count": 10
                 },
                 "done": null
             }
         },
-        "9949c442": {
+        "84b8e2bc": {
             "type": "algo",
-            "name": "输出报告",
+            "name": "计算结果",
             "param": {
-                "algo_id": "algoSummary",
-                "args": 1,
+                "algo_id": "algoStatics",
+                "args": null,
                 "done": null
             }
         }
@@ -79,26 +78,26 @@
             "status": "idle"
         },
         "end": {
-            "x": 47.0,
-            "y": 460.0,
+            "x": 48.0,
+            "y": 519.0,
             "text": "",
             "status": "idle"
         },
-        "a03455ce": {
-            "x": 47.0,
-            "y": 139.0,
+        "a3630325": {
+            "x": 128.0,
+            "y": 129.0,
             "text": "空指令",
             "status": "idle"
         },
-        "3cd9094d": {
-            "x": 172.0,
-            "y": 247.0,
+        "7d0e7fa4": {
+            "x": 128.0,
+            "y": 210.0,
             "text": "空指令",
             "status": "idle"
         },
-        "9949c442": {
-            "x": 172.0,
-            "y": 331.0,
+        "84b8e2bc": {
+            "x": 128.0,
+            "y": 305.0,
             "text": "空指令",
             "status": "idle"
         }
