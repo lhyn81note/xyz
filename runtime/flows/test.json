@@ -15,6 +15,9 @@
             "3cd9094d"
         ],
         "3cd9094d": [
+            "9949c442"
+        ],
+        "9949c442": [
             "end"
         ],
         "head_node_id": "head"
@@ -52,7 +55,18 @@
             "name": "实时曲线",
             "param": {
                 "dialog_id": "dialogChart",
-                "args": null,
+                "args": {
+                    "count": 5
+                },
+                "done": null
+            }
+        },
+        "9949c442": {
+            "type": "algo",
+            "name": "输出报告",
+            "param": {
+                "algo_id": "algoSummary",
+                "args": 1,
                 "done": null
             }
         }
@@ -79,6 +93,12 @@
         "3cd9094d": {
             "x": 172.0,
             "y": 247.0,
+            "text": "空指令",
+            "status": "idle"
+        },
+        "9949c442": {
+            "x": 172.0,
+            "y": 331.0,
             "text": "空指令",
             "status": "idle"
         }

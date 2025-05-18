@@ -1,15 +1,13 @@
 import sys
+import logging
 import configparser
-
-from PySide6.QtWidgets import QApplication
 
 from libs import *
 from models import *
-from wgts import TabWidget, PlcData, PlcTable
+from wgts import TabWidget, PlcData, PlcTable, CmdWidget
 from view import Views, Menus, MainFrame
 
-import logging
-
+#   日志初始化
 LogConfig.setup_logging()
 logger = logging.getLogger(__name__)
 logger.info("********** 程序启动 **********")
@@ -20,16 +18,16 @@ User="admin"
 config = configparser.ConfigParser()
 config.read('app.ini')
 
-# 全局容器初始化
+# 各种服务提供初始化
 Broker = CoreProvider().MsgBroker()
 LibServices = UtilsProvider()
 
-# 全局Service初始化
 PLC = CoreProvider().Plc(config_file=config.get('plc','pts'), addr=config['plc']['host'], interval=config.getint('plc','interval'), msgbroker=Broker)
 PLC.load_config()
 PLC.connect()
-logging.info(f"PLC连接状态: {PLC.alive}")
+logging.info(f"PLC连接结果: {PLC.alive}")
 PLC.scan()
+logging.info(f"PLC开始轮询")
 
 popper = Popup()  # Create a new instance of PopSignal
 Cmd = CoreProvider().Cmd
@@ -38,8 +36,7 @@ CmdManager['测试流程'] = CoreProvider().CmdManager(config.get('flow','try_te
 CmdManager['气压试验'] = CoreProvider().CmdManager(config.get('flow','try_gas'), PLC, popper)
 CmdManager['加载力试验'] = CoreProvider().CmdManager(config.get('flow','try_force'), PLC, popper)
 
-
-# 全局数据库引擎初始化
+# 数据库引擎初始化
 DbEng_Alarms = GenDbEnging(dbpath=config.get('db','alarm'))
 DbEng_AlarmsCode = GenDbEnging(dbpath=config.get('db','alarmCode'))
 DbEng_BaseData = GenDbEnging(dbpath=config.get('db','baseData'))
@@ -48,7 +45,7 @@ DbEng_model = GenDbEnging(dbpath=config.get('db','model'))
 DbEng_result = GenDbEnging(dbpath=config.get('db','result'))
 DbEng_user = GenDbEnging(dbpath=config.get('db','user'))
 
-# 全局数据表模型初始化
+# 数据表模型初始化
 Log = Log(engine=DbEng_Log)
 TblUser = TblUser(engine=DbEng_user)
 FaultCode = FaultCode(engine=DbEng_AlarmsCode)
@@ -71,6 +68,7 @@ TblResultMx =   TblResultMx(engine=DbEng_result)
 
 if __name__ == '__main__':
 
+    from PySide6.QtWidgets import QApplication
     app = QApplication(sys.argv)
     main_win = MainFrame(menus=Menus, title="QtAppX")
     main_win.show()

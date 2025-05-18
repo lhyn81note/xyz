@@ -4,15 +4,17 @@ import json
 import time
 import threading
 import uuid
-from PySide6.QtCore import QObject, Signal, Slot
 import logging
+from PySide6.QtCore import QObject, Signal, Slot
 
 # 导入所有的弹窗类
 from .algos.wait import algoWait
+from .algos.summary import algoSummary
 
 # 弹窗表映射
 algoMap = {
     "algoWait": algoWait,
+    "algoSummary": algoSummary,
 }
 
 
@@ -219,7 +221,7 @@ class CmdMananger(QObject):
             self.flowStatus = 0  # Reset flow status
 
             theCmd = self.getCmd(self.cursor)
-            theCmd.run(self.plc, self.popper)
+            theCmd.run(input=None, plc=self.plc, top_popper=self.popper)
 
             if theCmd.status == 2:
                 next_cmd_count = len(self.flow[self.cursor])
@@ -235,7 +237,8 @@ class CmdMananger(QObject):
                             "dialogPath",
                             {
                             "next_cmds":path_names
-                            }
+                            },
+                            None # last input is not used here
                         )
 
                         while self.popper.done == False:
@@ -250,8 +253,10 @@ class CmdMananger(QObject):
                         break
 
                     # 执行指针指令
+                    lastCmdResult = theCmd.result
+                    # logging.warning(f"???上一步结果:{lastCmdResult}")
                     theCmd = self.getCmd(self.cursor)
-                    theCmd.run(self.plc, self.popper)
+                    theCmd.run(input=lastCmdResult, plc=self.plc, top_popper=self.popper)
 
                     if theCmd.status == 2:
                         next_cmd_count = len(self.flow[self.cursor])
@@ -296,7 +301,7 @@ class CmdMananger(QObject):
 class Cmd(QObject):
 
     evtStatusChanged = Signal(str, int)  # Signal to emit status changes with id and status
-    evtCmdNotify = Signal(str, dict)
+    evtCmdNotify = Signal(str, dict) 
 
     def __init__(self, id, cmd_dict):
         super().__init__()
@@ -314,38 +319,41 @@ class Cmd(QObject):
         if self.beginTime and self.endTime:
             begin = datetime.strptime(self.beginTime, "%Y-%m-%d %H:%M:%S")
             end = datetime.strptime(self.endTime, "%Y-%m-%d %H:%M:%S")
-            return (end - begin).total_seconds()
+            return (end - begin).total_seconds().__round__(2)
         return None
 
 
-    def run(self, plc, top_popper):
+    def run(self, input=None, plc=None, top_popper=None):
 
-        def run_algo(self, plc):
+        def run_algo(self):
             logging.info(f">>> 开始执行指令: 名称<{self.name}> 类型<algo> 算法类型:<{self.param.get('algo_id')}>")
-            self.result = algoMap[self.param.get("algo_id")](self.param.get("args"))
+            # Algo类型Cmd的结果为Algo返回值
+            self.result = algoMap[self.param.get("algo_id")](self.param.get("args"), input=input)
             self.status = 2
 
-        def run_pop(self, plc):
+        def run_pop(self):
             logging.info(f">>> 开始执行指令: 名称<{self.name}> 类型<pop> 弹窗类型:<{self.param.get('dialog_id')}>")
             top_popper.evtBegin.emit(
                 self.param["dialog_id"], 
-                self.param["args"])
+                self.param["args"],
+                input)
 
             while top_popper.done == False:
                 time.sleep(1)
 
             top_popper.done = False
-            self.result = top_popper.result
+            self.result = top_popper.result # Pop类型Cmd的结果为弹窗内部结果(这里result已经被赋值了)
             self.status = 2
 
-        def run_plc(self, plc):
+        def run_plc(self):
             logging.info(f">>> 开始执行指令: 名称<{self.name}> 类型<plc> 动作:<{self.param.get('out')}>")
+            self.result = None # plc类型的结果为None,只看status
             pt_out = plc.pts.get(self.param.get("out"))
             pt_args = self.param.get("args")
-            pt_cmd = plc.pts.get(self.param.get("out")) # 取得plc点表中的实例
-            pt_sig_name = pt_cmd.done[0]  # 取得plc点表中的monitor覆盖当前cmd的monitor
+            pt_sig_name = pt_out.done[0]  # 取得plc点表中的monitor覆盖当前cmd的monitor
             pt_sig = plc.pts.get(pt_sig_name)
 
+            # 写参数
             for arg_kv in pt_args:
                 for k,v in arg_kv.items():
                     pt_arg = plc.pts.get(k)
@@ -354,41 +362,43 @@ class Cmd(QObject):
                         return False
                     else:
                         plc.write(k, v)
-
+            
+            # 启动指令
             plc.write(pt_out.id, 1)
+
+            # 监控完成
             while self.status == 1:
                 time.sleep(plc.interval/1000)
                 for k in plc.pts.keys():
                     if 'alarm' in k:
                         if plc.pts.get(k).value==True:
-                            self.result = "plc fault."
                             self.status = 3  # Set status to done
                             break
-
+                
+                # 完成了!
                 if pt_sig.value == 1:
-                    self.result = "plc done."
                     self.status = 2  # Set status to done
                     break
-                # await asyncio.sleep(1)
 
 
         if (self.status != 0):
             logging.error("无法运行非空闲状态指令!")
             raise RuntimeError("无法运行非空闲状态指令!")
 
+        # 设定状态为运行中
         self.status = 1  # Set status to running
         self.beginTime = datetime.now().strftime("%Y-%m-%d %H:%M:%S")  # Set start time in "yyyy-mm-dd hh:mm:ss" format
         self.evtStatusChanged.emit(self.id, self.status)
 
         try:
             if self.type == "algo":
-                run_algo(self, plc)
+                run_algo(self)
 
             elif self.type == "pop":
-                run_pop(self, plc)
+                run_pop(self)
 
             elif self.type == "plc":
-                run_plc(self, plc)
+                run_plc(self)
 
             else:
                 logging.error(f"指令类型不对<{self.type}>")

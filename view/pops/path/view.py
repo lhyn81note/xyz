@@ -2,7 +2,7 @@ from PySide6.QtWidgets import QDialog, QPushButton, QLabel, QVBoxLayout, QComboB
 
 
 class Dialog(QDialog):
-    def __init__(self, parent=None, dialog_args=None):
+    def __init__(self, parent=None, dialog_args=None, input=None):
 
         super().__init__(parent)
         self.ret = None

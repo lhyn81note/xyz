@@ -13,24 +13,23 @@ dialogMap = {
 
 class Popup(QObject):
 
-    evtBegin = Signal(str, dict)
+    evtBegin = Signal(str, dict, dict) # (id, args, lastResult/input)
     evtEnd = Signal(str, dict)
 
     def __init__(self):
 
         super().__init__()
         self.done = False
-        self.result = None
+        self.result = None # 默认结果为None
 
-    def pop(self, dialog_id, dialog_args):
+    def pop(self, dialog_id, dialog_args, input=None):
         
         # def core():
         self.done = False
-        theDialog = dialogMap[dialog_id](None, dialog_args)
+        theDialog = dialogMap[dialog_id](None, dialog_args, input)
         theDialog.exec()
-        self.dialog_result = theDialog.get_result()
-        self.done = True
-        self.result = self.dialog_result
+        self.result = theDialog.get_result() # 这里有结果了
+        self.done = True # 通知CmdManager弹窗任务完成
 
         # 注意这里不能采用多线程, 否则会卡死在Dialog窗口
         # thread = threading.Thread(target=core, daemon=True)

@@ -14,11 +14,13 @@ from matplotlib.figure import Figure
 
 
 class Dialog(QDialog):
-    def __init__(self, parent=None, dialog_args=None):
+    def __init__(self, parent=None, dialog_args=None, input=None):
         super().__init__(parent)
         self.ui = Ui_Form()
         self.ui.setupUi(self)
         self.setWindowTitle("实时曲线")
+
+        self.count = dialog_args["count"] # 绘图点数
 
         # Initialize matplotlib figure and canvas
         self.figure = Figure(figsize=(5, 4), dpi=100)
@@ -29,8 +31,8 @@ class Dialog(QDialog):
         layout.addWidget(self.canvas)
 
         # Initialize data for the chart
-        self.x_data = list(range(10))
-        self.y_data = [0] * 10
+        self.x_data = list(range(self.count))
+        self.y_data = [0] * self.count
 
         # Initialize the plot
         self.init_plot()
@@ -69,7 +71,7 @@ class Dialog(QDialog):
         self.counter += 1
 
         # Stop after 10 seconds
-        if self.counter > 10:
+        if self.counter > self.count:
             self.timer.stop()
             return
 
@@ -88,4 +90,7 @@ class Dialog(QDialog):
         self.canvas.draw()
 
     def get_result(self):
-        return True
+        return {
+            "name": "绘图结果",
+            "value": self.y_data
+        }

@@ -1,4 +1,7 @@
 import time
-def algoWait(secs):
+def algoWait(secs, input=None):
     time.sleep(secs)
-    return True
+    return {
+        "name":"等待时间",
+        "value":secs
+    }

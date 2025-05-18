@@ -49,6 +49,7 @@ class Window(QWidget):
         for k, _  in _top.CmdManager.items():
             if k==flowname:
                 self.CmdManagerAgent = _top.CmdManager.get(flowname)
+                _top.CurrentCmdManager = self.CmdManagerAgent
                 break
 
         if not self.CmdManagerAgent:
@@ -219,6 +220,6 @@ class Window(QWidget):
         self.qml_root.updateNodeStatus(cmd_id, status)
 
     @Slot(str, dict)
-    def onPopup(self, dialog_id, args):
-        _top.popper.pop(dialog_id, args)
+    def onPopup(self, dialog_id, args, input):
+        _top.popper.pop(dialog_id, args, input)
 

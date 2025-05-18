@@ -68,7 +68,7 @@ class Window(QMainWindow):
                 self.ui.lb_info.setStyleSheet('color: rgb(255, 0, 0);')
                 self.ui.lb_info.setText(msg['content'])
 
-            self.ui.lb_info.update()
+            # self.ui.lb_info.update()
 
         elif msg['source']=='Serial':
             pass

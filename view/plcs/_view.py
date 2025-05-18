@@ -15,8 +15,10 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QHBoxLayout, QSizePolicy, QVBoxLayout,
-    QWidget)
+from PySide6.QtWidgets import (QApplication, QHBoxLayout, QSizePolicy, QSpacerItem,
+    QVBoxLayout, QWidget)
+
+from wgts.wgt_cmd import CmdWidget
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -27,16 +29,32 @@ class Ui_Form(object):
 "background-color: rgb(0, 0, 0);\n"
 "	color: rgb(255, 255, 255);\n"
 "}")
-        self.verticalLayout_2 = QVBoxLayout(Form)
-        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
+        self.horizontalLayout = QHBoxLayout(Form)
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.wgt_plc = QWidget(Form)
         self.wgt_plc.setObjectName(u"wgt_plc")
         self.horizontalLayout_2 = QHBoxLayout(self.wgt_plc)
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
 
-        self.verticalLayout_2.addWidget(self.wgt_plc)
+        self.horizontalLayout.addWidget(self.wgt_plc)
 
-        self.verticalLayout_2.setStretch(0, 10)
+        self.widget = QWidget(Form)
+        self.widget.setObjectName(u"widget")
+        self.verticalLayout = QVBoxLayout(self.widget)
+        self.verticalLayout.setObjectName(u"verticalLayout")
+        self.widget_2 = CmdWidget(self.widget)
+        self.widget_2.setObjectName(u"widget_2")
+
+        self.verticalLayout.addWidget(self.widget_2)
+
+        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayout.addItem(self.verticalSpacer)
+
+
+        self.horizontalLayout.addWidget(self.widget)
+
+        self.horizontalLayout.setStretch(0, 1)
 
         self.retranslateUi(Form)
 

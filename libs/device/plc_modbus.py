@@ -272,12 +272,7 @@ class ModbusTcp(BasePlc):
                         pt.value = self.read(pt.id)
 
                         if pt.value is None:
-                            print(pt)
-                            self.msgbroker.publish(MsgType.alarm, {
-                                'source': "PLC",
-                                'subject': 'alarm',
-                                'content': "PLC读点失败",
-                            })
+                            logging.error(f"PLC读取错误:{pt.id}")
                         else:
                             if not pt.isValid:
                                 self.msgbroker.publish(MsgType.alarm, {
