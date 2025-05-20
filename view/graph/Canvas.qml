@@ -45,7 +45,7 @@ Rectangle {
     Repeater {
         model: nodesModel
         delegate: FlowNode {
-            z:1
+            z:2
             nodeId: model.id
             text: model.text
             x: model.x
@@ -105,41 +105,21 @@ Rectangle {
 Repeater {
     model: connectionsModel
     delegate: Shape {
-        z:0
+        z: 1  // Set z-index lower than nodes (which have z:1)
         id: connectionShape
         property string from: model.from
         property string to: model.to
         
-        // Calculate best connection points based on relative positions
-        property bool isToBelow: canvas.nodes[to].y > canvas.nodes[from].y
-        property bool isToAbove: canvas.nodes[to].y < canvas.nodes[from].y
-        property bool isToRight: canvas.nodes[to].x > canvas.nodes[from].x
-        property bool isToLeft: canvas.nodes[to].x < canvas.nodes[from].x
-        property bool isXFarAway: Math.abs(canvas.nodes[to].x - canvas.nodes[from].x) > 100
-        property bool isYFarAway: Math.abs(canvas.nodes[to].y - canvas.nodes[from].y) > 100
+        // Get center points of nodes
+        property real fromX: canvas.nodes[from].cx
+        property real fromY: canvas.nodes[from].cy
+        property real toX: canvas.nodes[to].cx
+        property real toY: canvas.nodes[to].cy
         
-        // Select optimal connection points
-        property real fromX: isToRight ? 
-                            isXFarAway ? canvas.nodes[from].rightX : canvas.nodes[from].bothX : 
-                            isXFarAway ? canvas.nodes[from].leftX : canvas.nodes[from].bothX
-                            
-        property real fromY: isToBelow ? 
-                            isYFarAway ? canvas.nodes[from].bottomY : canvas.nodes[from].bothY : 
-                            isYFarAway ? canvas.nodes[from].topY : canvas.nodes[from].bothY
+        // Determine if horizontal or vertical routing is better
+        property bool useHorizontalFirst: Math.abs(toX - fromX) > Math.abs(toY - fromY)
         
-        property real toX: isToRight ? 
-                            isXFarAway ? canvas.nodes[to].leftX : canvas.nodes[to].bothX : 
-                            isXFarAway ? canvas.nodes[to].rightX : canvas.nodes[to].bothX
-
-        property real toY: isToBelow ? 
-                            isYFarAway ? canvas.nodes[to].topY : canvas.nodes[to].bothY : 
-                            isYFarAway ? canvas.nodes[to].bottomY : canvas.nodes[to].bothY
-        
-        // Midpoint for horizontal-vertical routing
-        property real midX: (fromX + toX) / 2
-        property real midY: (fromY + toY) / 2
-        
-        // First segment from source node
+        // First segment
         ShapePath {
             strokeColor: "#5f5c5c"
             strokeWidth: 2
@@ -147,30 +127,17 @@ Repeater {
             startY: fromY
             
             PathLine {
-                x: isToBelow || isToAbove ? fromX : midX
-                y: isToBelow || isToAbove ? midY : fromY
+                x: useHorizontalFirst ? toX : fromX
+                y: useHorizontalFirst ? fromY : toY
             }
         }
         
-        // Middle segment (horizontal or vertical)
+        // Second segment
         ShapePath {
             strokeColor: "#5f5c5c"
             strokeWidth: 2
-            startX: isToBelow || isToAbove ? fromX : midX
-            startY: isToBelow || isToAbove ? midY : fromY
-            
-            PathLine {
-                x: isToBelow || isToAbove ? toX : midX
-                y: isToBelow || isToAbove ? midY : toY
-            }
-        }
-        
-        // Final segment to target node
-        ShapePath {
-            strokeColor: "#5f5c5c"
-            strokeWidth: 2
-            startX: isToBelow || isToAbove ? toX : midX
-            startY: isToBelow || isToAbove ? midY : toY
+            startX: useHorizontalFirst ? toX : fromX
+            startY: useHorizontalFirst ? fromY : toY
             
             PathLine {
                 x: toX

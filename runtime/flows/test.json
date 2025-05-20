@@ -7,18 +7,19 @@
     },
     "flow": {
         "head": [
-            "a3630325",
+            "83dcb222",
             "fde7d20a"
         ],
         "end": [],
         "a3630325": [
-            "83dcb222"
+            "end"
         ],
         "fde7d20a": [
             "end"
         ],
         "83dcb222": [
-            "head"
+            "a3630325",
+            "end"
         ],
         "head_node_id": "head"
     },
@@ -52,7 +53,7 @@
         },
         "fde7d20a": {
             "type": "algo",
-            "name": "ø’÷∏¡Ó",
+            "name": "555",
             "param": {
                 "funcID": "algoWait",
                 "args": 1,
@@ -61,7 +62,7 @@
         },
         "83dcb222": {
             "type": "algo",
-            "name": "ø’÷∏¡Ó",
+            "name": "233",
             "param": {
                 "funcID": "algoWait",
                 "args": 1,
@@ -71,32 +72,32 @@
     },
     "nodes": {
         "head": {
-            "x": 47.0,
-            "y": 22.0,
+            "x": 43.0,
+            "y": 43.0,
             "text": "",
             "status": "idle"
         },
         "end": {
-            "x": 44.0,
-            "y": 389.0,
+            "x": 89.0,
+            "y": 485.0,
             "text": "",
             "status": "idle"
         },
         "a3630325": {
-            "x": 214.0,
-            "y": 418.0,
+            "x": 440.0,
+            "y": 305.0,
             "text": "ø’÷∏¡Ó",
             "status": "idle"
         },
         "fde7d20a": {
-            "x": 116.0,
-            "y": 283.0,
+            "x": 27.0,
+            "y": 240.0,
             "text": "ø’÷∏¡Ó",
             "status": "idle"
         },
         "83dcb222": {
-            "x": 369.0,
-            "y": 245.0,
+            "x": 266.0,
+            "y": 176.0,
             "text": "ø’÷∏¡Ó",
             "status": "idle"
         }

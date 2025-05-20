@@ -191,8 +191,11 @@ class CmdManager(QObject):
         self.loadCmds()
 
 
-    def setCmd(self, cmd_id, child_id):
-        self.flow[cmd_id] = [child_id]
+    def setCmd(self, cmd_id, child_id, add=False):
+        if add:
+            self.flow[cmd_id].append(child_id)
+        else:
+            self.flow[cmd_id] = [child_id]
         self.saveFlow()
         self.loadFlow()
         self.loadCmds()

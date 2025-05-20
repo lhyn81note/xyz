@@ -194,3 +194,85 @@
 2025-05-20 16:56:48,495 - INFO - root - app.py:30 - PLC开始轮询
 2025-05-20 16:56:56,680 - ERROR - root - notify.py:238 - Error in subscriber View_index: Internal C++ object (PySide6.QtWidgets.QLabel) already deleted.
 2025-05-20 16:56:56,680 - ERROR - root - notify.py:175 - Error notifying subscriber: Internal C++ object (PySide6.QtWidgets.QLabel) already deleted.
+2025-05-20 17:05:40,359 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
+2025-05-20 17:05:40,361 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-20 17:05:40,362 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-20 17:05:40,362 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-20 17:05:40,367 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-20 17:05:40,371 - INFO - root - plc_s7.py:76 - S7连接成功.
+2025-05-20 17:05:40,372 - INFO - root - app.py:28 - PLC连接结果: True
+2025-05-20 17:05:40,372 - INFO - root - app.py:30 - PLC开始轮询
+2025-05-20 17:05:47,522 - ERROR - root - notify.py:238 - Error in subscriber View_index: Internal C++ object (PySide6.QtWidgets.QLabel) already deleted.
+2025-05-20 17:05:47,523 - ERROR - root - notify.py:175 - Error notifying subscriber: Internal C++ object (PySide6.QtWidgets.QLabel) already deleted.
+2025-05-20 17:06:12,120 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
+2025-05-20 17:06:12,122 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-20 17:06:12,122 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-20 17:06:12,123 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-20 17:06:12,128 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-20 17:06:12,132 - INFO - root - plc_s7.py:76 - S7连接成功.
+2025-05-20 17:06:12,132 - INFO - root - app.py:28 - PLC连接结果: True
+2025-05-20 17:06:12,132 - INFO - root - app.py:30 - PLC开始轮询
+2025-05-20 17:06:34,206 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
+2025-05-20 17:06:34,208 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-20 17:06:34,209 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-20 17:06:34,209 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-20 17:06:34,215 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-20 17:06:34,221 - INFO - root - plc_s7.py:76 - S7连接成功.
+2025-05-20 17:06:34,221 - INFO - root - app.py:28 - PLC连接结果: True
+2025-05-20 17:06:34,222 - INFO - root - app.py:30 - PLC开始轮询
+2025-05-20 17:07:23,470 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
+2025-05-20 17:07:23,472 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-20 17:07:23,472 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-20 17:07:23,472 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-20 17:07:23,478 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-20 17:07:23,482 - INFO - root - plc_s7.py:76 - S7连接成功.
+2025-05-20 17:07:23,482 - INFO - root - app.py:28 - PLC连接结果: True
+2025-05-20 17:07:23,483 - INFO - root - app.py:30 - PLC开始轮询
+2025-05-20 17:08:37,318 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
+2025-05-20 17:08:37,321 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-20 17:08:37,321 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-20 17:08:37,321 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-20 17:08:37,327 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-20 17:08:37,331 - INFO - root - plc_s7.py:76 - S7连接成功.
+2025-05-20 17:08:37,331 - INFO - root - app.py:28 - PLC连接结果: True
+2025-05-20 17:08:37,332 - INFO - root - app.py:30 - PLC开始轮询
+2025-05-20 17:09:09,949 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
+2025-05-20 17:09:09,951 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-20 17:09:09,951 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-20 17:09:09,952 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-20 17:09:09,957 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-20 17:09:09,962 - INFO - root - plc_s7.py:76 - S7连接成功.
+2025-05-20 17:09:09,962 - INFO - root - app.py:28 - PLC连接结果: True
+2025-05-20 17:09:09,963 - INFO - root - app.py:30 - PLC开始轮询
+2025-05-20 17:27:51,996 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
+2025-05-20 17:27:51,999 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-20 17:27:51,999 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-20 17:27:51,999 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-20 17:27:52,005 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-20 17:27:52,010 - INFO - root - plc_s7.py:76 - S7连接成功.
+2025-05-20 17:27:52,010 - INFO - root - app.py:28 - PLC连接结果: True
+2025-05-20 17:27:52,011 - INFO - root - app.py:30 - PLC开始轮询
+2025-05-20 17:33:05,497 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
+2025-05-20 17:33:05,499 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-20 17:33:05,500 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-20 17:33:05,500 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-20 17:33:05,505 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-20 17:33:05,509 - INFO - root - plc_s7.py:76 - S7连接成功.
+2025-05-20 17:33:05,509 - INFO - root - app.py:28 - PLC连接结果: True
+2025-05-20 17:33:05,510 - INFO - root - app.py:30 - PLC开始轮询
+2025-05-20 17:33:55,730 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
+2025-05-20 17:33:55,732 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-20 17:33:55,732 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-20 17:33:55,733 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-20 17:33:55,739 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-20 17:33:55,743 - INFO - root - plc_s7.py:76 - S7连接成功.
+2025-05-20 17:33:55,743 - INFO - root - app.py:28 - PLC连接结果: True
+2025-05-20 17:33:55,744 - INFO - root - app.py:30 - PLC开始轮询
+2025-05-20 17:34:59,162 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
+2025-05-20 17:34:59,164 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-20 17:34:59,164 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-20 17:34:59,164 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-20 17:34:59,170 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-20 17:34:59,175 - INFO - root - plc_s7.py:76 - S7连接成功.
+2025-05-20 17:34:59,175 - INFO - root - app.py:28 - PLC连接结果: True
+2025-05-20 17:34:59,176 - INFO - root - app.py:30 - PLC开始轮询

@@ -16,13 +16,15 @@ Rectangle {
     property string bgColor: hovering ? "cyan" : "lightblue"
 
     // Connection points
-    property real topY: y
-    property real bottomY: y + height
-    property real leftX: x
-    property real rightX: x + width
+    property real cx: x + width/2
+    property real cy: y + height/2
+    // property real topY: y
+    // property real bottomY: y + height
+    // property real leftX: x
+    // property real rightX: x + width
     
-    property real bothY: y + height/2
-    property real bothX: x + width/2
+    // property real bothY: y + height/2
+    // property real bothX: x + width/2
 
     // Interaction properties
     property bool dragging: false
@@ -99,11 +101,11 @@ Rectangle {
             onTriggered: evtAddChild(node.nodeId)
         }
         MenuItem {
-            text: "删除本条指令"
+            text: "删除本指令"
             onTriggered: evtDelSelf(node.nodeId)
         }
         MenuItem {
-            text: "设置下级指令"
+            text: "重置下级指令"
             onTriggered: evtSetChild(node.nodeId)
         }
     }

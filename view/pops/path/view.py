@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import QDialog, QPushButton, QLabel, QVBoxLayout, QComboBox
+from PySide6.QtWidgets import QDialog, QPushButton, QLabel, QVBoxLayout, QComboBox, QCheckBox
 
 
 class Dialog(QDialog):
@@ -16,11 +16,15 @@ class Dialog(QDialog):
         self.combobox.addItems(dialog_args['next_cmds'])
         self.combobox.setCurrentIndex(0)
 
+        self.addflag = QCheckBox("保留原路径并添加")
+        self.addflag.setChecked(True)
+
         self.confirm_button = QPushButton("确认")
         self.cancel_button = QPushButton("取消")
 
         layout.addWidget(QLabel("可选流程:"))
         layout.addWidget(self.combobox)
+        layout.addWidget(self.addflag)
         layout.addWidget(self.confirm_button)
         layout.addWidget(self.cancel_button)
         self.setLayout(layout)
@@ -30,6 +34,7 @@ class Dialog(QDialog):
 
     def ok(self):
         self.ret = self.combobox.currentText()
+        self.ret += f":{self.addflag.isChecked()}"  # Add flag to result string
         self.accept()
 
     def cancel(self):

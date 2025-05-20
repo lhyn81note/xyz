@@ -312,11 +312,11 @@ class Window(QWidget):
 
                     _top.popper.pop("dialogPath", dialog_args)
                     if _top.popper.done and _top.popper.result:
+                        print(_top.popper.result)
                         selected_cmd_id = _top.popper.result.split(":")[0]
-                        # Add logic to set the child relationship
-                        # self.CmdManagerAgent.setChildCmd(nodeId, selected_cmd_id)
+                        addflag = _top.popper.result.split(":")[2]=="True"
                         _top.popper.done = True
-                        self.CmdManagerAgent.setCmd(nodeId, selected_cmd_id)
+                        self.CmdManagerAgent.setCmd(nodeId, selected_cmd_id, addflag)
 
                 else:
                     pass
