@@ -4,6 +4,7 @@ from .plcs.view import Window as view_plc
 from .db_users.view import Window as view_db_user
 from .db_basic.view import Window as view_db_basic
 from .db_types.view import Window as view_db_types
+from .login.view import LoginWindow
 
 Views = {
     'view_index':{'title':'自动流程','obj':view_graph},

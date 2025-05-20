@@ -276,3 +276,89 @@
 2025-05-20 17:34:59,175 - INFO - root - plc_s7.py:76 - S7连接成功.
 2025-05-20 17:34:59,175 - INFO - root - app.py:28 - PLC连接结果: True
 2025-05-20 17:34:59,176 - INFO - root - app.py:30 - PLC开始轮询
+2025-05-20 23:27:08,751 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
+2025-05-20 23:27:08,807 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-20 23:27:08,808 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-20 23:27:08,809 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-20 23:27:11,811 - ERROR - snap7.common - error.py:142 - b' ISO : An error occurred during recv TCP : Connection timed out'
+2025-05-20 23:27:11,811 - ERROR - root - plc_s7.py:83 - S7连接出错: b' ISO : An error occurred during recv TCP : Connection timed out'
+2025-05-20 23:27:11,812 - INFO - root - app.py:28 - PLC连接结果: False
+2025-05-20 23:27:11,813 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-20 23:27:11,813 - INFO - root - app.py:30 - PLC开始轮询
+2025-05-20 23:27:11,813 - INFO - snap7.client - client.py:92 - destroying snap7 client
+2025-05-20 23:27:11,814 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-20 23:27:11,815 - INFO - snap7.client - client.py:92 - destroying snap7 client
+2025-05-20 23:27:11,816 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-20 23:27:14,818 - ERROR - snap7.common - error.py:142 - b' ISO : An error occurred during recv TCP : Connection timed out'
+2025-05-20 23:27:14,818 - ERROR - root - plc_s7.py:83 - S7连接出错: b' ISO : An error occurred during recv TCP : Connection timed out'
+2025-05-20 23:27:15,820 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-20 23:27:15,821 - INFO - snap7.client - client.py:92 - destroying snap7 client
+2025-05-20 23:27:15,821 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-20 23:27:15,821 - INFO - snap7.client - client.py:92 - destroying snap7 client
+2025-05-20 23:27:15,821 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-20 23:27:18,824 - ERROR - snap7.common - error.py:142 - b' ISO : An error occurred during recv TCP : Connection timed out'
+2025-05-20 23:27:18,824 - ERROR - root - plc_s7.py:83 - S7连接出错: b' ISO : An error occurred during recv TCP : Connection timed out'
+2025-05-20 23:27:19,826 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-20 23:27:19,827 - INFO - snap7.client - client.py:92 - destroying snap7 client
+2025-05-20 23:27:19,827 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-20 23:27:19,827 - INFO - snap7.client - client.py:92 - destroying snap7 client
+2025-05-20 23:27:19,828 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-20 23:27:22,831 - ERROR - snap7.common - error.py:142 - b' ISO : An error occurred during recv TCP : Connection timed out'
+2025-05-20 23:27:22,831 - ERROR - root - plc_s7.py:83 - S7连接出错: b' ISO : An error occurred during recv TCP : Connection timed out'
+2025-05-20 23:27:23,833 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-20 23:27:23,834 - INFO - snap7.client - client.py:92 - destroying snap7 client
+2025-05-20 23:27:23,834 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-20 23:27:23,835 - INFO - snap7.client - client.py:92 - destroying snap7 client
+2025-05-20 23:27:23,835 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-20 23:27:26,837 - ERROR - snap7.common - error.py:142 - b' ISO : An error occurred during recv TCP : Connection timed out'
+2025-05-20 23:27:26,837 - ERROR - root - plc_s7.py:83 - S7连接出错: b' ISO : An error occurred during recv TCP : Connection timed out'
+2025-05-20 23:27:27,839 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-20 23:27:27,840 - INFO - snap7.client - client.py:92 - destroying snap7 client
+2025-05-20 23:27:27,840 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-20 23:27:27,841 - INFO - snap7.client - client.py:92 - destroying snap7 client
+2025-05-20 23:27:27,841 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-20 23:27:30,842 - ERROR - snap7.common - error.py:142 - b' ISO : An error occurred during recv TCP : Connection timed out'
+2025-05-20 23:27:30,843 - ERROR - root - plc_s7.py:83 - S7连接出错: b' ISO : An error occurred during recv TCP : Connection timed out'
+2025-05-20 23:27:31,845 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-20 23:27:31,845 - INFO - snap7.client - client.py:92 - destroying snap7 client
+2025-05-20 23:27:31,845 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-20 23:27:31,846 - INFO - snap7.client - client.py:92 - destroying snap7 client
+2025-05-20 23:27:31,846 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-20 23:27:34,846 - ERROR - snap7.common - error.py:142 - b' ISO : An error occurred during recv TCP : Connection timed out'
+2025-05-20 23:27:34,847 - ERROR - root - plc_s7.py:83 - S7连接出错: b' ISO : An error occurred during recv TCP : Connection timed out'
+2025-05-20 23:27:35,847 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-20 23:27:35,849 - INFO - snap7.client - client.py:92 - destroying snap7 client
+2025-05-20 23:27:35,849 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-20 23:27:35,850 - INFO - snap7.client - client.py:92 - destroying snap7 client
+2025-05-20 23:27:35,850 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-20 23:27:38,853 - ERROR - snap7.common - error.py:142 - b' ISO : An error occurred during recv TCP : Connection timed out'
+2025-05-20 23:27:38,854 - ERROR - root - plc_s7.py:83 - S7连接出错: b' ISO : An error occurred during recv TCP : Connection timed out'
+2025-05-20 23:27:39,855 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-20 23:27:39,857 - INFO - snap7.client - client.py:92 - destroying snap7 client
+2025-05-20 23:27:39,857 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-20 23:27:39,857 - INFO - snap7.client - client.py:92 - destroying snap7 client
+2025-05-20 23:27:39,858 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-20 23:27:42,860 - ERROR - snap7.common - error.py:142 - b' ISO : An error occurred during recv TCP : Connection timed out'
+2025-05-20 23:27:42,861 - ERROR - root - plc_s7.py:83 - S7连接出错: b' ISO : An error occurred during recv TCP : Connection timed out'
+2025-05-20 23:27:43,865 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-20 23:27:43,865 - INFO - snap7.client - client.py:92 - destroying snap7 client
+2025-05-20 23:27:43,865 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-20 23:27:43,866 - INFO - snap7.client - client.py:92 - destroying snap7 client
+2025-05-20 23:27:43,866 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-20 23:27:46,869 - ERROR - snap7.common - error.py:142 - b' ISO : An error occurred during recv TCP : Connection timed out'
+2025-05-20 23:27:46,870 - ERROR - root - plc_s7.py:83 - S7连接出错: b' ISO : An error occurred during recv TCP : Connection timed out'
+2025-05-20 23:27:47,873 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-20 23:27:47,874 - INFO - snap7.client - client.py:92 - destroying snap7 client
+2025-05-20 23:27:47,874 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-20 23:27:47,875 - INFO - snap7.client - client.py:92 - destroying snap7 client
+2025-05-20 23:27:47,875 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-20 23:27:47,880 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-20 23:27:47,885 - INFO - root - plc_s7.py:76 - S7连接成功.
+2025-05-20 23:39:05,946 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
+2025-05-20 23:39:05,948 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-20 23:39:05,949 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-20 23:39:05,949 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-20 23:39:05,954 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-20 23:39:05,958 - INFO - root - plc_s7.py:76 - S7连接成功.
+2025-05-20 23:39:05,958 - INFO - root - app.py:28 - PLC连接结果: True
+2025-05-20 23:39:05,959 - INFO - root - app.py:30 - PLC开始轮询

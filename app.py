@@ -5,7 +5,7 @@ import configparser
 from libs import *
 from models import *
 from wgts import TabWidget, PlcData, PlcTable, CmdWidget
-from view import Views, Menus, MainFrame
+from view import Views, Menus, MainFrame, LoginWindow
 
 #   日志初始化
 LogConfig.setup_logging()
@@ -68,9 +68,16 @@ TblNowSheet = TblNowSheet(engine=DbEng_result)
 TblResultMx =   TblResultMx(engine=DbEng_result)
 
 if __name__ == '__main__':
+    from PySide6.QtWidgets import QApplication, QDialog
 
-    from PySide6.QtWidgets import QApplication
     app = QApplication(sys.argv)
-    main_win = MainFrame(menus=Menus, title="QtAppX")
-    main_win.show()
-    sys.exit(app.exec())
+    loginWindow = LoginWindow(TblUser)
+    
+    # Show loginWindow as a modal dialog
+    if loginWindow.exec() == QDialog.Accepted:  # Check if login was successful
+        User = loginWindow.usernames.currentText()
+        main_win = MainFrame(menus=Menus, title="QtAppX")
+        main_win.show()
+        sys.exit(app.exec())
+    else:
+        sys.exit(0)  # Exit if login fails

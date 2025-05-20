@@ -17,7 +17,7 @@ class ServiceBase:
     def getById(self,id):
         data=self.db_session.get(self.T,id)
         return data
-    
+        
     def add(self,data)->bool:
         try:
             self.db_session.add(data)
@@ -45,4 +45,18 @@ class ServiceBase:
         except:
             self.db_session.rollback()
             return False
+
+    def getByAny(self, field_name, value):
+        """Get a record by any field name and value.
+        
+        Args:
+            field_name: The name of the field to query by
+            value: The value to search for
+            
+        Returns:
+            The first matching record or None
+        """
+        field = getattr(self.T, field_name)
+        data = self.db_session.query(self.T).filter(field == value).first()
+        return data
 
