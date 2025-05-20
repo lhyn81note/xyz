@@ -9,11 +9,22 @@ Rectangle {
     color: bgColor
     border.color: "black"
 
+    // Node identification and styling properties
     property string nodeId: ""
     property string text: ""
     property string textColor: "black"
     property string bgColor: hovering ? "cyan" : "lightblue"
 
+    // Connection points
+    property real topY: y
+    property real bottomY: y + height
+    property real leftX: x
+    property real rightX: x + width
+    
+    property real bothY: y + height/2
+    property real bothX: x + width/2
+
+    // Interaction properties
     property bool dragging: false
     property bool hovering: false // New property for hover state
 

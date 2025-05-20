@@ -12,16 +12,13 @@
         ],
         "end": [],
         "a3630325": [
-            "7d0e7fa4"
-        ],
-        "7d0e7fa4": [
-            "84b8e2bc"
-        ],
-        "84b8e2bc": [
-            "end"
+            "83dcb222"
         ],
         "fde7d20a": [
             "end"
+        ],
+        "83dcb222": [
+            "head"
         ],
         "head_node_id": "head"
     },
@@ -53,27 +50,16 @@
                 "done": null
             }
         },
-        "7d0e7fa4": {
-            "type": "pop",
-            "name": "实时采集",
-            "param": {
-                "funcID": "dialogChart",
-                "args": {
-                    "count": 10
-                },
-                "done": null
-            }
-        },
-        "84b8e2bc": {
-            "type": "algo",
-            "name": "计算结果",
-            "param": {
-                "funcID": "algoStatics",
-                "args": null,
-                "done": null
-            }
-        },
         "fde7d20a": {
+            "type": "algo",
+            "name": "空指令",
+            "param": {
+                "funcID": "algoWait",
+                "args": 1,
+                "done": null
+            }
+        },
+        "83dcb222": {
             "type": "algo",
             "name": "空指令",
             "param": {
@@ -91,32 +77,26 @@
             "status": "idle"
         },
         "end": {
-            "x": 48.0,
-            "y": 519.0,
+            "x": 44.0,
+            "y": 389.0,
             "text": "",
             "status": "idle"
         },
         "a3630325": {
-            "x": 128.0,
-            "y": 129.0,
-            "text": "空指令",
-            "status": "idle"
-        },
-        "7d0e7fa4": {
-            "x": 128.0,
-            "y": 210.0,
-            "text": "空指令",
-            "status": "idle"
-        },
-        "84b8e2bc": {
-            "x": 128.0,
-            "y": 305.0,
+            "x": 214.0,
+            "y": 418.0,
             "text": "空指令",
             "status": "idle"
         },
         "fde7d20a": {
-            "x": 48.0,
-            "y": 355.0,
+            "x": 116.0,
+            "y": 283.0,
+            "text": "空指令",
+            "status": "idle"
+        },
+        "83dcb222": {
+            "x": 369.0,
+            "y": 245.0,
             "text": "空指令",
             "status": "idle"
         }
