@@ -346,7 +346,8 @@ class Window(QWidget):
                 return
 
             # Create a new task with a worker ID (using current user or admin as default)
-            worker_id = getattr(_top, 'User', 'admin')
+            worker_id = getattr(_top, 'User')
+            print(f"Creating task for worker: {worker_id}")
 
             # Create the task
             task = Task(carType=cartype, workerId=worker_id, theCmdManager=cmd_manager)

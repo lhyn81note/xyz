@@ -214,3 +214,19 @@
 2025-05-21 01:10:02,639 - INFO - root - plc_s7.py:76 - S7连接成功.
 2025-05-21 01:10:02,639 - INFO - root - app.py:28 - PLC连接结果: True
 2025-05-21 01:10:02,639 - INFO - root - app.py:30 - PLC开始轮询
+2025-05-21 01:12:20,325 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
+2025-05-21 01:12:20,329 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-21 01:12:20,329 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-21 01:12:20,330 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-21 01:12:20,333 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-21 01:12:20,338 - INFO - root - plc_s7.py:76 - S7连接成功.
+2025-05-21 01:12:20,338 - INFO - root - app.py:28 - PLC连接结果: True
+2025-05-21 01:12:20,339 - INFO - root - app.py:30 - PLC开始轮询
+2025-05-21 01:14:31,901 - INFO - __main__ - app.py:13 - ********** 程序启动 **********
+2025-05-21 01:14:31,903 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-21 01:14:31,904 - INFO - snap7.client - client.py:78 - creating snap7 client
+2025-05-21 01:14:31,904 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-21 01:14:31,910 - INFO - snap7.client - client.py:194 - connecting to 172.16.1.95:102 rack 0 slot 2
+2025-05-21 01:14:31,915 - INFO - root - plc_s7.py:76 - S7连接成功.
+2025-05-21 01:14:31,915 - INFO - root - app.py:28 - PLC连接结果: True
+2025-05-21 01:14:31,915 - INFO - root - app.py:30 - PLC开始轮询
